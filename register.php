@@ -1,3 +1,7 @@
+<?php
+    
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,20 +53,20 @@
                                             account.</p>
 
                                         <!-- form -->
-                                        <form action="#">
+                                        <form method="GET" action="index.php" >
                                             <div class="mb-3">
                                                 <label for="fullname" class="form-label">Full Name</label>
-                                                <input class="form-control" type="text" id="fullname"
+                                                <input class="form-control" name="nombre" type="text" id="fullname"
                                                     placeholder="Enter your name" required="">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="emailaddress" class="form-label">Email address</label>
-                                                <input class="form-control" type="email" id="emailaddress" required=""
+                                                <input class="form-control" name="email" type="email" id="emailaddress" required=""
                                                     placeholder="Enter your email">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="password" class="form-label">Password</label>
-                                                <input class="form-control" type="password" required="" id="password"
+                                                <input class="form-control" name="password" type="password" required="" id="password"
                                                     placeholder="Enter your password">
                                             </div>
                                             <div class="mb-3">
@@ -75,7 +79,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-0 d-grid text-center">
-                                                <button class="btn btn-primary fw-semibold" type="submit">Sign
+                                                <button class="btn btn-primary fw-semibold" type="submit" name="register">Sign
                                                     Up</button>
                                             </div>
 
