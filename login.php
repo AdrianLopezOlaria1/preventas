@@ -1,3 +1,15 @@
+<?php
+    $usuario = new Usuario();
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if (isset($_POST["email"]) && isset($_POST["password"])) {
+            $email = $_POST["email"];
+            $password = $_POST["password"];
+            $usuario->login($email, $password);
+        }
+    }
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +65,7 @@
                                             <div class="mb-3">
                                                 <label for="emailaddress" class="form-label">Email address</label>
                                                 <input class="form-control" type="email" id="emailaddress" required=""
-                                                    placeholder="Enter your email">
+                                                    placeholder="Enter your email" name="emailaddress">
                                             </div>
                                             <div class="mb-3">
                                                 <a href="auth-forgotpw.html" class="text-muted float-end"><small>Forgot
@@ -61,7 +73,7 @@
                                                         password?</small></a>
                                                 <label for="password" class="form-label">Password</label>
                                                 <input class="form-control" type="password" required="" id="password"
-                                                    placeholder="Enter your password">
+                                                    placeholder="Enter your password" name="password">
                                             </div>
                                             <div class="mb-3">
                                                 <div class="form-check">
