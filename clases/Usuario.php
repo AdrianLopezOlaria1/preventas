@@ -1,6 +1,6 @@
 <?php
 
-    require_once 'conexion.php';
+    require_once 'config/conexion.php';
 
     class Usuario {
         private $nombre;
@@ -43,7 +43,7 @@
         public function logout(){
             session_start();
             session_destroy();
-            header('Location: index.php');
+            header('Location: ../index.php');
         }
 
         public function login($email, $password) {
