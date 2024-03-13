@@ -20,6 +20,4 @@ class Conexion {
     }
 }
 
-// Crear una instancia de la conexión a la base de datos
-$conexion = new Conexion();
 ?>

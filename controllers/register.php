@@ -1,5 +1,17 @@
 <?php
-    
+
+require "clases/Usuario.php";
+
+    $usuario = new Usuario();
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if (isset($_POST["nombre"]) && isset($_POST["email"]) && isset($_POST["password"])) {
+            $nombre = $_POST["nombre"];
+            $email = $_POST["email"];
+            $password = $_POST["password"];
+            $usuario->registrar($nombre, $email, $password);
+        }
+    }
 ?>
 
 
@@ -53,7 +65,7 @@
                                             account.</p>
 
                                         <!-- form -->
-                                        <form method="GET" action="index.php" >
+                                        <form method="POST" action="#" >
                                             <div class="mb-3">
                                                 <label for="fullname" class="form-label">Full Name</label>
                                                 <input class="form-control" name="nombre" type="text" id="fullname"
