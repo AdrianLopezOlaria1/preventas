@@ -1,9 +1,4 @@
-<?php require_once 'views/header.php' ?>
-<?php
-
-include 'views/aside.php';
-
-include 'views/footer.php';
+<?php 
 
 
 ?>
@@ -32,10 +27,17 @@ switch ($action) {
     case "logout":
         include 'controllers/logout.php';
         break;
+    case "logeado":
+        include 'views/aside.php';
+        include 'views/footer.php';
+        include 'views/header.php';
+        include 'form/formPrecompra.php';
+        break;
     default:
         include 'controllers/register.php';
-        break;
-}
+         break;
+ }
+
 ?>
 
 
