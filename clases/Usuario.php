@@ -41,9 +41,13 @@
         }
 
         public function logout(){
-            session_start();
-            session_destroy();
-            header('Location: index.php');
+            //session_start();
+
+            if(session_destroy()){
+                return true;
+            }else{
+                return false;
+            }
         }
 
         public function login($email, $password) {
@@ -59,8 +63,10 @@
                 $verificar = password_verify($password, $usuario['password']);
         
                 if($verificar){
-                    header('Location: hola.php');
+                    
+
                     $_SESSION['usuario'] = $usuario;
+                    header('Location: index.php?action=index');
                 } else {
                     $_SESSION['error_login'] = 'Login incorrecto';
                     return $_SESSION['error_login'];
