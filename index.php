@@ -33,14 +33,14 @@ switch ($action) {
         include 'controllers/logout.php';
         break;
     case "logeado":
+        include 'controllers/checker.php';
         include 'views/aside.php';
         include 'views/footer.php';
         include 'views/header.php';
         include 'form/formPrecompra.php';
         break;
     case "index":
-
-        include 'controllers/redir.php';
+        include 'controllers/checker.php';
         include 'views/aside.php';
         include 'views/footer.php';
         include 'views/header.php';
@@ -50,12 +50,14 @@ switch ($action) {
         include 'metodos/cerrarSesion.php';
         break;
     case "profile":
+        include 'controllers/checker.php';
         include 'views/aside.php';
         include 'views/footer.php';
         include 'views/header.php';
         include 'views/profile.php';
         break;
     case "updateProfile":
+        include 'controllers/checker.php';
         include 'metodos/updateProfile.php';
         break;
     default:
