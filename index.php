@@ -18,6 +18,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <script src="assets/js/config.js"></script>
         <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <script src="https://maps.googleapis.com/maps/api/js?key=TU_CLAVE_API&libraries=places"></script>
 
 </head>
 <body>
@@ -45,6 +46,15 @@ switch ($action) {
         break;
     case "cerrando":
         include 'metodos/cerrarSesion.php';
+        break;
+    case "profile":
+        include 'views/aside.php';
+        include 'views/footer.php';
+        include 'views/header.php';
+        include 'views/profile.php';
+        break;
+    case "updateProfile":
+        include 'metodos/updateProfile.php';
         break;
     default:
         include 'controllers/login.php';

@@ -6,11 +6,17 @@
         private $nombre;
         private $email;
         private $password;
+        private $skype;
+        private $website;
+        private $aboutus;
 
-        public function __construct($nombre = "", $email = "", $password = "") {
+        public function __construct($nombre = "", $email = "", $password = "", $skype = "", $website = "", $aboutus = "") {
             $this->nombre = $nombre;
             $this->email = $email;
             $this->password = $password;
+            $this->skype = $skype;
+            $this->website = $website;
+            $this->aboutus = $aboutus;
         }
 
         // Getter y Setter para Nombre
@@ -49,6 +55,31 @@
                 return false;
             }
         }
+
+        public function getSkype() {
+            return $this->skype;
+        }
+
+        public function setSkype($skype) {
+            $this->skype = $skype;
+        }
+
+        public function getWebsite() {
+            return $this->website;
+        }
+
+        public function setWebsite($website) {
+            $this->website = $website;
+        }
+
+        public function getDescription() {
+            return $this->description;
+        }
+
+        public function setDescription($description) {
+            $this->description = $description;
+        }
+
 
         function validarDatos($nombre, $email, $password) {
             $error = array();
@@ -112,5 +143,90 @@
                 $_SESSION['error'] = $error;
                 return $_SESSION['error'];
             }
+        }   
+
+        public function update($nombre, $email, $website, $skype, $new_password, $description, $password) {
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
+
+        
+            $id_usuario = $_SESSION['usuario']['id'];
+
+        
+            // Verificar si se proporcionó una nueva contraseña
+            if ($new_password) {
+
+
+                $sql = "SELECT password FROM usuarios WHERE id = $id_usuario;";
+                $result = mysqli_query($mysqli, $sql);
+
+        
+                if ($result && mysqli_num_rows($result) == 1) {
+
+                    $row = mysqli_fetch_assoc($result);
+                    $hashedPassword = $row['password'];
+                    
+
+                    // Verificar si la contraseña actual coincide
+                    if (password_verify($password, $hashedPassword)) {
+                        // Contraseña actual coincide, proceder con la actualización de datos
+
+                        // Validar los nuevos datos
+                        $error = $this->validarDatos($nombre, $email, $new_password);
+        
+                        if (count($error) == 0) {
+                            // Hashear la nueva contraseña
+
+                            $password_segura = password_hash($new_password, PASSWORD_BCRYPT, ['cost' => 4]);
+                            
+                            // Actualizar los datos del usuario en la base de datos
+                            $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', password = '$password_segura', skype = '$skype', website = '$website', description = '$description' WHERE id = $id_usuario;";
+                            $resultado = mysqli_query($mysqli, $sql);
+        
+                            if ($resultado) {
+                                $_SESSION['usuario']['nombre'] = $nombre;
+                                $_SESSION['usuario']['email'] = $email;
+                                $_SESSION['usuario']['skype'] = $skype;
+                                $_SESSION['usuario']['website'] = $website;
+                                $_SESSION['usuario']['description'] = $description;
+        
+                                return true; // Actualización exitosa
+                            } else {
+                                $_SESSION['error'] = $error;
+                                return false; // Error al actualizar
+                            }
+                        } else {
+                            // Datos inválidos
+                            $_SESSION['error'] = $error;
+                            return false;
+                        }
+                    } else {
+                        // Contraseña actual no coincide
+                        return false;
+                    }
+                } else {
+                    // No se encontró al usuario o error en la consulta
+                    return false;
+                }
+            } else {
+                // No se proporcionó una nueva contraseña, actualizar sin cambiar la contraseña
+                $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', skype = '$skype', website = '$website', description = '$description' WHERE id = $id_usuario;";
+                $resultado = mysqli_query($mysqli, $sql);
+        
+                if ($resultado) {
+                    $_SESSION['usuario']['nombre'] = $nombre;
+                    $_SESSION['usuario']['email'] = $email;
+                    $_SESSION['usuario']['skype'] = $skype;
+                    $_SESSION['usuario']['website'] = $website;
+                    $_SESSION['usuario']['description'] = $description;
+
+                    return true; 
+                } else {
+                    return false; 
+                }
+            }
         }
+        
+
+
     }
