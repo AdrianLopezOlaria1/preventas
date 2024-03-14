@@ -362,13 +362,13 @@
                             </a>
 
                             <!-- item-->
-                            <a href="pages-profile.html" class="dropdown-item">
+                            <a href="index.php?action=profile#edit-profile" class="dropdown-item">
                                 <i class="ri-settings-4-line fs-18 align-middle me-1"></i>
                                 <span>Settings</span>
                             </a>
 
                             <!-- item-->
-                            <a href="pages-faq.html" class="dropdown-item">
+                            <a href="index.php?action=support" class="dropdown-item">
                                 <i class="ri-customer-service-2-line fs-18 align-middle me-1"></i>
                                 <span>Support</span>
                             </a>

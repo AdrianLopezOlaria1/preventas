@@ -30,9 +30,10 @@ switch ($action) {
         include 'controllers/register.php';
         break;
     case "logout":
+        
         include 'controllers/logout.php';
         break;
-    case "logeado":
+    case "formPrecompra":
         include 'controllers/checker.php';
         include 'views/aside.php';
         include 'views/footer.php';
@@ -59,6 +60,13 @@ switch ($action) {
     case "updateProfile":
         include 'controllers/checker.php';
         include 'metodos/updateProfile.php';
+        break;
+    case "support":
+        include 'controllers/checker.php';
+        include 'views/aside.php';
+        include 'views/footer.php';
+        include 'views/header.php';
+        include 'views/support.php';
         break;
     default:
         include 'controllers/login.php';

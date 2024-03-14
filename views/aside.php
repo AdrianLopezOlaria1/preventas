@@ -1,7 +1,7 @@
 <div class="leftside-menu">
 
             <!-- Brand Logo Light -->
-            <a href="index.html" class="logo logo-light">
+            <a href="index.php?action=index" class="logo logo-light">
                 <span class="logo-lg">
                     <img src="assets/images/logo.png" alt="logo">
                 </span>
@@ -28,12 +28,15 @@
                     <li class="side-nav-title">Main</li>
 
                     <li class="side-nav-item">
-                        <a href="index.html" class="side-nav-link">
+                        <a href="index.php?action=index" class="side-nav-link">
                             <i class="ri-dashboard-3-line"></i>
                             <span class="badge bg-success float-end">9+</span>
-                            <span> Dashboard </span>
+                            <span>Mis Precompras</span>
                         </a>
                     </li>
+
+
+
 
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
@@ -44,7 +47,7 @@
                         <div class="collapse" id="sidebarPages">
                             <ul class="side-nav-second-level">
                                 <li>
-                                    <a href="pages-starter.html">Starter Page</a>
+                                    <a href="index.php?action=formPrecompra">Precomprar</a>
                                 </li>
                                 <li>
                                     <a href="pages-contact-list.html">Contact List</a>
@@ -439,3 +442,4 @@
                 <div class="clearfix"></div>
             </div>
         </div>
+        
