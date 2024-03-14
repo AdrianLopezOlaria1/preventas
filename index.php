@@ -39,6 +39,8 @@ switch ($action) {
         include 'form/formPrecompra.php';
         break;
     case "index":
+
+        include 'controllers/redir.php';
         include 'views/aside.php';
         include 'views/footer.php';
         include 'views/header.php';

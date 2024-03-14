@@ -1,4 +1,3 @@
-<?php require_once 'redir.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
