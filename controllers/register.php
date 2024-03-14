@@ -1,3 +1,4 @@
+<?php require_once 'redir.php' ?>
 <?php
     require "clases/Usuario.php";
     $usuario = new Usuario();
