@@ -50,10 +50,26 @@
             }
         }
 
+        function validarDatos($nombre, $email, $password) {
+            $error = array();
+            if(!empty($nombre) && !is_numeric($nombre) && !preg_match("/[0-9]/", $nombre)){
+                $nombre_validado = true;
+            } else {
+                $nombre_validado = false;
+                $error['nombre'] = "Insert a valid name";
+            }
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                $error['email'] = "Insert a valid email address";
+            }
+            if(empty($password)){
+                $error['password'] = "The password can't be empty";
+            }
+            return $error;
+        }
+
         public function login($email, $password) {
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
-
             $sql = "SELECT * FROM usuarios WHERE email = '$email';";
             $login = mysqli_query($mysqli, $sql);
     
@@ -63,41 +79,18 @@
                 $verificar = password_verify($password, $usuario['password']);
         
                 if($verificar){
-                    
+                    //header('Location: index.php?action=logeado');
 
                     $_SESSION['usuario'] = $usuario;
                     header('Location: index.php?action=index');
                 } else {
-                    $_SESSION['error_login'] = 'Login incorrecto';
+                    $_SESSION['error_login'] = 'Invalid credentials, check email or password';
                     return $_SESSION['error_login'];
                 }
             } else {
-                $_SESSION['error_login'] = 'Login incorrecto';
+                $_SESSION['error_login'] = 'Invalid credentials, check email or password';
                 return $_SESSION['error_login'];
             }
-        }
-
-        function validarDatos($nombre, $email, $password) {
-            $error = array();
-            if(!empty($nombre) && !is_numeric($nombre) && !preg_match("/[0-9]/", $nombre)){
-                $nombre_validado = true;
-            } else {
-                $nombre_validado = false;
-                $error['nombre'] = "El nombre no es válido";
-            }
-            if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-                $email_validado = true;
-            } else {
-                $email_validado = false;
-                $error['email'] = "El email no es válido";
-            }
-            if(!empty($password)){
-                $password_validado = true;
-            } else {
-                $password_validado = false;
-                $error['password'] = "La contraseña no puede estar vacía";
-            }
-            return $error;
         }
 
         public function registrar($nombre, $email, $password) {
@@ -111,14 +104,13 @@
                 $guardar = mysqli_query($mysqli, $sql);
         
                 if($guardar) {
-                    $_SESSION['completado'] = "El registro se ha completado con éxito";
+                    $_SESSION['completado'] = "Sign up has been successfully completed!";
                 } else {
-                    $_SESSION['error']['general'] = "Fallo al guardar usuario";
+                    $_SESSION['error']['general'] = "Error";
                 }
             } else {
                 $_SESSION['error'] = $error;
                 return $_SESSION['error'];
             }
-            header('Location: index.php?action=login');
         }
     }

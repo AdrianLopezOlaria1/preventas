@@ -1,10 +1,7 @@
 
 <?php
-
-require "clases/Usuario.php";
-
+    require "clases/Usuario.php";
     $usuario = new Usuario();
-
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (isset($_POST["email"]) && isset($_POST["password"])) {
             $email = $_POST["email"];
@@ -13,7 +10,6 @@ require "clases/Usuario.php";
         }
     }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -63,21 +59,25 @@ require "clases/Usuario.php";
                                         <p class="text-muted mb-3">Enter your email address and password to access
                                             account.
                                         </p>
-
+                                        <?php if(isset($_SESSION['error_login'])): ?>
+                                            <div class='alerta alerta-error'>
+                                                <?=$_SESSION['error_login'];?>
+                                            </div>
+                                        <?php endif; ?>
                                         <!-- form -->
                                         <form action="#" method="POST">
                                             <div class="mb-3">
                                                 <label for="emailaddress" class="form-label">Email address</label>
-                                                <input class="form-control" type="email" id="emailaddress" required=""
-                                                    placeholder="Enter your email" name="email">
+                                                <input class="form-control" type="email" id="emailaddress"
+                                                    placeholder="Enter your email" name="email">                        
                                             </div>
                                             <div class="mb-3">
                                                 <a href="auth-forgotpw.html" class="text-muted float-end"><small>Forgot
                                                         your
                                                         password?</small></a>
                                                 <label for="password" class="form-label">Password</label>
-                                                <input class="form-control" type="password" required="" id="password"
-                                                    placeholder="Enter your password" name="password">
+                                                <input class="form-control" type="password" id="password"
+                                                    placeholder="Enter your password" name="password">                                                    
                                             </div>
                                             <div class="mb-3">
                                                 <div class="form-check">
