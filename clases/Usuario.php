@@ -131,9 +131,9 @@
             if(count($error) == 0){
                 // Insertar usuario en la base de datos
                 $password_segura = password_hash($password, PASSWORD_BCRYPT, ['cost' => 4]);
-                $sql = "INSERT INTO usuarios VALUES(null, '$nombre', '$email', '$password_segura');";
+                $sql = "INSERT INTO usuarios VALUES(null, '$nombre', '$email', '$password_segura', 
+                NULL, NULL, NULL, 'A', NOW(), NULL, NULL);";
                 $guardar = mysqli_query($mysqli, $sql);
-        
                 if($guardar) {
                     $_SESSION['completado'] = "Sign up has been successfully completed!";
                 } else {
