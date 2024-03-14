@@ -344,7 +344,8 @@
                                 <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle">
                             </span>
                             <span class="d-lg-block d-none">
-                                <h5 class="my-0 fw-normal">Thomson <i
+                                <h5 class="my-0 fw-normal"><?php echo isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['nombre'] : ''; ?>
+                            <i
                                         class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i></h5>
                             </span>
                         </a>
@@ -379,7 +380,7 @@
                             </a>
 
                             <!-- item-->
-                            <a href="auth-logout-2.html" class="dropdown-item">
+                            <a href="index.php?action=cerrando" class="dropdown-item">
                                 <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
                                 <span>Logout</span>
                             </a>

@@ -41,9 +41,13 @@
         }
 
         public function logout(){
-            session_start();
-            session_destroy();
-            header('Location: index.php');
+            //session_start();
+
+            if(session_destroy()){
+                return true;
+            }else{
+                return false;
+            }
         }
 
         function validarDatos($nombre, $email, $password) {
@@ -75,8 +79,10 @@
                 $verificar = password_verify($password, $usuario['password']);
         
                 if($verificar){
-                    header('Location: index.php?action=logeado');
+                    //header('Location: index.php?action=logeado');
+
                     $_SESSION['usuario'] = $usuario;
+                    header('Location: index.php?action=index');
                 } else {
                     $_SESSION['error_login'] = 'Invalid credentials, check email or password';
                     return $_SESSION['error_login'];

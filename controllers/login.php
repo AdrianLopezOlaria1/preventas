@@ -118,7 +118,7 @@
             </div>
             <div class="row">
                 <div class="col-12 text-center">
-                    <p class="text-dark-emphasis">Don't have an account? <a href="index.php"
+                    <p class="text-dark-emphasis">Don't have an account? <a href="index.php?action=register"
                             class="text-dark fw-bold ms-1 link-offset-3 text-decoration-underline"><b>Sign up</b></a>
                     </p>
                 </div> <!-- end col -->
