@@ -1,9 +1,6 @@
 <?php
-
-require "clases/Usuario.php";
-
+    require "clases/Usuario.php";
     $usuario = new Usuario();
-
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (isset($_POST["nombre"]) && isset($_POST["email"]) && isset($_POST["password"])) {
             $nombre = $_POST["nombre"];
@@ -64,22 +61,43 @@ require "clases/Usuario.php";
                                         <p class="text-muted mb-3">Enter your email address and password to access
                                             account.</p>
 
+                                        <?php if(isset($_SESSION['completado'])): ?>
+                                            <div class='alerta alerta-error'>
+                                                <?=$_SESSION['completado'];?>
+                                            </div>
+                                        <?php endif; ?>
                                         <!-- form -->
                                         <form method="POST" action="#" >
                                             <div class="mb-3">
                                                 <label for="fullname" class="form-label">Full Name</label>
                                                 <input class="form-control" name="nombre" type="text" id="fullname"
-                                                    placeholder="Enter your name" required="">
+                                                    placeholder="Enter your name">
+                                                    <?php if(isset($_SESSION['error']['nombre'])): ?>
+                                                        <div class='alerta alerta-error'>
+                                                            <?=$_SESSION['error']['nombre'];?>
+                                                        </div>
+                                                    <?php endif; ?>
+        
                                             </div>
                                             <div class="mb-3">
                                                 <label for="emailaddress" class="form-label">Email address</label>
-                                                <input class="form-control" name="email" type="email" id="emailaddress" required=""
+                                                <input class="form-control" name="email" type="email" id="emailaddress"
                                                     placeholder="Enter your email">
+                                                    <?php if(isset($_SESSION['error']['email'])): ?>
+                                                        <div class='alerta alerta-error'>
+                                                            <?=$_SESSION['error']['email'];?>
+                                                        </div>
+                                                    <?php endif; ?>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="password" class="form-label">Password</label>
-                                                <input class="form-control" name="password" type="password" required="" id="password"
+                                                <input class="form-control" name="password" type="password" id="password"
                                                     placeholder="Enter your password">
+                                                    <?php if(isset($_SESSION['error']['password'])): ?>
+                                                        <div class='alerta alerta-error'>
+                                                            <?=$_SESSION['error']['password'];?>
+                                                        </div>
+                                                    <?php endif; ?>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="form-check">
