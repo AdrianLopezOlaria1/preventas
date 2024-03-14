@@ -1,3 +1,4 @@
+<?php require_once 'redir.php' ?>
 <div class="content-page">
             <div class="content">
 
