@@ -139,6 +139,7 @@
                 }
                 // Insertar usuario en la base de datos
                 $password_segura = password_hash($password, PASSWORD_BCRYPT, ['cost' => 4]);
+
                 $sql = "INSERT INTO usuarios VALUES(null, '$nombre', '$email', '$password_segura', 
                 NULL, NULL, NULL, 'A', NOW(), NULL, NULL);";
                 $guardar = mysqli_query($mysqli, $sql);
@@ -151,7 +152,7 @@
                 $_SESSION['error'] = $error;
                 return $_SESSION['error'];
             }
-        }   
+        }    
 
         public function update($nombre, $email, $website, $skype, $new_password, $description, $password) {
             $conexion = new Conexion();
@@ -183,6 +184,7 @@
                         $error = $this->validarDatos($nombre, $email, $new_password);
         
                         if (count($error) == 0) {
+
                             //comprobar si email ya existe
                             $sql = "SELECT id, email FROM usuarios WHERE email = '$email';";
                             $result = mysqli_query($mysqli, $sql);
@@ -211,6 +213,7 @@
                                     $_SESSION['error'] = $error;
                                     return false; // Error al actualizar
                                 }
+
                             } else {
                                 $_SESSION['error']['general'] = "Error, this email is already registered";
                                 return false;
@@ -260,3 +263,20 @@
             }
         }
     }
+
+
+        public function deshabilitar($usuario_id) {
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
+        
+            $sql = "UPDATE usuarios SET status = 'D', fecha_baja = NOW() WHERE id = $usuario_id";
+        
+            if ($mysqli->query($sql)) {
+                return true;
+            } else {
+                return false;
+            }
+         
+    }
+}
+
