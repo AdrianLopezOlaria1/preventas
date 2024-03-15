@@ -1,40 +1,3 @@
-<?php
-    require "clases/Usuario.php";
-    $usuario = new Usuario();
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        if (isset($_POST["nombre"]) && isset($_POST["email"]) && isset($_POST["password"])) {
-            $nombre = $_POST["nombre"];
-            $email = $_POST["email"];
-            $password = $_POST["password"];
-            $usuario->registrar($nombre, $email, $password);
-        }
-    }
-?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <title>Register | Velonic - Bootstrap 5 Admin & Dashboard Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
-    <meta content="Techzaa" name="author" />
-
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
-
-    <!-- Theme Config Js -->
-    <script src="assets/js/config.js"></script>
-
-    <!-- App css -->
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
-
-    <!-- Icons css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-</head>
-
 <body class="authentication-bg">
 
     <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5 position-relative">
@@ -162,5 +125,3 @@
     <script src="assets/js/app.min.js"></script>
 
 </body>
-
-</html>

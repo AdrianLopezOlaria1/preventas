@@ -27,25 +27,25 @@ $action = isset($_GET["action"]) ? $_GET["action"] : "";
 
 switch ($action) {
     case "register":
-        include 'controllers/register.php';
+        include 'form/formRegister.php';
         break;
     case "logout":
         
-        include 'controllers/logout.php';
+        include 'views/logout.php';
         break;
     case "formPrecompra":
-        include 'controllers/checker.php';
+        include 'metodos/checker.php';
         include 'views/aside.php';
         include 'views/footer.php';
         include 'views/header.php';
         include 'form/formPrecompra.php';
         break;
     case "index":
-        include 'controllers/checker.php';
+        include 'metodos/checker.php';
         include 'views/aside.php';
         include 'views/footer.php';
         include 'views/header.php';
-        include 'controllers/indice.php';
+        include 'views/indice.php';
         break;
     case "cerrando":
         include 'metodos/cerrarSesion.php';
@@ -55,25 +55,31 @@ switch ($action) {
         break;
         
     case "profile":
-        include 'controllers/checker.php';
+        include 'metodos/checker.php';
         include 'views/aside.php';
         include 'views/footer.php';
         include 'views/header.php';
         include 'views/profile.php';
         break;
     case "updateProfile":
-        include 'controllers/checker.php';
+        include 'metodos/checker.php';
         include 'metodos/updateProfile.php';
         break;
     case "support":
-        include 'controllers/checker.php';
+        include 'metodos/checker.php';
         include 'views/aside.php';
         include 'views/footer.php';
         include 'views/header.php';
         include 'views/support.php';
         break;
+    case "enviarLogin":
+        include 'metodos/login.php';
+        break;
+    case "enviarRegister":
+        include 'metodos/register.php';
+        break;
     default:
-        include 'controllers/login.php';
+        include 'form/formLogin.php';
          break;
  }
 
