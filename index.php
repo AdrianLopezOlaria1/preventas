@@ -79,6 +79,15 @@ switch ($action) {
     case "enviarRegister":
         include 'metodos/register.php';
         break;
+    case "clientList":
+        include 'metodos/checker.php';
+        include 'views/aside.php';
+        include 'views/footer.php';
+        include 'views/header.php';
+        include 'config/conexion.php';
+        include 'clases/Cliente.php';
+        include 'views/clientes.php';
+        break;
     default:
         include 'clases/Usuario.php';
         include 'form/formLogin.php';
