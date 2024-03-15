@@ -262,9 +262,6 @@
                 }
             }
         }
-    }
-
-
         public function deshabilitar($usuario_id) {
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
@@ -278,5 +275,8 @@
             }
          
     }
-}
+    }
+
+
+        
 
