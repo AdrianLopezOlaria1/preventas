@@ -27,6 +27,7 @@ $action = isset($_GET["action"]) ? $_GET["action"] : "";
 
 switch ($action) {
     case "register":
+        include 'clases/Usuario.php';
         include 'form/formRegister.php';
         break;
     case "logout":
@@ -79,7 +80,7 @@ switch ($action) {
         include 'metodos/register.php';
         break;
     default:
-
+        include 'clases/Usuario.php';
         include 'form/formLogin.php';
          break;
  }

@@ -90,6 +90,7 @@
                                                 </div>
                                             </div>
                                         </form>
+                                        <?php $usuario = new Usuario(); $usuario->borrarErrores(); ?>
                                         <!-- end form-->
                                     </div>
                                 </div>

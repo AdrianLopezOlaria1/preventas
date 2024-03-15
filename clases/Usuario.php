@@ -276,7 +276,26 @@
             }
          
     }
+
+    function borrarErrores(){
+        $borrado = false;
+        if(isset($_SESSION['error'])){
+            $_SESSION['error'] = null;
+            $borrado = true;
+        }      
+        if(isset($_SESSION['completado'])){
+            $_SESSION['completado'] = null;
+            $borrado = true;  
+        }
+
+        if(isset($_SESSION['error_login'])){
+            $_SESSION['error_login'] = null;
+            $borrado = true;      
+        }
+       
+        return $borrado;
     }
+}
 
 
         
