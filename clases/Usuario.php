@@ -180,7 +180,9 @@
                             $password_segura = password_hash($new_password, PASSWORD_BCRYPT, ['cost' => 4]);
                             
                             // Actualizar los datos del usuario en la base de datos
-                            $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', password = '$password_segura', skype = '$skype', website = '$website', description = '$description' WHERE id = $id_usuario;";
+                            $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', password = '$password_segura', 
+                            skype = '$skype', website = '$website', description = '$description', status = 'M', fecha_modificacion = NOW()
+                            WHERE id = $id_usuario;";
                             $resultado = mysqli_query($mysqli, $sql);
         
                             if ($resultado) {
@@ -210,7 +212,9 @@
                 }
             } else {
                 // No se proporcionó una nueva contraseña, actualizar sin cambiar la contraseña
-                $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', skype = '$skype', website = '$website', description = '$description' WHERE id = $id_usuario;";
+                $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', skype = '$skype', 
+                website = '$website', description = '$description', status = 'M', fecha_modificacion = NOW()
+                WHERE id = $id_usuario;";
                 $resultado = mysqli_query($mysqli, $sql);
         
                 if ($resultado) {
