@@ -30,7 +30,7 @@
                                             </div>
                                         <?php endif; ?>
                                         <!-- form -->
-                                        <form method="POST" action="#" >
+                                        <form method="POST" action="index.php?action=enviarRegister" >
                                             <div class="mb-3">
                                                 <label for="fullname" class="form-label">Full Name</label>
                                                 <input class="form-control" name="nombre" type="text" id="fullname"

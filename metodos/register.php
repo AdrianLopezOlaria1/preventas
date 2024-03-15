@@ -6,7 +6,14 @@
             $nombre = $_POST["nombre"];
             $email = $_POST["email"];
             $password = $_POST["password"];
-            $usuario->registrar($nombre, $email, $password);
+            
+            if($usuario->registrar($nombre, $email, $password)){
+                header("location: index.php?action=register");
+            }else{
+                header("location: index.php?action=register");
+            }
+                
+            
         }
     }
 ?>

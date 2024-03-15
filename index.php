@@ -79,6 +79,7 @@ switch ($action) {
         include 'metodos/register.php';
         break;
     default:
+
         include 'form/formLogin.php';
          break;
  }

@@ -114,13 +114,14 @@
 
                     $_SESSION['usuario'] = $usuario;
                     header('Location: index.php?action=index');
+                    return true;
                 } else {
                     $_SESSION['error_login'] = 'Invalid credentials, check email or password';
-                    return $_SESSION['error_login'];
+                    return false;
                 }
             } else {
                 $_SESSION['error_login'] = 'Invalid credentials, check email or password';
-                return $_SESSION['error_login'];
+                return false;
             }
         }
 
