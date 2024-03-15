@@ -75,12 +75,17 @@
                                             <div class="mb-3">
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input"
-                                                        id="checkbox-signup">
+                                                        id="checkbox-signup" name="check">
                                                     <label class="form-check-label" for="checkbox-signup">I accept <a
                                                             href="javascript: void(0);" class="text-muted">Terms and
                                                             Conditions</a></label>
                                                 </div>
-                                            </div>                                            
+                                            </div>
+                                            <?php if(isset($_SESSION['error_check'])): ?>
+                                                <div class='alerta alerta-error'>
+                                                    <?=$_SESSION['error_check'];?>
+                                                </div>
+                                            <?php endif; ?>                                           
                                             <div class="mb-0 d-grid text-center">
                                                 <button class="btn btn-primary fw-semibold" type="submit" name="register">Sign
                                                     Up</button>
