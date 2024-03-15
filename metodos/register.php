@@ -12,6 +12,7 @@
                 echo "<script>window.location.href = 'index.php?action=register';</script>";
             } else {
                 if($usuario->registrar($nombre, $email, $password)){
+
                     header("location: index.php?action=register");
                 }else{
                     header("location: index.php?action=register");
@@ -20,3 +21,4 @@
         }
     }
 ?>
+ 
