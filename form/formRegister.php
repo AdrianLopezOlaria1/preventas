@@ -61,8 +61,9 @@
                                                             <?=$_SESSION['error']['password'];?>
                                                         </div>
                                                     <?php endif; ?>
-                                            </div>
+                                            </div>                                            
                                             <!-- Escoger rol -->
+                                            <!--
                                             <div class="mb-3">
                                                 <div class="">
                                                     <label for="rol">Rol:</label>
@@ -72,6 +73,7 @@
                                                     </select><br><br>
                                                 </div>
                                             </div>
+                                            -->
                                             <div class="mb-3">
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input"
