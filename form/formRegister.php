@@ -80,12 +80,7 @@
                                                             href="javascript: void(0);" class="text-muted">Terms and
                                                             Conditions</a></label>
                                                 </div>
-                                            </div>
-                                            <?php if(isset($_SESSION['error_check'])): ?>
-                                                <div class='alerta alerta-error'>
-                                                    <?=$_SESSION['error_check'];?>
-                                                </div>
-                                            <?php endif; ?>                                           
+                                            </div>                                                                                      
                                             <div class="mb-0 d-grid text-center">
                                                 <button class="btn btn-primary fw-semibold" type="submit" name="register">Sign
                                                     Up</button>
