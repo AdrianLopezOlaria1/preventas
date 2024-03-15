@@ -131,9 +131,10 @@
             if(count($error) == 0){
                 // Insertar usuario en la base de datos
                 $password_segura = password_hash($password, PASSWORD_BCRYPT, ['cost' => 4]);
-                $sql = "INSERT INTO usuarios VALUES(null, '$nombre', '$email', '$password_segura',null,null,null,null,null,null,null);";
+
+                $sql = "INSERT INTO usuarios VALUES(null, '$nombre', '$email', '$password_segura', 
+                NULL, NULL, NULL, 'A', NOW(), NULL, NULL);";
                 $guardar = mysqli_query($mysqli, $sql);
-        
                 if($guardar) {
                     $_SESSION['completado'] = "Sign up has been successfully completed!";
                 } else {
@@ -180,7 +181,9 @@
                             $password_segura = password_hash($new_password, PASSWORD_BCRYPT, ['cost' => 4]);
                             
                             // Actualizar los datos del usuario en la base de datos
-                            $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', password = '$password_segura', skype = '$skype', website = '$website', description = '$description' WHERE id = $id_usuario;";
+                            $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', password = '$password_segura', 
+                            skype = '$skype', website = '$website', description = '$description', status = 'M', fecha_modificacion = NOW()
+                            WHERE id = $id_usuario;";
                             $resultado = mysqli_query($mysqli, $sql);
         
                             if ($resultado) {
@@ -210,7 +213,9 @@
                 }
             } else {
                 // No se proporcionó una nueva contraseña, actualizar sin cambiar la contraseña
-                $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', skype = '$skype', website = '$website', description = '$description' WHERE id = $id_usuario;";
+                $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', skype = '$skype', 
+                website = '$website', description = '$description', status = 'M', fecha_modificacion = NOW()
+                WHERE id = $id_usuario;";
                 $resultado = mysqli_query($mysqli, $sql);
         
                 if ($resultado) {
