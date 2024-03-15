@@ -9,9 +9,10 @@
             
             
             if($usuario->login($email, $password)){
+                $_SESSION['error_login']="";
                 header("Location: index.php?action=index");
             }else{
-                echo "Error cerrando sesion";
+                header('Location: index.php');
             }
         }
     }
