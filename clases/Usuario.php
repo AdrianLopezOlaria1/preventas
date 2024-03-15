@@ -131,7 +131,7 @@
             if(count($error) == 0){
                 // Insertar usuario en la base de datos
                 $password_segura = password_hash($password, PASSWORD_BCRYPT, ['cost' => 4]);
-                $sql = "INSERT INTO usuarios VALUES(null, '$nombre', '$email', '$password_segura');";
+                $sql = "INSERT INTO usuarios VALUES(null, '$nombre', '$email', '$password_segura',null,null,null,null,null,null,null);";
                 $guardar = mysqli_query($mysqli, $sql);
         
                 if($guardar) {
@@ -143,7 +143,7 @@
                 $_SESSION['error'] = $error;
                 return $_SESSION['error'];
             }
-        }   
+        }    
 
         public function update($nombre, $email, $website, $skype, $new_password, $description, $password) {
             $conexion = new Conexion();
