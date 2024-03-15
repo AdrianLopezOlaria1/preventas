@@ -125,7 +125,7 @@
             }
         }
 
-        public function registrar($nombre, $email, $password) {
+        public function registrar($nombre, $email, $password, $rol) {
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
             $error = $this->validarDatos($nombre, $email, $password);
@@ -142,7 +142,7 @@
                 $password_segura = password_hash($password, PASSWORD_BCRYPT, ['cost' => 4]);
 
                 $sql = "INSERT INTO usuarios VALUES(null, '$nombre', '$email', '$password_segura', 
-                NULL, NULL, NULL, 'A', NOW(), NULL, NULL);";
+                NULL, NULL, NULL, 'A', NOW(), NULL, NULL, $rol);";
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {
                     $_SESSION['completado'] = "Sign up has been successfully completed!";
