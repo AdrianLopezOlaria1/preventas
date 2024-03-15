@@ -189,7 +189,7 @@
                             if ($resultado) {
                                 $_SESSION['usuario']['nombre'] = $nombre;
                                 $_SESSION['usuario']['email'] = $email;
-                                $_SESSION['usuario']['skype'] = $skype;
+                              $_SESSION['usuario']['skype'] = $skype;
                                 $_SESSION['usuario']['website'] = $website;
                                 $_SESSION['usuario']['description'] = $description;
         
@@ -231,7 +231,18 @@
                 }
             }
         }
+
+        public function deshabilitar($usuario_id) {
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
         
-
-
+            $sql = "UPDATE usuarios SET status = 'D', fecha_baja = NOW() WHERE id = $usuario_id";
+        
+            if ($mysqli->query($sql)) {
+                return true;
+            } else {
+                return false;
+            }
+         
     }
+}

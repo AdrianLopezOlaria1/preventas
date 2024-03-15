@@ -32,8 +32,8 @@
                                                     Edit Profile
                                                 </button>
                                             </a>
-                                            <a class="btn btn-soft-info" href="#edit-profile"> 
-                                                <i class="ri-check-double-fill fs-18 me-1 lh-1"></i> Following
+                                            <a class="btn btn-soft-info" href="#" id="eliminar"> 
+                                                <i class="ri-check-double-fill fs-18 me-1 lh-1"></i> Eliminar
                                             </a>
                                         </div>
                                     </div>
@@ -361,6 +361,21 @@
             link.classList.add('active'); // Añade la clase 'active' al enlace clicado
         }
     }
+    let boton 
+    boton = 
+
+    document.getElementById("eliminar").onclick = function() { 
+    // Mostrar un mensaje de confirmación
+    var confirmacion = confirm("¿Estás seguro de que quieres borrar tu cuenta?");
+
+    // Verificar si el usuario confirmó
+    if (confirmacion) {
+        // Si confirmó, redirigir al archivo PHP
+        window.location.href = "index.php?action=delete";
+    }else{
+        window.location.href = "index.php?action=profile";
+    }
+}
 
 </script>
 

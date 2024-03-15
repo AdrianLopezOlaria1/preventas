@@ -50,6 +50,10 @@ switch ($action) {
     case "cerrando":
         include 'metodos/cerrarSesion.php';
         break;
+    case "delete":
+        include 'metodos/deshabilitar.php';
+        break;
+        
     case "profile":
         include 'controllers/checker.php';
         include 'views/aside.php';
