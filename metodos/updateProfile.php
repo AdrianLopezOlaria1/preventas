@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "<script>window.location.href = 'index.php?action=profile';</script>";
 
                 } else {
-                    echo "<script>alert('Ha surgido un problema al guardar los cambios');</script>";
+                    echo "<script>alert('El correo esta en uso');</script>";
                     echo "<script>window.location.href = 'index.php?action=profile';</script>";
 
                 }
