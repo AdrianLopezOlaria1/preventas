@@ -109,7 +109,7 @@
                 
                 $verificar = password_verify($password, $usuario['password']);
         
-                if($verificar){
+                if($verificar && $usuario['status'] != 'D'){
                     //header('Location: index.php?action=logeado');
 
                     $_SESSION['usuario'] = $usuario;
@@ -129,6 +129,14 @@
             $mysqli = $conexion->getConexion();
             $error = $this->validarDatos($nombre, $email, $password);
             if(count($error) == 0){
+                // Verificar si el correo electrónico ya existe en la base de datos
+                $sql_check_email = "SELECT COUNT(*) as count FROM usuarios WHERE email = '$email'";
+                $result_check_email = mysqli_query($mysqli, $sql_check_email);
+                $row = mysqli_fetch_assoc($result_check_email);
+                if ($row['count'] > 0) {
+                    $_SESSION['error']['email'] = "Error, this email is already registered";
+                    return $_SESSION['error'];
+                }
                 // Insertar usuario en la base de datos
                 $password_segura = password_hash($password, PASSWORD_BCRYPT, ['cost' => 4]);
                 $sql = "INSERT INTO usuarios VALUES(null, '$nombre', '$email', '$password_segura', 
@@ -175,28 +183,39 @@
                         $error = $this->validarDatos($nombre, $email, $new_password);
         
                         if (count($error) == 0) {
-                            // Hashear la nueva contraseña
+                            //comprobar si email ya existe
+                            $sql = "SELECT id, email FROM usuarios WHERE email = '$email';";
+                            $result = mysqli_query($mysqli, $sql);
+                            $user = mysqli_fetch_assoc($result);
 
-                            $password_segura = password_hash($new_password, PASSWORD_BCRYPT, ['cost' => 4]);
-                            
-                            // Actualizar los datos del usuario en la base de datos
-                            $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', password = '$password_segura', 
-                            skype = '$skype', website = '$website', description = '$description', status = 'M', fecha_modificacion = NOW()
-                            WHERE id = $id_usuario;";
-                            $resultado = mysqli_query($mysqli, $sql);
-        
-                            if ($resultado) {
-                                $_SESSION['usuario']['nombre'] = $nombre;
-                                $_SESSION['usuario']['email'] = $email;
-                                $_SESSION['usuario']['skype'] = $skype;
-                                $_SESSION['usuario']['website'] = $website;
-                                $_SESSION['usuario']['description'] = $description;
-        
-                                return true; // Actualización exitosa
+                            if($user['id'] == $id_usuario || empty($user)){
+                                // Hashear la nueva contraseña
+
+                                $password_segura = password_hash($new_password, PASSWORD_BCRYPT, ['cost' => 4]);
+                                
+                                // Actualizar los datos del usuario en la base de datos
+                                $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', password = '$password_segura', 
+                                skype = '$skype', website = '$website', description = '$description', status = 'M', fecha_modificacion = NOW()
+                                WHERE id = $id_usuario;";
+                                $resultado = mysqli_query($mysqli, $sql);
+            
+                                if ($resultado) {
+                                    $_SESSION['usuario']['nombre'] = $nombre;
+                                    $_SESSION['usuario']['email'] = $email;
+                                    $_SESSION['usuario']['skype'] = $skype;
+                                    $_SESSION['usuario']['website'] = $website;
+                                    $_SESSION['usuario']['description'] = $description;
+            
+                                    return true; // Actualización exitosa
+                                } else {
+                                    $_SESSION['error'] = $error;
+                                    return false; // Error al actualizar
+                                }
                             } else {
-                                $_SESSION['error'] = $error;
-                                return false; // Error al actualizar
+                                $_SESSION['error']['general'] = "Error, this email is already registered";
+                                return false;
                             }
+                            
                         } else {
                             // Datos inválidos
                             $_SESSION['error'] = $error;
@@ -212,25 +231,32 @@
                 }
             } else {
                 // No se proporcionó una nueva contraseña, actualizar sin cambiar la contraseña
-                $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', skype = '$skype', 
-                website = '$website', description = '$description', status = 'M', fecha_modificacion = NOW()
-                WHERE id = $id_usuario;";
-                $resultado = mysqli_query($mysqli, $sql);
-        
-                if ($resultado) {
-                    $_SESSION['usuario']['nombre'] = $nombre;
-                    $_SESSION['usuario']['email'] = $email;
-                    $_SESSION['usuario']['skype'] = $skype;
-                    $_SESSION['usuario']['website'] = $website;
-                    $_SESSION['usuario']['description'] = $description;
+                //comprobar si email ya existe
+                $sql = "SELECT id, email FROM usuarios WHERE email = '$email';";
+                $result = mysqli_query($mysqli, $sql);
+                $user = mysqli_fetch_assoc($result);
 
-                    return true; 
+                if($user['id'] == $id_usuario || empty($user)){
+                    $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', skype = '$skype', 
+                    website = '$website', description = '$description', status = 'M', fecha_modificacion = NOW()
+                    WHERE id = $id_usuario;";
+                    $resultado = mysqli_query($mysqli, $sql);
+            
+                    if ($resultado) {
+                        $_SESSION['usuario']['nombre'] = $nombre;
+                        $_SESSION['usuario']['email'] = $email;
+                        $_SESSION['usuario']['skype'] = $skype;
+                        $_SESSION['usuario']['website'] = $website;
+                        $_SESSION['usuario']['description'] = $description;
+
+                        return true; 
+                    } else {
+                        return false; 
+                    }
                 } else {
-                    return false; 
+                    $_SESSION['error']['general'] = "Error, this email is already registered";
+                    return false;
                 }
             }
         }
-        
-
-
     }
