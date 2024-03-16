@@ -81,7 +81,7 @@
         }
 
 
-        function validarDatos($nombre, $email, $password) {
+        function validarDatos($nombre, $email, $password, $check = null) {
             $error = array();
             if(!empty($nombre) && !is_numeric($nombre) && !preg_match("/[0-9]/", $nombre)){
                 $nombre_validado = true;
@@ -94,6 +94,9 @@
             }
             if(empty($password)){
                 $error['password'] = "The password can't be empty";
+            }
+            if(!isset($check)){
+                $error['check'] = "You must accept terms and conditions";
             }
             return $error;
         }
@@ -125,17 +128,17 @@
             }
         }
 
-        public function registrar($nombre, $email, $password) {
+        public function registrar($nombre, $email, $password, $check) {
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
-            $error = $this->validarDatos($nombre, $email, $password);
+            $error = $this->validarDatos($nombre, $email, $password, $check);
             if(count($error) == 0){
                 // Verificar si el correo electrónico ya existe en la base de datos
                 $sql_check_email = "SELECT COUNT(*) as count FROM usuarios WHERE email = '$email'";
                 $result_check_email = mysqli_query($mysqli, $sql_check_email);
                 $row = mysqli_fetch_assoc($result_check_email);
                 if ($row['count'] > 0) {
-                    $_SESSION['error']['email'] = "Error, this email is already registered";
+                    $_SESSION['error']['email'] = "Error, the email is already registered";
                     return $_SESSION['error'];
                 }
                 // Insertar usuario en la base de datos

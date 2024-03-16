@@ -25,7 +25,7 @@
                                             account.</p>
 
                                         <?php if(isset($_SESSION['completado'])): ?>
-                                            <div class='alerta alerta-error'>
+                                            <div class='alert alert-success'>
                                                 <?=$_SESSION['completado'];?>
                                             </div>
                                         <?php endif; ?>
@@ -36,18 +36,17 @@
                                                 <input class="form-control" name="nombre" type="text" id="fullname"
                                                     placeholder="Enter your name">
                                                     <?php if(isset($_SESSION['error']['nombre'])): ?>
-                                                        <div class='alerta alerta-error'>
+                                                        <div class='alert alert-warning'>
                                                             <?=$_SESSION['error']['nombre'];?>
                                                         </div>
-                                                    <?php endif; ?>
-        
+                                                    <?php endif; ?>        
                                             </div>
                                             <div class="mb-3">
                                                 <label for="emailaddress" class="form-label">Email address</label>
                                                 <input class="form-control" name="email" type="email" id="emailaddress"
                                                     placeholder="Enter your email">
                                                     <?php if(isset($_SESSION['error']['email'])): ?>
-                                                        <div class='alerta alerta-error'>
+                                                        <div class='alert alert-warning'>
                                                             <?=$_SESSION['error']['email'];?>
                                                         </div>
                                                     <?php endif; ?>
@@ -57,7 +56,7 @@
                                                 <input class="form-control" name="password" type="password" id="password"
                                                     placeholder="Enter your password">
                                                     <?php if(isset($_SESSION['error']['password'])): ?>
-                                                        <div class='alerta alerta-error'>
+                                                        <div class='alert alert-warning'>
                                                             <?=$_SESSION['error']['password'];?>
                                                         </div>
                                                     <?php endif; ?>
@@ -82,12 +81,16 @@
                                                             href="javascript: void(0);" class="text-muted">Terms and
                                                             Conditions</a></label>
                                                 </div>
-                                            </div>                                                                                      
+                                            </div> 
+                                            <?php if(isset($_SESSION['error']['check'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['check'];?>
+                                                </div>
+                                            <?php endif; ?>                                                                                     
                                             <div class="mb-0 d-grid text-center">
                                                 <button class="btn btn-primary fw-semibold" type="submit" name="register">Sign
                                                     Up</button>
                                             </div>
-
                                             <div class="text-center mt-4">
                                                 <p class="text-muted fs-16">Sign in with</p>
                                                 <div class="d-flex gap-2 justify-content-center mt-3">
