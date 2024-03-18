@@ -87,7 +87,7 @@
                     $('#clientes-lista').empty();
                     // Iterar sobre los clientes y mostrarlos en la lista
                     $.each(response, function (index, cliente) {
-                        console.log("Estado del cliente:", cliente.status);
+                        //console.log("Estado del cliente:", cliente.status);
                         if (cliente.status !== 'D') {
                         var html = '<div class="col-md-6">';
                         html += '<div class="card">';
@@ -158,22 +158,25 @@
         var formData = $('#formEditarCliente').serialize();
 
         $.ajax({
-        url: 'metodos/editar_cliente.php',
-        type: 'POST',
-        data: formData,
-        dataType: 'json',
-        success: function(response) {
-
+            url: 'metodos/editar_cliente.php',
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+    success: function(response) {
+        if (response.success) {
+            alert(response.message);
             $('#modalEditarCliente').modal('hide');
-            alert('Cliente modificado exitosamente.');
             cargarClientes();
-        },
-        error: function(xhr, status, error) {
+        } else {
+            alert(response.error);
+        }
+    },
+    error: function(xhr, status, error) {
         console.error(xhr.responseText);
         // Agregar alerta u otro manejo de errores aquí
         alert("Error al modificar. Consulta la consola para más detalles.");
     }
-    });
+});
 
     });
     $(document).on('click', '.eliminar-btn', function() {
