@@ -79,6 +79,18 @@ switch ($action) {
     case "enviarRegister":
         include 'metodos/register.php';
         break;
+    case "enviarCliente":
+        include 'metodos/crearCliente.php';
+        break;
+    case "formCliente":
+        include 'metodos/checker.php';
+        include 'views/aside.php';
+        include 'views/footer.php';
+        include 'views/header.php';
+        include 'config/conexion.php';
+        include 'clases/Cliente.php';
+        include 'form/formCliente.php';
+        break;
     case "clientList":
         include 'metodos/checker.php';
         include 'views/aside.php';

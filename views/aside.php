@@ -45,7 +45,7 @@
                         <div class="collapse" id="sidebarPages">
                             <ul class="side-nav-second-level">
                                 <li>
-                                    <a href="index.php?action=formClient">New Client</a>
+                                    <a href="index.php?action=formCliente">New Client</a>
                                 </li>
                                 <li>
                                     <a href="index.php?action=clientList">Client List</a>
