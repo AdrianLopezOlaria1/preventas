@@ -1,6 +1,3 @@
-
-<?php if($_SESSION['usuario']['rol'] == 1):?>
-
     <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5 position-relative">
         <div class="container">
             <div class="row justify-content-center">
@@ -104,8 +101,3 @@
         <!-- end container -->
     </div>
     <!-- end page -->
-
-<?php else:?>
-    <script>alert('You must be admin to create contacts');</script>
-    <script>window.location.href = 'index.php?action=index';</script>
-<?php endif;?>
