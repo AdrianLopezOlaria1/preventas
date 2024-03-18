@@ -109,7 +109,7 @@
             $error = $this->validarDatos($nombre, $email, $tel);
             if(count($error) == 0){
                 // Verificar si el correo electrónico ya existe en la base de datos
-                $sql_check_email = "SELECT email FROM usuarios WHERE email = '$email'";
+                $sql_check_email = "SELECT email FROM personas_contacto WHERE email = '$email'";
                 $result_check_email = mysqli_query($mysqli, $sql_check_email);
                 $row = mysqli_fetch_assoc($result_check_email);
                 if ($row) {
