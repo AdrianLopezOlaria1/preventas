@@ -1,6 +1,5 @@
-
 <?php if($_SESSION['usuario']['rol'] == 1):?>
-<body class="authentication-bg">
+<!--<body class="authentication-bg">-->
 
     <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5 position-relative">
         <div class="container">
@@ -65,19 +64,7 @@
     </div>
     <!-- end page -->
 
-    <footer class="footer footer-alt fw-medium">
-        <span class="text-dark-emphasis">
-            <script>document.write(new Date().getFullYear())</script> © Velonic - Theme by Techzaa
-        </span>
-    </footer>
-
-    <!-- Vendor js -->
-    <script src="assets/js/vendor.min.js"></script>
-
-    <!-- App js -->
-    <script src="assets/js/app.min.js"></script>
-
-</body>
+<!-- </body> -->
 <?php else:?>
     <script>alert('You must be admin to create clients');</script>
     <script>window.location.href = 'index.php?action=index';</script>
