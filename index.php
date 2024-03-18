@@ -102,7 +102,7 @@ switch ($action) {
         include 'views/footer.php';
         include 'views/header.php';
         include 'config/conexion.php';
-        include 'clases/Cliente.php';
+        //include 'clases/Cliente.php';
         include 'views/clientes.php';
         break;
     case "formContacto":

@@ -1,6 +1,14 @@
 <?php
 
-    require_once 'config/conexion.php';
+if (!function_exists('Conexion')) {
+    if (file_exists('../config/conexion.php')) {
+        require_once '../config/conexion.php';
+    } else {
+        // Si no existe en el directorio anterior, intentar cargarlo desde la carpeta actual
+        require_once 'config/conexion.php';
+    }
+
+}
 
     class Cliente {
         private $nombre;
@@ -109,17 +117,14 @@
         public function obtenerClientes() {
             $clientes = array();
     
-            // Inicializar la conexión dentro del método
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
     
-            // Ejecutar la consulta SQL para obtener todos los clientes
             $sql = "SELECT * FROM clientes";
             $resultado = $mysqli->query($sql);
     
-            // Verificar si la consulta se ejecutó correctamente
             if ($resultado) {
-                // Iterar sobre los resultados y almacenar cada cliente en un array
+
                 while ($fila = $resultado->fetch_assoc()) {
                     $clientes[] = $fila;
                 }
@@ -141,6 +146,96 @@
            
             return $borrado;
         }
+
+        public function obtenerClientesJson($conn) {
+            $clientes = array();
+    
+            $sql = "SELECT id, nombre, status FROM clientes";
+            $resultado = $conn->query($sql);
+    
+            if ($resultado) {
+
+                while ($fila = $resultado->fetch_assoc()) {
+                    $clientes[] = $fila;
+                }
+            }
+    
+            return $clientes;
+        }
+
+        public function obtenerClienteJson($conn, $idCliente) {
+
+            $sql = "SELECT nombre FROM clientes WHERE id = $idCliente";
+        
+            $resultado = $conn->query($sql);
+        
+            if ($resultado->num_rows > 0) {
+
+                $cliente = $resultado->fetch_assoc();
+
+                return json_encode($cliente);
+            } else {
+
+                http_response_code(404); 
+                return json_encode(array("error" => "No se encontró ningún cliente con el ID proporcionado."));
+            }
+        }
+
+
+        public function editarCliente($conn, $idCliente, $nuevoNombre) {
+            $idCliente = $conn->real_escape_string($idCliente);
+            $nuevoNombre = $conn->real_escape_string($nuevoNombre);
+
+            $sql = "SELECT nombre FROM clientes";
+            $resultado = $conn->query($sql);
+        
+            if ($resultado) {
+                $nombresClientes = array();
+
+                while ($row = $resultado->fetch_assoc()) {
+                    $nombresClientes[] = $row['nombre'];
+                }
+        
+                if (in_array($nuevoNombre, $nombresClientes)) {
+
+        
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            
+            $fechaModificacion = date('Y-m-d H:i:s');
+        
+            $consulta = "UPDATE clientes SET nombre = '$nuevoNombre', fecha_modificacion = '$fechaModificacion', status = 'M' WHERE id = '$idCliente'";
+        
+            if ($conn->query($consulta)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+        public function deshabilitarCliente($conn, $idCliente) {
+
+            $idCliente = $conn->real_escape_string($idCliente);
+            
+            $consulta = "UPDATE clientes SET status = 'D' WHERE id = $idCliente";
+
+            if ($conn->query($consulta) === TRUE) {
+
+                return true;
+            } else {
+
+                return array('error' => 'Error al deshabilitar el cliente: ' . $conn->error);
+            }
+}
+        
+        
+
+
+        
   
 }
 
