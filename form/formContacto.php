@@ -1,5 +1,6 @@
+
 <?php if($_SESSION['usuario']['rol'] == 1):?>
-<!--<body class="authentication-bg">-->
+<body class="authentication-bg">
 
     <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5 position-relative">
         <div class="container">
@@ -21,8 +22,8 @@
                                         </a>
                                     </div>
                                     <div class="p-4 my-auto">
-                                        <h4 class="fs-20">Create client</h4>
-                                        <p class="text-muted mb-3">Enter client name</p>
+                                        <h4 class="fs-20">Create contact</h4>
+                                        <p class="text-muted mb-3">Enter contact information</p>
 
                                         <?php if(isset($_SESSION['completado'])): ?>
                                             <div class='alert alert-success'>
@@ -30,9 +31,9 @@
                                             </div>
                                         <?php endif; ?>
                                         <!-- form -->
-                                        <form method="POST" action="index.php?action=enviarCliente" >
+                                        <form method="POST" action="index.php?action=enviarContacto" >
                                             <div class="mb-3">
-                                                <label for="fullname" class="form-label">Client name</label>
+                                                <label for="fullname" class="form-label">Contact name</label>
                                                 <input class="form-control" name="nombre" type="text" id="fullname"
                                                     placeholder="Enter client name">
                                                     <?php if(isset($_SESSION['error']['nombre'])): ?>
@@ -40,6 +41,26 @@
                                                             <?=$_SESSION['error']['nombre'];?>
                                                         </div>
                                                     <?php endif; ?>        
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="emailaddress" class="form-label">Email address</label>
+                                                <input class="form-control" name="email" type="email" id="emailaddress"
+                                                    placeholder="Enter the contact's email address">
+                                                    <?php if(isset($_SESSION['error']['email'])): ?>
+                                                        <div class='alert alert-warning'>
+                                                            <?=$_SESSION['error']['email'];?>
+                                                        </div>
+                                                    <?php endif; ?>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="tel" class="form-label">Phone number</label>
+                                                <input class="form-control" name="tel" type="text" id="tel"
+                                                    placeholder="Enter the contact's phone number">
+                                                    <?php if(isset($_SESSION['error']['tel'])): ?>
+                                                        <div class='alert alert-warning'>
+                                                            <?=$_SESSION['error']['tel'];?>
+                                                        </div>
+                                                    <?php endif; ?>
                                             </div>                                                                                                                                                                                                                                                      
                                             <div class="mb-0 d-grid text-center">
                                                 <button class="btn btn-primary fw-semibold" type="submit" name="register">Create
@@ -64,7 +85,19 @@
     </div>
     <!-- end page -->
 
-<!-- </body> -->
+    <footer class="footer footer-alt fw-medium">
+        <span class="text-dark-emphasis">
+            <script>document.write(new Date().getFullYear())</script> © Velonic - Theme by Techzaa
+        </span>
+    </footer>
+
+    <!-- Vendor js -->
+    <script src="assets/js/vendor.min.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/app.min.js"></script>
+
+</body>
 <?php else:?>
     <script>alert('You must be admin to create clients');</script>
     <script>window.location.href = 'index.php?action=index';</script>

@@ -83,26 +83,26 @@
             $mysqli = $conexion->getConexion();
             $error = $this->validarDatos($nombre);
             if(count($error) == 0){
-                // Verificar si el correo electrónico ya existe en la base de datos
-                $sql_check_name = "SELECT COUNT(*) as count FROM clientes WHERE email = '$email'";
-                $result_check_name = mysqli_query($mysqli, $sql_check_email);
+                // Verificar si el nombre ya existe en la base de datos
+                $sql_check_name = "SELECT nombre FROM clientes WHERE nombre = '$nombre'";
+                $result_check_name = mysqli_query($mysqli, $sql_check_name);
                 $row = mysqli_fetch_assoc($result_check_name);
-                if ($row['count'] > 0) {
-                    $_SESSION['error']['email'] = "Error, this name is already registered";
-                    return false;
+                if ($row) {
+                    $_SESSION['error']['nombre'] = "Error, this name is already registered";
+                    return $_SESSION['error'];
                 }
-                // Insertar usuario en la base de datos
-
-                $sql = "INSERT INTO clientes VALUES('$nombre', 'A', NOW(),
+                // Insertar Cliente en la base de datos
+                $sql = "INSERT INTO clientes VALUES(NULL,'$nombre', 'A', NOW(),
                  NULL, NULL);";
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {
-                    return true;
+                    $_SESSION['completado'] = "Client has been successfully completed!";
                 } else {
                    return false;
                 }
             } else {
-                return false;
+                $_SESSION['error'] = $error;
+                return $_SESSION['error'];
             }
         }    
 
@@ -126,6 +126,20 @@
             }
     
             return $clientes;
+        }
+
+        function borrarErrores(){
+            $borrado = false;
+            if(isset($_SESSION['error'])){
+                $_SESSION['error'] = null;
+                $borrado = true;
+            }      
+            if(isset($_SESSION['completado'])){
+                $_SESSION['completado'] = null;
+                $borrado = true;  
+            }
+           
+            return $borrado;
         }
   
 }
