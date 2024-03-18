@@ -21,7 +21,7 @@
                                         </a>
                                     </div>
                                     <div class="p-4 my-auto">
-                                        <h4 class="fs-20">Create client</h4>
+                                        <h4 class="fs-20">Create new client</h4>
                                         <p class="text-muted mb-3">Enter client name</p>
 
                                         <?php if(isset($_SESSION['completado'])): ?>

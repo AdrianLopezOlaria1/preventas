@@ -1,6 +1,5 @@
 
 <?php if($_SESSION['usuario']['rol'] == 1):?>
-<body class="authentication-bg">
 
     <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5 position-relative">
         <div class="container">
@@ -22,7 +21,7 @@
                                         </a>
                                     </div>
                                     <div class="p-4 my-auto">
-                                        <h4 class="fs-20">Create contact</h4>
+                                        <h4 class="fs-20">Create new contact</h4>
                                         <p class="text-muted mb-3">Enter contact information</p>
 
                                         <?php if(isset($_SESSION['completado'])): ?>
@@ -35,7 +34,7 @@
                                             <div class="mb-3">
                                                 <label for="fullname" class="form-label">Contact name</label>
                                                 <input class="form-control" name="nombre" type="text" id="fullname"
-                                                    placeholder="Enter client name">
+                                                    placeholder="Enter contact name">
                                                     <?php if(isset($_SESSION['error']['nombre'])): ?>
                                                         <div class='alert alert-warning'>
                                                             <?=$_SESSION['error']['nombre'];?>
@@ -61,13 +60,34 @@
                                                             <?=$_SESSION['error']['tel'];?>
                                                         </div>
                                                     <?php endif; ?>
-                                            </div>                                                                                                                                                                                                                                                      
+                                            </div>                                            
+                                            <!-- selector clientes -->
+                                            <div class="mb-3">
+                                                <label for="id_cliente" class="form-label">Client</label>
+                                                <select class="form-select" name="id_cliente" id="cliente">
+                                                    <option value="">Select client</option>
+                                                    <?php 
+                                                        $cliente = new Cliente();
+                                                        $clientes = $cliente->obtenerClientes();
+                                                        if (!empty($clientes)) {
+                                                            foreach ($clientes as $c) {
+                                                    ?>
+                                                    <option value="<?=$c['id']?>">
+                                                        <?=$c['nombre']?>
+                                                    </option>
+                                                    <?php
+                                                            }
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <!-- fin selector -->
                                             <div class="mb-0 d-grid text-center">
                                                 <button class="btn btn-primary fw-semibold" type="submit" name="register">Create
                                                 </button>
                                             </div>                                        
                                         </form>
-                                        <?php $cliente = new Cliente(); $cliente->borrarErrores(); ?>
+                                        <?php $contacto = new Contacto(); $contacto->borrarErrores(); ?>
                                         <!-- end form-->
                                         <br><br>
                                         <a href="index.php?action=index">Volver</a>
@@ -85,20 +105,7 @@
     </div>
     <!-- end page -->
 
-    <footer class="footer footer-alt fw-medium">
-        <span class="text-dark-emphasis">
-            <script>document.write(new Date().getFullYear())</script> © Velonic - Theme by Techzaa
-        </span>
-    </footer>
-
-    <!-- Vendor js -->
-    <script src="assets/js/vendor.min.js"></script>
-
-    <!-- App js -->
-    <script src="assets/js/app.min.js"></script>
-
-</body>
 <?php else:?>
-    <script>alert('You must be admin to create clients');</script>
+    <script>alert('You must be admin to create contacts');</script>
     <script>window.location.href = 'index.php?action=index';</script>
 <?php endif;?>

@@ -44,7 +44,7 @@ if (!function_exists('Conexion')) {
             $this->status = $status;
         }
 
-        // Getter y Setter para Password
+        // Getter y Setter para fechas
         public function getFecha_alta() {
             return $this->fecha_alta;
         }

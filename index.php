@@ -111,6 +111,7 @@ switch ($action) {
         include 'views/footer.php';
         include 'views/header.php';
         include 'config/conexion.php';
+        include 'clases/Contacto.php';
         include 'clases/Cliente.php';
         include 'form/formContacto.php';
         break;
