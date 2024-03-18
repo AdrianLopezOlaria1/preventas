@@ -86,8 +86,11 @@
 
         //funciones
 
-        function validarDatos($nombre, $email, $tel) {
+        function validarDatos($id_cliente, $nombre, $email, $tel) {
             $error = array();
+            if(empty($id_cliente)){
+                $error['id_cliente'] = "You must choose a client";
+            }
             if(!empty($nombre) && !is_numeric($nombre) && !preg_match("/[0-9]/", $nombre)){
                 $nombre_validado = true;
             } else {
@@ -106,7 +109,7 @@
         public function nuevo($id_cliente, $nombre, $email, $tel) {
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
-            $error = $this->validarDatos($nombre, $email, $tel);
+            $error = $this->validarDatos($id_cliente, $nombre, $email, $tel);
             if(count($error) == 0){
                 // Verificar si el correo electrónico ya existe en la base de datos
                 $sql_check_email = "SELECT email FROM personas_contacto WHERE email = '$email'";
