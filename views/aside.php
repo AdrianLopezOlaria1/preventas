@@ -84,8 +84,9 @@
 
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
-                            <i class="ri-pages-line"></i>
+                            <i class="ri-pages-line"></i
                             <span> Create </span>
+
                             <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarPages">
