@@ -101,11 +101,12 @@
                         html += '<h5 class="fs-18 my-1">' + cliente.nombre + '</h5>';
                         html += '<p class="text-muted fs-15">' + cliente.status + '</p>';
                         html += '</div>';
-                        html += '</div>';
+                        html += '<?php if($_SESSION['usuario']['rol'] == 1): ?>';
                         html += '<div class="">';
                         html += '<a href="#" class="btn btn-success btn-sm me-1 editar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" data-id="' + cliente.id + '"><i class="ri-pencil-fill"></i></a>';
                         html += '<a href="#" class="btn btn-danger btn-sm eliminar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" data-id="' + cliente.id + '"><i class="ri-close-fill"></i></a>';
                         html += '</div>';
+                        html += '<?php endif; ?>';
                         html += '</div>';
                         html += '<hr>';
                         html += '<ul class="social-list list-inline mt-3 mb-0">';

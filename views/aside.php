@@ -39,7 +39,7 @@
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
                             <i class="ri-pages-line"></i>
-                            <span> Clientes </span>
+                            <span> Listas </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarPages">
@@ -87,7 +87,7 @@
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
                             <i class="ri-pages-line"></i>
-                            <span> Pages </span>
+                            <span> Crear </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarPages">
