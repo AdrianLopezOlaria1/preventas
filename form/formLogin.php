@@ -24,7 +24,7 @@
                                             account.
                                         </p>
                                         <?php if(isset($_SESSION['error_login'])): ?>
-                                            <div class='alerta alerta-error'>
+                                            <div class='alert alert-warning'>
                                                 <?=$_SESSION['error_login'];?>
                                             </div>
                                         <?php endif; ?>
