@@ -51,6 +51,9 @@
                                     <a href="index.php?action=clientList">Client List</a>
                                 </li>
                                 <li>
+                                    <a href="index.php?action=formContacto">New Contact</a>
+                                </li>
+                                <li>
                                     <a href="pages-profile.html">Profile</a>
                                 </li>
                                 <li>
