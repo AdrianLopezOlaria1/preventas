@@ -15,7 +15,7 @@
                                 <li class="breadcrumb-item active">Contact List</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Contact List</h4>
+                        <h4 class="page-title">Comercial List</h4>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
             </div>
             <!-- End row -->
 
-            <div class="row" id="clientes-lista">
+            <div class="row" id="comerciales-lista">
                 <!-- La lista de clientes se mostrará aquí -->
             </div>
 
@@ -49,7 +49,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Editar Cliente</h5>
+                <h5 class="modal-title">Editar Comercial</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -79,16 +79,16 @@
         // Función para cargar la lista de clientes
         function cargarClientes() {
             $.ajax({
-                url: 'metodos/obtener_clientes.php', // Ruta de tu script PHP para obtener clientes
+                url: 'metodos/obtener_comerciales.php', // Ruta de tu script PHP para obtener clientes
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
                     // Limpiar la lista de clientes
-                    $('#clientes-lista').empty();
+                    $('#comerciales-lista').empty();
                     // Iterar sobre los clientes y mostrarlos en la lista
-                    $.each(response, function (index, cliente) {
+                    $.each(response, function (index, comercial) {
                         //console.log("Estado del cliente:", cliente.status);
-                        if (cliente.status !== 'D') {
+                        if (comercial.status !== 'D') {
                             var html = '<div class="col-md-6">';
                             html += '<div class="card">';
                             html += '<div class="card-body">';
@@ -98,15 +98,15 @@
                             html += '<img class="avatar-md rounded-circle bx-s" src="assets/images/users/avatar-2.jpg" alt="">';
                             html += '</a>';
                             html += '<div class="info">';
-                            html += '<h5 class="fs-18 my-1">' + cliente.nombre + '</h5>';
-                            html += '<p class="text-muted fs-15">' + cliente.status + '</p>';
+                            html += '<h5 class="fs-18 my-1">' + comercial.nombre + '</h5>';
+                            html += '<p class="text-muted fs-15">' + comercial.email + '</p>';
                             html += '</div>';
                             // html += '<h1>Hola</h1><hr>';
                             
                             <?php if($_SESSION['usuario']['rol'] == 1): ?>
                             html += '<div class="">';
-                            html += '<a href="#" class="btn btn-success btn-sm me-1 editar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" data-id="' + cliente.id + '"><i class="ri-pencil-fill"></i></a>';
-                            html += '<a href="#" class="btn btn-danger btn-sm eliminar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" data-id="' + cliente.id + '"><i class="ri-close-fill"></i></a>';
+                            html += '<a href="#" class="btn btn-success btn-sm me-1 editar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" data-id="' + comercial.id + '"><i class="ri-pencil-fill"></i></a>';
+                            html += '<a href="#" class="btn btn-danger btn-sm eliminar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" data-id="' + comercial.id + '"><i class="ri-close-fill"></i></a>';
                             html += '</div>';
                             <?php endif; ?>
                             
@@ -151,7 +151,7 @@
                         // html += '</div>'; 
                         // html += '</div>'; 
                         // html += '</div>'; 
-                        $('#clientes-lista').append(html);
+                        $('#comerciales-lista').append(html);
                         }
                 });
             },

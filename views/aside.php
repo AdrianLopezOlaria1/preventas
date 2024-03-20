@@ -50,7 +50,7 @@
                                     <a href="pages-contact-list.html">Contact List</a>
                                 </li>                                
                                 <li>
-                                    <a href="pages-profile.html">Profile</a>
+                                    <a href="index.php?action=comercialList">Comercial List</a>
                                 </li>
                                 <li>
                                     <a href="pages-timeline.html">Timeline</a>
