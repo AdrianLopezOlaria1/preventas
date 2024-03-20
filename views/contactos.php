@@ -105,8 +105,8 @@
                         html += '</a>';
                         html += '<div class="info">';
                         html += '<h5 class="fs-18 my-1">' + contacto.nombre + '</h5>';
-                        html += '<p class="text-muted fs-15">' + contacto.email + '</p>';
-                        html += '<p class="text-muted fs-15">' + contacto.status + '</p>';
+                        html += '<p class="text-muted fs-15">' + contacto.email + '</p>';                        
+                        html += '</div>';
                         html += '</div>';
                         html += '<?php if($_SESSION['usuario']['rol'] == 1): ?>';
                         html += '<div class="">';
