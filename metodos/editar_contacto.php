@@ -18,19 +18,19 @@ if (isset($_POST['contactoId']) && isset($_POST['nombreContacto']) && isset($_PO
     $conexion = new Conexion();
     $conn = $conexion->getConexion();
 
-    // Crear una instancia de la clase Cliente para editar el cliente
+    // Crear una instancia de la clase Contacto para editar el contacto
     $contacto = new Contacto();
     // Llamar al método editarContacto y pasarle la conexión
     $resultado = $contacto->editarContacto($conn, $contactoId, $nombreContacto, $emailContacto, $telContacto);
 
     // Verificar si hubo un error
-    if ($resultado) {
+    if ($resultado === true) {
         // Éxito: enviar mensaje de éxito
         $response['success'] = true;
         $response['message'] = "Contacto modificado exitosamente.";
     } else {
         // Error: enviar mensaje de error
-        $response['error'] = "Error al modificar.";
+        $response['error'] = $resultado['error']; // Acceder al mensaje de error dentro del objeto devuelto
     }
 } else {
     // Si no se recibieron los datos del formulario, devolver un error
