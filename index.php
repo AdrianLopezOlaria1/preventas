@@ -105,6 +105,15 @@ switch ($action) {
         //include 'clases/Cliente.php';
         include 'views/clientes.php';
         break;
+    case "comercialList":
+        include 'metodos/checker.php';
+        include 'views/aside.php';
+        include 'views/footer.php';
+        include 'views/header.php';
+        include 'config/conexion.php';
+        //include 'clases/Cliente.php';
+        include 'views/comerciales.php';
+        break;
     case "formContacto":
         include 'metodos/checker.php';
         include 'views/aside.php';
