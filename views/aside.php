@@ -47,7 +47,7 @@
                                     <a href="index.php?action=clientList">Client List</a>
                                 </li>
                                 <li>
-                                    <a href="pages-contact-list.html">Contact List</a>
+                                    <a href="index.php?action=contactList">Contact List</a>
                                 </li>                                
                                 <li>
                                     <a href="pages-profile.html">Profile</a>
