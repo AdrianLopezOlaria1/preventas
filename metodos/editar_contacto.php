@@ -30,7 +30,7 @@ if (isset($_POST['contactoId']) && isset($_POST['nombreContacto']) && isset($_PO
         $response['message'] = "Contacto modificado exitosamente.";
     } else {
         // Error: enviar mensaje de error
-        $response['error'] = "Ese al modificar.";
+        $response['error'] = "Error al modificar.";
     }
 } else {
     // Si no se recibieron los datos del formulario, devolver un error
