@@ -50,7 +50,7 @@
                                     <a href="index.php?action=contactList">Contact List</a>
                                 </li>                                
                                 <li>
-                                    <a href="pages-profile.html">Profile</a>
+                                    <a href="index.php?action=comercialList">Comercial List</a>
                                 </li>
                                 <li>
                                     <a href="pages-timeline.html">Timeline</a>
@@ -98,10 +98,10 @@
                                     <a href="index.php?action=formContacto">New Contact</a>
                                 </li>
                                 <li>
-                                    <a href="index.php?action=formPrecompra">Precomprar</a>
+                                    <a href="index.php?action=formComercial">New Comertial</a>
                                 </li>                
                                 <li>
-                                    <a href="pages-profile.html">Profile</a>
+                                    <a href="index.php?action=formPrecompra">New Precompra</a>
                                 </li>
                                 <li>
                                     <a href="pages-timeline.html">Timeline</a>

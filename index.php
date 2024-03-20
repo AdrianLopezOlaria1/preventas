@@ -84,6 +84,9 @@ switch ($action) {
     case "enviarCliente":
         include 'metodos/crearCliente.php';
         break;
+    case "enviarComercial":
+        include 'metodos/crearComercial.php';
+        break;
     case "enviarContacto":
         include 'metodos/crearContacto.php';
         break;
@@ -96,6 +99,15 @@ switch ($action) {
         include 'clases/Cliente.php';
         include 'form/formCliente.php';
         break;
+    case "formComercial":
+        include 'metodos/checker.php';
+        include 'views/aside.php';
+        include 'views/footer.php';
+        include 'views/header.php';
+        include 'config/conexion.php';
+        include 'clases/Comercial.php';
+        include 'form/formComercial.php';
+        break;
     case "clientList":
         include 'metodos/checker.php';
         include 'views/aside.php';
@@ -106,12 +118,21 @@ switch ($action) {
         include 'views/clientes.php';
         break;
     case "contactList":
-        include 'metodos/checker.php';
+         include 'metodos/checker.php';
         include 'views/aside.php';
         include 'views/footer.php';
         include 'views/header.php';
         include 'config/conexion.php';
         include 'views/contactos.php';
+        break;
+    case "comercialList":
+        include 'metodos/checker.php';
+        include 'views/aside.php';
+        include 'views/footer.php';
+        include 'views/header.php';
+        include 'config/conexion.php';
+        //include 'clases/Cliente.php';
+        include 'views/comerciales.php';
         break;
     case "formContacto":
         include 'metodos/checker.php';
