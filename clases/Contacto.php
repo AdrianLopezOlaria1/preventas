@@ -215,6 +215,23 @@
             $nuevoEmail = $conn->real_escape_string($nuevoEmail);
             $nuevoTel = $conn->real_escape_string($nuevoTel);
 
+            // Obtener el correo electrónico actual del contacto
+            $sql_obtener_email_actual = "SELECT email FROM personas_contacto WHERE id = '$idContacto'";
+            $result_obtener_email_actual = $conn->query($sql_obtener_email_actual);
+            $row_obtener_email_actual = $result_obtener_email_actual->fetch_assoc();
+            $email_actual = $row_obtener_email_actual['email'];
+
+            // Verificar si el correo electrónico ha sido cambiado
+            if ($email_actual != $nuevoEmail) {
+                // Verificar si el nuevo correo electrónico ya está en uso
+                $sql_check_email = "SELECT email FROM personas_contacto WHERE email = '$nuevoEmail'";
+                $result_check_email = $conn->query($sql_check_email);
+                if ($result_check_email->num_rows > 0) {
+                    // El nuevo correo electrónico ya está en uso
+                    return array('error' => 'El correo electrónico ya está en uso por otro contacto.');
+                }
+            }
+            
             $fechaModificacion = date('Y-m-d H:i:s');
         
             $consulta = "UPDATE personas_contacto SET nombre = '$nuevoNombre', 
