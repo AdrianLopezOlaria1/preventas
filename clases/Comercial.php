@@ -171,22 +171,19 @@ if (!function_exists('Conexion')) {
         public function editarComercial($conn, $idComercial, $nuevoNombre, $nuevoEmail) {
             $idComercial = $conn->real_escape_string($idComercial);
             
-            // Verificar si se proporcionó un nuevo nombre y escaparlo si es necesario
+            // Verificar si el nuevo email ya existe en la base de datos antes de escaparlo
+            if ($nuevoEmail !== "email") {
+                $emailExistente = $this->valorExistente($conn, 'email', $nuevoEmail);
+                if ($emailExistente) {
+                    return false; // Si el email ya existe, retornar false
+                }
+            }
+        
+            // Escapar el nuevo nombre si se proporcionó
             $nuevoNombre = isset($nuevoNombre) ? "'" . $conn->real_escape_string($nuevoNombre) . "'" : "nombre";
         
-            // Verificar si se proporcionó un nuevo email y escaparlo si es necesario
+            // Escapar el nuevo email si se proporcionó
             $nuevoEmail = isset($nuevoEmail) ? "'" . $conn->real_escape_string($nuevoEmail) . "'" : "email";
-        
-            // Verificar si el nuevo nombre ya existe en la base de datos
-            $nombreExistente = $nuevoNombre !== "nombre" && $this->valorExistente($conn, 'nombre', $nuevoNombre);
-        
-            // Verificar si el nuevo email ya existe en la base de datos
-            $emailExistente = $nuevoEmail !== "email" && $this->valorExistente($conn, 'email', $nuevoEmail);
-        
-            // Si el nuevo nombre o el nuevo email ya existen, retornar false
-            if ($nombreExistente || $emailExistente) {
-                return false;
-            }
         
             $fechaModificacion = date('Y-m-d H:i:s');
             
@@ -200,6 +197,7 @@ if (!function_exists('Conexion')) {
                 return false;
             }
         }
+        
         
         
         
@@ -232,27 +230,21 @@ if (!function_exists('Conexion')) {
             }
             
             // Verificar si el nombre ya existe en la base de datos
-            $nombreExistente = $this->valorExistente($mysqli, 'nombre', $nombre);
-            if ($nombreExistente) {
-                $_SESSION['error']['nombre'] = "Error, this name is already registered";
-                return $_SESSION['error'];
-            }
-            
-            // Verificar si el email ya existe en la base de datos
             $emailExistente = $this->valorExistente($mysqli, 'email', $email);
-            if ($emailExistente) {
+            
+            // Insertar Cliente en la base de datos si el nombre no existe
+            if (!$emailExistente) {
+                $sql = "INSERT INTO comerciales VALUES(NULL, '$nombre', '$email', 'A', NOW(), NULL, NULL)";
+                $guardar = mysqli_query($mysqli, $sql);
+                if ($guardar) {
+                    $_SESSION['completado'] = "Commercial has been successfully created!";
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
                 $_SESSION['error']['email'] = "Error, this email is already registered";
                 return $_SESSION['error'];
-            }
-            
-            // Insertar Cliente en la base de datos
-            $sql = "INSERT INTO comerciales VALUES(NULL, '$nombre', '$email', 'A', NOW(), NULL, NULL)";
-            $guardar = mysqli_query($mysqli, $sql);
-            if ($guardar) {
-                $_SESSION['completado'] = "Comertial has been successfully completed!";
-                return true;
-            } else {
-                return false;
             }
         }
         
@@ -274,4 +266,5 @@ if (!function_exists('Conexion')) {
 }
         
     
-}
+}      
+
