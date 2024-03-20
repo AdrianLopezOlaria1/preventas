@@ -2,24 +2,18 @@
 require_once '../clases/Contacto.php'; 
 require_once '../config/conexion.php'; 
 
-// Crear una instancia de la clase Conexion
+$id_cliente = isset($_GET['id_cliente']) ? $_GET['id_cliente'] : null;
 $conexion = new Conexion();
 $conn = $conexion->getConexion();
-
-// Verificar la conexión
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
-
-// Crear una instancia de la clase Contaxcto
 $contacto = new Contacto();
-
-// Llamar al método obtenerContactos y pasarle la conexión
-$contactos = $contacto->obtenerContactos($conn);
-
-// Devolver los contactos en formato JSON
+if ($id_cliente !== null) {
+    $contactos = $contacto->obtenerContactosPorCliente($conn, $id_cliente);
+} else {
+    $contactos = $contacto->obtenerContactos($conn);
+}
 echo json_encode($contactos);
-
-// Cerrar la conexión a la base de datos
 $conn->close();
 ?>
