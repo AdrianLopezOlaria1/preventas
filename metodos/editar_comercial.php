@@ -29,7 +29,7 @@ if (isset($_POST['comercialId']) && isset($_POST['nombreComercial']) && isset($_
         $response['message'] = "Cliente modificado exitosamente.";
     } else {
         // Error: enviar mensaje de error
-        $response['error'] = "Ese nombre o email están en uso.";
+        $response['error'] = "Ese email están en uso.";
     }
 } else {
     // Si no se recibieron los datos del formulario, devolver un error

@@ -18,7 +18,7 @@
                             <?php endif; ?>
                             <form method="POST" action="index.php?action=enviarComercial">
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Clomertial name</label>
+                                    <label for="exampleInputEmail1" class="form-label">Comertial name</label>
                                     <input type="text" class="form-control" id="exampleInputEmail1"
                                         aria-describedby="emailHelp" placeholder="Enter client name" name="nombre">
                                         <?php if(isset($_SESSION['error']['nombre'])): ?>
@@ -26,7 +26,7 @@
                                                 <?=$_SESSION['error']['nombre'];?>
                                             </div>
                                          <?php endif; ?>
-                                        <label for="exampleInputEmail2" class="form-label">Clomertial email</label>
+                                        <label for="exampleInputEmail2" class="form-label">Comertial email</label>
                                     <input type="text" class="form-control" id="exampleInputEmail2"
                                     aria-describedby="emailHelp" placeholder="Enter client name" name="email">
                                     <?php if(isset($_SESSION['error']['email'])): ?>
