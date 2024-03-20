@@ -1,62 +1,47 @@
-    <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5 position-relative">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xxl-8 col-lg-10">
-                    <div class="card overflow-hidden bg-opacity-25">
-                        <div class="row g-0">
-                            <div class="col-lg-6 d-none d-lg-block p-2">
-                                <img src="assets/images/auth-img.jpg" alt="" class="img-fluid rounded h-100">
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex flex-column h-100">
-                                    <div class="auth-brand p-4">
-                                        <a href="index.html" class="logo-light">
-                                            <img src="assets/images/logo.png" alt="logo" height="22">
-                                        </a>
-                                        <a href="index.html" class="logo-dark">
-                                            <img src="assets/images/logo-dark.png" alt="dark logo" height="22">
-                                        </a>
-                                    </div>
-                                    <div class="p-4 my-auto">
-                                        <h4 class="fs-20">Create new client</h4>
-                                        <p class="text-muted mb-3">Enter client name</p>
-
-                                        <?php if(isset($_SESSION['completado'])): ?>
-                                            <div class='alert alert-success'>
-                                                <?=$_SESSION['completado'];?>
-                                            </div>
-                                        <?php endif; ?>
-                                        <!-- form -->
-                                        <form method="POST" action="index.php?action=enviarCliente" >
-                                            <div class="mb-3">
-                                                <label for="fullname" class="form-label">Client name</label>
-                                                <input class="form-control" name="nombre" type="text" id="fullname"
-                                                    placeholder="Enter client name">
-                                                    <?php if(isset($_SESSION['error']['nombre'])): ?>
-                                                        <div class='alert alert-warning'>
-                                                            <?=$_SESSION['error']['nombre'];?>
-                                                        </div>
-                                                    <?php endif; ?>        
-                                            </div>                                                                                                                                                                                                                                                      
-                                            <div class="mb-0 d-grid text-center">
-                                                <button class="btn btn-primary fw-semibold" type="submit" name="register">Create
-                                                </button>
-                                            </div>                                        
-                                        </form>
-                                        <?php $cliente = new Cliente(); $cliente->borrarErrores(); ?>
-                                        <!-- end form-->
-                                        <br><br>
-                                        <a href="index.php?action=index">Volver</a>
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->
+<div class="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="header-title">Create new client</h4>
+                            <p class="text-muted mb-0">
+                            Enter the new client information here.
+                            </p>
                         </div>
-                    </div>
+                        <div class="card-body">
+                            <?php if(isset($_SESSION['completado'])): ?>
+                                <div class='alert alert-success'>
+                                    <?=$_SESSION['completado'];?>
+                                </div>
+                            <?php endif; ?>
+                            <form method="POST" action="index.php?action=enviarCliente">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Client name</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" placeholder="Enter client name" name="nombre">
+                                    <small id="emailHelp" class="form-text text-muted">The name must not be previously
+                                        registered</small>
+                                    <?php if(isset($_SESSION['error']['nombre'])): ?>
+                                        <div class='alert alert-warning'>
+                                            <?=$_SESSION['error']['nombre'];?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </form>
+                            <?php $cliente = new Cliente(); $cliente->borrarErrores(); ?>          
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
                 </div>
-                <!-- end row -->
+                <!-- end col -->
             </div>
             <!-- end row -->
         </div>
-        <!-- end container -->
     </div>
-    <!-- end page -->
+</div>
+            
+
+    
