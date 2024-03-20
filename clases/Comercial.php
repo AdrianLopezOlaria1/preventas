@@ -79,49 +79,22 @@ if (!function_exists('Conexion')) {
         }
 
 
-        function validarDatos($nombre) {
+        function validarDatos($nombre, $email) {
             $error = array();
-            if(!empty($nombre)){
-                $nombre_validado = true;
-            } else {
-                $nombre_validado = false;
+            if(empty($nombre)){
                 $error['nombre'] = "Insert a valid name";
             }
-/*             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        
+            if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){
                 $error['email'] = "Insert a valid email address";
-            } */
+            }
+        
             return $error;
         }
 
     
 
-        public function nuevo($nombre) {
-            $conexion = new Conexion();
-            $mysqli = $conexion->getConexion();
-            $error = $this->validarDatos($nombre);
-            if(count($error) == 0){
-                // Verificar si el nombre ya existe en la base de datos
-                $sql_check_name = "SELECT nombre FROM clientes WHERE nombre = '$nombre'";
-                $result_check_name = mysqli_query($mysqli, $sql_check_name);
-                $row = mysqli_fetch_assoc($result_check_name);
-                if ($row) {
-                    $_SESSION['error']['nombre'] = "Error, this name is already registered";
-                    return $_SESSION['error'];
-                }
-                // Insertar Cliente en la base de datos
-                $sql = "INSERT INTO clientes VALUES(NULL,'$nombre', 'A', NOW(),
-                 NULL, NULL);";
-                $guardar = mysqli_query($mysqli, $sql);
-                if($guardar) {
-                    $_SESSION['completado'] = "Client has been successfully completed!";
-                } else {
-                   return false;
-                }
-            } else {
-                $_SESSION['error'] = $error;
-                return $_SESSION['error'];
-            }
-        }    
+ 
 
         // public function obtenerComerciales() {
         //     $comerciales = array();
@@ -246,6 +219,42 @@ if (!function_exists('Conexion')) {
             }
         }
         
+        
+        public function nuevo($nombre, $email) {
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
+            
+            // Validar los datos de entrada
+            $error = $this->validarDatos($nombre, $email);
+            if (count($error) > 0) {
+                $_SESSION['error'] = $error;
+                return $_SESSION['error'];
+            }
+            
+            // Verificar si el nombre ya existe en la base de datos
+            $nombreExistente = $this->valorExistente($mysqli, 'nombre', $nombre);
+            if ($nombreExistente) {
+                $_SESSION['error']['nombre'] = "Error, this name is already registered";
+                return $_SESSION['error'];
+            }
+            
+            // Verificar si el email ya existe en la base de datos
+            $emailExistente = $this->valorExistente($mysqli, 'email', $email);
+            if ($emailExistente) {
+                $_SESSION['error']['email'] = "Error, this email is already registered";
+                return $_SESSION['error'];
+            }
+            
+            // Insertar Cliente en la base de datos
+            $sql = "INSERT INTO comerciales VALUES(NULL, '$nombre', '$email', 'A', NOW(), NULL, NULL)";
+            $guardar = mysqli_query($mysqli, $sql);
+            if ($guardar) {
+                $_SESSION['completado'] = "Comertial has been successfully completed!";
+                return true;
+            } else {
+                return false;
+            }
+        }
         
 
 
