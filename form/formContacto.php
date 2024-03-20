@@ -77,6 +77,11 @@
                                                         }
                                                     ?>
                                                 </select>
+                                                <?php if(isset($_SESSION['error']['id_cliente'])): ?>
+                                                    <div class='alert alert-warning'>
+                                                        <?=$_SESSION['error']['id_cliente'];?>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
                                             <!-- fin selector -->
                                             <div class="mb-0 d-grid text-center">
