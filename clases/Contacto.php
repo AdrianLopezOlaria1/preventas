@@ -248,7 +248,7 @@
 
             $idContacto = $conn->real_escape_string($idContacto);
             
-            $consulta = "UPDATE personas_contacto SET status = 'D' WHERE id = $idContacto";
+            $consulta = "UPDATE personas_contacto SET status = 'D', fecha_baja = NOW() WHERE id = $idContacto";
 
             if ($conn->query($consulta) === TRUE) {
 
