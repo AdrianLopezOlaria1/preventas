@@ -1,6 +1,14 @@
 <?php
 
-    require_once 'config/conexion.php';
+    if (!function_exists('Conexion')) {
+        if (file_exists('../config/conexion.php')) {
+            require_once '../config/conexion.php';
+        } else {
+            // Si no existe en el directorio anterior, intentar cargarlo desde la carpeta actual
+            require_once 'config/conexion.php';
+        }
+
+    }
 
     class Contacto {
         private $id_cliente;
@@ -147,7 +155,93 @@
         
             return $borrado;
         }
-}
+
+        public function obtenerContactos() {
+            $contactos = array();
+    
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
+    
+            $sql = "SELECT * FROM personas_contacto";
+            $resultado = $mysqli->query($sql);
+    
+            if ($resultado) {
+
+                while ($fila = $resultado->fetch_assoc()) {
+                    $contactos[] = $fila;
+                }
+            }
+    
+            return $contactos;
+        }
+
+        public function obtenerContactosJson($conn) {
+            $contactos = array();
+    
+            $sql = "SELECT id, nombre, email, tel, status FROM personas_contacto";
+            $resultado = $conn->query($sql);
+    
+            if ($resultado) {
+
+                while ($fila = $resultado->fetch_assoc()) {
+                    $contactos[] = $fila;
+                }
+            }
+    
+            return $contactos;
+        }
+
+        public function obtenerContactoJson($conn, $idContacto) {
+
+            $sql = "SELECT nombre, email, tel FROM personas_contacto WHERE id = $idContacto";
+        
+            $resultado = $conn->query($sql);
+        
+            if ($resultado->num_rows > 0) {
+
+                $contacto = $resultado->fetch_assoc();
+
+                return json_encode($contacto);
+            } else {
+
+                http_response_code(404); 
+                return json_encode(array("error" => "No se encontró ningún contacto con el ID proporcionado."));
+            }
+        }
+
+        public function editarContacto($conn, $idContacto, $nuevoNombre, $nuevoEmail, $nuevoTel) {
+            $idContacto = $conn->real_escape_string($idContacto);
+            $nuevoNombre = $conn->real_escape_string($nuevoNombre);
+            $nuevoEmail = $conn->real_escape_string($nuevoEmail);
+            $nuevoTel = $conn->real_escape_string($nuevoTel);
+
+            $fechaModificacion = date('Y-m-d H:i:s');
+        
+            $consulta = "UPDATE personas_contacto SET nombre = '$nuevoNombre', 
+            email = '$nuevoEmail', tel = '$nuevoTel', fecha_modificacion = '$fechaModificacion', status = 'M' WHERE id = '$idContacto'";
+        
+            if ($conn->query($consulta)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function deshabilitarContacto($conn, $idContacto) {
+
+            $idContacto = $conn->real_escape_string($idContacto);
+            
+            $consulta = "UPDATE personas_contacto SET status = 'D' WHERE id = $idContacto";
+
+            if ($conn->query($consulta) === TRUE) {
+
+                return true;
+            } else {
+
+                return array('error' => 'Error al deshabilitar el contacto: ' . $conn->error);
+            }
+        }
+    }
 
 
         
