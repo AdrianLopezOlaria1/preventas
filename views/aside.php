@@ -36,6 +36,14 @@
                     </li>
 
                     <li class="side-nav-item">
+                    
+                        <a href="index.php?action=formPrecompra" class="side-nav-link">
+                            <i class="ri-dashboard-3-line"></i>
+                            <span>Nueva Precompras</span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
                             <i class="ri-pages-line"></i>
                             <span> Listas </span>
@@ -82,16 +90,15 @@
 
                     <?php if($_SESSION['usuario']['rol'] == 1):?>
 
-                    <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
-                            <i class="ri-pages-line"></i>
+                        <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPagesAuth" aria-expanded="false" aria-controls="sidebarPagesAuth" class="side-nav-link">
+                            <i class="ri-group-2-line"></i>
                             <span> Create </span>
-
                             <span class="menu-arrow"></span>
                         </a>
-                        <div class="collapse" id="sidebarPages">
+                        <div class="collapse" id="sidebarPagesAuth">
                             <ul class="side-nav-second-level">
-                                <li>
+                            <li>
                                     <a href="index.php?action=formCliente">New Client</a>
                                 </li>
                                 <li>
@@ -100,9 +107,9 @@
                                 <li>
                                     <a href="index.php?action=formComercial">New Comertial</a>
                                 </li>                
-                                <li>
+                                <!-- <li>
                                     <a href="index.php?action=formPrecompra">New Precompra</a>
-                                </li>
+                                </li> -->
                                 <li>
                                     <a href="pages-timeline.html">Timeline</a>
                                 </li>
@@ -130,9 +137,11 @@
                             </ul>
                         </div>
                     </li>
+
                     <?php endif; ?>
 
-                    <li class="side-nav-item">
+                    <!-- 
+                        <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPagesAuth" aria-expanded="false" aria-controls="sidebarPagesAuth" class="side-nav-link">
                             <i class="ri-group-2-line"></i>
                             <span> Authentication </span>
@@ -158,6 +167,7 @@
                             </ul>
                         </div>
                     </li>
+                 -->
 
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarLayouts" aria-expanded="false" aria-controls="sidebarLayouts" class="side-nav-link">
