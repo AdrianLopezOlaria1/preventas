@@ -50,6 +50,7 @@
                                         </div>
                                     <?php endif; ?>
                                 </div>
+                                <!-- selector -->
                                 <div class="mb-3">
                                     <label for="id_cliente" class="form-label">Client</label>
                                     <select class="form-select" name="id_cliente" id="cliente">
