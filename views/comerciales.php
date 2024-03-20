@@ -45,7 +45,7 @@
     </div> <!-- end content -->
 
     <!-- Modal de Edición de Cliente -->
-    <div id="modalEditarCliente" class="modal fade" tabindex="-1">
+    <div id="modalEditarComercial" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -53,12 +53,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form id="formEditarCliente">
+            <form id="formEditarComercial">
                     <div class="mb-3">
-                        <label for="nombreCliente" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" value="Cliente_A1">
+                        <label for="nombreComercial" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombreComercial" name="nombreComercial" value="">
                     </div>
-                    <input type="hidden" id="clienteId" name="clienteId" value="">
+                    <div class="mb-3">
+                        <label for="emailComercial" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="emailComercial" name="emailComercial" value="">
+                    </div>
+                    <input type="hidden" id="comercialId" name="comercialId" value="">
                     <button type="button" id="guardarCambiosBtn" class="btn btn-primary">Guardar Cambios</button>
                 </form>
             </div>
@@ -165,16 +169,17 @@
 
     // Manejar clic en el botón de edición
     $(document).on('click', '.editar-btn', function() {
-        var clienteId = $(this).data('id');
+        var comercialId = $(this).data('id');
         $.ajax({
-            url: 'metodos/obtener_cliente.php',
+            url: 'metodos/obtener_comercial.php',
             type: 'GET',
-            data: { id: clienteId },
+            data: { id: comercialId},
             dataType: 'json',
             success: function(response) {
-                $('#nombreCliente').val(response.nombre);
-                $('#clienteId').val(clienteId);
-                $('#modalEditarCliente').modal('show');
+                $('#nombreComercial').val(response.nombre);
+                $('#emailComercial').val(response.email);
+                $('#comercialId').val(comercialId);
+                $('#modalEditarComercial').modal('show');
             },
             error: function(xhr, status, error) {
             console.error(xhr.responseText);
@@ -188,17 +193,17 @@
 
     // Manejar clic en el botón de guardar cambios
     $('#guardarCambiosBtn').click(function() {
-        var formData = $('#formEditarCliente').serialize();
+        var formData = $('#formEditarComercial').serialize();
 
         $.ajax({
-            url: 'metodos/editar_cliente.php',
+            url: 'metodos/editar_comercial.php',
             type: 'POST',
             data: formData,
             dataType: 'json',
     success: function(response) {
         if (response.success) {
             alert(response.message);
-            $('#modalEditarCliente').modal('hide');
+            $('#modalEditarComercial').modal('hide');
             cargarClientes();
         } else {
             alert(response.error);
@@ -213,19 +218,19 @@
 
     });
     $(document).on('click', '.eliminar-btn', function() {
-    var clienteId = $(this).data('id');
+    var comercialId = $(this).data('id');
     // Mostrar confirmación al usuario
-    var confirmacion = confirm("¿Estás seguro de que quieres eliminar este cliente?");
+    var confirmacion = confirm("¿Estás seguro de que quieres eliminar este comercial?");
     if (confirmacion) {
         // Si el usuario confirma, enviar la solicitud AJAX para deshabilitar el cliente
         $.ajax({
-            url: 'metodos/deshabilitar_cliente.php',
+            url: 'metodos/deshabilitar_comercial.php',
             type: 'POST',
-            data: { id: clienteId },
+            data: { id: comercialId },
             dataType: 'json',
             success: function(response) {
                 // Muestra una alerta o realiza cualquier otra acción necesaria
-                alert('Cliente deshabilitado exitosamente.');
+                alert('Comercial deshabilitado exitosamente.');
                 // Recarga la lista de clientes para reflejar los cambios
                 cargarClientes();
             },

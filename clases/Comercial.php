@@ -176,17 +176,17 @@ if (!function_exists('Conexion')) {
 
 
 
-        public function obtenerClienteJson($conn, $idCliente) {
+        public function obtenerComercialJson($conn, $idComercial) {
 
-            $sql = "SELECT nombre FROM clientes WHERE id = $idCliente";
+            $sql = "SELECT nombre, email FROM comerciales WHERE id = $idComercial";
         
             $resultado = $conn->query($sql);
         
             if ($resultado->num_rows > 0) {
 
-                $cliente = $resultado->fetch_assoc();
+                $comercial = $resultado->fetch_assoc();
 
-                return json_encode($cliente);
+                return json_encode($comercial);
             } else {
 
                 http_response_code(404); 
@@ -195,46 +195,65 @@ if (!function_exists('Conexion')) {
         }
 
 
-        public function editarCliente($conn, $idCliente, $nuevoNombre) {
-            $idCliente = $conn->real_escape_string($idCliente);
-            $nuevoNombre = $conn->real_escape_string($nuevoNombre);
-
-            $sql = "SELECT nombre FROM clientes";
-            $resultado = $conn->query($sql);
+        public function editarComercial($conn, $idComercial, $nuevoNombre, $nuevoEmail) {
+            $idComercial = $conn->real_escape_string($idComercial);
+            
+            // Verificar si se proporcionó un nuevo nombre y escaparlo si es necesario
+            $nuevoNombre = isset($nuevoNombre) ? "'" . $conn->real_escape_string($nuevoNombre) . "'" : "nombre";
         
-            if ($resultado) {
-                $nombresClientes = array();
-
-                while ($row = $resultado->fetch_assoc()) {
-                    $nombresClientes[] = $row['nombre'];
-                }
+            // Verificar si se proporcionó un nuevo email y escaparlo si es necesario
+            $nuevoEmail = isset($nuevoEmail) ? "'" . $conn->real_escape_string($nuevoEmail) . "'" : "email";
         
-                if (in_array($nuevoNombre, $nombresClientes)) {
-
+            // Verificar si el nuevo nombre ya existe en la base de datos
+            $nombreExistente = $nuevoNombre !== "nombre" && $this->valorExistente($conn, 'nombre', $nuevoNombre);
         
-                    return false;
-                }
-            } else {
+            // Verificar si el nuevo email ya existe en la base de datos
+            $emailExistente = $nuevoEmail !== "email" && $this->valorExistente($conn, 'email', $nuevoEmail);
+        
+            // Si el nuevo nombre o el nuevo email ya existen, retornar false
+            if ($nombreExistente || $emailExistente) {
                 return false;
             }
-            
+        
             $fechaModificacion = date('Y-m-d H:i:s');
+            
+            // Construir la consulta SQL para actualizar el registro
+            $consulta = "UPDATE comerciales SET nombre = $nuevoNombre, email = $nuevoEmail, fecha_modificacion = NOW(), status = 'M' WHERE id = '$idComercial'";
         
-            $consulta = "UPDATE clientes SET nombre = '$nuevoNombre', fecha_modificacion = '$fechaModificacion', status = 'M' WHERE id = '$idCliente'";
-        
+            // Ejecutar la consulta SQL
             if ($conn->query($consulta)) {
                 return true;
             } else {
                 return false;
             }
         }
+        
+        
+        
+        function valorExistente($conn, $columna, $valor) {
+            // Escapar el valor solo si se utilizará en la consulta SQL
+            $valor = $conn->real_escape_string($valor);
+        
+            // Consultar si el valor existe en la columna especificada
+            $sql = "SELECT $columna FROM comerciales WHERE $columna = '$valor'";
+            $resultado = $conn->query($sql);
+        
+            if ($resultado) {
+                // Devuelve true si el valor existe en la columna especificada
+                return $resultado->num_rows > 0;
+            } else {
+                return false; // Error al consultar la base de datos
+            }
+        }
+        
+        
 
 
-        public function deshabilitarCliente($conn, $idCliente) {
+        public function deshabilitarComerial($conn, $idComercial) {
 
-            $idCliente = $conn->real_escape_string($idCliente);
+            $idComercial = $conn->real_escape_string($idComercial);
             
-            $consulta = "UPDATE clientes SET status = 'D' WHERE id = $idCliente";
+            $consulta = "UPDATE comerciales SET status = 'D', fecha_baja = NOW() WHERE id = $idComercial";
 
             if ($conn->query($consulta) === TRUE) {
 
