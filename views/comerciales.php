@@ -105,8 +105,7 @@
                             html += '<h5 class="fs-18 my-1">' + comercial.nombre + '</h5>';
                             html += '<p class="text-muted fs-15">' + comercial.email + '</p>';
                             html += '</div>';
-                            // html += '<h1>Hola</h1><hr>';
-                            
+                            html += '</div>';
                             <?php if($_SESSION['usuario']['rol'] == 1): ?>
                             html += '<div class="">';
                             html += '<a href="#" class="btn btn-success btn-sm me-1 editar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" data-id="' + comercial.id + '"><i class="ri-pencil-fill"></i></a>';
