@@ -41,6 +41,9 @@ switch ($action) {
         include 'views/aside.php';
         include 'views/footer.php';
         include 'views/header.php';
+        include 'clases/Cliente.php';
+        include 'clases/Contacto.php';
+        include 'clases/Tipo.php';
         include 'form/formPrecompra.php';
         break;
     case "index":
@@ -114,7 +117,6 @@ switch ($action) {
         include 'views/footer.php';
         include 'views/header.php';
         include 'config/conexion.php';
-        //include 'clases/Cliente.php';
         include 'views/clientes.php';
         break;
     case "contactList":
@@ -131,7 +133,6 @@ switch ($action) {
         include 'views/footer.php';
         include 'views/header.php';
         include 'config/conexion.php';
-        //include 'clases/Cliente.php';
         include 'views/comerciales.php';
         break;
     case "formContacto":

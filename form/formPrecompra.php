@@ -1,3 +1,36 @@
+<script>
+    function cargarContactos() {
+        var idCliente = document.getElementById("cliente").value;
+        if (idCliente != null) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "metodos/obtener_contactos.php?id_cliente=" + idCliente);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var respuesta = JSON.parse(xhr.responseText);                           
+                    var contactos = respuesta.contactos;
+                    var selectorContacto = document.getElementById("contacto");
+                    selectorContacto.innerHTML = "";
+                    for (var i = 0; i < contactos.length; i++) {
+                    var opcion = document.createElement("option");
+                    opcion.value = contactos[i].id;
+                    opcion.textContent = contactos[i].nombre;
+                    if (contactos[i].id === <?php echo $_GET['id_contacto']; ?>) {
+                        opcion.selected = true;
+                    }
+                    selectorContacto.appendChild(opcion);
+                    }
+                } else {
+                    alert("Error al obtener los contactos: " + xhr.statusText);
+                }
+            }
+            xhr.send();
+        } else {
+            var selectorContacto = document.getElementById("contacto");
+            selectorContacto.innerHTML = "";
+        }
+    }
+</script>
+
 <div class="content-page">
     <div class="content">
         <!-- Start Content-->
@@ -28,10 +61,27 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form>
+                                        <!-- selector clientes-->
                                         <div class="mb-3">
-                                            <label for="example-static" class="form-label">Cliente</label>
-                                            <input type="text" readonly class="form-control-plaintext" id="example-static" name="cliente" value="cliente@cliente.com(sacar de la sesion)">
+                                            <label for="id_cliente" class="form-label">Cliente</label>
+                                            <select class="form-select" name="id_cliente" id="cliente" onchange="cargarContactos()">
+                                                <option value="">Seleccione cliente</option>
+                                                <?php 
+                                                    $cliente = new Cliente();
+                                                    $clientes = $cliente->obtenerClientes();
+                                                    if (!empty($clientes)) {
+                                                        foreach ($clientes as $c) {
+                                                ?>
+                                                <option value="<?=$c['id']?>">
+                                                    <?=$c['nombre']?>
+                                                </option>
+                                                <?php
+                                                        }
+                                                    }
+                                                ?>
+                                            </select>                                            
                                         </div>
+                                        <!-- fin selector clientes -->                    
                                         <div class="mb-3">
                                             <label for="fecha_reunion" class="form-label">Fecha de la reunión</label>
                                             <input class="form-control" id="fecha_reunion" type="date" name="fecha_reunion">
@@ -51,24 +101,39 @@
                                     </form>
                                 </div> <!-- end col -->
                                 <div class="col-lg-6">
+                                    <!-- selector contactos -->
                                     <div class="mb-3">
-                                        <label for="persona_contacto" class="form-label">Persona de Contacto</label>
-                                        <input type="text" readonly class="form-control-plaintext" id="persona_contacto" value="email@cliente.com(sacar de la sesion?)" name="persona_contacto">
+                                        <label for="id_contacto" class="form-label">Contacto</label>
+                                        <select class="form-select" name="id_contacto" id="contacto">
+                                            <option value="">Select contact</option>
+                                        </select>
                                     </div>
+                                    <!-- fin selector contactos -->
                                     <div class="mb-3">
                                         <label for="example-disable" class="form-label">Comercial</label>
                                         <input type="text" class="form-control" id="example-disable" disabled="" name="comercial" value="Sacar el nombre de la empresa dependiendo en la que marque">
                                     </div>
+                                    <!-- selector tipos -->
                                     <div class="mb-3">
-                                        <label for="tipo_proyecto" class="form-label">Tipo de proyecto</label>
-                                        <select class="form-select" id="tipo_proyecto" name="tipo_proyecto">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+                                        <label for="tipo" class="form-label">Tipo de proyecto</label>
+                                        <select class="form-select" name="tipo" id="tipo">
+                                            <option value="">Seleccione tipo</option>
+                                            <?php 
+                                                $tipo = new Tipo();
+                                                $tipos = $tipo->obtenerTipos();
+                                                if (!empty($tipos)) {
+                                                    foreach ($tipos as $t) {
+                                            ?>
+                                            <option value="<?=$t['id']?>">
+                                                <?=$t['nombre']?>
+                                            </option>
+                                            <?php
+                                                    }
+                                                }
+                                            ?>
                                         </select>
                                     </div>
+                                    <!-- fin selector tipos -->
                                     <div class="mb-3">
                                         <label for="horas" class="form-label">Horas</label>
                                         <input class="form-control" id="horas" type="number" name="horas">
@@ -88,3 +153,6 @@
         </div><!-- end container-fluid -->
     </div><!-- end content -->
 </div><!-- end content-page -->
+
+
+

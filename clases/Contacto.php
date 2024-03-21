@@ -158,7 +158,7 @@
 
         public function obtenerContactos() {
             $contactos = array();
-    
+
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
     
@@ -172,6 +172,21 @@
                 }
             }
     
+            return $contactos;
+        }
+
+        public function obtenerContactosPorCliente($conexion, $id_cliente) {
+            $contactos = array();
+            $sql = "SELECT * FROM personas_contacto WHERE id_cliente = $id_cliente";
+            $resultado = mysqli_query($conexion, $sql);
+            if ($resultado) {
+                while ($fila = mysqli_fetch_assoc($resultado)) {
+                    $contactos[] = $fila;
+                }
+            } else {
+                echo "Error en la consulta: " . mysqli_error($conexion);
+            }
+
             return $contactos;
         }
 
