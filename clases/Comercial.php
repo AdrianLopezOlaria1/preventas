@@ -167,26 +167,6 @@ if (!function_exists('Conexion')) {
             }
         }
 
-        
-        // public function obtenerComerciales() {
-        //     $comerciales = array();
-            
-           
-        //     $conexion = new Conexion(); // Obtener la conexión usando el método estático
-        //     $conexion = $conexion->getConexion();
-
-        //     $sql = "SELECT id, nombre, email, status FROM comerciales";
-        //     $resultado = $conexion->query($sql);
-    
-        //     if ($resultado) {
-        //         while ($fila = $resultado->fetch_assoc()) {
-        //             $comerciales[] = $fila;
-        //         }
-        //     }
-        //     return $comerciales;
-        // }
-
-
         public function editarComercial($conn, $idComercial, $nuevoNombre, $nuevoEmail) {
             $idComercial = $conn->real_escape_string($idComercial);
             
