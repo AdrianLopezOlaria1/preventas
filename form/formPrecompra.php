@@ -153,10 +153,12 @@
                     var selectorContacto = document.getElementById("contacto");
                     selectorContacto.innerHTML = "";
                     for (var i = 0; i < contactos.length; i++) {
-                    var opcion = document.createElement("option");
-                    opcion.value = contactos[i].id;                    
-                    opcion.textContent = contactos[i].nombre;
-                    selectorContacto.appendChild(opcion);
+                        var opcion = document.createElement("option");
+                        opcion.value = contactos[i].id;                    
+                        opcion.textContent = contactos[i].nombre;
+                        if(contactos[i].status != 'D'){
+                            selectorContacto.appendChild(opcion);
+                        }
                     }
                 } else {
                     alert("Error al obtener los contactos: " + xhr.statusText);
