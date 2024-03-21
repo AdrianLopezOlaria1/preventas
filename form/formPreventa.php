@@ -28,7 +28,12 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form>
+                                    <?php if(isset($_SESSION['completado'])): ?>
+                                        <div class='alert alert-success'>
+                                            <?=$_SESSION['completado'];?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <form action="index.php?action=enviarPreventa" method="POST">
                                         <!-- selector clientes-->
                                         <div class="mb-3">
                                             <label for="id_cliente" class="form-label">Cliente</label>
@@ -49,26 +54,47 @@
                                                         }
                                                     }
                                                 ?>
-                                            </select>                                            
+                                            </select>
+                                            <?php if(isset($_SESSION['error']['id_cliente'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['id_cliente'];?>
+                                                </div>
+                                            <?php endif; ?>                                            
                                         </div>
                                         <!-- fin selector clientes -->                    
                                         <div class="mb-3">
                                             <label for="fecha_reunion" class="form-label">Fecha de la reunión</label>
                                             <input class="form-control" id="fecha_reunion" type="date" name="fecha_reunion">
-                                        </div>   
+                                            <?php if(isset($_SESSION['error']['fecha_reunion'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['fecha_reunion'];?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>                                           
                                         <div class="mb-3">
                                             <label for="horas" class="form-label">Horas previstas</label>
-                                            <input class="form-control" id="horas" type="number" name="horas">
-                                        </div>                                     
+                                            <input class="form-control" id="horas" type="number" name="horas_previstas">
+                                            <?php if(isset($_SESSION['error']['horas_previstas'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['horas_previstas'];?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>                                                                             
                                         <div class="mb-3">
                                             <label for="acta_reunion" class="form-label">Detalles acta de la reunión</label>
                                             <textarea class="form-control" id="acta_reunion" name="acta_reunion" rows="5"></textarea>
-                                        </div>
+                                            <?php if(isset($_SESSION['error']['acta_reunion'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['acta_reunion'];?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>                                        
                                         <!-- <div class="mb-3">
                                             <label for="example-fileinput" class="form-label">Archivo acta de la reunión</label>
                                             <input type="file" id="example-fileinput" class="form-control">
                                         </div> -->
                                     </form>
+                                   
                                 </div> <!-- end col -->
                                 <div class="col-lg-6">
                                     <!-- selector contactos -->
@@ -77,6 +103,11 @@
                                         <select class="form-select" name="id_contacto" id="contacto">
                                             <option value="">Seleccione contacto</option>
                                         </select>
+                                        <?php if(isset($_SESSION['error']['id_contactos'])): ?>
+                                            <div class='alert alert-warning'>
+                                                <?=$_SESSION['error']['id_contactos'];?>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                     <!-- fin selector contactos -->
                                     <div class="mb-3">
@@ -99,11 +130,16 @@
                                             }
                                         ?>                                  
                                         </select>
+                                        <?php if(isset($_SESSION['error']['id_comercial'])): ?>
+                                            <div class='alert alert-warning'>
+                                                <?=$_SESSION['error']['id_comercial'];?>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                     <!-- selector tipos -->
                                     <div class="mb-3">
-                                        <label for="tipo" class="form-label">Tipo de proyecto</label>
-                                        <select class="form-select" name="tipo" id="tipo">
+                                        <label for="id_tipo" class="form-label">Tipo de proyecto</label>
+                                        <select class="form-select" name="id_tipo" id="id_tipo">
                                             <option value="">Seleccione tipo</option>
                                             <?php 
                                                 $tipo = new Tipo();
@@ -119,11 +155,21 @@
                                                 }
                                             ?>
                                         </select>
+                                        <?php if(isset($_SESSION['error']['id_tipo'])): ?>
+                                            <div class='alert alert-warning'>
+                                                <?=$_SESSION['error']['id_tipo'];?>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                     <!-- fin selector tipos -->                                    
                                     <div class="mb-3">
-                                        <label for="precio" class="form-label">Precio estimado</label>
-                                        <input class="form-control" id="precio" type="number" name="precio">
+                                        <label for="importe" class="form-label">Precio estimado</label>
+                                        <input class="form-control" id="importe" type="number" name="importe">
+                                        <?php if(isset($_SESSION['error']['importe'])): ?>
+                                            <div class='alert alert-warning'>
+                                                <?=$_SESSION['error']['importe'];?>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div> <!-- end col -->

@@ -9,7 +9,7 @@
         }
     }
 
-    class Precompra {
+    class Preventa {
         private $id_cliente;
         private $id_contacto;
         private $id_comercial;
@@ -107,7 +107,7 @@
         //funciones
 
         function validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
-            $horas_previstas, $email, $tel) {
+            $horas_previstas, $acta_reunion, $importe) {
 
             $error = array();
             if(empty($id_cliente)){
@@ -126,40 +126,32 @@
                 $error['fecha_reunion'] = "Debes escoger una fecha";
             }
             if(empty($horas_previstas) || !is_numeric($horas_previstas)){            
-                $error['horas_previstas'] = "Debes insertar horas previstas";
+                $error['horas_previstas'] = "Debes insertar horas previstas en número";
             }
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                $error['email'] = "Insert a valid email address";
+            if(empty($acta_reunion)){
+                $error['acta_reunion'] = "Debes rellenar el acta de reunión";
             }
-            if(empty($tel) || !is_numeric($tel)){
-                $error['tel'] = "Insert a valid phone number";
+            if(empty($importe) || !is_numeric($importe)){
+                $error['importe'] = "Debes poner importe en números";
             }
+
             return $error;
         }
     
-    
-
-        
-
-        public function nuevo($id_cliente, $nombre, $email, $tel) {
+        public function crearPreventa($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
+            $horas_previstas, $acta_reunion, $importe) {
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
-            $error = $this->validarDatos($id_cliente, $nombre, $email, $tel);
+            $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
+            $horas_previstas, $acta_reunion, $importe);
             if(count($error) == 0){
-                // Verificar si el correo electrónico ya existe en la base de datos
-                $sql_check_email = "SELECT email FROM personas_contacto WHERE email = '$email'";
-                $result_check_email = mysqli_query($mysqli, $sql_check_email);
-                $row = mysqli_fetch_assoc($result_check_email);
-                if ($row) {
-                    $_SESSION['error']['email'] = "Error, the email is already registered";
-                    return $_SESSION['error'];
-                }
-                // Insertar contacto en la base de datos
-                $sql = "INSERT INTO personas_contacto VALUES(NULL, $id_cliente, '$nombre', '$email', '$tel', 
-                'A', NOW(), NULL, NULL);";
+                // Insertar precompra en la base de datos
+                $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_contacto, $id_comercial, $id_tipo, 'P',
+                GETDATE(), NULL, $fecha_reunion, '$acta_reunion', $horas_previstas, $importe);";
+
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {
-                    $_SESSION['completado'] = "The contact has been successfully created!";
+                    $_SESSION['completado'] = "La preventa se ha generado correctamente!";
                 } else {
                     $_SESSION['error']['general'] = "Error";
                 }
@@ -182,6 +174,7 @@
         
             return $borrado;
         }
+
 
         public function obtenerContactos() {
             $contactos = array();
@@ -300,6 +293,7 @@
                 return array('error' => 'Error al deshabilitar el contacto: ' . $conn->error);
             }
         }
+
 
         public function obtenerPreventas() {
             // Array para almacenar los preventas$preventas de la base de datos

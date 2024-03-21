@@ -31,15 +31,17 @@
                         <a href="index.php?action=index" class="side-nav-link">
                             <i class="ri-dashboard-3-line"></i>
                             <span class="badge bg-success float-end">9+</span>
-                            <span>Precompras</span>
+
+                            <span>Mis Preventas</span>
+
                         </a>
                     </li>
 
                     <li class="side-nav-item">
                     
-                        <a href="index.php?action=formPrecompra" class="side-nav-link">
+                        <a href="index.php?action=formPreventa" class="side-nav-link">
                         <i class="bi bi-cart"></i>
-                            <span>Nueva Precompras</span>
+                            <span>Nueva Preventa</span>
                         </a>
                     </li>
 
