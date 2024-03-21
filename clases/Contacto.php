@@ -273,6 +273,30 @@
                 return array('error' => 'Error al deshabilitar el contacto: ' . $conn->error);
             }
         }
+
+        public function buscarContacto($conn, $termino) {
+            $contactos = array();
+        
+            // Escapar el término de búsqueda para evitar inyección de SQL
+            $termino = $conn->real_escape_string($termino);
+        
+            // Consulta SQL para buscar clientes que coincidan con el término de búsqueda en el nombre
+            $sql = "SELECT * FROM personas_contacto WHERE nombre LIKE '$termino%'";
+        
+            // Ejecutar la consulta SQL
+            $resultado = $conn->query($sql);
+        
+            // Verificar si se encontraron resultados
+            if ($resultado) {
+                // Iterar sobre los resultados y agregarlos al arreglo de clientes
+                while ($fila = $resultado->fetch_assoc()) {
+                    $contactos[] = $fila;
+                }
+            }
+        
+            // Devolver el arreglo de clientes encontrados
+            return $contactos;
+        }
     }
 
 
