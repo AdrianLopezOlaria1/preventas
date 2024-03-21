@@ -263,6 +263,30 @@ if (!function_exists('Conexion')) {
                 return array('error' => 'Error al deshabilitar el cliente: ' . $conn->error);
             }
 }
+
+            public function buscarComerciales($conn, $termino) {
+                $comerciales = array();
+
+                // Escapar el término de búsqueda para evitar inyección de SQL
+                $termino = $conn->real_escape_string($termino);
+
+                // Consulta SQL para buscar comerciales$comerciales que coincidan con el término de búsqueda en el nombre
+                $sql = "SELECT * FROM comerciales WHERE nombre LIKE '$termino%'";
+
+                // Ejecutar la consulta SQL
+                $resultado = $conn->query($sql);
+
+                // Verificar si se encontraron resultados
+                if ($resultado) {
+                    // Iterar sobre los resultados y agregarlos al arreglo de comerciales$comerciales
+                    while ($fila = $resultado->fetch_assoc()) {
+                        $comerciales[] = $fila;
+                    }
+                }
+
+                // Devolver el arreglo de comerciales$comerciales encontrados
+                return $comerciales;
+            }        
         
     
 }      
