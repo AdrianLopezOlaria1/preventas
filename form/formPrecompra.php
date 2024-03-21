@@ -148,28 +148,19 @@
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "metodos/obtener_contactos.php?id_cliente=" + idCliente);
             xhr.onload = function() {
-            if (xhr.status === 200) {
-                var respuesta = JSON.parse(xhr.responseText);
-                console.log(respuesta);
-                if (respuesta.error) {
-                console.log(respuesta.error);
-                return;
+                if (xhr.status === 200) {                    
+                    var contactos = JSON.parse(xhr.responseText);                                                      
+                    var selectorContacto = document.getElementById("contacto");
+                    selectorContacto.innerHTML = "";
+                    for (var i = 0; i < contactos.length; i++) {
+                    var opcion = document.createElement("option");
+                    opcion.value = contactos[i].id;                    
+                    opcion.textContent = contactos[i].nombre;
+                    selectorContacto.appendChild(opcion);
+                    }
+                } else {
+                    alert("Error al obtener los contactos: " + xhr.statusText);
                 }
-                var contactos = respuesta.contactos;
-                var selectorContacto = document.getElementById("contacto");
-                selectorContacto.innerHTML = "";
-                for (var i = 0; i < contactos.length; i++) {
-                var opcion = document.createElement("option");
-                opcion.value = contactos[i].id;
-                opcion.textContent = contactos[i].nombre;
-                if (contactos[i].id === <?php echo $_GET['id_contacto']; ?>) {
-                    opcion.selected = true;
-                }
-                selectorContacto.appendChild(opcion);
-                }
-            } else {
-                alert("Error al obtener los contactos: " + xhr.statusText);
-            }
             };
             xhr.send();
         } else {
