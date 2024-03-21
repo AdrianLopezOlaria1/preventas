@@ -1,6 +1,6 @@
 <?php
 require_once '../clases/Comercial.php'; // Asegúrate de que el nombre del archivo sea 'Cliente.php'
-require_once '../config/conexion.php'; // Asegúrate de que el nombre del archivo sea 'Conexion.php'
+require_once 'config/conexion.php'; // Asegúrate de que el nombre del archivo sea 'Conexion.php'
 
 // Crear una instancia de la clase Conexion
 $conexion = new Conexion();

@@ -38,7 +38,7 @@
                     <li class="side-nav-item">
                     
                         <a href="index.php?action=formPrecompra" class="side-nav-link">
-                            <i class="ri-dashboard-3-line"></i>
+                        <i class="bi bi-cart"></i>
                             <span>Nueva Precompras</span>
                         </a>
                     </li>
@@ -92,7 +92,7 @@
 
                         <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPagesAuth" aria-expanded="false" aria-controls="sidebarPagesAuth" class="side-nav-link">
-                            <i class="ri-group-2-line"></i>
+                        <i class="bi bi-plus-circle-fill"></i>
                             <span> Create </span>
                             <span class="menu-arrow"></span>
                         </a>

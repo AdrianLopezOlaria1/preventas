@@ -20,6 +20,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <script src="https://maps.googleapis.com/maps/api/js?key=TU_CLAVE_API&libraries=places"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 </head>
@@ -44,6 +45,7 @@ switch ($action) {
         include 'clases/Cliente.php';
         include 'clases/Contacto.php';
         include 'clases/Tipo.php';
+        include 'clases/Comercial.php';
         include 'form/formPrecompra.php';
         break;
     case "index":

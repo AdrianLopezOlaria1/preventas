@@ -80,8 +80,24 @@
                                     </div>
                                     <!-- fin selector contactos -->
                                     <div class="mb-3">
-                                        <label for="example-disable" class="form-label">Comercial</label>
-                                        <input type="text" class="form-control" id="example-disable" disabled="" name="comercial" value="Sacar el nombre de la empresa dependiendo en la que marque">
+                                        <label for="comercial" class="form-label">Comerciales</label>
+                                        <select class="form-select" id="comercial" name="comercial">
+                                        <?php 
+                                            $comerciales = new Comercial();
+                                            $comerciales = $comerciales->obtenerComerciales();
+                                            if (!empty($comerciales)) {
+                                                foreach ($comerciales as $c) {
+                                                    if($c['status'] != 'D'):
+                                        ?>
+                                        <option value="<?=$c['id']?>">
+                                            <?=$c['nombre']?>
+                                        </option>
+                                        <?php 
+                                                    endif;
+                                                }
+                                            }
+                                        ?>                                  
+                                        </select>
                                     </div>
                                     <!-- selector tipos -->
                                     <div class="mb-3">
@@ -123,5 +139,3 @@
         </div><!-- end container-fluid -->
     </div><!-- end content -->
 </div><!-- end content-page -->
-
-
