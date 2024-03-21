@@ -132,9 +132,9 @@
                                                 foreach ($preventas as $index => $preventa) {
                                                     echo '<tr>';
                                                     echo '<th scope="row">' . ($index + 1) . '</th>'; // Número de fila
-                                                    echo '<td>' . $preventa['id_cliente'] . '</td>'; // Cliente
-                                                    echo '<td>' . $preventa['id_comercial'] . '</td>'; // Comercial
-                                                    echo '<td>' . $preventa['id_tipo'] . '</td>'; // Tipo
+                                                    echo '<td>' . $preventa['nomCli'] . '</td>'; // Cliente
+                                                    echo '<td>' . $preventa['nomCom'] . '</td>'; // Comercial
+                                                    echo '<td>' . $preventa['nomTi'] . '</td>'; // Tipo
                                                     echo '<td>' . $preventa['fecha_solicitud'] . '</td>'; // Fecha Solicitud
                                                     echo '<td>' . $preventa['fecha_reunion'] . '</td>'; // Fecha Reunión
                                                     echo '<td>' . $preventa['acta_reunion'] . '</td>'; // Acta
@@ -163,7 +163,7 @@
                                                 
                                                     echo '<td><span class="' . $estado_class . '">' . $estado . '</span></td>'; // Estado
                                                 
-                                                    echo '<td>' . $preventa['id_contacto'] . '</td>'; // Contacto
+                                                    echo '<td>' . $preventa['nomCont'] . '</td>'; // Contacto
                                                     echo '</tr>';
                                                 }
                                                 
