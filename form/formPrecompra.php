@@ -83,7 +83,21 @@
                                     <div class="mb-3">
                                         <label for="comercial" class="form-label">Comerciales</label>
                                         <select class="form-select" id="comercial" name="comercial">
-                                            <!-- Opciones Comerciales  -->
+                                        <?php 
+                                            $comerciales = new Comercial();
+                                            $comerciales = $comerciales->obtenerComerciales();
+                                            if (!empty($comerciales)) {
+                                                foreach ($comerciales as $c) {
+                                                    if($c['status'] != 'D'):
+                                        ?>
+                                        <option value="<?=$c['id']?>">
+                                            <?=$c['nombre']?>
+                                        </option>
+                                        <?php 
+                                                    endif;
+                                                }
+                                            }
+                                        ?>                                  
                                         </select>
                                     </div>
                                     <!-- selector tipos -->
@@ -126,25 +140,3 @@
         </div><!-- end container-fluid -->
     </div><!-- end content -->
 </div><!-- end content-page -->
-
-<script>
-    // Hacer una solicitud AJAX para obtener los comerciales
-    $.ajax({
-        url: 'metodos/obtener_comerciales.php',
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            // Agregar las opciones de comerciales al select
-            const selectComercial = $('#comercial');
-            $.each(data, function(index, comercial) {
-                selectComercial.append($('<option>', {
-                    value: comercial.id,
-                    text: comercial.nombre
-                }));
-            });
-        },
-        error: function(xhr, status, error) {
-            console.error('Error al obtener los comerciales:', error);
-        }
-    });
-</script>

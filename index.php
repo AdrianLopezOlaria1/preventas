@@ -45,6 +45,7 @@ switch ($action) {
         include 'clases/Cliente.php';
         include 'clases/Contacto.php';
         include 'clases/Tipo.php';
+        include 'clases/Comercial.php';
         include 'form/formPrecompra.php';
         break;
     case "index":
