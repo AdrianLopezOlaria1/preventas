@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <!-- end page title -->
-
+                    
                     <div class="row">
                         <div class="col-xxl-3 col-sm-6">
                             <div class="card widget-flat text-bg-pink">
@@ -88,104 +88,87 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-8">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-widgets">
-                                        <a href="javascript:;" data-bs-toggle="reload"><i class="ri-refresh-line"></i></a>
-                                        <a data-bs-toggle="collapse" href="#weeklysales-collapse" role="button" aria-expanded="false" aria-controls="weeklysales-collapse"><i class="ri-subtract-line"></i></a>
-                                        <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
-                                    </div>
-                                    <h5 class="header-title mb-0">Weekly Sales Report</h5>
 
-                                    <div id="weeklysales-collapse" class="collapse pt-3 show">
-                                        <div dir="ltr">
-                                            <div id="revenue-chart" class="apex-charts" data-colors="#3bc0c3,#1a2942,#d1d7d973"></div>
-                                        </div>
-
-                                        <div class="row text-center">
-                                            <div class="col">
-                                                <p class="text-muted mt-3">Current Week</p>
-                                                <h3 class=" mb-0">
-                                                    <span>$506.54</span>
-                                                </h3>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3">Previous Week</p>
-                                                <h3 class=" mb-0">
-                                                    <span>$305.25 </span>
-                                                </h3>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3">Conversation</p>
-                                                <h3 class=" mb-0">
-                                                    <span>3.27%</span>
-                                                </h3>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3">Customers</p>
-                                                <h3 class=" mb-0">
-                                                    <span>3k</span>
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div> <!-- end card-body-->
-                            </div> <!-- end card-->
-                        </div> <!-- end col-->
-                        <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-widgets">
-                                        <a href="javascript:;" data-bs-toggle="reload"><i class="ri-refresh-line"></i></a>
-                                        <a data-bs-toggle="collapse" href="#yearly-sales-collapse" role="button" aria-expanded="false" aria-controls="yearly-sales-collapse"><i class="ri-subtract-line"></i></a>
-                                        <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
-                                    </div>
-                                    <h5 class="header-title mb-0">Yearly Sales Report</h5>
-
-                                    <div id="yearly-sales-collapse" class="collapse pt-3 show">
-                                        <div dir="ltr">
-                                            <div id="yearly-sales-chart" class="apex-charts" data-colors="#3bc0c3,#1a2942,#d1d7d973"></div>
-                                        </div>
-                                        <div class="row text-center">
-                                            <div class="col">
-                                                <p class="text-muted mt-3 mb-2">Quarter 1</p>
-                                                <h4 class="mb-0">$56.2k</h4>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3 mb-2">Quarter 2</p>
-                                                <h4 class="mb-0">$42.5k</h4>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3 mb-2">All Time</p>
-                                                <h4 class="mb-0">$102.03k</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div> <!-- end card-body-->
-                            </div> <!-- end card-->
-
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="flex-grow-1 overflow-hidden">
-                                            <h4 class="fs-22 fw-semibold">69.25%</h4>
-                                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> US Dollar Share</p>
-                                        </div>
-                                        <div class="flex-shrink-0">
-                                            <div id="us-share-chart" class="apex-charts" dir="ltr"></div>
-                                        </div>
-                                    </div>
-                                </div><!-- end card body -->
-                            </div> <!-- end card-->
-                        </div> <!-- end col-->
+                        
+                       
 
                     </div>
                     <!-- end row -->
 
                     <div class="row">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="header-title">Preventas</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Cliente</th>
+                                                    <th scope="col">Comercial</th>
+                                                    <th scope="col">Tipo</th>
+                                                    <th scope="col">Fecha Solicitud</th>
+                                                    <th scope="col">Fecha Reunión</th>
+                                                    <th scope="col">Acta</th>
+                                                    <th scope="col">Horas</th>
+                                                    <th scope="col">Importe</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Contacto</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td><span class="badge bg-success-subtle text-success">Released</span></td>
+                                                    <td>Cell</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td><span class="badge bg-pink-subtle text-pink">Pending</span></td>
+                                                    <td>Cell</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">3</th>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td><span class="badge bg-warning-subtle text-warning">Coming soon</span></td>
+                                                    <td>Cell</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div> <!-- end table-responsive-->
+
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div>
                         <div class="col-xl-4">
                             <!-- Chat-->
                             <div class="card">
@@ -376,6 +359,100 @@
                                         </div>        
                                     </div>
                                 </div>                           
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-widgets">
+                                        <a href="javascript:;" data-bs-toggle="reload"><i class="ri-refresh-line"></i></a>
+                                        <a data-bs-toggle="collapse" href="#weeklysales-collapse" role="button" aria-expanded="false" aria-controls="weeklysales-collapse"><i class="ri-subtract-line"></i></a>
+                                        <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
+                                    </div>
+                                    <h5 class="header-title mb-0">Weekly Sales Report</h5>
+
+                                    <div id="weeklysales-collapse" class="collapse pt-3 show">
+                                        <div dir="ltr">
+                                            <div id="revenue-chart" class="apex-charts" data-colors="#3bc0c3,#1a2942,#d1d7d973"></div>
+                                        </div>
+
+                                        <div class="row text-center">
+                                            <div class="col">
+                                                <p class="text-muted mt-3">Current Week</p>
+                                                <h3 class=" mb-0">
+                                                    <span>$506.54</span>
+                                                </h3>
+                                            </div>
+                                            <div class="col">
+                                                <p class="text-muted mt-3">Previous Week</p>
+                                                <h3 class=" mb-0">
+                                                    <span>$305.25 </span>
+                                                </h3>
+                                            </div>
+                                            <div class="col">
+                                                <p class="text-muted mt-3">Conversation</p>
+                                                <h3 class=" mb-0">
+                                                    <span>3.27%</span>
+                                                </h3>
+                                            </div>
+                                            <div class="col">
+                                                <p class="text-muted mt-3">Customers</p>
+                                                <h3 class=" mb-0">
+                                                    <span>3k</span>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div> <!-- end card-body-->
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-widgets">
+                                        <a href="javascript:;" data-bs-toggle="reload"><i class="ri-refresh-line"></i></a>
+                                        <a data-bs-toggle="collapse" href="#yearly-sales-collapse" role="button" aria-expanded="false" aria-controls="yearly-sales-collapse"><i class="ri-subtract-line"></i></a>
+                                        <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
+                                    </div>
+                                    <h5 class="header-title mb-0">Yearly Sales Report</h5>
+
+                                    <div id="yearly-sales-collapse" class="collapse pt-3 show">
+                                        <div dir="ltr">
+                                            <div id="yearly-sales-chart" class="apex-charts" data-colors="#3bc0c3,#1a2942,#d1d7d973"></div>
+                                        </div>
+                                        <div class="row text-center">
+                                            <div class="col">
+                                                <p class="text-muted mt-3 mb-2">Quarter 1</p>
+                                                <h4 class="mb-0">$56.2k</h4>
+                                            </div>
+                                            <div class="col">
+                                                <p class="text-muted mt-3 mb-2">Quarter 2</p>
+                                                <h4 class="mb-0">$42.5k</h4>
+                                            </div>
+                                            <div class="col">
+                                                <p class="text-muted mt-3 mb-2">All Time</p>
+                                                <h4 class="mb-0">$102.03k</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div> <!-- end card-body-->
+                            </div> <!-- end card-->
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <h4 class="fs-22 fw-semibold">69.25%</h4>
+                                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> US Dollar Share</p>
+                                        </div>
+                                        <div class="flex-shrink-0">
+                                            <div id="us-share-chart" class="apex-charts" dir="ltr"></div>
+                                        </div>
+                                    </div>
+                                </div><!-- end card body -->
                             </div> <!-- end card-->
                         </div> <!-- end col-->
                     </div>
