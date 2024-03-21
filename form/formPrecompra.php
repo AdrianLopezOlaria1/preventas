@@ -1,5 +1,4 @@
 
-
 <div class="content-page">
     <div class="content">
         <!-- Start Content-->
@@ -84,7 +83,6 @@
                                         <label for="comercial" class="form-label">Comerciales</label>
                                         <select class="form-select" id="comercial" name="comercial">
                                         <option value="">Seleccione comercial</option>
-
                                         <?php 
                                             $comerciales = new Comercial();
                                             $comerciales = $comerciales->obtenerComerciales();
@@ -96,7 +94,7 @@
                                             <?=$c['nombre']?>
                                         </option>
                                         <?php 
-                                                    endif;
+                                            endif;
                                                 }
                                             }
                                         ?>                                  
@@ -142,3 +140,32 @@
         </div><!-- end container-fluid -->
     </div><!-- end content -->
 </div><!-- end content-page -->
+
+<script>
+    function cargarContactos() {
+        var idCliente = document.getElementById("cliente").value;
+        if (idCliente) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "metodos/obtener_contactos.php?id_cliente=" + idCliente);
+            xhr.onload = function() {
+                if (xhr.status === 200) {                    
+                    var contactos = JSON.parse(xhr.responseText);                                                      
+                    var selectorContacto = document.getElementById("contacto");
+                    selectorContacto.innerHTML = "";
+                    for (var i = 0; i < contactos.length; i++) {
+                    var opcion = document.createElement("option");
+                    opcion.value = contactos[i].id;                    
+                    opcion.textContent = contactos[i].nombre;
+                    selectorContacto.appendChild(opcion);
+                    }
+                } else {
+                    alert("Error al obtener los contactos: " + xhr.statusText);
+                }
+            };
+            xhr.send();
+        } else {
+            var selectorContacto = document.getElementById("contacto");
+            selectorContacto.innerHTML = "";
+        }
+    }
+</script>
