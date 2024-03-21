@@ -146,8 +146,8 @@
             $horas_previstas, $acta_reunion, $importe);
             if(count($error) == 0){
                 // Insertar precompra en la base de datos
-                $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_contacto, $id_comercial, $id_tipo, 'P',
-                GETDATE(), NULL, $fecha_reunion, '$acta_reunion', $horas_previstas, $importe);";
+                $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_comercial, $id_tipo, NOW(), '$fecha_reunion', '$acta_reunion', $horas_previstas, $importe, 'P', NULL, $id_contacto);";
+
 
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {
@@ -161,7 +161,7 @@
             }
         }    
 
-        function borrarErrores(){
+        public function borrarErrores(){
             $borrado = false;
             if(isset($_SESSION['error'])){
                 $_SESSION['error'] = null;
@@ -186,7 +186,7 @@
             $mysqli = $conexion->getConexion();
         
             // Consulta SQL para obtener los preventas$preventas de la tabla precompras
-            $sql = "SELECT id_cliente,id_comercial, id_tipo, status, fecha_solicitud, fecha_reunion,
+            $sql = "SELECT id_cliente, id_comercial, id_tipo, status, fecha_solicitud, fecha_reunion,
              acta_reunion, horas_previstas, importe, status, id_contacto  FROM preventas";
         
             // Ejecutar la consulta
