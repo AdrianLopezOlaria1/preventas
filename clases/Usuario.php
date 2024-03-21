@@ -1,6 +1,14 @@
 <?php
 
-    require_once 'config/conexion.php';
+if (!function_exists('Conexion')) {
+    if (file_exists('../config/conexion.php')) {
+        require_once '../config/conexion.php';
+    } else {
+        // Si no existe en el directorio anterior, intentar cargarlo desde la carpeta actual
+        require_once 'config/conexion.php';
+    }
+
+}
 
     class Usuario {
         private $nombre;
@@ -298,6 +306,27 @@
        
         return $borrado;
     }
+
+    public function obtenerNumeroUsuarios() {
+        // Crear una instancia de la clase Conexion
+        $conexion = new Conexion();
+        // Obtener la conexión utilizando el método getConexion() de la instancia de Conexion
+        $conn = $conexion->getConexion();
+    
+        $sql = "SELECT COUNT(*) as total_usuarios FROM usuarios";
+        $resultado = $conn->query($sql);
+    
+        if ($resultado && $resultado->num_rows > 0) {
+            $fila = $resultado->fetch_assoc();
+            return $fila['total_usuarios'];
+        } else {
+            return false; // Manejo de error si no se encuentran usuarios
+        }
+    }
+    
+    
+    
+    
 }
 
 
