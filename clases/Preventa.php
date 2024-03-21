@@ -9,7 +9,7 @@
         }
     }
 
-    class Precompra {
+    class Preventa {
         private $id_cliente;
         private $id_contacto;
         private $id_comercial;
@@ -107,7 +107,7 @@
         //funciones
 
         function validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
-            $horas_previstas, $email, $tel) {
+            $horas_previstas, $acta_reunion, $importe) {
 
             $error = array();
             if(empty($id_cliente)){
@@ -126,40 +126,32 @@
                 $error['fecha_reunion'] = "Debes escoger una fecha";
             }
             if(empty($horas_previstas) || !is_numeric($horas_previstas)){            
-                $error['horas_previstas'] = "Debes insertar horas previstas";
+                $error['horas_previstas'] = "Debes insertar horas previstas en número";
             }
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                $error['email'] = "Insert a valid email address";
+            if(empty($acta_reunion)){
+                $error['acta_reunion'] = "Debes rellenar el acta de reunión";
             }
-            if(empty($tel) || !is_numeric($tel)){
-                $error['tel'] = "Insert a valid phone number";
+            if(empty($importe) || !is_numeric($importe)){
+                $error['importe'] = "Debes poner importe en números";
             }
+
             return $error;
         }
-    }
     
-
-        
-
-        public function nuevo($id_cliente, $nombre, $email, $tel) {
+        public function crearPreventa($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
+            $horas_previstas, $acta_reunion, $importe) {
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
-            $error = $this->validarDatos($id_cliente, $nombre, $email, $tel);
+            $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
+            $horas_previstas, $acta_reunion, $importe);
             if(count($error) == 0){
-                // Verificar si el correo electrónico ya existe en la base de datos
-                $sql_check_email = "SELECT email FROM personas_contacto WHERE email = '$email'";
-                $result_check_email = mysqli_query($mysqli, $sql_check_email);
-                $row = mysqli_fetch_assoc($result_check_email);
-                if ($row) {
-                    $_SESSION['error']['email'] = "Error, the email is already registered";
-                    return $_SESSION['error'];
-                }
-                // Insertar contacto en la base de datos
-                $sql = "INSERT INTO personas_contacto VALUES(NULL, $id_cliente, '$nombre', '$email', '$tel', 
-                'A', NOW(), NULL, NULL);";
+                // Insertar precompra en la base de datos
+                $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_contacto, $id_comercial, $id_tipo, 'P',
+                GETDATE(), NULL, $fecha_reunion, '$acta_reunion', $horas_previstas, $importe);";
+
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {
-                    $_SESSION['completado'] = "The contact has been successfully created!";
+                    $_SESSION['completado'] = "La preventa se ha generado correctamente!";
                 } else {
                     $_SESSION['error']['general'] = "Error";
                 }
@@ -181,124 +173,6 @@
             }
         
             return $borrado;
-        }
-
-        public function obtenerContactos() {
-            $contactos = array();
-
-            $conexion = new Conexion();
-            $mysqli = $conexion->getConexion();
-    
-            $sql = "SELECT * FROM personas_contacto";
-            $resultado = $mysqli->query($sql);
-    
-            if ($resultado) {
-
-                while ($fila = $resultado->fetch_assoc()) {
-                    $contactos[] = $fila;
-                }
-            }
-    
-            return $contactos;
-        }
-
-        public function obtenerContactosPorCliente($conexion, $id_cliente) {
-            $contactos = array();
-            $sql = "SELECT * FROM personas_contacto WHERE id_cliente = $id_cliente";
-            $resultado = mysqli_query($conexion, $sql);
-            if ($resultado) {
-                while ($fila = mysqli_fetch_assoc($resultado)) {
-                    $contactos[] = $fila;
-                }
-            } else {
-                echo "Error en la consulta: " . mysqli_error($conexion);
-            }
-
-            return $contactos;
-        }
-
-        public function obtenerContactosJson($conn) {
-            $contactos = array();
-    
-            $sql = "SELECT id, nombre, email, tel, status FROM personas_contacto";
-            $resultado = $conn->query($sql);
-    
-            if ($resultado) {
-
-                while ($fila = $resultado->fetch_assoc()) {
-                    $contactos[] = $fila;
-                }
-            }
-    
-            return $contactos;
-        }
-
-        public function obtenerContactoJson($conn, $idContacto) {
-
-            $sql = "SELECT nombre, email, tel FROM personas_contacto WHERE id = $idContacto";
-        
-            $resultado = $conn->query($sql);
-        
-            if ($resultado->num_rows > 0) {
-
-                $contacto = $resultado->fetch_assoc();
-
-                return json_encode($contacto);
-            } else {
-
-                http_response_code(404); 
-                return json_encode(array("error" => "No se encontró ningún contacto con el ID proporcionado."));
-            }
-        }
-
-        public function editarContacto($conn, $idContacto, $nuevoNombre, $nuevoEmail, $nuevoTel) {
-            $idContacto = $conn->real_escape_string($idContacto);
-            $nuevoNombre = $conn->real_escape_string($nuevoNombre);
-            $nuevoEmail = $conn->real_escape_string($nuevoEmail);
-            $nuevoTel = $conn->real_escape_string($nuevoTel);
-
-            // Obtener el correo electrónico actual del contacto
-            $sql_obtener_email_actual = "SELECT email FROM personas_contacto WHERE id = '$idContacto'";
-            $result_obtener_email_actual = $conn->query($sql_obtener_email_actual);
-            $row_obtener_email_actual = $result_obtener_email_actual->fetch_assoc();
-            $email_actual = $row_obtener_email_actual['email'];
-
-            // Verificar si el correo electrónico ha sido cambiado
-            if ($email_actual != $nuevoEmail) {
-                // Verificar si el nuevo correo electrónico ya está en uso
-                $sql_check_email = "SELECT email FROM personas_contacto WHERE email = '$nuevoEmail'";
-                $result_check_email = $conn->query($sql_check_email);
-                if ($result_check_email->num_rows > 0) {
-                    // El nuevo correo electrónico ya está en uso
-                    return array('error' => 'El correo electrónico ya está en uso por otro contacto.');
-                }
-            }
-            
-            $fechaModificacion = date('Y-m-d H:i:s');
-        
-            $consulta = "UPDATE personas_contacto SET nombre = '$nuevoNombre', 
-            email = '$nuevoEmail', tel = '$nuevoTel', fecha_modificacion = '$fechaModificacion', status = 'M' WHERE id = '$idContacto'";
-        
-            if ($conn->query($consulta)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        public function deshabilitarContacto($conn, $idContacto) {
-
-            $idContacto = $conn->real_escape_string($idContacto);
-            
-            $consulta = "UPDATE personas_contacto SET status = 'D', fecha_baja = NOW() WHERE id = $idContacto";
-
-            if ($conn->query($consulta) === TRUE) {
-
-                return true;
-            } else {
-
-                return array('error' => 'Error al deshabilitar el contacto: ' . $conn->error);
-            }
         }
     }
 

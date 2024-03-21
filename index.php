@@ -37,7 +37,7 @@ switch ($action) {
         
         include 'views/logout.php';
         break;
-    case "formPrecompra":
+    case "formPreventa":
         include 'metodos/checker.php';
         include 'views/aside.php';
         include 'views/footer.php';
@@ -46,7 +46,7 @@ switch ($action) {
         include 'clases/Contacto.php';
         include 'clases/Tipo.php';
         include 'clases/Comercial.php';
-        include 'form/formPrecompra.php';
+        include 'form/formPreventa.php';
         break;
     case "index":
         include 'metodos/checker.php';
@@ -82,6 +82,9 @@ switch ($action) {
         break;
     case "enviarLogin":
         include 'metodos/login.php';
+        break;
+    case "enviarPreventa":
+        include 'metodos/preventa.php';
         break;
     case "enviarRegister":
         include 'metodos/register.php';
