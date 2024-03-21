@@ -53,6 +53,7 @@ switch ($action) {
         include 'views/aside.php';
         include 'views/footer.php';
         include 'views/header.php';
+        include 'clases/Preventa.php';
         include 'views/indice.php';
         break;
     case "cerrando":

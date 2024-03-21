@@ -174,8 +174,163 @@
         
             return $borrado;
         }
-    }
 
+
+        public function obtenerContactos() {
+            $contactos = array();
+
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
+    
+            $sql = "SELECT * FROM personas_contacto";
+            $resultado = $mysqli->query($sql);
+    
+            if ($resultado) {
+
+                while ($fila = $resultado->fetch_assoc()) {
+                    $contactos[] = $fila;
+                }
+            }
+    
+            return $contactos;
+        }
+
+        public function obtenerContactosPorCliente($conexion, $id_cliente) {
+            $contactos = array();
+            $sql = "SELECT * FROM personas_contacto WHERE id_cliente = $id_cliente";
+            $resultado = mysqli_query($conexion, $sql);
+            if ($resultado) {
+                while ($fila = mysqli_fetch_assoc($resultado)) {
+                    $contactos[] = $fila;
+                }
+            } else {
+                echo "Error en la consulta: " . mysqli_error($conexion);
+            }
+
+            return $contactos;
+        }
+
+        public function obtenerContactosJson($conn) {
+            $contactos = array();
+    
+            $sql = "SELECT id, nombre, email, tel, status FROM personas_contacto";
+            $resultado = $conn->query($sql);
+    
+            if ($resultado) {
+
+                while ($fila = $resultado->fetch_assoc()) {
+                    $contactos[] = $fila;
+                }
+            }
+    
+            return $contactos;
+        }
+
+        public function obtenerContactoJson($conn, $idContacto) {
+
+            $sql = "SELECT nombre, email, tel FROM personas_contacto WHERE id = $idContacto";
+        
+            $resultado = $conn->query($sql);
+        
+            if ($resultado->num_rows > 0) {
+
+                $contacto = $resultado->fetch_assoc();
+
+                return json_encode($contacto);
+            } else {
+
+                http_response_code(404); 
+                return json_encode(array("error" => "No se encontró ningún contacto con el ID proporcionado."));
+            }
+        }
+
+        public function editarContacto($conn, $idContacto, $nuevoNombre, $nuevoEmail, $nuevoTel) {
+            $idContacto = $conn->real_escape_string($idContacto);
+            $nuevoNombre = $conn->real_escape_string($nuevoNombre);
+            $nuevoEmail = $conn->real_escape_string($nuevoEmail);
+            $nuevoTel = $conn->real_escape_string($nuevoTel);
+
+            // Obtener el correo electrónico actual del contacto
+            $sql_obtener_email_actual = "SELECT email FROM personas_contacto WHERE id = '$idContacto'";
+            $result_obtener_email_actual = $conn->query($sql_obtener_email_actual);
+            $row_obtener_email_actual = $result_obtener_email_actual->fetch_assoc();
+            $email_actual = $row_obtener_email_actual['email'];
+
+            // Verificar si el correo electrónico ha sido cambiado
+            if ($email_actual != $nuevoEmail) {
+                // Verificar si el nuevo correo electrónico ya está en uso
+                $sql_check_email = "SELECT email FROM personas_contacto WHERE email = '$nuevoEmail'";
+                $result_check_email = $conn->query($sql_check_email);
+                if ($result_check_email->num_rows > 0) {
+                    // El nuevo correo electrónico ya está en uso
+                    return array('error' => 'El correo electrónico ya está en uso por otro contacto.');
+                }
+            }
+            
+            $fechaModificacion = date('Y-m-d H:i:s');
+        
+            $consulta = "UPDATE personas_contacto SET nombre = '$nuevoNombre', 
+            email = '$nuevoEmail', tel = '$nuevoTel', fecha_modificacion = '$fechaModificacion', status = 'M' WHERE id = '$idContacto'";
+        
+            if ($conn->query($consulta)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function deshabilitarContacto($conn, $idContacto) {
+
+            $idContacto = $conn->real_escape_string($idContacto);
+            
+            $consulta = "UPDATE personas_contacto SET status = 'D', fecha_baja = NOW() WHERE id = $idContacto";
+
+            if ($conn->query($consulta) === TRUE) {
+
+                return true;
+            } else {
+
+                return array('error' => 'Error al deshabilitar el contacto: ' . $conn->error);
+            }
+        }
+
+
+        public function obtenerPreventas() {
+            // Array para almacenar los preventas$preventas de la base de datos
+            $preventas = array();
+        
+            // Crear una instancia de la clase Conexion
+            $conexion = new Conexion();
+            // Obtener la conexión
+            $mysqli = $conexion->getConexion();
+        
+            // Consulta SQL para obtener los preventas$preventas de la tabla precompras
+            $sql = "SELECT id_cliente,id_comercial, id_tipo, status, fecha_solicitud, fecha_reunion,
+             acta_reunion, horas_previstas, importe, status, id_contacto  FROM preventas";
+        
+            // Ejecutar la consulta
+            $resultado = $mysqli->query($sql);
+        
+            // Verificar si se obtuvieron resultados
+            if ($resultado) {
+                // Recorrer los resultados y almacenarlos en el array $preventas
+                while ($fila = $resultado->fetch_assoc()) {
+                    $preventas[] = $fila;
+                }
+            } else {
+                // Si hay un error en la consulta, mostrar el mensaje de error
+                echo "Error en la consulta: " . $mysqli->error;
+            }
+        
+            // Cerrar la conexión a la base de datos
+            $mysqli->close();
+        
+            // Devolver los preventas$preventas obtenidos
+            return $preventas;
+        }
+        
+    
+    }
 
         
 
