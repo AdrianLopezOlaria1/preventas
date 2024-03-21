@@ -111,8 +111,8 @@
                                     </div>
                                     <!-- fin selector contactos -->
                                     <div class="mb-3">
-                                        <label for="comercial" class="form-label">Comercial</label>
-                                        <select class="form-select" id="comercial" name="comercial">
+                                        <label for="id_comercial" class="form-label">Comercial</label>
+                                        <select class="form-select" id="id_comercial" name="id_comercial">
                                         <option value="">Seleccione comercial</option>
                                         <?php 
                                             $comerciales = new Comercial();
