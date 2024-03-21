@@ -1,6 +1,6 @@
 <?php
 require_once '../clases/Comercial.php'; // Asegúrate de que el nombre del archivo sea 'Cliente.php'
-require_once 'config/conexion.php'; // Asegúrate de que el nombre del archivo sea 'Conexion.php'
+require_once '../config/conexion.php'; // Asegúrate de que el nombre del archivo sea 'Conexion.php'
 
 // Crear una instancia de la clase Conexion
 $conexion = new Conexion();
@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 $comercial = new Comercial();
 
 // Llamar al método obtenerClientes y pasarle la conexión
-$comerciales = $comercial->obtenerComercialesJson($conn);
+$comerciales = $comercial->obtenerComerciales($conn);
 
 // Devolver los clientes en formato JSON
 echo json_encode($comerciales);
