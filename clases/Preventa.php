@@ -136,7 +136,7 @@
             }
             return $error;
         }
-    }
+    
     
 
         
@@ -300,8 +300,43 @@
                 return array('error' => 'Error al deshabilitar el contacto: ' . $conn->error);
             }
         }
-    }
 
+        public function obtenerPreventas() {
+            // Array para almacenar los preventas$preventas de la base de datos
+            $preventas = array();
+        
+            // Crear una instancia de la clase Conexion
+            $conexion = new Conexion();
+            // Obtener la conexión
+            $mysqli = $conexion->getConexion();
+        
+            // Consulta SQL para obtener los preventas$preventas de la tabla precompras
+            $sql = "SELECT id_cliente,id_comercial, id_tipo, status, fecha_solicitud, fecha_reunion,
+             acta_reunion, horas_previstas, importe, status, id_contacto  FROM preventas";
+        
+            // Ejecutar la consulta
+            $resultado = $mysqli->query($sql);
+        
+            // Verificar si se obtuvieron resultados
+            if ($resultado) {
+                // Recorrer los resultados y almacenarlos en el array $preventas
+                while ($fila = $resultado->fetch_assoc()) {
+                    $preventas[] = $fila;
+                }
+            } else {
+                // Si hay un error en la consulta, mostrar el mensaje de error
+                echo "Error en la consulta: " . $mysqli->error;
+            }
+        
+            // Cerrar la conexión a la base de datos
+            $mysqli->close();
+        
+            // Devolver los preventas$preventas obtenidos
+            return $preventas;
+        }
+        
+    
+    }
 
         
 

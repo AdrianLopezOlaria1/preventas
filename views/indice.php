@@ -121,45 +121,53 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td><span class="badge bg-success-subtle text-success">Released</span></td>
-                                                    <td>Cell</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td><span class="badge bg-pink-subtle text-pink">Pending</span></td>
-                                                    <td>Cell</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                    <td><span class="badge bg-warning-subtle text-warning">Coming soon</span></td>
-                                                    <td>Cell</td>
-                                                </tr>
+                                            <?php
+                                                // Instanciar la clase Precompra
+                                                $precompra = new Precompra();
+
+                                                // Obtener los datos de las preventas
+                                                $preventas = $precompra->obtenerPreventas();
+
+                                                // Iterar sobre los resultados y generar las filas de la tabla
+                                                foreach ($preventas as $index => $preventa) {
+                                                    echo '<tr>';
+                                                    echo '<th scope="row">' . ($index + 1) . '</th>'; // Número de fila
+                                                    echo '<td>' . $preventa['id_cliente'] . '</td>'; // Cliente
+                                                    echo '<td>' . $preventa['id_comercial'] . '</td>'; // Comercial
+                                                    echo '<td>' . $preventa['id_tipo'] . '</td>'; // Tipo
+                                                    echo '<td>' . $preventa['fecha_solicitud'] . '</td>'; // Fecha Solicitud
+                                                    echo '<td>' . $preventa['fecha_reunion'] . '</td>'; // Fecha Reunión
+                                                    echo '<td>' . $preventa['acta_reunion'] . '</td>'; // Acta
+                                                    echo '<td>' . $preventa['horas_previstas'] . '</td>'; // Horas
+                                                    echo '<td>' . $preventa['importe'] . '</td>'; // Importe
+                                                
+                                                    // Definir la clase CSS según el estado
+                                                    $estado_class = '';
+                                                    switch ($preventa['status']) {
+                                                        case 'A':
+                                                            $estado_class = 'badge bg-primary-subtle text-primary';
+                                                            $estado = "Accept";
+                                                            break;
+                                                        case 'D':
+                                                            $estado_class = 'badge bg-danger-subtle text-danger';
+                                                            $estado = "Deny";
+                                                            break;
+                                                        case 'P':
+                                                            $estado_class = 'badge bg-warning-subtle text-warning';
+                                                            $estado = "Pending";
+                                                            break;
+                                                        default:
+                                                            $estado_class = 'badge bg-secondary-subtle text-secondary'; // Por defecto
+                                                            break;
+                                                    }
+                                                
+                                                    echo '<td><span class="' . $estado_class . '">' . $estado . '</span></td>'; // Estado
+                                                
+                                                    echo '<td>' . $preventa['id_contacto'] . '</td>'; // Contacto
+                                                    echo '</tr>';
+                                                }
+                                                
+                                                ?>
                                                 
                                             </tbody>
                                         </table>
