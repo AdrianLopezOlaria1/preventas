@@ -123,10 +123,10 @@
                                             <tbody>
                                             <?php
                                                 // Instanciar la clase Precompra
-                                                $precompra = new Precompra();
+                                                $preventa = new PreVenta();
 
                                                 // Obtener los datos de las preventas
-                                                $preventas = $precompra->obtenerPreventas();
+                                                $preventas = $preventa->obtenerPreventas();
 
                                                 // Iterar sobre los resultados y generar las filas de la tabla
                                                 foreach ($preventas as $index => $preventa) {
@@ -146,15 +146,15 @@
                                                     switch ($preventa['status']) {
                                                         case 'A':
                                                             $estado_class = 'badge bg-primary-subtle text-primary';
-                                                            $estado = "Accept";
+                                                            $estado = 'Accept'.'<i class="bi bi-clock"></i>';
                                                             break;
                                                         case 'D':
                                                             $estado_class = 'badge bg-danger-subtle text-danger';
-                                                            $estado = "Deny";
+                                                            $estado = 'Deny'.'<i class="bi bi-x"></i>';
                                                             break;
                                                         case 'P':
                                                             $estado_class = 'badge bg-warning-subtle text-warning';
-                                                            $estado = "Pending";
+                                                            $estado = 'Pending'.'<i class="bi bi-check"></i>';
                                                             break;
                                                         default:
                                                             $estado_class = 'badge bg-secondary-subtle text-secondary'; // Por defecto
