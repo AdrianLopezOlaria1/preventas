@@ -146,15 +146,15 @@
                                                     switch ($preventa['status']) {
                                                         case 'A':
                                                             $estado_class = 'badge bg-primary-subtle text-primary';
-                                                            $estado = 'Accept'.'<i class="bi bi-clock"></i>';
+                                                            $estado = 'Accept'.' <i class="bi bi-check"></i>';
                                                             break;
                                                         case 'D':
                                                             $estado_class = 'badge bg-danger-subtle text-danger';
-                                                            $estado = 'Deny'.'<i class="bi bi-x"></i>';
+                                                            $estado = 'Deny'.' <i class="bi bi-x"></i>';
                                                             break;
                                                         case 'P':
                                                             $estado_class = 'badge bg-warning-subtle text-warning';
-                                                            $estado = 'Pending'.'<i class="bi bi-check"></i>';
+                                                            $estado = 'Pending'.' <i class="bi bi-clock"></i>';
                                                             break;
                                                         default:
                                                             $estado_class = 'badge bg-secondary-subtle text-secondary'; // Por defecto
