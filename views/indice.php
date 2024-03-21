@@ -77,7 +77,7 @@
                                         <i class="ri-group-2-line widget-icon"></i>
                                     </div>
                                     <h6 class="text-uppercase mt-0" title="Customers">Users</h6>
-                                    <h2 class="my-2">63,154</h2>
+                                    <h2 class="my-2" id="total-users"></h2>
                                     <p class="mb-0">
                                         <span class="badge bg-white bg-opacity-10 me-1">8.21%</span>
                                         <span class="text-nowrap">Since last month</span>
@@ -400,3 +400,21 @@
             <!-- end Footer -->
 
         </div>
+
+        <script>
+    $(document).ready(function(){
+        $.ajax({
+            url: 'metodos/obtener_numero_usuarios.php',
+            type: 'GET',
+            success: function(response) {
+                // Actualizar el número total de usuarios
+                $('#total-users').text(response);
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+</script>
+
+

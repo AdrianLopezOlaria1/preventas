@@ -56,8 +56,10 @@
                                         <input type="text" readonly class="form-control-plaintext" id="persona_contacto" value="email@cliente.com(sacar de la sesion?)" name="persona_contacto">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="example-disable" class="form-label">Comercial</label>
-                                        <input type="text" class="form-control" id="example-disable" disabled="" name="comercial" value="Sacar el nombre de la empresa dependiendo en la que marque">
+                                        <label for="comercial" class="form-label">Comerciales</label>
+                                        <select class="form-select" id="comercial" name="comercial">
+                                            <!-- Opciones Comerciales  -->
+                                        </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="tipo_proyecto" class="form-label">Tipo de proyecto</label>
@@ -88,3 +90,25 @@
         </div><!-- end container-fluid -->
     </div><!-- end content -->
 </div><!-- end content-page -->
+
+<script>
+    // Hacer una solicitud AJAX para obtener los comerciales
+    $.ajax({
+        url: 'metodos/obtener_comerciales.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            // Agregar las opciones de comerciales al select
+            const selectComercial = $('#comercial');
+            $.each(data, function(index, comercial) {
+                selectComercial.append($('<option>', {
+                    value: comercial.id,
+                    text: comercial.nombre
+                }));
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al obtener los comerciales:', error);
+        }
+    });
+</script>
