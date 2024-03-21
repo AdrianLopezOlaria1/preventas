@@ -55,19 +55,19 @@
                                         <div class="mb-3">
                                             <label for="fecha_reunion" class="form-label">Fecha de la reunión</label>
                                             <input class="form-control" id="fecha_reunion" type="date" name="fecha_reunion">
-                                        </div>
+                                        </div>   
                                         <div class="mb-3">
-                                            <label for="example-time" class="form-label">Hora de la reunión</label>
-                                            <input class="form-control" id="example-time" type="time" name="hora_reunion">
-                                        </div>
+                                            <label for="horas" class="form-label">Horas previstas</label>
+                                            <input class="form-control" id="horas" type="number" name="horas">
+                                        </div>                                     
                                         <div class="mb-3">
                                             <label for="acta_reunion" class="form-label">Detalles acta de la reunión</label>
                                             <textarea class="form-control" id="acta_reunion" name="acta_reunion" rows="5"></textarea>
                                         </div>
-                                        <div class="mb-3">
+                                        <!-- <div class="mb-3">
                                             <label for="example-fileinput" class="form-label">Archivo acta de la reunión</label>
                                             <input type="file" id="example-fileinput" class="form-control">
-                                        </div>
+                                        </div> -->
                                     </form>
                                 </div> <!-- end col -->
                                 <div class="col-lg-6">
@@ -75,12 +75,12 @@
                                     <div class="mb-3">
                                         <label for="id_contacto" class="form-label">Contacto</label>
                                         <select class="form-select" name="id_contacto" id="contacto">
-                                            <option value="">Select contact</option>
+                                            <option value="">Seleccione contacto</option>
                                         </select>
                                     </div>
                                     <!-- fin selector contactos -->
                                     <div class="mb-3">
-                                        <label for="comercial" class="form-label">Comerciales</label>
+                                        <label for="comercial" class="form-label">Comercial</label>
                                         <select class="form-select" id="comercial" name="comercial">
                                         <option value="">Seleccione comercial</option>
                                         <?php 
@@ -120,11 +120,7 @@
                                             ?>
                                         </select>
                                     </div>
-                                    <!-- fin selector tipos -->
-                                    <div class="mb-3">
-                                        <label for="horas" class="form-label">Horas</label>
-                                        <input class="form-control" id="horas" type="number" name="horas">
-                                    </div>
+                                    <!-- fin selector tipos -->                                    
                                     <div class="mb-3">
                                         <label for="precio" class="form-label">Precio estimado</label>
                                         <input class="form-control" id="precio" type="number" name="precio">
