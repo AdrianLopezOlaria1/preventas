@@ -25,15 +25,18 @@
                         <div class="card-header">
                             <h4 class="header-title">Input Types</h4>
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <?php if(isset($_SESSION['completado'])): ?>
+                        <?php if(isset($_SESSION['completado'])): ?>
                                         <div class='alert alert-success'>
                                             <?=$_SESSION['completado'];?>
                                         </div>
                                     <?php endif; ?>
                                     <form action="index.php?action=enviarPreventa" method="POST">
+
+                        <div class="card-body">
+                            <div class="row">
+                           
+                                <div class="col-lg-6">
+                                   
                                         <!-- selector clientes-->
                                         <div class="mb-3">
                                             <label for="id_cliente" class="form-label">Cliente</label>
@@ -112,7 +115,7 @@
                                     <!-- fin selector contactos -->
                                     <div class="mb-3">
                                         <label for="id_comercial" class="form-label">Comercial</label>
-                                        <select class="form-select" id="id_comercial" name="id_comercial">
+                                        <select class="form-select" id="id_comercial" name="comercial">
                                         <option value="">Seleccione comercial</option>
                                         <?php 
                                             $comerciales = new Comercial();
@@ -173,8 +176,11 @@
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div> <!-- end col -->
+                                        
                             </div>
                             <!-- end row -->
+                            </form>
+                            <?php $preventa = new Preventa(); $preventa->borrarErrores(); ?>     
                         </div> <!-- end card-body -->
                     </div> <!-- end card -->
                 </div><!-- end col -->
