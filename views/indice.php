@@ -96,6 +96,79 @@
                     <!-- end row -->
 
                     <div class="row">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="header-title">Preventas</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Cliente</th>
+                                                    <th scope="col">Comercial</th>
+                                                    <th scope="col">Tipo</th>
+                                                    <th scope="col">Fecha Solicitud</th>
+                                                    <th scope="col">Fecha Reunión</th>
+                                                    <th scope="col">Acta</th>
+                                                    <th scope="col">Horas</th>
+                                                    <th scope="col">Importe</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Contacto</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td><span class="badge bg-success-subtle text-success">Released</span></td>
+                                                    <td>Cell</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td><span class="badge bg-pink-subtle text-pink">Pending</span></td>
+                                                    <td>Cell</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">3</th>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                    <td><span class="badge bg-warning-subtle text-warning">Coming soon</span></td>
+                                                    <td>Cell</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div> <!-- end table-responsive-->
+
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div>
                         <div class="col-xl-4">
                             <!-- Chat-->
                             <div class="card">
