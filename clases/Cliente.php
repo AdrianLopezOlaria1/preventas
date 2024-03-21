@@ -221,7 +221,7 @@ if (!function_exists('Conexion')) {
 
             $idCliente = $conn->real_escape_string($idCliente);
             
-            $consulta = "UPDATE clientes SET status = 'D' WHERE id = $idCliente";
+            $consulta = "UPDATE clientes SET status = 'D', fecha_baja = NOW() WHERE id = $idCliente";
 
             if ($conn->query($consulta) === TRUE) {
 
