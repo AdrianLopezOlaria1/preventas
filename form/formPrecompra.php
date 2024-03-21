@@ -83,6 +83,8 @@
                                     <div class="mb-3">
                                         <label for="comercial" class="form-label">Comerciales</label>
                                         <select class="form-select" id="comercial" name="comercial">
+                                        <option value="">Seleccione comercial</option>
+
                                         <?php 
                                             $comerciales = new Comercial();
                                             $comerciales = $comerciales->obtenerComerciales();
