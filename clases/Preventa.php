@@ -175,7 +175,6 @@
             return $borrado;
         }
 
-
         public function obtenerPreventas() {
             // Array para almacenar los preventas$preventas de la base de datos
             $preventas = array();
@@ -186,8 +185,13 @@
             $mysqli = $conexion->getConexion();
         
             // Consulta SQL para obtener los preventas$preventas de la tabla precompras
-            $sql = "SELECT id_cliente, id_comercial, id_tipo, status, fecha_solicitud, fecha_reunion,
-             acta_reunion, horas_previstas, importe, status, id_contacto  FROM preventas";
+            $sql = "SELECT cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi,
+            pr.id_cliente, pr.id_comercial, pr.id_tipo, pr.status, pr.fecha_solicitud, pr.fecha_reunion,
+            pr.acta_reunion, pr.horas_previstas, pr.importe, pr.id_contacto  FROM preventas pr
+            INNER JOIN clientes cl ON cl.id = pr.id_cliente
+            INNER JOIN comerciales com ON com.id = pr.id_comercial
+            INNER JOIN personas_contacto cont ON cont.id = pr.id_contacto
+            INNER JOIN tipos_proyectos ti ON ti.id = pr.id_tipo;";
         
             // Ejecutar la consulta
             $resultado = $mysqli->query($sql);
@@ -209,8 +213,6 @@
             // Devolver los preventas$preventas obtenidos
             return $preventas;
         }
-        
-    
     }
 
         
