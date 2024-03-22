@@ -246,7 +246,7 @@ function cargarComerciales(terminoBusqueda = '') {
                                 html += '</a>';
                                 html += '<div class="info">';
                                 html += '<h5 class="fs-18 my-1">' + comercial.nombre + '</h5>';
-                                html += '<p class="text-muted fs-15">' + comercial.status + '</p>';
+                                html += '<p class="text-muted fs-15">' + comercial.email + '</p>';
                                 html += '</div>';
                                 html += '</div>';                                
                                 <?php if($_SESSION['usuario']['rol'] == 1): ?>
