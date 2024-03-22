@@ -197,12 +197,13 @@
     });
     $(document).on('click', '.eliminar-btn', function() {
     var comercialId = $(this).data('id');
+    
     // Mostrar confirmación al usuario
     var confirmacion = confirm("¿Estás seguro de que quieres eliminar este comercial?");
     if (confirmacion) {
         // Si el usuario confirma, enviar la solicitud AJAX para deshabilitar el cliente
         $.ajax({
-            url: 'metodos/deshabilitar_comerciales.php',
+            url: 'metodos/deshabilitar_comercial.php',
             type: 'POST',
             data: { id: comercialId },
             dataType: 'json',
