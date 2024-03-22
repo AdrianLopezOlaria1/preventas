@@ -85,6 +85,12 @@ switch ($action) {
     case "enviarLogin":
         include 'metodos/login.php';
         break;
+    case "enviarAceptar":
+        include 'metodos/aceptar.php';
+        break;
+    case "enviarDenegar":
+        include 'metodos/denegar.php';
+        break;
     case "enviarPreventa":
         include 'metodos/preventa.php';
         break;

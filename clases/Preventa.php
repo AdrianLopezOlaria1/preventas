@@ -185,7 +185,7 @@
             $mysqli = $conexion->getConexion();
         
             // Consulta SQL para obtener los preventas$preventas de la tabla precompras
-            $sql = "SELECT cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi,
+            $sql = "SELECT pr.id, cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi,
             pr.id_cliente, pr.id_comercial, pr.id_tipo, pr.status, pr.fecha_solicitud, pr.fecha_reunion,
             pr.acta_reunion, pr.horas_previstas, pr.importe, pr.id_contacto  FROM preventas pr
             INNER JOIN clientes cl ON cl.id = pr.id_cliente
@@ -212,6 +212,20 @@
         
             // Devolver los preventas$preventas obtenidos
             return $preventas;
+        }
+
+        public function aceptar($id){
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
+            $sql = "UPDATE preventas SET status = 'A', fecha_accion = NOW() WHERE id = $id;";
+            $actualizar = mysqli_query($mysqli, $sql);
+        }
+
+        public function denegar($id){
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
+            $sql = "UPDATE preventas SET status = 'D', fecha_accion = NOW() WHERE id = $id;";
+            $actualizar = mysqli_query($mysqli, $sql);
         }
     }
 
