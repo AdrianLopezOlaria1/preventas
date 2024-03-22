@@ -117,7 +117,8 @@
                                                     <th scope="col">Acta</th>
                                                     <th scope="col">Horas</th>
                                                     <th scope="col">Importe</th>
-                                                    <th scope="col">Status</th>                                                    
+                                                    <th scope="col">Status</th>  
+                                                    <th scope="col">aa</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -141,6 +142,7 @@
                                                     echo '<td>' . $preventa['acta_reunion'] . '</td>'; // Acta
                                                     echo '<td>' . $preventa['horas_previstas'] . '</td>'; // Horas
                                                     echo '<td>' . $preventa['importe'] . '</td>'; // Importe
+                                                    
                                                 
                                                     // Definir la clase CSS según el estado
                                                     $estado_class = '';
@@ -162,7 +164,9 @@
                                                             break;
                                                     }
                                                 
-                                                    echo '<td><span class="' . $estado_class . '">' . $estado . '</span></td>'; // Estado                                                                                    
+                                                    echo '<td><span class="' . $estado_class . '">' . $estado . '</span></td>'; // Estado    
+                                                    echo '<td style="white-space: nowrap; width: 1%;"> <div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><button type="button" class="tabledit-edit-button btn btn-success" style="float: none;"><span><i class="bi bi-check"></i></span></button></div>';
+                                                    echo '<div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><button type="button" class="tabledit-edit-button btn btn-danger" style="float: none;"><span><i class="bi bi-x"></i></span></button></div><td >';                                                                                
                                                     echo '</tr>';
                                                 }
                                                 
