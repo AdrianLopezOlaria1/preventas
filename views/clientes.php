@@ -217,68 +217,6 @@
     return false;
 });
 
-function cargarClientes(terminoBusqueda = '') {
-        $.ajax({
-            url: 'metodos/buscar_clientes.php', // Ruta del script PHP para buscar clientes
-            type: 'GET',
-            dataType: 'json',
-            data: { termino: terminoBusqueda }, // Envía el término de búsqueda al servidor
-            success: function(response) {
-                // Limpiar la lista de clientes
-                $('#clientes-lista').empty();
-                // Iterar sobre los clientes y mostrarlos en la lista
-                $.each(response, function (index, cliente) {
-                        //console.log("Estado del cliente:", cliente.status);
-                        if (cliente.status !== 'D') {
-                            var html = '<div class="col-md-6">';
-                                html += '<div class="card">';
-                                html += '<div class="card-body">';
-                                html += '<div class="d-flex align-items-start justify-content-between">';
-                                html += '<div class="d-flex">';
-                                html += '<a class="me-3" href="#">';
-                                html += '<img class="avatar-md rounded-circle bx-s" src="assets/images/users/avatar-2.jpg" alt="">';
-                                html += '</a>';
-                                html += '<div class="info">';
-                                html += '<h5 class="fs-18 my-1">' + cliente.nombre + '</h5>';
-                                html += '<p class="text-muted fs-15">' + cliente.status + '</p>';
-                                html += '</div>';
-                                html += '</div>';                                
-                                <?php if($_SESSION['usuario']['rol'] == 1): ?>
-                                html += '<div class="">';
-                                html += '<a href="#" class="btn btn-success btn-sm me-1 editar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" data-id="' + cliente.id + '"><i class="ri-pencil-fill"></i></a>';
-                                html += '<a href="#" class="btn btn-danger btn-sm eliminar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" data-id="' + cliente.id + '"><i class="ri-close-fill"></i></a>';
-                                html += '</div>';
-                                <?php endif; ?>
-                                
-                                html += '</div>';
-                                html += '<hr>'; // Asegúrate de que el hr esté dentro del bloque if
-                                html += '<ul class="social-list list-inline mt-3 mb-0">';
-                                html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="Facebook"><i class="ri-facebook-fill"></i></a></li>';
-                                html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="Twitter"><i class="ri-twitter-fill"></i></a></li>';
-                                html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="LinkedIn"><i class="ri-linkedin-box-fill"></i></a></li>';
-                                html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="Skype"><i class="ri-skype-fill"></i></a></li>';
-                                html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="Message"><i class="ri-mail-open-line"></i></a></li>';
-                                html += '</ul>';
-                                html += '</div>'; 
-                                html += '</div>'; 
-                                html += '</div>'; 
-
-                        $('#clientes-lista').append(html);
-                        }
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-                if (terminoBusqueda !== '') {
-                    // Si se ha ingresado un término de búsqueda, muestra el mensaje de error
-                    alert("Error al buscar los clientes. Consulta la consola para más detalles.");
-                } else {
-                    // Si no se ha ingresado un término de búsqueda, carga todos los clientes
-                    cargarClientes(); // Esto llamará a la función sin un término de búsqueda, cargando todos los clientes
-                }
-            }
-        });
-    }
 
     // Evento de teclado para detectar la entrada del usuario en el campo de búsqueda
     $('#example-input1-group2').keyup(function() {
