@@ -165,8 +165,8 @@
                                                     }
                                                 
                                                     echo '<td><span class="' . $estado_class . '">' . $estado . '</span></td>'; // Estado    
-                                                    echo '<td style="white-space: nowrap; width: 1%;"> <div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><button type="button" class="tabledit-edit-button btn btn-success" style="float: none;"><span><i class="bi bi-check"></i></span></button></div>';
-                                                    echo '<div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><button type="button" class="tabledit-edit-button btn btn-danger" style="float: none;"><span><i class="bi bi-x"></i></span></button></div><td >';                                                                                
+                                                    echo '<td style="white-space: nowrap; width: 1%;"> <div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><a href="index.php?action=enviarAceptar&&id=' .$preventa['id']. '" class="tabledit-edit-button btn btn-success" style="float: none;"><span><i class="bi bi-check"></i></span></a></div>';
+                                                    echo '<div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><a href="index.php?action=enviarDenegar&&id=' .$preventa['id']. '" class="tabledit-edit-button btn btn-danger" style="float: none;"><span><i class="bi bi-x"></i></span></a></div><td >';                                                                                
                                                     echo '</tr>';
                                                 }
                                                 
