@@ -57,6 +57,14 @@ switch ($action) {
         include 'clases/Preventa.php';
         include 'views/indice.php';
         break;
+    case "preventas":
+        include 'metodos/checker.php';
+        include 'views/aside.php';
+        include 'views/footer.php';
+        include 'views/header.php';
+        include 'clases/Preventa.php';
+        include 'views/preventas.php';
+        break;
     case "cerrando":
         include 'metodos/cerrarSesion.php';
         break;
