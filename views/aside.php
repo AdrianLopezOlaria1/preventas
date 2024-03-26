@@ -28,7 +28,7 @@
                     <li class="side-nav-title">Main</li>
 
                     <li class="side-nav-item">
-                        <a href="index.php?action=index" class="side-nav-link">
+                        <a href="index.php?action=preventas" class="side-nav-link">
                             <i class="ri-dashboard-3-line"></i>
                             <span class="badge bg-success float-end">9+</span>
                             <span>Mis Preventas</span>
@@ -44,42 +44,42 @@
 
                     <li class="side-nav-item">                    
                         <a href="index.php?action=clientList" class="side-nav-link">
-                        <i class="bi bi-cart"></i>
+                        <i class="bi bi-person"></i>
                             <span>Clientes</span>
                         </a>
                     </li>
                     <?php if($_SESSION['usuario']['rol'] == 1):?>
                     <li class="side-nav-item">                    
                         <a href="index.php?action=formCliente" class="side-nav-link">
-                        <i class="bi bi-cart"></i>
+                        <i class="bi bi-plus-circle"></i>
                             <span>Nuevo cliente</span>
                         </a>
                     </li>
                     <?php endif; ?>
                     <li class="side-nav-item">                    
                         <a href="index.php?action=contactList" class="side-nav-link">
-                        <i class="bi bi-cart"></i>
+                        <i class="bi bi-file-earmark-person"></i>
                             <span>Contactos</span>
                         </a>
                     </li>
                     <?php if($_SESSION['usuario']['rol'] == 1):?>
                     <li class="side-nav-item">                    
                         <a href="index.php?action=formContacto" class="side-nav-link">
-                        <i class="bi bi-cart"></i>
+                        <i class="bi bi-plus-circle"></i>
                             <span>Nuevo contacto</span>
                         </a>
                     </li>
                     <?php endif; ?>
                     <li class="side-nav-item">                    
                         <a href="index.php?action=comercialList" class="side-nav-link">
-                        <i class="bi bi-cart"></i>
+                        <i class="bi bi-building"></i>
                             <span>Comercial</span>
                         </a>
                     </li>
                     <?php if($_SESSION['usuario']['rol'] == 1):?>
                     <li class="side-nav-item">                    
                         <a href="index.php?action=formComercial" class="side-nav-link">
-                        <i class="bi bi-cart"></i>
+                        <i class="bi bi-plus-circle"></i>
                             <span>Nuevo comercial</span>
                         </a>
                     </li>
