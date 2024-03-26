@@ -34,6 +34,13 @@
                         </div>
                     </div>
                 </div>
+                <?php if($_SESSION['usuario']['rol'] == 1):?>
+                <div class="col-lg-4">
+                    <div class="d-flex justify-content-end align-items-center gap-2">        
+                        <a class="btn btn-soft-info" href="index.php?action=formComercial"> Nuevo comercial</a>
+                    </div>
+                </div>
+                <?php endif; ?>
             </div>
             <!-- End row -->
 
