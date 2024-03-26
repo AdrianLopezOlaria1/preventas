@@ -281,7 +281,7 @@
             $termino = $conn->real_escape_string($termino);
         
             // Consulta SQL para buscar clientes que coincidan con el término de búsqueda en el nombre
-            $sql = "SELECT * FROM personas_contacto WHERE nombre LIKE '$termino%'";
+            $sql = "SELECT * FROM personas_contacto WHERE nombre LIKE '%$termino%'";
         
             // Ejecutar la consulta SQL
             $resultado = $conn->query($sql);

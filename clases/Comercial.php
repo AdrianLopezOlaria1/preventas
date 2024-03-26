@@ -271,7 +271,7 @@ if (!function_exists('Conexion')) {
                 $termino = $conn->real_escape_string($termino);
 
                 // Consulta SQL para buscar comerciales$comerciales que coincidan con el término de búsqueda en el nombre
-                $sql = "SELECT * FROM comerciales WHERE nombre LIKE '$termino%'";
+                $sql = "SELECT * FROM comerciales WHERE nombre LIKE '%$termino%'";
 
                 // Ejecutar la consulta SQL
                 $resultado = $conn->query($sql);
