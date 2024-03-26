@@ -1,8 +1,23 @@
 <div class="content-page">
     <div class="content">
         <div class="container-fluid">
-            <div class="row">
+        <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Velonic</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
+                                <li class="breadcrumb-item active">Form Clients</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Form Clients</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
                 <div class="col-lg-6">
+                
                     <div class="card">
                         <div class="card-header">
                             <h4 class="header-title">Create new client</h4>
@@ -36,6 +51,7 @@
                         </div> <!-- end card-body-->
                     </div> <!-- end card-->
                 </div>
+                                    </div>
                 <!-- end col -->
             </div>
             <!-- end row -->
