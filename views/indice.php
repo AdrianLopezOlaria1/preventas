@@ -61,7 +61,8 @@
                                         <i class="ri-shopping-basket-line widget-icon"></i>
                                     </div>
                                     <h6 class="text-uppercase mt-0" title="Customers">Orders</h6>
-                                    <h2 class="my-2">753</h2>
+                                    <?php $preventas = new Preventa();?>
+                                    <h2 class="my-2"><?=count($preventas->obtenerPreventas());?></h2>
                                     <p class="mb-0">
                                         <span class="badge bg-white bg-opacity-25 me-1">-5.75%</span>
                                         <span class="text-nowrap">Since last month</span>
