@@ -15,21 +15,47 @@
                                         <li class="breadcrumb-item active">Horizontal</li>
                                     </ol>
                                 </div>
-                                <h4 class="page-title">Horizontal</h4>
+                                <h4 class="page-title">Preventas</h4>
                             </div>
                         </div>
                     </div>
                     <!-- end page title -->
-                    
+
                     <div class="row">
-                        <div class="col-xxl-3 col-sm-6">
+                    <div class="col-xxl-6 col-sm-6">
+                        <div class="card widget-flat text-bg-success"> <!-- Cambiado de "text-bg-info" a "text-bg-success" para cambiar el color a verde -->
+                            <div class="card-body">
+                                <div class="float-end">
+                                    <i class="ri-shopping-basket-line widget-icon"></i>
+                                </div>
+                                <h6 class="text-uppercase mt-0" title="Customers">Ganadas</h6>
+                                <?php 
+                                    $preventas = new Preventa();
+                                    $cantidadGanadas = $preventas->contarPreventasGanadas();
+                                ?>
+                                <h2 class="my-2"><?= $cantidadGanadas ?></h2>
+                                <p class="mb-0">
+                                    <span class="badge bg-white bg-opacity-25 me-1">-5.75%</span>
+                                    <span class="text-nowrap">Since last month</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div> <!-- end col-->
+
+
+                    
+                        <div class="col-xxl-6 col-sm-6">
                             <div class="card widget-flat text-bg-pink">
                                 <div class="card-body">
                                     <div class="float-end">
                                         <i class="ri-eye-line widget-icon"></i>
                                     </div>
-                                    <h6 class="text-uppercase mt-0" title="Customers">Daily Visits</h6>
-                                    <h2 class="my-2">8,652</h2>
+                                    <h6 class="text-uppercase mt-0" title="Customers">Perdidas</h6>
+                                    <?php 
+                                        $preventas = new Preventa();
+                                        $cantidadCerradasPerdidas = $preventas->contarPreventasCerradaPerdida();
+                                    ?>
+                                    <h2 class="my-2"><?= $cantidadCerradasPerdidas ?></h2>
                                     <p class="mb-0">
                                         <span class="badge bg-white bg-opacity-10 me-1">2.97%</span>
                                         <span class="text-nowrap">Since last month</span>
@@ -37,6 +63,9 @@
                                 </div>
                             </div>
                         </div> <!-- end col-->
+                        </div>
+
+                        <div class="row">
 
                         <div class="col-xxl-3 col-sm-6">
                             <div class="card widget-flat text-bg-purple">
@@ -44,8 +73,12 @@
                                     <div class="float-end">
                                         <i class="ri-wallet-2-line widget-icon"></i>
                                     </div>
-                                    <h6 class="text-uppercase mt-0" title="Customers">Revenue</h6>
-                                    <h2 class="my-2">$9,254.62</h2>
+                                    <h6 class="text-uppercase mt-0" title="Customers">Pendientes de Cierre</h6>
+                                    <?php 
+                                        $preventas = new Preventa();
+                                        $cantidadPendienteCierre = $preventas->contarPreventasPendientesCierre();
+                                    ?>
+                                    <h2 class="my-2"><?= $cantidadPendienteCierre ?></h2>
                                     <p class="mb-0">
                                         <span class="badge bg-white bg-opacity-10 me-1">18.25%</span>
                                         <span class="text-nowrap">Since last month</span>
@@ -55,19 +88,20 @@
                         </div> <!-- end col-->
 
                         <div class="col-xxl-3 col-sm-6">
-                            <div class="card widget-flat text-bg-info">
+                            <div class="card widget-flat bg-warning-subtle">
+                            
                                 <div class="card-body">
                                     <div class="float-end">
                                         <i class="ri-shopping-basket-line widget-icon"></i>
                                     </div>
-                                    <h6 class="text-uppercase mt-0" title="Customers">Preventas Pendientes</h6>
+                                    <h6 class="text-uppercase mt-0" title="Customers">Pendientes</h6>
                                     <?php 
                                         $preventas = new Preventa();
                                         $cantidadPendientes = $preventas->contarPreventasPendientes();
                                     ?>
                                     <h2 class="my-2"><?= $cantidadPendientes ?></h2>
                                     <p class="mb-0">
-                                        <span class="badge bg-white bg-opacity-25 me-1">-5.75%</span>
+                                        <span class="badge bg-white text-warning bg-opacity-25 me-1">-5.75%</span>
                                         <span class="text-nowrap">Since last month</span>
                                     </p>
                                 </div>
@@ -75,15 +109,41 @@
                         </div> <!-- end col-->
 
 
+                        <div class="col-xxl-3 col-sm-6">
+    <div class="card widget-flat text-secondary me-1 border border-secondary-light rounded-3">
+        <div class="card-body">
+            <div class="float-end">
+                <i style="background-color: #c2c2c2;" class="ri-group-2-line widget-icon text-secondary"></i>
+            </div>
+            <h6 class="text-uppercase mt-0" title="Customers">Realizada reunion</h6>
+            <?php 
+                $preventas = new Preventa();
+                $cantidadRealizadaReunion = $preventas->contarPreventasRealizadaReunion();
+            ?>
+            <h2 class="my-2"><?= $cantidadRealizadaReunion ?></h2>
+            <p class="mb-0">
+                <span class="badge bg-secondary-subtle text-secondary me-1">8.21%</span>
+                <span class="text-nowrap">Since last month</span>
+            </p>
+        </div>
+    </div>
+</div> <!-- end col-->
 
+
+
+                        
                         <div class="col-xxl-3 col-sm-6">
                             <div class="card widget-flat text-bg-primary">
                                 <div class="card-body">
                                     <div class="float-end">
                                         <i class="ri-group-2-line widget-icon"></i>
                                     </div>
-                                    <h6 class="text-uppercase mt-0" title="Customers">Users</h6>
-                                    <h2 class="my-2" id="total-users"></h2>
+                                    <h6 class="text-uppercase mt-0" title="Customers">Realizada Valoración</h6>
+                                    <?php 
+                                        $preventas = new Preventa();
+                                        $cantidadValoradas = $preventas->contarPreventasValoradas();
+                                    ?>
+                                    <h2 class="my-2"><?= $cantidadValoradas ?></h2>
                                     <p class="mb-0">
                                         <span class="badge bg-white bg-opacity-10 me-1">8.21%</span>
                                         <span class="text-nowrap">Since last month</span>
@@ -402,7 +462,7 @@
 
         </div>
 
-        <script>
+        <!-- <script>
     $(document).ready(function(){
         $.ajax({
             url: 'metodos/obtener_numero_usuarios.php',
@@ -416,6 +476,6 @@
             }
         });
     });
-</script>
+</script> -->
 
 

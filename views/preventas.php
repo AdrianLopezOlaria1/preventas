@@ -68,18 +68,30 @@
                                                     // Definir la clase CSS según el estado
                                                     $estado_class = '';
                                                     switch ($preventa['status']) {
-                                                        case 'A':
-                                                            $estado_class = 'badge bg-primary-subtle text-primary';
-                                                            $estado = 'Accept'.' <i class="bi bi-check"></i>';
-                                                            break;
-                                                        case 'D':
-                                                            $estado_class = 'badge bg-danger-subtle text-danger';
-                                                            $estado = 'Deny'.' <i class="bi bi-x"></i>';
-                                                            break;
                                                         case 'P':
                                                             $estado_class = 'badge bg-warning-subtle text-warning';
-                                                            $estado = 'Pending'.' <i class="bi bi-clock"></i>';
+                                                            $estado = 'Pendiente';
                                                             break;
+                                                        case 'RP':
+                                                            $estado_class = 'badge bg-secondary-subtle text-secondary';
+                                                            $estado = 'Realizada reunión preventa';
+                                                            break;
+                                                        case 'RV':
+                                                            $estado_class = 'badge bg-primary';
+                                                            $estado = 'Realizada valoración';
+                                                            break;
+                                                        case 'PC':
+                                                            $estado_class = 'badge bg-purple-subtle text-purple';
+                                                            $estado = 'Pendiente cierre';
+                                                            break;
+                                                        case 'CG':
+                                                            $estado_class = 'badge bg-primary-subtle text-primary';
+                                                            $estado = 'Cerrada ganada';
+                                                            break; 
+                                                        case 'CP':
+                                                            $estado_class = 'badge bg-danger-subtle text-danger';
+                                                            $estado = 'Cerrada perdida';
+                                                            break;         
                                                         default:
                                                             $estado_class = 'badge bg-secondary-subtle text-secondary'; // Por defecto
                                                             break;
@@ -87,7 +99,7 @@
                                                     
                                                     echo '<td><span class="' . $estado_class . '">' . $estado . '</span></td>'; // Estado 
                                                     if($_SESSION['usuario']['rol'] == 1){   
-                                                    echo '<td style="white-space: nowrap; width: 1%;"> <div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><a href="index.php?action=formEditPreventa&&id=' .$preventa['id']. '" class="tabledit-edit-button btn btn-success" style="float: none;">Modificar</a></div>';                                        
+                                                    echo '<td style="white-space: nowrap; width: 1%;"> <div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><a href="index.php?action=formEditPreventa&id=' .$preventa['id']. '" class="tabledit-edit-button btn btn-success" style="float: none;">Modificar</a></div>';                                        
                                                     }                                                                                
                                                     echo '</tr>';
                                                 }

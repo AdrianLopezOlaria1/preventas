@@ -106,8 +106,8 @@
 
         //funciones
 
-        function validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
-            $horas_previstas, $acta_reunion, $importe) {
+         public function validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
+            $horas_previstas, $acta_reunion, $importe, $status) {
 
             $error = array();
             if(empty($id_cliente)){
@@ -134,19 +134,22 @@
             if(empty($importe) || !is_numeric($importe)){
                 $error['importe'] = "Debes poner importe en números";
             }
+            if(empty($status)){
+                $error['status'] = "Debes escojer un estado";
+            }
 
             return $error;
         }
     
         public function crearPreventa($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
-            $horas_previstas, $acta_reunion, $importe) {
+            $horas_previstas, $acta_reunion, $importe, $status) {
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
             $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
             $horas_previstas, $acta_reunion, $importe);
             if(count($error) == 0){
                 // Insertar precompra en la base de datos
-                $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_comercial, $id_tipo, NOW(), '$fecha_reunion', '$acta_reunion', $horas_previstas, $importe, 'P', NULL, $id_contacto);";
+                $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_comercial, $id_tipo, NOW(), '$fecha_reunion', '$acta_reunion', $horas_previstas, $importe, '$status', NULL, $id_contacto);";
 
 
                 $guardar = mysqli_query($mysqli, $sql);
@@ -231,20 +234,140 @@
             // Devolver la cantidad de preventas pendientes
             return $cantidadPendientes;
         }
+
+        public function contarPreventasRealizadaReunion() {
+            // Obtener todas las preventas
+            $preventas = $this->obtenerPreventas();
+        
+            // Filtrar solo las preventas pendientes
+            $preventasRealizadaReunion = array_filter($preventas, function($preventa) {
+                return $preventa['status'] == 'RP'; //preventas pendientes en tu base de datos
+            });
+        
+            // Contar las preventas pendientes
+            $cantidadRealizadaReunion = count($preventasRealizadaReunion);
+        
+            // Devolver la cantidad de preventas pendientes
+            return $cantidadRealizadaReunion;
+        }
+
+        public function contarPreventasPendientesCierre() {
+            // Obtener todas las preventas
+            $preventas = $this->obtenerPreventas();
+        
+            // Filtrar solo las preventas pendientes
+            $preventasPendientesCierre = array_filter($preventas, function($preventa) {
+                return $preventa['status'] == 'PC'; //preventas pendientes en tu base de datos
+            });
+        
+            // Contar las preventas pendientes
+            $cantidadPendientesCierre = count($preventasPendientesCierre);
+        
+            // Devolver la cantidad de preventas pendientes
+            return $cantidadPendientesCierre;
+        }
+
+        public function contarPreventasCerradaPerdida() {
+            // Obtener todas las preventas
+            $preventas = $this->obtenerPreventas();
+        
+            // Filtrar solo las preventas pendientes
+            $preventasCerradaPerdida = array_filter($preventas, function($preventa) {
+                return $preventa['status'] == 'CP'; //preventas pendientes en tu base de datos
+            });
+        
+            // Contar las preventas pendientes
+            $cantidadCerradaPerdida = count($preventasCerradaPerdida);
+        
+            // Devolver la cantidad de preventas pendientes
+            return $cantidadCerradaPerdida;
+        }
+
+        public function contarPreventasGanadas() {
+            // Obtener todas las preventas
+            $preventas = $this->obtenerPreventas();
+        
+            // Filtrar solo las preventas pendientes
+            $preventasGanadas = array_filter($preventas, function($preventa) {
+                return $preventa['status'] == 'CG'; //preventas pendientes en tu base de datos
+            });
+        
+            // Contar las preventas pendientes
+            $cantidadGanadas = count($preventasGanadas);
+        
+            // Devolver la cantidad de preventas pendientes
+            return $cantidadGanadas;
+        }
+        
+        public function contarPreventasValoradas() {
+            // Obtener todas las preventas
+            $preventas = $this->obtenerPreventas();
+        
+            // Filtrar solo las preventas pendientes
+            $preventasValoradas = array_filter($preventas, function($preventa) {
+                return $preventa['status'] == 'RV'; //preventas pendientes en tu base de datos
+            });
+        
+            // Contar las preventas pendientes
+            $cantidadValoradas = count($preventasValoradas);
+        
+            // Devolver la cantidad de preventas pendientes
+            return $cantidadValoradas;
+        }
         
         
 
-        function conseguirPreventa($id){
+        
+        
+        
+        
 
+        public function conseguirPreventa($id){
             $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
             $sql = "SELECT * FROM preventas WHERE id = $id;";
-            $preventa = mysqli_query($conexion, $sql);
+            $preventa = mysqli_query($mysqli, $sql);
             $result = array();
             if($preventa && mysqli_num_rows($preventa) >= 1){
                 $result = mysqli_fetch_assoc($preventa);
             }
     
-            return $preventa;
+            return $result;
+        }
+
+        public function editarPreventa($id, $id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
+        $horas_previstas, $acta_reunion, $importe, $status) {
+
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
+            $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
+            $horas_previstas, $acta_reunion, $importe, $status);
+
+            if(count($error) == 0){    
+        
+                $sql = "UPDATE preventas SET 
+                    id_cliente = $id_cliente, 
+                    id_comercial = $id_comercial, 
+                    id_tipo = $id_tipo, 
+                    fecha_reunion = '$fecha_reunion', 
+                    acta_reunion = '$acta_reunion', 
+                    horas_previstas = $horas_previstas, 
+                    importe = $importe,
+                    status = '$status',
+                    fecha_accion = NOW(),
+                    id_contacto = $id_contacto 
+                    WHERE id = $id;"; 
+
+                $guardar = mysqli_query($mysqli, $sql);
+                if($guardar) {
+                    $_SESSION['completado'] = "La preventa se ha modificado correctamente!";
+                } else {
+                    $_SESSION['error']['general'] = "Error";
+                }
+            } else {
+                $_SESSION['error'] = $error;
+                return $_SESSION['error'];
+            }
         }
     }
 

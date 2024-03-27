@@ -106,9 +106,9 @@
                                         <select class="form-select" name="id_contacto" id="contacto">
                                             <option value="">Seleccione contacto</option>
                                         </select>
-                                        <?php if(isset($_SESSION['error']['id_contactos'])): ?>
+                                        <?php if(isset($_SESSION['error']['id_contacto'])): ?>
                                             <div class='alert alert-warning'>
-                                                <?=$_SESSION['error']['id_contactos'];?>
+                                                <?=$_SESSION['error']['id_contacto'];?>
                                             </div>
                                         <?php endif; ?>
                                     </div>
