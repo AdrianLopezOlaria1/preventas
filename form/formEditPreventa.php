@@ -11,10 +11,10 @@
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Velonic</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                                <li class="breadcrumb-item active">Formulario preventas</li>
+                                <li class="breadcrumb-item active">Formulario editar preventa</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Formulario preventas</h4>
+                        <h4 class="page-title">Formulario editar preventa</h4>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="header-title">Ingrese información</h4>
+                            <h4 class="header-title">Modifique información de la preventa</h4>
                         </div>
                         <?php if(isset($_SESSION['completado'])): ?>
                                         <div class='alert alert-success'>

@@ -214,18 +214,37 @@
             return $preventas;
         }
 
-        public function aceptar($id){
-            $conexion = new Conexion();
-            $mysqli = $conexion->getConexion();
-            $sql = "UPDATE preventas SET status = 'A', fecha_accion = NOW() WHERE id = $id;";
-            $actualizar = mysqli_query($mysqli, $sql);
-        }
 
-        public function denegar($id){
+
+        public function contarPreventasPendientes() {
+            // Obtener todas las preventas
+            $preventas = $this->obtenerPreventas();
+        
+            // Filtrar solo las preventas pendientes
+            $preventasPendientes = array_filter($preventas, function($preventa) {
+                return $preventa['status'] == 'P'; //preventas pendientes en tu base de datos
+            });
+        
+            // Contar las preventas pendientes
+            $cantidadPendientes = count($preventasPendientes);
+        
+            // Devolver la cantidad de preventas pendientes
+            return $cantidadPendientes;
+        }
+        
+        
+
+        function conseguirPreventa($id){
+
             $conexion = new Conexion();
-            $mysqli = $conexion->getConexion();
-            $sql = "UPDATE preventas SET status = 'D', fecha_accion = NOW() WHERE id = $id;";
-            $actualizar = mysqli_query($mysqli, $sql);
+            $sql = "SELECT * FROM preventas WHERE id = $id;";
+            $preventa = mysqli_query($conexion, $sql);
+            $result = array();
+            if($preventa && mysqli_num_rows($preventa) >= 1){
+                $result = mysqli_fetch_assoc($preventa);
+            }
+    
+            return $preventa;
         }
     }
 
