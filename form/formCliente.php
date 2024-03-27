@@ -8,10 +8,10 @@
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Velonic</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                                <li class="breadcrumb-item active">Form Clients</li>
+                                <li class="breadcrumb-item active">Formulario Clientes</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Form Clients</h4>
+                        <h4 class="page-title">Formulario Clientes</h4>
                     </div>
                 </div>
             </div>
@@ -20,9 +20,9 @@
                 
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="header-title">Create new client</h4>
+                            <h4 class="header-title">Crear nuevo cliente</h4>
                             <p class="text-muted mb-0">
-                            Enter the new client information here.
+                            Ingrese la información del nuevo cliente aquí.
                             </p>
                         </div>
                         <div class="card-body">
@@ -33,11 +33,12 @@
                             <?php endif; ?>
                             <form method="POST" action="index.php?action=enviarCliente">
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Client name</label>
+                                    <label for="exampleInputEmail1" class="form-label">Nombre de cliente</label>
                                     <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp" placeholder="Enter client name" name="nombre">
-                                    <small id="emailHelp" class="form-text text-muted">The name must not be previously
-                                        registered</small>
+                                        aria-describedby="emailHelp" placeholder="Ingrese nombre de cliente" name="nombre">
+                                    <small id="emailHelp" class="form-text text-muted">El nombre no debe estar
+                                    previamente registrado.
+                                    </small>
                                     <?php if(isset($_SESSION['error']['nombre'])): ?>
                                         <div class='alert alert-warning'>
                                             <?=$_SESSION['error']['nombre'];?>
@@ -45,7 +46,7 @@
                                     <?php endif; ?>
                                 </div>
                                 
-                                <button type="submit" class="btn btn-primary">Create</button>
+                                <button type="submit" class="btn btn-primary">Crear</button>
                             </form>
                             <?php $cliente = new Cliente(); $cliente->borrarErrores(); ?>          
                         </div> <!-- end card-body-->

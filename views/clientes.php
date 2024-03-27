@@ -12,10 +12,10 @@
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Velonic</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
-                                <li class="breadcrumb-item active">Client List</li>
+                                <li class="breadcrumb-item active">Lista de clientes</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Client List</h4>
+                        <h4 class="page-title">Lista de Clientes</h4>
                     </div>
                 </div>
             </div>
