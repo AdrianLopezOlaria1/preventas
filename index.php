@@ -49,6 +49,18 @@ switch ($action) {
         include 'clases/Comercial.php';
         include 'form/formPreventa.php';
         break;
+    case "formEditPreventa":
+        include 'metodos/checker.php';
+        include 'views/aside.php';
+        include 'views/footer.php';
+        include 'views/header.php';
+        include 'clases/Cliente.php';
+        include 'clases/Contacto.php';
+        include 'clases/Preventa.php';
+        include 'clases/Tipo.php';
+        include 'clases/Comercial.php';
+        include 'form/formEditPreventa.php';
+        break;
     case "index":
         include 'metodos/checker.php';
         include 'views/aside.php';
@@ -92,12 +104,6 @@ switch ($action) {
         break;
     case "enviarLogin":
         include 'metodos/login.php';
-        break;
-    case "enviarAceptar":
-        include 'metodos/aceptar.php';
-        break;
-    case "enviarDenegar":
-        include 'metodos/denegar.php';
         break;
     case "enviarPreventa":
         include 'metodos/preventa.php';
