@@ -214,18 +214,16 @@
             return $preventas;
         }
 
-        public function aceptar($id){
+        function conseguirPreventa($id){
             $conexion = new Conexion();
-            $mysqli = $conexion->getConexion();
-            $sql = "UPDATE preventas SET status = 'A', fecha_accion = NOW() WHERE id = $id;";
-            $actualizar = mysqli_query($mysqli, $sql);
-        }
-
-        public function denegar($id){
-            $conexion = new Conexion();
-            $mysqli = $conexion->getConexion();
-            $sql = "UPDATE preventas SET status = 'D', fecha_accion = NOW() WHERE id = $id;";
-            $actualizar = mysqli_query($mysqli, $sql);
+            $sql = "SELECT * FROM preventas WHERE id = $id;";
+            $preventa = mysqli_query($conexion, $sql);
+            $result = array();
+            if($preventa && mysqli_num_rows($preventa) >= 1){
+                $result = mysqli_fetch_assoc($preventa);
+            }
+    
+            return $preventa;
         }
     }
 

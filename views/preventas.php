@@ -38,7 +38,7 @@
                                                     <th scope="col">Importe</th>
                                                     <th scope="col">Status</th> 
                                                     <?php if($_SESSION['usuario']['rol'] == 1): ?> 
-                                                    <th scope="col">aa</th>
+                                                    <th scope="col">acción</th>
                                                     <?php endif; ?>
                                                 </tr>
                                             </thead>
@@ -87,8 +87,7 @@
                                                     
                                                     echo '<td><span class="' . $estado_class . '">' . $estado . '</span></td>'; // Estado 
                                                     if($_SESSION['usuario']['rol'] == 1){   
-                                                    echo '<td style="white-space: nowrap; width: 1%;"> <div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><a href="index.php?action=enviarAceptar&&id=' .$preventa['id']. '" class="tabledit-edit-button btn btn-success" style="float: none;"><span><i class="bi bi-check"></i></span></a></div>';
-                                                    echo '<div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><a href="index.php?action=enviarDenegar&&id=' .$preventa['id']. '" class="tabledit-edit-button btn btn-danger" style="float: none;"><span><i class="bi bi-x"></i></span></a></div><td >';
+                                                    echo '<td style="white-space: nowrap; width: 1%;"> <div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><a href="index.php?action=formEditPreventa&&id=' .$preventa['id']. '" class="tabledit-edit-button btn btn-success" style="float: none;">Modificar</a></div>';                                        
                                                     }                                                                                
                                                     echo '</tr>';
                                                 }
