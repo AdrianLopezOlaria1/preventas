@@ -27,107 +27,98 @@
 
                     <li class="side-nav-title">Main</li>
 
+
+
+
                     <li class="side-nav-item">
-                        <a href="index.php?action=preventas" class="side-nav-link">
-                            <i class="ri-dashboard-3-line"></i>
-                            <span class="badge bg-success float-end">9+</span>
-                            <span>Mis Preventas</span>
-                        </a>
-                    </li>
+                            <a data-bs-toggle="collapse" href="#sidebarCharts" aria-expanded="false" aria-controls="sidebarCharts" class="side-nav-link">
+                            <i class="bi bi-cart"></i>
+                                <span> Preventas </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarCharts">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="index.php?action=preventas">Mis preventas</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?action=formPreventa">Nueva preventa</a>
+                                    </li>
+                                   
+                                </ul>
+                            </div>
+                        </li>
 
-                    <li class="side-nav-item">                    
-                        <a href="index.php?action=formPreventa" class="side-nav-link">
-                        <i class="bi bi-cart"></i>
-                            <span>Nueva Preventa</span>
-                        </a>
-                    </li>
+                   
+                    
 
-                    <li class="side-nav-item">                    
-                        <a href="index.php?action=clientList" class="side-nav-link">
-                        <i class="bi bi-person"></i>
-                            <span>Clientes</span>
-                        </a>
-                    </li>
-                    <?php if($_SESSION['usuario']['rol'] == 1):?>
-                    <li class="side-nav-item">                    
-                        <a href="index.php?action=formCliente" class="side-nav-link">
-                        <i class="bi bi-plus-circle"></i>
-                            <span>Nuevo cliente</span>
-                        </a>
-                    </li>
-                    <?php endif; ?>
-                    <li class="side-nav-item">                    
-                        <a href="index.php?action=contactList" class="side-nav-link">
-                        <i class="bi bi-file-earmark-person"></i>
-                            <span>Contactos</span>
-                        </a>
-                    </li>
-                    <?php if($_SESSION['usuario']['rol'] == 1):?>
-                    <li class="side-nav-item">                    
-                        <a href="index.php?action=formContacto" class="side-nav-link">
-                        <i class="bi bi-plus-circle"></i>
-                            <span>Nuevo contacto</span>
-                        </a>
-                    </li>
-                    <?php endif; ?>
-                    <li class="side-nav-item">                    
-                        <a href="index.php?action=comercialList" class="side-nav-link">
-                        <i class="bi bi-building"></i>
-                            <span>Comercial</span>
-                        </a>
-                    </li>
-                    <?php if($_SESSION['usuario']['rol'] == 1):?>
-                    <li class="side-nav-item">                    
-                        <a href="index.php?action=formComercial" class="side-nav-link">
-                        <i class="bi bi-plus-circle"></i>
-                            <span>Nuevo comercial</span>
-                        </a>
-                    </li>
-                    <?php endif; ?>
-                    <!-- <li class="side-nav-item">
+                    
+                    <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
-                            <i class="ri-pages-line"></i>
-                            <span> Listas </span>
+                        <i class="bi bi-building"></i>
+                        <span> Comercial </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarPages">
-                            <ul class="side-nav-second-level">
+                            <ul class="side-nav-second-level">                       
                                 <li>
-                                    <a href="index.php?action=clientList">Client List</a>
+                                    <a href="index.php?action=comercialList">Lista comerciales</a>
                                 </li>
-                                <li>
-                                    <a href="index.php?action=contactList">Contact List</a>
-                                </li>                                
-                                <li>
-                                    <a href="index.php?action=comercialList">Comercial List</a>
-                                </li>
-                                <li>
-                                    <a href="pages-timeline.html">Timeline</a>
-                                </li>
-                                <li>
-                                    <a href="pages-invoice.html">Invoice</a>
-                                </li>
-                                <li>
-                                    <a href="pages-faq.html">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="pages-pricing.html">Pricing</a>
-                                </li>
-                                <li>
-                                    <a href="pages-maintenance.html">Maintenance</a>
-                                </li>
-                                <li>
-                                    <a href="error-404.html">Error 404</a>
-                                </li>
-                                <li>
-                                    <a href="error-404-alt.html">Error 404-alt</a>
-                                </li>
-                                <li>
-                                    <a href="error-500.html">Error 500</a>
-                                </li>
+
+                                <?php if($_SESSION['usuario']['rol'] == 1):?>
+                                    <li class="side-nav-item">                    
+                                        <a href="index.php?action=formComercial" class="side-nav-link">
+                                            <span>Nuevo Comercial</span>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
+                                
                             </ul>
                         </div>
-                    </li> -->
+                    </li> 
+
+                    <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarPagesAuth" aria-expanded="false" aria-controls="sidebarPagesAuth" class="side-nav-link">
+                                <i class="bi bi-person"></i>
+                                <span> Cliente </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarPagesAuth">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="index.php?action=clientList">Lista Clientes</a>
+                                    </li>
+                                    <?php if($_SESSION['usuario']['rol'] == 1):?>
+                                        <li>
+                                            <a href="index.php?action=formCliente">Nuevo Cliente</a>
+                                        </li>
+                                    <?php endif; ?>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false" aria-controls="sidebarExtendedUI" class="side-nav-link">
+                            <i class="bi bi-file-earmark-person"></i>
+                                <span> Contacto </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarExtendedUI">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="index.php?action=contactList">Lista Contactos</a>
+                                    </li>
+                                    <?php if($_SESSION['usuario']['rol'] == 1):?>
+                                    <li>
+                                        <a href="index.php?action=formContacto">Nuevo Contacto</a>
+                                    </li>
+                                    <?php endif; ?>
+
+                                    <li>
+                                </ul>
+                            </div>
+                        </li>
+
                 </ul>
                 <!--- End Sidemenu -->
                 <div class="clearfix"></div>
