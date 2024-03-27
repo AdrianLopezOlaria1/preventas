@@ -21,9 +21,9 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="header-title">Create new comercial</h4>
+                            <h4 class="header-title">Crear nuevo comercial</h4>
                             <p class="text-muted mb-0">
-                            Enter the new comertial information here.
+                            Ingrese la información del nuevo comercial aquí.
                             </p>
                         </div>
                         <div class="card-body">
@@ -34,29 +34,29 @@
                             <?php endif; ?>
                             <form method="POST" action="index.php?action=enviarComercial">
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Comertial name</label>
+                                    <label for="exampleInputEmail1" class="form-label">Nombre de comercial</label>
                                     <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp" placeholder="Enter client name" name="nombre">
+                                        aria-describedby="emailHelp" placeholder="Ingrese nombre del comercial" name="nombre">
                                         <?php if(isset($_SESSION['error']['nombre'])): ?>
                                             <div class='alert alert-warning'>
                                                 <?=$_SESSION['error']['nombre'];?>
                                             </div>
                                          <?php endif; ?>
-                                        <label for="exampleInputEmail2" class="form-label">Comertial email</label>
+                                        <label for="exampleInputEmail2" class="form-label">Comercial email</label>
                                     <input type="text" class="form-control" id="exampleInputEmail2"
-                                    aria-describedby="emailHelp" placeholder="Enter client name" name="email">
+                                    aria-describedby="emailHelp" placeholder="Ingrese email del comercial" name="email">
                                     <?php if(isset($_SESSION['error']['email'])): ?>
                                         <div class='alert alert-warning'>
                                             <?=$_SESSION['error']['email'];?>
                                         </div>
                                     <?php endif; ?>
-                                    <small id="emailHelp" class="form-text text-muted">The name and email must not be previously
-                                        registered</small>
+                                    <small id="emailHelp" class="form-text text-muted">El email no debe estar previamente
+                                    registrado</small>
 
                                     
                                 </div>
                                 
-                                <button type="submit" class="btn btn-primary">Create</button>
+                                <button type="submit" class="btn btn-primary">Crear</button>
                             </form>
                             <?php $comercial = new Comercial(); $comercial->borrarErrores(); ?>          
                         </div> <!-- end card-body-->

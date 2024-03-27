@@ -11,10 +11,10 @@
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Velonic</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                                <li class="breadcrumb-item active">Form Contacts</li>
+                                <li class="breadcrumb-item active">Formulario de contactos</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Form Contacts</h4>
+                        <h4 class="page-title">Formulario de contactos</h4>
                     </div>
                 </div>
             </div>
@@ -24,9 +24,9 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="header-title">Create new contact</h4>
+                            <h4 class="header-title">Crear nuevo contacto</h4>
                             <p class="text-muted mb-0">
-                            Enter the new contact information here.
+                            Ingrese la información del nuevo contacto aquí.
                             </p>
                         </div>
                         <div class="card-body">
@@ -37,9 +37,9 @@
                             <?php endif; ?>
                             <form method="POST" action="index.php?action=enviarContacto">
                                 <div class="mb-3">
-                                    <label for="exampleInputName1" class="form-label">Contact name</label>
+                                    <label for="exampleInputName1" class="form-label">Nombre de contacto</label>
                                     <input type="text" class="form-control" id="exampleInputName1"
-                                        aria-describedby="nameHelp" placeholder="Enter contact name" name="nombre">
+                                        aria-describedby="nameHelp" placeholder="Ingrese nombre de contacto" name="nombre">
                                     <?php if(isset($_SESSION['error']['nombre'])): ?>
                                         <div class='alert alert-warning'>
                                             <?=$_SESSION['error']['nombre'];?>
@@ -49,7 +49,7 @@
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp" placeholder="Enter contact email" name="email">
+                                        aria-describedby="emailHelp" placeholder="Ingrese email del contacto" name="email">
                                     <?php if(isset($_SESSION['error']['email'])): ?>
                                         <div class='alert alert-warning'>
                                             <?=$_SESSION['error']['email'];?>
@@ -57,9 +57,9 @@
                                     <?php endif; ?>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputTel1" class="form-label">Phone number</label>
+                                    <label for="exampleInputTel1" class="form-label">Número de teléfono</label>
                                     <input type="text" class="form-control" id="exampleInputTel1"
-                                        aria-describedby="telHelp" placeholder="Enter contact phone number" name="tel">
+                                        aria-describedby="telHelp" placeholder="Ingrese teléfono del contacto" name="tel">
                                     <?php if(isset($_SESSION['error']['tel'])): ?>
                                         <div class='alert alert-warning'>
                                             <?=$_SESSION['error']['tel'];?>
@@ -68,9 +68,9 @@
                                 </div>
                                 <!-- selector -->
                                 <div class="mb-3">
-                                    <label for="id_cliente" class="form-label">Client</label>
+                                    <label for="id_cliente" class="form-label">Cliente</label>
                                     <select class="form-select" name="id_cliente" id="cliente">
-                                        <option value="">Select client</option>
+                                        <option value="">Seleccione cliente</option>
                                         <?php 
                                             $cliente = new Cliente();
                                             $clientes = $cliente->obtenerClientes();
@@ -90,12 +90,12 @@
                                             <?=$_SESSION['error']['id_cliente'];?>
                                         </div>
                                     <?php endif; ?>
-                                    <small id="emailHelp" class="form-text text-muted">The email must not be previously
-                                        registered</small>
+                                    <small id="emailHelp" class="form-text text-muted">El email no debe estar
+                                    previamente registrado.</small>
                                 </div>
                                 <!-- fin selector -->
                                 
-                                <button type="submit" class="btn btn-primary">Create</button>
+                                <button type="submit" class="btn btn-primary">Crear</button>
                             </form>
                             <?php $contacto = new Contacto(); $contacto->borrarErrores(); ?>          
                         </div> <!-- end card-body-->
