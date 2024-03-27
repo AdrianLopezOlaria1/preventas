@@ -231,6 +231,91 @@
             // Devolver la cantidad de preventas pendientes
             return $cantidadPendientes;
         }
+
+        public function contarPreventasRealizadaReunion() {
+            // Obtener todas las preventas
+            $preventas = $this->obtenerPreventas();
+        
+            // Filtrar solo las preventas pendientes
+            $preventasRealizadaReunion = array_filter($preventas, function($preventa) {
+                return $preventa['status'] == 'RP'; //preventas pendientes en tu base de datos
+            });
+        
+            // Contar las preventas pendientes
+            $cantidadRealizadaReunion = count($preventasRealizadaReunion);
+        
+            // Devolver la cantidad de preventas pendientes
+            return $cantidadRealizadaReunion;
+        }
+
+        public function contarPreventasPendientesCierre() {
+            // Obtener todas las preventas
+            $preventas = $this->obtenerPreventas();
+        
+            // Filtrar solo las preventas pendientes
+            $preventasPendientesCierre = array_filter($preventas, function($preventa) {
+                return $preventa['status'] == 'PC'; //preventas pendientes en tu base de datos
+            });
+        
+            // Contar las preventas pendientes
+            $cantidadPendientesCierre = count($preventasPendientesCierre);
+        
+            // Devolver la cantidad de preventas pendientes
+            return $cantidadPendientesCierre;
+        }
+
+        public function contarPreventasCerradaPerdida() {
+            // Obtener todas las preventas
+            $preventas = $this->obtenerPreventas();
+        
+            // Filtrar solo las preventas pendientes
+            $preventasCerradaPerdida = array_filter($preventas, function($preventa) {
+                return $preventa['status'] == 'CP'; //preventas pendientes en tu base de datos
+            });
+        
+            // Contar las preventas pendientes
+            $cantidadCerradaPerdida = count($preventasCerradaPerdida);
+        
+            // Devolver la cantidad de preventas pendientes
+            return $cantidadCerradaPerdida;
+        }
+
+        public function contarPreventasGanadas() {
+            // Obtener todas las preventas
+            $preventas = $this->obtenerPreventas();
+        
+            // Filtrar solo las preventas pendientes
+            $preventasGanadas = array_filter($preventas, function($preventa) {
+                return $preventa['status'] == 'CG'; //preventas pendientes en tu base de datos
+            });
+        
+            // Contar las preventas pendientes
+            $cantidadGanadas = count($preventasGanadas);
+        
+            // Devolver la cantidad de preventas pendientes
+            return $cantidadGanadas;
+        }
+        
+        public function contarPreventasValoradas() {
+            // Obtener todas las preventas
+            $preventas = $this->obtenerPreventas();
+        
+            // Filtrar solo las preventas pendientes
+            $preventasValoradas = array_filter($preventas, function($preventa) {
+                return $preventa['status'] == 'RV'; //preventas pendientes en tu base de datos
+            });
+        
+            // Contar las preventas pendientes
+            $cantidadValoradas = count($preventasValoradas);
+        
+            // Devolver la cantidad de preventas pendientes
+            return $cantidadValoradas;
+        }
+        
+        
+
+        
+        
         
         
 
