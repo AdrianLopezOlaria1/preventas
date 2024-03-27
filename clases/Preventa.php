@@ -214,7 +214,28 @@
             return $preventas;
         }
 
+
+
+        public function contarPreventasPendientes() {
+            // Obtener todas las preventas
+            $preventas = $this->obtenerPreventas();
+        
+            // Filtrar solo las preventas pendientes
+            $preventasPendientes = array_filter($preventas, function($preventa) {
+                return $preventa['status'] == 'P'; //preventas pendientes en tu base de datos
+            });
+        
+            // Contar las preventas pendientes
+            $cantidadPendientes = count($preventasPendientes);
+        
+            // Devolver la cantidad de preventas pendientes
+            return $cantidadPendientes;
+        }
+        
+        
+
         function conseguirPreventa($id){
+
             $conexion = new Conexion();
             $sql = "SELECT * FROM preventas WHERE id = $id;";
             $preventa = mysqli_query($conexion, $sql);
