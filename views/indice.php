@@ -60,9 +60,12 @@
                                     <div class="float-end">
                                         <i class="ri-shopping-basket-line widget-icon"></i>
                                     </div>
-                                    <h6 class="text-uppercase mt-0" title="Customers">Orders</h6>
-                                    <?php $preventas = new Preventa();?>
-                                    <h2 class="my-2"><?=count($preventas->obtenerPreventas());?></h2>
+                                    <h6 class="text-uppercase mt-0" title="Customers">Preventas Pendientes</h6>
+                                    <?php 
+                                        $preventas = new Preventa();
+                                        $cantidadPendientes = $preventas->contarPreventasPendientes();
+                                    ?>
+                                    <h2 class="my-2"><?= $cantidadPendientes ?></h2>
                                     <p class="mb-0">
                                         <span class="badge bg-white bg-opacity-25 me-1">-5.75%</span>
                                         <span class="text-nowrap">Since last month</span>
@@ -70,6 +73,8 @@
                                 </div>
                             </div>
                         </div> <!-- end col-->
+
+
 
                         <div class="col-xxl-3 col-sm-6">
                             <div class="card widget-flat text-bg-primary">

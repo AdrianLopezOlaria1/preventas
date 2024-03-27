@@ -76,11 +76,14 @@
                                             $clientes = $cliente->obtenerClientes();
                                             if (!empty($clientes)) {
                                                 foreach ($clientes as $c) {
+                                                    if ($c['status'] != 'D') {
                                         ?>
                                         <option value="<?=$c['id']?>">
+
                                             <?=$c['nombre']?>
                                         </option>
                                         <?php
+                                                    }
                                                 }
                                             }
                                         ?>
