@@ -263,7 +263,7 @@
 
                                     <div id="weeklysales-collapse" class="collapse pt-3 show">
                                         <div dir="ltr">
-                                            <div id="revenue-chart1" data-colors="#3bc0c3,#1a2942,#d1d7d973"></div>
+                                            <div id="revenue-chart1" data-colors="#2fff00,#ff0000"></div>
                                         </div>
 
                                         <div class="row text-center">
@@ -359,6 +359,7 @@
 
         </div>
 
+
 <?php
 $meses = array();
 $fecha_actual = new DateTime();
@@ -368,6 +369,41 @@ for ($i = 0; $i < 7; $i++) {
 }
 $meses = array_reverse($meses);
 $meses_json = json_encode($meses);
+?>
+        <?php
+function imprimirMesesAnteriores() {
+    // Obtener el número de mes actual
+    $mesActual = date('n');
+
+    // Array de nombres de los meses
+    $meses = [
+        1 => "enero",
+        2 => "febrero",
+        3 => "marzo",
+        4 => "abril",
+        5 => "mayo",
+        6 => "junio",
+        7 => "julio",
+        8 => "agosto",
+        9 => "septiembre",
+        10 => "octubre",
+        11 => "noviembre",
+        12 => "diciembre"
+    ];
+
+    // Imprimir los seis meses anteriores en orden inverso
+    $mesesAnteriores = [];
+    for ($i = 6; $i >= 0; $i--) {
+        $mes = ($mesActual - $i < 1) ? 12 + $mesActual - $i : $mesActual - $i;
+        $mesesAnteriores[] = $meses[$mes];
+    }
+
+    return $mesesAnteriores;
+}
+
+// Llamar a la función para imprimir los meses anteriores
+$mesesAnteriores = imprimirMesesAnteriores();
+
 ?>
 
 <script>
@@ -391,20 +427,17 @@ $meses_json = json_encode($meses);
                     right: 0
                 }
             },
-            colors: ["#3e60d5", "#47ad77", "#fa5c7c", "#ffbc00"]
+            colors: ["#2fff00", "#ff0000"]
         };
-        var e = ["#3e60d5", "#47ad77", "#fa5c7c", "#ffbc00"],
+        var e = ["#2fff00", "#ff0000"],
             t = r("#revenue-chart1").data("colors"),
             a = {
                 series: [{
-                    name: "Revenue",
-                    data: [260, 505, 414, 526, 227, 413, 201]
+                    name: "Ganado",
+                    data: [<?php echo '221';?>, 505, 414, 526, 227, 413, 201]
                 }, {
-                    name: "Sales",
+                    name: "Perdidas",
                     data: [320, 258, 368, 458, 201, 365, 389]
-                }, {
-                    name: "Profit",
-                    data: [320, 458, 369, 520, 180, 369, 160]
                 }],
                 chart: {
                     height: 377,
@@ -425,11 +458,12 @@ $meses_json = json_encode($meses);
                 },
                 colors: e = t ? t.split(",") : e,
                 xaxis: {
-                    categories: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+                    
+                    categories:[<?php echo "'" . implode("', '", $mesesAnteriores) . "'"; ?>]
                 },
                 yaxis: {
                     title: {
-                        text: "$ (thousands)"
+                        text: "$ (preventas)"
                     }
                 },
                 legend: {
@@ -446,7 +480,7 @@ $meses_json = json_encode($meses);
                 tooltip: {
                     y: {
                         formatter: function(e) {
-                            return "$ " + e + " thousands"
+                            return "$ " + e + " preventas"
                         }
                     }
                 }
@@ -468,10 +502,10 @@ $meses_json = json_encode($meses);
                 colors: e = (t = r("#yearly-sales-chart").data("colors")) ? t.split(",") : e,
                 stroke: {
                     curve: "smooth",
-                    width: [3, 3]
+                    width: [2, 2]
                 },
                 markers: {
-                    size: 3
+                    size: 2
                 },
                 xaxis: {
                     categories: <?php echo $meses_json;?>
