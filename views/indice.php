@@ -93,8 +93,8 @@
                             
                                 <div class="card-body">
                                     <div class="float-end">
-                                    <i class="bi bi-clock"></i>
-                                    <i style="background-color: #c2c2c2;" class="bi bi-clipboard-fill widget-icon"></i>
+                                    
+                                    <i style="background-color: #c2c2c2;" class="bi bi-clock widget-icon"></i>
                                         
                                     </div>
                                     <h6 class="text-uppercase mt-0" title="Customers">Pendientes</h6>
