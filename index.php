@@ -108,6 +108,9 @@ switch ($action) {
     case "enviarPreventa":
         include 'metodos/preventa.php';
         break;
+    case "enviarEditarPreventa":
+        include 'metodos/editar_preventa.php';
+        break;
     case "enviarRegister":
         include 'metodos/register.php';
         break;

@@ -106,8 +106,8 @@
 
         //funciones
 
-        function validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
-            $horas_previstas, $acta_reunion, $importe) {
+         public function validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
+            $horas_previstas, $acta_reunion, $importe, $status) {
 
             $error = array();
             if(empty($id_cliente)){
@@ -134,19 +134,22 @@
             if(empty($importe) || !is_numeric($importe)){
                 $error['importe'] = "Debes poner importe en números";
             }
+            if(empty($status)){
+                $error['status'] = "Debes escojer un estado";
+            }
 
             return $error;
         }
     
         public function crearPreventa($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
-            $horas_previstas, $acta_reunion, $importe) {
+            $horas_previstas, $acta_reunion, $importe, $status) {
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
             $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
             $horas_previstas, $acta_reunion, $importe);
             if(count($error) == 0){
                 // Insertar precompra en la base de datos
-                $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_comercial, $id_tipo, NOW(), '$fecha_reunion', '$acta_reunion', $horas_previstas, $importe, 'P', NULL, $id_contacto);";
+                $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_comercial, $id_tipo, NOW(), '$fecha_reunion', '$acta_reunion', $horas_previstas, $importe, '$status', NULL, $id_contacto);";
 
 
                 $guardar = mysqli_query($mysqli, $sql);
@@ -319,17 +322,59 @@
         
         
 
-        function conseguirPreventa($id){
-
+        public function conseguirPreventa($id){
             $conexion = new Conexion();
-            $sql = "SELECT * FROM preventas WHERE id = $id;";
-            $preventa = mysqli_query($conexion, $sql);
+            $mysqli = $conexion->getConexion();
+            $sql = "SELECT pr.id, cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi,
+            pr.id_cliente, pr.id_comercial, pr.id_tipo, pr.status, pr.fecha_solicitud, pr.fecha_reunion,
+            pr.acta_reunion, pr.horas_previstas, pr.importe, pr.id_contacto  FROM preventas pr
+            INNER JOIN clientes cl ON cl.id = pr.id_cliente
+            INNER JOIN comerciales com ON com.id = pr.id_comercial
+            INNER JOIN personas_contacto cont ON cont.id = pr.id_contacto
+            INNER JOIN tipos_proyectos ti ON ti.id = pr.id_tipo 
+            WHERE pr.id = $id;";
+            $preventa = mysqli_query($mysqli, $sql);
             $result = array();
             if($preventa && mysqli_num_rows($preventa) >= 1){
                 $result = mysqli_fetch_assoc($preventa);
             }
     
-            return $preventa;
+            return $result;
+        }
+
+        public function editarPreventa($id, $id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
+        $horas_previstas, $acta_reunion, $importe, $status) {
+
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
+            $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
+            $horas_previstas, $acta_reunion, $importe, $status);
+
+            if(count($error) == 0){    
+        
+                $sql = "UPDATE preventas SET 
+                    id_cliente = $id_cliente, 
+                    id_comercial = $id_comercial, 
+                    id_tipo = $id_tipo, 
+                    fecha_reunion = '$fecha_reunion', 
+                    acta_reunion = '$acta_reunion', 
+                    horas_previstas = $horas_previstas, 
+                    importe = $importe,
+                    status = '$status',
+                    fecha_accion = NOW(),
+                    id_contacto = $id_contacto 
+                    WHERE id = $id;"; 
+
+                $guardar = mysqli_query($mysqli, $sql);
+                if($guardar) {
+                    $_SESSION['completado'] = "La preventa se ha modificado correctamente!";
+                } else {
+                    $_SESSION['error']['general'] = "Error";
+                }
+            } else {
+                $_SESSION['error'] = $error;
+                return $_SESSION['error'];
+            }
         }
     }
 

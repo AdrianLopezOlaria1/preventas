@@ -99,7 +99,7 @@
                                                     
                                                     echo '<td><span class="' . $estado_class . '">' . $estado . '</span></td>'; // Estado 
                                                     if($_SESSION['usuario']['rol'] == 1){   
-                                                    echo '<td style="white-space: nowrap; width: 1%;"> <div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><a href="index.php?action=formEditPreventa&&id=' .$preventa['id']. '" class="tabledit-edit-button btn btn-success" style="float: none;">Modificar</a></div>';                                        
+                                                    echo '<td style="white-space: nowrap; width: 1%;"> <div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><a href="index.php?action=formEditPreventa&id=' .$preventa['id']. '" class="tabledit-edit-button btn btn-success" style="float: none;">Modificar</a></div>';                                        
                                                     }                                                                                
                                                     echo '</tr>';
                                                 }
