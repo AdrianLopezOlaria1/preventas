@@ -198,7 +198,8 @@ switch ($action) {
     <script src="assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
 
     <!-- Dashboard App js -->
-    <script src="assets/js/pages/dashboard.js"></script>
+    
+
 
     <!-- App js -->
     <script src="assets/js/app.min.js"></script>
