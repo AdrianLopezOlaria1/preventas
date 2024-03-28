@@ -26,7 +26,7 @@
                         <div class="card widget-flat text-bg-success"> <!-- Cambiado de "text-bg-info" a "text-bg-success" para cambiar el color a verde -->
                             <div class="card-body">
                                 <div class="float-end">
-                                    <i class="ri-shopping-basket-line widget-icon"></i>
+                                    <i class="bi bi-clipboard2-check widget-icon"></i>
                                 </div>
                                 <h6 class="text-uppercase mt-0" title="Customers">Ganadas</h6>
                                 <?php 
@@ -48,7 +48,7 @@
                             <div class="card widget-flat text-bg-pink">
                                 <div class="card-body">
                                     <div class="float-end">
-                                        <i class="ri-eye-line widget-icon"></i>
+                                        <i class="bi bi-clipboard-x widget-icon"></i>
                                     </div>
                                     <h6 class="text-uppercase mt-0" title="Customers">Perdidas</h6>
                                     <?php 
@@ -71,7 +71,8 @@
                             <div class="card widget-flat text-bg-purple">
                                 <div class="card-body">
                                     <div class="float-end">
-                                        <i class="ri-wallet-2-line widget-icon"></i>
+                                    <i class="bi bi-clock"></i>
+                                        <i class="bi bi-clipboard2-data widget-icon"></i>
                                     </div>
                                     <h6 class="text-uppercase mt-0" title="Customers">Pendientes de Cierre</h6>
                                     <?php 
@@ -92,7 +93,9 @@
                             
                                 <div class="card-body">
                                     <div class="float-end">
-                                        <i class="ri-shopping-basket-line widget-icon"></i>
+                                    <i class="bi bi-clock"></i>
+                                    <i style="background-color: #c2c2c2;" class="bi bi-clipboard-fill widget-icon"></i>
+                                        
                                     </div>
                                     <h6 class="text-uppercase mt-0" title="Customers">Pendientes</h6>
                                     <?php 
@@ -101,7 +104,7 @@
                                     ?>
                                     <h2 class="my-2"><?= $cantidadPendientes ?></h2>
                                     <p class="mb-0">
-                                        <span class="badge bg-white text-warning bg-opacity-25 me-1">-5.75%</span>
+                                        <span class="badge bg-white text-warning bg-opacity-50 me-1">-5.75%</span>
                                         <span class="text-nowrap">Since last month</span>
                                     </p>
                                 </div>
@@ -136,7 +139,8 @@
                             <div class="card widget-flat text-bg-primary">
                                 <div class="card-body">
                                     <div class="float-end">
-                                        <i class="ri-group-2-line widget-icon"></i>
+                                    <i class="bi bi-star"></i>
+                                        <i class="bi bi-clipboard widget-icon"></i>
                                     </div>
                                     <h6 class="text-uppercase mt-0" title="Customers">Realizada Valoración</h6>
                                     <?php 
