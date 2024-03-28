@@ -217,6 +217,34 @@
             return $preventas;
         }
 
+        public function ultimasPreventas() {
+            $preventas = array();      
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
+        
+            $sql = "SELECT pr.id, cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi,
+            pr.id_cliente, pr.id_comercial, pr.id_tipo, pr.status, pr.fecha_solicitud, pr.fecha_reunion,
+            pr.acta_reunion, pr.horas_previstas, pr.importe, pr.id_contacto  FROM preventas pr
+            INNER JOIN clientes cl ON cl.id = pr.id_cliente
+            INNER JOIN comerciales com ON com.id = pr.id_comercial
+            INNER JOIN personas_contacto cont ON cont.id = pr.id_contacto
+            INNER JOIN tipos_proyectos ti ON ti.id = pr.id_tipo
+            ORDER BY pr.fecha_solicitud DESC
+            LIMIT 5;";
+
+            $resultado = $mysqli->query($sql);
+            if ($resultado) {
+                while ($fila = $resultado->fetch_assoc()) {
+                    $preventas[] = $fila;
+                }
+            } else {
+                echo "Error en la consulta: " . $mysqli->error;
+            }
+            $mysqli->close();
+ 
+            return $preventas;
+        }
+
 
 
         public function contarPreventasPendientes() {
