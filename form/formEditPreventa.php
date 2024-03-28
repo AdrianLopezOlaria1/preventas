@@ -153,11 +153,17 @@ if(isset($_GET['id'])){
                                                     $tipos = $tipo->obtenerTipos();
                                                     if (!empty($tipos)) {
                                                         foreach ($tipos as $t) {
+                                                            if ($t['id'] == $actual['id_tipo']){
                                                 ?>
-                                                <option value="<?=$t['id']?>">
+                                                <option value="<?=$t['id']?>" selected>
                                                     <?=$t['nombre']?>
                                                 </option>
-                                                <?php
+                                                <?php } else { ?>
+                                                    <option value="<?=$t['id']?>">
+                                                        <?=$t['nombre']?>
+                                                    </option>
+                                                <?php                                                                
+                                                            }
                                                         }
                                                     }
                                                 ?>
@@ -183,12 +189,12 @@ if(isset($_GET['id'])){
                                             <label for="estado" class="form-label">Estado</label>
                                             <select class="form-select" id="estado" name="estado">
                                                 <option value="" selected>Seleccione estado</option>
-                                                <option value="P">Pendiente</option>
-                                                <option value="RP">Realizada reunión preventa</option>
-                                                <option value="RV">Realizada valoración</option>
-                                                <option value="PC">Pendiente cierre</option>
-                                                <option value="CG">Cerrada ganada</option>
-                                                <option value="CP">Cerrada perdida</option>
+                                                <option value="P" <?php echo ($actual['status'] == 'P') ? 'selected' : ''; ?>>Pendiente</option>
+                                                <option value="RP" <?php echo ($actual['status'] == 'RP') ? 'selected' : ''; ?>>Realizada reunión preventa</option>
+                                                <option value="RV" <?php echo ($actual['status'] == 'RV') ? 'selected' : ''; ?>>Realizada valoración</option>
+                                                <option value="PC" <?php echo ($actual['status'] == 'PC') ? 'selected' : ''; ?>>Pendiente cierre</option>
+                                                <option value="CG" <?php echo ($actual['status'] == 'CG') ? 'selected' : ''; ?>>Cerrada ganada</option>
+                                                <option value="CP" <?php echo ($actual['status'] == 'CP') ? 'selected' : ''; ?>>Cerrada perdida</option>
                                             </select>
                                             <?php if(isset($_SESSION['error']['status'])): ?>
                                                 <div class='alert alert-warning'>
