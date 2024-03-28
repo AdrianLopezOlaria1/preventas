@@ -146,7 +146,7 @@
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
             $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
-            $horas_previstas, $acta_reunion, $importe);
+            $horas_previstas, $acta_reunion, $importe, $status);
             if(count($error) == 0){
                 // Insertar precompra en la base de datos
                 $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_comercial, $id_tipo, NOW(), '$fecha_reunion', '$acta_reunion', $horas_previstas, $importe, '$status', NULL, $id_contacto);";
