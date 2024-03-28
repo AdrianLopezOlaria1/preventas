@@ -20,7 +20,7 @@
                                                 class="avatar-lg rounded-circle"></div>
                                         <div class="">
                                             <h4 class="mt-4 fs-17 ellipsis"><?php echo isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['nombre'] : 'Error'; ?></h4>
-                                            <p class="font-13"><?php echo isset($_SESSION['usuario']['description']) ? $_SESSION['usuario']['description'] : 'Error'; ?></p>
+                                            <p class="font-13"><?php echo isset($_SESSION['usuario']['description']) ? $_SESSION['usuario']['description'] : 'Añada su descripción'; ?></p>
                                             <p class="text-muted mb-0"><small>California, United States</small></p>
                                         </div>
                                     </div>
@@ -72,9 +72,8 @@
                                             <div class="tab-pane active" id="aboutme" role="tabpanel"
                                                 aria-labelledby="home-tab" tabindex="0">
                                                 <div class="profile-desk">
-                                                    <h5 class="text-uppercase fs-17 text-dark">Johnathan Deo</h5>
-                                                    <div class="designation mb-4">PRODUCT DESIGNER (UX / UI / Visual
-                                                        Interaction)</div>
+                                                    <h5 class="text-uppercase fs-17 text-dark"><?php echo isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['nombre'] : 'Error'; ?></h5>
+
                                                     <p class="text-muted fs-16">
                                                     <?php echo isset($_SESSION['usuario']['description']) ? $_SESSION['usuario']['description'] : ''; ?>
                                                     </p>

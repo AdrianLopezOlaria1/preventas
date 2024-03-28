@@ -74,7 +74,7 @@
                                                             break;
                                                         case 'RP':
                                                             $estado_class = 'badge bg-secondary-subtle text-secondary';
-                                                            $estado = 'Realizada reunión preventa';
+                                                            $estado = 'Realizada reunión';
                                                             break;
                                                         case 'RV':
                                                             $estado_class = 'badge bg-primary';
