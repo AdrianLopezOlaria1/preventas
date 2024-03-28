@@ -306,7 +306,7 @@
                                         <a data-bs-toggle="collapse" href="#yearly-sales-collapse" role="button" aria-expanded="false" aria-controls="yearly-sales-collapse"><i class="ri-subtract-line"></i></a>
                                         <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
                                     </div>
-                                    <h5 class="header-title mb-0">Yearly Sales Report</h5>
+                                    <h5 class="header-title mb-0">Reporte mensual preventas</h5>
 
                                     <div id="yearly-sales-collapse" class="collapse pt-3 show">
                                         <div dir="ltr">
@@ -314,16 +314,16 @@
                                         </div>
                                         <div class="row text-center">
                                             <div class="col">
-                                                <p class="text-muted mt-3 mb-2">Quarter 1</p>
-                                                <h4 class="mb-0">$56.2k</h4>
+                                                <p class="text-muted mt-3 mb-2">semestre 1</p>
+                                                <h4 class="mb-0">...</h4>
                                             </div>
                                             <div class="col">
-                                                <p class="text-muted mt-3 mb-2">Quarter 2</p>
-                                                <h4 class="mb-0">$42.5k</h4>
+                                                <p class="text-muted mt-3 mb-2">semestre 2</p>
+                                                <h4 class="mb-0">...</h4>
                                             </div>
                                             <div class="col">
-                                                <p class="text-muted mt-3 mb-2">All Time</p>
-                                                <h4 class="mb-0">$102.03k</h4>
+                                                <p class="text-muted mt-3 mb-2">Total</p>
+                                                <h4 class="mb-0">...</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -359,7 +359,16 @@
 
         </div>
 
-    
+<?php
+$meses = array();
+$fecha_actual = new DateTime();
+for ($i = 0; $i < 7; $i++) {
+    $meses[] = $fecha_actual->format('M');
+    $fecha_actual->modify('-1 month');
+}
+$meses = array_reverse($meses);
+$meses_json = json_encode($meses);
+?>
 
 <script>
 !function(r) {
@@ -446,10 +455,7 @@
         var e = ["#3e60d5", "#47ad77", "#fa5c7c", "#ffbc00"],
             a = {
                 series: [{
-                    name: "Mobile",
-                    data: [25, 15, 25, 36, 32, 42, 45]
-                }, {
-                    name: "Desktop",
+                    name: "Preventas",
                     data: [20, 10, 20, 31, 27, 37, 40]
                 }],
                 chart: {
@@ -468,7 +474,7 @@
                     size: 3
                 },
                 xaxis: {
-                    categories: ["2017", "2018", "2019", "2020", "2021", "2022", "2023"]
+                    categories: <?php echo $meses_json;?>
                 },
                 legend: {
                     show: !1
