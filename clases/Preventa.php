@@ -426,6 +426,45 @@
                 return $_SESSION['error'];
             }
         }
+
+        function obtenerNumeroPreventasPorMes($status, $mes) {
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
+            // Suponiendo que tu tabla de preventas se llama 'preventas'
+ 
+            $query = "SELECT COUNT(*) as total 
+            FROM preventas 
+            WHERE status = '$status' AND MONTH(fecha_solicitud) = 
+                CASE '$mes'
+                    WHEN 'enero' THEN 1
+                    WHEN 'febrero' THEN 2
+                    WHEN 'marzo' THEN 3
+                    WHEN 'abril' THEN 4
+                    WHEN 'mayo' THEN 5
+                    WHEN 'junio' THEN 6
+                    WHEN 'julio' THEN 7
+                    WHEN 'agosto' THEN 8
+                    WHEN 'septiembre' THEN 9
+                    WHEN 'octubre' THEN 10
+                    WHEN 'noviembre' THEN 11
+                    WHEN 'diciembre' THEN 12
+                END";
+            
+            
+            // Ejecutar la consulta
+            $resultado = $mysqli->query($query);
+            
+            // Obtener el número de preventas
+            $numero_preventas = 0;
+            if ($fila = $resultado->fetch_assoc()) {
+                $numero_preventas = $fila['total'];
+            }
+            
+            // Cerrar la conexión y devolver el número de preventas
+            $mysqli->close();
+            return $numero_preventas;
+        }
+        
     }
 
         
