@@ -259,39 +259,14 @@
                                         <a data-bs-toggle="collapse" href="#weeklysales-collapse" role="button" aria-expanded="false" aria-controls="weeklysales-collapse"><i class="ri-subtract-line"></i></a>
                                         <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
                                     </div>
-                                    <h5 class="header-title mb-0">Weekly Sales Report</h5>
+                                    <h5 class="header-title mb-0">Tabla de Preventas Ganadas y Perdidas por Mes</h5>
 
                                     <div id="weeklysales-collapse" class="collapse pt-3 show">
                                         <div dir="ltr">
                                             <div id="revenue-chart1" data-colors="#2fff00,#ff0000"></div>
                                         </div>
 
-                                        <div class="row text-center">
-                                            <div class="col">
-                                                <p class="text-muted mt-3">Current Week</p>
-                                                <h3 class=" mb-0">
-                                                    <span>$506.54</span>
-                                                </h3>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3">Previous Week</p>
-                                                <h3 class=" mb-0">
-                                                    <span>$305.25 </span>
-                                                </h3>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3">Conversation</p>
-                                                <h3 class=" mb-0">
-                                                    <span>3.27%</span>
-                                                </h3>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3">Customers</p>
-                                                <h3 class=" mb-0">
-                                                    <span>3k</span>
-                                                </h3>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
 
                                 </div> <!-- end card-body-->
@@ -311,21 +286,7 @@
                                     <div id="yearly-sales-collapse" class="collapse pt-3 show">
                                         <div dir="ltr">
                                             <div id="yearly-sales-chart" class="apex-charts" data-colors="#3bc0c3,#1a2942,#d1d7d973"></div>
-                                        </div>
-                                        <div class="row text-center">
-                                            <div class="col">
-                                                <p class="text-muted mt-3 mb-2">semestre 1</p>
-                                                <h4 class="mb-0">...</h4>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3 mb-2">semestre 2</p>
-                                                <h4 class="mb-0">...</h4>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3 mb-2">Total</p>
-                                                <h4 class="mb-0">...</h4>
-                                            </div>
-                                        </div>
+                                        </div>                                        
                                     </div>
 
                                 </div> <!-- end card-body-->
@@ -396,16 +357,7 @@ function imprimirMesesAnteriores() {
 $mesesAnteriores = imprimirMesesAnteriores();
 
 ?>
-<?php
-    $pre = new Preventa();
-    $cantidades_preventas = $pre->obtenerPreventasPorMes();
-    $data = array();
-    for ($mes = 2; $mes < 8; $mes++) {
-        $cantidad = isset($cantidades_preventas[$mes]) ? $cantidades_preventas[$mes] : 0;
-        $data[] = $cantidad;
-    }
-    $data_json = json_encode($data);
-?>
+
 <?php
     $meses = array();
     $fecha_actual = new DateTime();
@@ -415,7 +367,16 @@ $mesesAnteriores = imprimirMesesAnteriores();
     }
     $meses = array_reverse($meses);
     $meses_json = json_encode($meses);
+
+    $pre = new Preventa();
+    $data = array();
+    foreach ($meses as $m) {
+        $numero = $pre->obtenerPreventasPorMes($m);
+        array_push($data, $numero);
+    }
+    $data_json = json_encode($data);
 ?>
+
 <script>
 !function(r) {
     "use strict";
@@ -498,7 +459,7 @@ var a = {
             },
             yaxis: {
                 title: {
-                    text: "$ (preventas)"
+                    text: "nº preventas"
                 }
             },
             legend: {
