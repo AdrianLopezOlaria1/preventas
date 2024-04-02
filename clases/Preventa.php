@@ -343,11 +343,33 @@
             return $cantidadValoradas;
         }
         
-        
+        public function obtenerPreventasPorMes() {
+            $preventasPorMes = array();
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
+            $anioActual = date('Y');
+            $mesActual = date('m');
 
-        
-        
-        
+            $sql = "SELECT YEAR(pr.fecha_solicitud) AS año, MONTH(pr.fecha_solicitud) AS mes, COUNT(*) AS total
+                    FROM preventas pr
+                    WHERE YEAR(pr.fecha_solicitud) <= $anioActual AND
+                          (YEAR(pr.fecha_solicitud) < $anioActual OR MONTH(pr.fecha_solicitud) <= $mesActual)
+                    GROUP BY YEAR(pr.fecha_solicitud), MONTH(pr.fecha_solicitud)
+                    ORDER BY YEAR(pr.fecha_solicitud), MONTH(pr.fecha_solicitud);";
+ 
+            $resultado = $mysqli->query($sql);
+
+            if ($resultado) {
+                while ($fila = $resultado->fetch_assoc()) {
+                    $preventasPorMes[] = $fila['total'];
+                }
+            } else {
+                echo "Error en la consulta: " . $mysqli->error;
+            }
+            $mysqli->close();
+
+            return $preventasPorMes;
+        }
         
 
         public function conseguirPreventa($id){
