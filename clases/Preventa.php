@@ -343,35 +343,6 @@
             return $cantidadValoradas;
         }
         
-        public function obtenerPreventasPorMes() {
-            $preventasPorMes = array();
-            $conexion = new Conexion();
-            $mysqli = $conexion->getConexion();
-            $anioActual = date('Y');
-            $mesActual = date('m');
-
-            $sql = "SELECT YEAR(pr.fecha_solicitud) AS año, MONTH(pr.fecha_solicitud) AS mes, COUNT(*) AS total
-                    FROM preventas pr
-                    WHERE YEAR(pr.fecha_solicitud) <= $anioActual AND
-                          (YEAR(pr.fecha_solicitud) < $anioActual OR MONTH(pr.fecha_solicitud) <= $mesActual)
-                    GROUP BY YEAR(pr.fecha_solicitud), MONTH(pr.fecha_solicitud)
-                    ORDER BY YEAR(pr.fecha_solicitud), MONTH(pr.fecha_solicitud);";
- 
-            $resultado = $mysqli->query($sql);
-
-            if ($resultado) {
-                while ($fila = $resultado->fetch_assoc()) {
-                    $preventasPorMes[] = $fila['total'];
-                }
-            } else {
-                echo "Error en la consulta: " . $mysqli->error;
-            }
-            $mysqli->close();
-
-            return $preventasPorMes;
-        }
-        
-
         public function conseguirPreventa($id){
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
@@ -461,6 +432,35 @@
             }
             
             // Cerrar la conexión y devolver el número de preventas
+            $mysqli->close();
+            return $numero_preventas;
+        }
+
+        function obtenerPreventasPorMes($mes) {
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
+            $query = "SELECT COUNT(*) as total 
+            FROM preventas 
+            WHERE MONTH(fecha_solicitud) = 
+                CASE '$mes'
+                    WHEN 'Jan' THEN 1
+                    WHEN 'Feb' THEN 2
+                    WHEN 'Mar' THEN 3
+                    WHEN 'Apr' THEN 4
+                    WHEN 'May' THEN 5
+                    WHEN 'Jun' THEN 6
+                    WHEN 'Jul' THEN 7
+                    WHEN 'Aug' THEN 8
+                    WHEN 'Sep' THEN 9
+                    WHEN 'Oct' THEN 10
+                    WHEN 'Nov' THEN 11
+                    WHEN 'Dec' THEN 12
+                END";
+            $resultado = $mysqli->query($query);
+            $numero_preventas = 0;
+            if ($fila = $resultado->fetch_assoc()) {
+                $numero_preventas = $fila['total'];
+            }
             $mysqli->close();
             return $numero_preventas;
         }

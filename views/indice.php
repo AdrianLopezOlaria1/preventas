@@ -286,21 +286,7 @@
                                     <div id="yearly-sales-collapse" class="collapse pt-3 show">
                                         <div dir="ltr">
                                             <div id="yearly-sales-chart" class="apex-charts" data-colors="#3bc0c3,#1a2942,#d1d7d973"></div>
-                                        </div>
-                                        <div class="row text-center">
-                                            <div class="col">
-                                                <p class="text-muted mt-3 mb-2">semestre 1</p>
-                                                <h4 class="mb-0">...</h4>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3 mb-2">semestre 2</p>
-                                                <h4 class="mb-0">...</h4>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3 mb-2">Total</p>
-                                                <h4 class="mb-0">...</h4>
-                                            </div>
-                                        </div>
+                                        </div>                                        
                                     </div>
 
                                 </div> <!-- end card-body-->
@@ -371,16 +357,7 @@ function imprimirMesesAnteriores() {
 $mesesAnteriores = imprimirMesesAnteriores();
 
 ?>
-<?php
-    $pre = new Preventa();
-    $cantidades_preventas = $pre->obtenerPreventasPorMes();
-    $data = array();
-    for ($mes = 2; $mes < 8; $mes++) {
-        $cantidad = isset($cantidades_preventas[$mes]) ? $cantidades_preventas[$mes] : 0;
-        $data[] = $cantidad;
-    }
-    $data_json = json_encode($data);
-?>
+
 <?php
     $meses = array();
     $fecha_actual = new DateTime();
@@ -390,7 +367,16 @@ $mesesAnteriores = imprimirMesesAnteriores();
     }
     $meses = array_reverse($meses);
     $meses_json = json_encode($meses);
+
+    $pre = new Preventa();
+    $data = array();
+    foreach ($meses as $m) {
+        $numero = $pre->obtenerPreventasPorMes($m);
+        array_push($data, $numero);
+    }
+    $data_json = json_encode($data);
 ?>
+
 <script>
 !function(r) {
     "use strict";
