@@ -360,17 +360,8 @@
         </div>
 
 
+
 <?php
-$meses = array();
-$fecha_actual = new DateTime();
-for ($i = 0; $i < 7; $i++) {
-    $meses[] = $fecha_actual->format('M');
-    $fecha_actual->modify('-1 month');
-}
-$meses = array_reverse($meses);
-$meses_json = json_encode($meses);
-?>
-        <?php
 function imprimirMesesAnteriores() {
     // Obtener el número de mes actual
     $mesActual = date('n');
@@ -405,7 +396,26 @@ function imprimirMesesAnteriores() {
 $mesesAnteriores = imprimirMesesAnteriores();
 
 ?>
-
+<?php
+    $pre = new Preventa();
+    $cantidades_preventas = $pre->obtenerPreventasPorMes();
+    $data = array();
+    for ($mes = 2; $mes < 8; $mes++) {
+        $cantidad = isset($cantidades_preventas[$mes]) ? $cantidades_preventas[$mes] : 0;
+        $data[] = $cantidad;
+    }
+    $data_json = json_encode($data);
+?>
+<?php
+    $meses = array();
+    $fecha_actual = new DateTime();
+    for ($i = 0; $i < 6; $i++) {
+        $meses[] = $fecha_actual->format('M');
+        $fecha_actual->modify('-1 month');
+    }
+    $meses = array_reverse($meses);
+    $meses_json = json_encode($meses);
+?>
 <script>
 !function(r) {
     "use strict";
@@ -485,12 +495,14 @@ $mesesAnteriores = imprimirMesesAnteriores();
                     }
                 }
             };
+
+
         new ApexCharts(document.querySelector("#revenue-chart1"), a).render();
         var e = ["#3e60d5", "#47ad77", "#fa5c7c", "#ffbc00"],
             a = {
                 series: [{
                     name: "Preventas",
-                    data: [20, 10, 20, 31, 27, 37, 40]
+                    data: <?php echo $data_json; ?>                    
                 }],
                 chart: {
                     height: 250,
