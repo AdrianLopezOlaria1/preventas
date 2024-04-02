@@ -439,62 +439,88 @@ $mesesAnteriores = imprimirMesesAnteriores();
             },
             colors: ["#2fff00", "#ff0000"]
         };
-        var e = ["#2fff00", "#ff0000"],
-            t = r("#revenue-chart1").data("colors"),
-            a = {
-                series: [{
-                    name: "Ganado",
-                    data: [<?php echo '221';?>, 505, 414, 526, 227, 413, 201]
-                }, {
-                    name: "Perdidas",
-                    data: [320, 258, 368, 458, 201, 365, 389]
-                }],
-                chart: {
-                    height: 377,
-                    type: "bar"
-                },
-                plotOptions: {
-                    bar: {
-                        columnWidth: "60%"
-                    }
-                },
-                stroke: {
-                    show: !0,
-                    width: 2,
-                    colors: ["transparent"]
-                },
-                dataLabels: {
-                    enabled: !1
-                },
-                colors: e = t ? t.split(",") : e,
-                xaxis: {
-                    
-                    categories:[<?php echo "'" . implode("', '", $mesesAnteriores) . "'"; ?>]
-                },
-                yaxis: {
-                    title: {
-                        text: "$ (preventas)"
-                    }
-                },
-                legend: {
-                    offsetY: 7
-                },
-                grid: {
-                    padding: {
-                        bottom: 20
-                    }
-                },
-                fill: {
-                    opacity: 1
-                },
-                tooltip: {
-                    y: {
-                        formatter: function(e) {
-                            return "$ " + e + " preventas"
-                        }
+        var e = ["#2fff00", "#ff0000"];
+var t = r("#revenue-chart1").data("colors");
+var a = {
+    series: [{
+        name: "Ganado",
+        data: [
+            <?php
+
+            $preventas = new Preventa();
+
+            $ganado = array();
+            foreach ($mesesAnteriores as $mes) {
+                $numero_ganado = $preventas->obtenerNumeroPreventasPorMes('CG', $mes);
+                array_push($ganado, $numero_ganado);
+            }
+            echo implode(", ", $ganado);
+            ?>
+        ]
+    }, {
+        name: "Perdidas",
+        data: [
+            <?php
+
+            $perdidas = array();
+
+            $preventas = new Preventa();    
+
+            foreach ($mesesAnteriores as $mes) {
+
+                $numero_perdidas = $preventas->obtenerNumeroPreventasPorMes('CP', $mes);
+                array_push($perdidas, $numero_perdidas);
+            }
+            echo implode(", ", $perdidas);
+            ?>
+                ]
+            }],
+            chart: {
+                height: 377,
+                type: "bar"
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: "60%"
+                }
+            },
+            stroke: {
+                show: !0,
+                width: 2,
+                colors: ["transparent"]
+            },
+            dataLabels: {
+                enabled: !1
+            },
+            colors: e = t ? t.split(",") : e,
+            xaxis: {
+                categories:[<?php echo "'" . implode("', '", $mesesAnteriores) . "'"; ?>]
+            },
+            yaxis: {
+                title: {
+                    text: "$ (preventas)"
+                }
+            },
+            legend: {
+                offsetY: 7
+            },
+            grid: {
+                padding: {
+                    bottom: 20
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            tooltip: {
+                y: {
+                    formatter: function(e) {
+                        return "" + e + " preventas"
                     }
                 }
-            };
+
+            }
+        };
 
 
         new ApexCharts(document.querySelector("#revenue-chart1"), a).render();
