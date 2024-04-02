@@ -259,39 +259,14 @@
                                         <a data-bs-toggle="collapse" href="#weeklysales-collapse" role="button" aria-expanded="false" aria-controls="weeklysales-collapse"><i class="ri-subtract-line"></i></a>
                                         <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
                                     </div>
-                                    <h5 class="header-title mb-0">Weekly Sales Report</h5>
+                                    <h5 class="header-title mb-0">Tabla de Preventas Ganadas y Perdidas por Mes</h5>
 
                                     <div id="weeklysales-collapse" class="collapse pt-3 show">
                                         <div dir="ltr">
                                             <div id="revenue-chart1" data-colors="#2fff00,#ff0000"></div>
                                         </div>
 
-                                        <div class="row text-center">
-                                            <div class="col">
-                                                <p class="text-muted mt-3">Current Week</p>
-                                                <h3 class=" mb-0">
-                                                    <span>$506.54</span>
-                                                </h3>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3">Previous Week</p>
-                                                <h3 class=" mb-0">
-                                                    <span>$305.25 </span>
-                                                </h3>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3">Conversation</p>
-                                                <h3 class=" mb-0">
-                                                    <span>3.27%</span>
-                                                </h3>
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mt-3">Customers</p>
-                                                <h3 class=" mb-0">
-                                                    <span>3k</span>
-                                                </h3>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
 
                                 </div> <!-- end card-body-->
@@ -498,7 +473,7 @@ var a = {
             },
             yaxis: {
                 title: {
-                    text: "$ (preventas)"
+                    text: "nº preventas"
                 }
             },
             legend: {
