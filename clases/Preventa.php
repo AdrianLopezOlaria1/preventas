@@ -14,25 +14,32 @@
         private $id_contacto;
         private $id_comercial;
         private $id_tipo;
+        private $id_usuario;
         private $status;
         private $fecha_solicitud;
         private $fecha_accion;
         private $fecha_reunion;
+        private $fecha_presentacion;
         private $acta_reunion;
+        private $archivo;
         private $horas_previstas;
         private $importe;
     
-        public function __construct($id_cliente="", $id_contacto="", $id_comercial="", $id_tipo="", $status="", 
-        $fecha_solicitud="", $fecha_accion="", $fecha_reunion="", $acta_reunion="", $horas_previstas="", $importe="") {
+        public function __construct($id_cliente="", $id_contacto="", $id_comercial="", $id_tipo="", $id_usuario="",
+        $status="", $fecha_solicitud="", $fecha_accion="", $fecha_reunion="", $fecha_presentacion="", $acta_reunion="",
+        $archivo="", $horas_previstas="", $importe="") {
             $this->id_cliente = $id_cliente;
             $this->id_contacto = $id_contacto;
             $this->id_comercial = $id_comercial;
             $this->id_tipo = $id_tipo;
+            $this->id_usuario = $id_usuario;
             $this->status = $status;
             $this->fecha_solicitud = $fecha_solicitud;
             $this->fecha_accion = $fecha_accion;
             $this->fecha_reunion = $fecha_reunion;
+            $this->fecha_presentacion = $fecha_presentacion;
             $this->acta_reunion = $acta_reunion;
+            $this->archivo = $archivo;
             $this->horas_previstas = $horas_previstas;
             $this->importe = $importe;
         }
@@ -60,7 +67,13 @@
         }    
         public function setIdTipo($id_tipo) {
             $this->id_tipo = $id_tipo;
+        }
+        public function getIdUsuario() {
+            return $this->id_usuario;
         }    
+        public function setIdUsuario($id_usuario) {
+            $this->id_usuario = $id_usuario;
+        }     
         public function getStatus() {
             return $this->status;
         }    
@@ -106,8 +119,8 @@
 
         //funciones
 
-         public function validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
-            $horas_previstas, $acta_reunion, $importe, $status) {
+        public function validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario,
+        $fecha_reunion, $horas_previstas, $acta_reunion, $importe, $status) {
 
             $error = array();
             if(empty($id_cliente)){
@@ -121,6 +134,9 @@
             }
             if(empty($id_tipo)){
                 $error['id_tipo'] = "Debes escoger un tipo de proyecto";
+            }
+            if(empty($id_usuario)){
+                $error['id_usuario'] = "Debes escoger un usuario";
             }
             if(empty($fecha_reunion)){
                 $error['fecha_reunion'] = "Debes escoger una fecha";
@@ -141,15 +157,15 @@
             return $error;
         }
     
-        public function crearPreventa($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
-            $horas_previstas, $acta_reunion, $importe, $status) {
+        public function crearPreventa($id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario,
+        $fecha_reunion, $fecha_presentacion, $horas_previstas, $acta_reunion, $archivo, $importe, $status) {
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
-            $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
-            $horas_previstas, $acta_reunion, $importe, $status);
+            $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario,
+            $fecha_reunion, $horas_previstas, $acta_reunion, $importe, $status);
             if(count($error) == 0){
                 // Insertar precompra en la base de datos
-                $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_comercial, $id_tipo, NOW(), '$fecha_reunion', '$acta_reunion', $horas_previstas, $importe, '$status', NULL, $id_contacto);";
+                $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_comercial, $id_tipo, NOW(), '$fecha_reunion', '$acta_reunion', $horas_previstas, $importe, '$status', NULL, $id_contacto, $id_usuario, '$fecha_presentacion', '$archivo');";
 
 
                 $guardar = mysqli_query($mysqli, $sql);
@@ -188,13 +204,14 @@
             $mysqli = $conexion->getConexion();
         
             // Consulta SQL para obtener los preventas$preventas de la tabla precompras
-            $sql = "SELECT pr.id, cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi,
-            pr.id_cliente, pr.id_comercial, pr.id_tipo, pr.status, pr.fecha_solicitud, pr.fecha_reunion,
-            pr.acta_reunion, pr.horas_previstas, pr.importe, pr.id_contacto  FROM preventas pr
-            INNER JOIN clientes cl ON cl.id = pr.id_cliente
-            INNER JOIN comerciales com ON com.id = pr.id_comercial
-            INNER JOIN personas_contacto cont ON cont.id = pr.id_contacto
-            INNER JOIN tipos_proyectos ti ON ti.id = pr.id_tipo;";
+            $sql = "SELECT pr.id, cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi, us.nombre AS nomUs,
+            pr.id_cliente, pr.id_comercial, pr.id_tipo, pr.id_usuario, pr.status, pr.fecha_solicitud, pr.fecha_reunion,
+            pr.fecha_presentacion, pr.acta_reunion, pr.horas_previstas, pr.importe, pr.id_contacto, pr.archivo FROM preventas pr
+            LEFT JOIN clientes cl ON cl.id = pr.id_cliente
+            LEFT JOIN comerciales com ON com.id = pr.id_comercial
+            LEFT JOIN personas_contacto cont ON cont.id = pr.id_contacto
+            LEFT JOIN usuarios us ON us.id = pr.id_usuario
+            LEFT JOIN tipos_proyectos ti ON ti.id = pr.id_tipo;";
         
             // Ejecutar la consulta
             $resultado = $mysqli->query($sql);
@@ -222,13 +239,14 @@
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
         
-            $sql = "SELECT pr.id, cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi,
-            pr.id_cliente, pr.id_comercial, pr.id_tipo, pr.status, pr.fecha_solicitud, pr.fecha_reunion,
-            pr.acta_reunion, pr.horas_previstas, pr.importe, pr.id_contacto  FROM preventas pr
-            INNER JOIN clientes cl ON cl.id = pr.id_cliente
-            INNER JOIN comerciales com ON com.id = pr.id_comercial
-            INNER JOIN personas_contacto cont ON cont.id = pr.id_contacto
-            INNER JOIN tipos_proyectos ti ON ti.id = pr.id_tipo
+            $sql = "SELECT pr.id, cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi, us.nombre AS nomUs,
+            pr.id_cliente, pr.id_comercial, pr.id_tipo, pr.id_usuario, pr.status, pr.fecha_solicitud, pr.fecha_reunion,
+            pr.fecha_presentacion, pr.acta_reunion, pr.horas_previstas, pr.importe, pr.id_contacto, pr.archivo FROM preventas pr
+            LEFT JOIN clientes cl ON cl.id = pr.id_cliente
+            LEFT JOIN comerciales com ON com.id = pr.id_comercial
+            LEFT JOIN personas_contacto cont ON cont.id = pr.id_contacto
+            LEFT JOIN usuarios us ON us.id = pr.id_usuario
+            LEFT JOIN tipos_proyectos ti ON ti.id = pr.id_tipo
             ORDER BY pr.fecha_solicitud DESC
             LIMIT 5;";
 
@@ -346,12 +364,13 @@
         public function conseguirPreventa($id){
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
-            $sql = "SELECT pr.id, cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi,
-            pr.id_cliente, pr.id_comercial, pr.id_tipo, pr.status, pr.fecha_solicitud, pr.fecha_reunion,
-            pr.acta_reunion, pr.horas_previstas, pr.importe, pr.id_contacto  FROM preventas pr
+            $sql = "SELECT pr.id, cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi, us.nombre AS nomUs,
+            pr.id_cliente, pr.id_comercial, pr.id_tipo, pr.id_usuario, pr.status, pr.fecha_solicitud, pr.fecha_reunion,
+            pr.fecha_presentacion, pr.acta_reunion, pr.horas_previstas, pr.importe, pr.id_contacto, pr.archivo FROM preventas pr
             INNER JOIN clientes cl ON cl.id = pr.id_cliente
             INNER JOIN comerciales com ON com.id = pr.id_comercial
             INNER JOIN personas_contacto cont ON cont.id = pr.id_contacto
+            INNER JOIN usuarios us ON us.id = pr.id_usuario
             INNER JOIN tipos_proyectos ti ON ti.id = pr.id_tipo 
             WHERE pr.id = $id;";
             $preventa = mysqli_query($mysqli, $sql);
@@ -363,13 +382,13 @@
             return $result;
         }
 
-        public function editarPreventa($id, $id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
-        $horas_previstas, $acta_reunion, $importe, $status) {
+        public function editarPreventa($id, $id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario, $fecha_reunion,
+        $fecha_presentacion, $horas_previstas, $acta_reunion, $importe, $status, $archivo) {
 
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
-            $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $fecha_reunion,
-            $horas_previstas, $acta_reunion, $importe, $status);
+            $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario,
+            $fecha_reunion, $horas_previstas, $acta_reunion, $importe, $status);
 
             if(count($error) == 0){    
         
@@ -377,13 +396,16 @@
                     id_cliente = $id_cliente, 
                     id_comercial = $id_comercial, 
                     id_tipo = $id_tipo, 
+                    id_usuario = $id_usuario,
                     fecha_reunion = '$fecha_reunion', 
+                    fecha_presentacion = '$fecha_presentacion',
                     acta_reunion = '$acta_reunion', 
                     horas_previstas = $horas_previstas, 
                     importe = $importe,
                     status = '$status',
                     fecha_accion = NOW(),
-                    id_contacto = $id_contacto 
+                    id_contacto = $id_contacto,
+                    archivo = '$archivo' 
                     WHERE id = $id;"; 
 
                 $guardar = mysqli_query($mysqli, $sql);

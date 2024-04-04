@@ -27,13 +27,16 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
+                                                    <th scope="col">Usuario</th>
                                                     <th scope="col">Cliente</th>
                                                     <th scope="col">Contacto</th>
                                                     <th scope="col">Comercial</th>
                                                     <th scope="col">Tipo</th>
                                                     <th scope="col">Fecha Solicitud</th>
                                                     <th scope="col">Fecha Reunión</th>
+                                                    <th scope="col">Fecha Presentación</th>
                                                     <th scope="col">Acta</th>
+                                                    <th scope="col">Archivo</th>
                                                     <th scope="col">Horas</th>
                                                     <th scope="col">Importe</th>
                                                     <th scope="col">Status</th> 
@@ -54,13 +57,16 @@
                                                 foreach ($preventas as $index => $preventa) {
                                                     echo '<tr>';
                                                     echo '<th scope="row">' . ($index + 1) . '</th>'; // Número de fila
+                                                    echo '<td>' . $preventa['nomUs'] . '</td>'; // Usuario
                                                     echo '<td>' . $preventa['nomCli'] . '</td>'; // Cliente
                                                     echo '<td>' . $preventa['nomCont'] . '</td>'; // Contacto
                                                     echo '<td>' . $preventa['nomCom'] . '</td>'; // Comercial
                                                     echo '<td>' . $preventa['nomTi'] . '</td>'; // Tipo
                                                     echo '<td>' . $preventa['fecha_solicitud'] . '</td>'; // Fecha Solicitud
                                                     echo '<td>' . $preventa['fecha_reunion'] . '</td>'; // Fecha Reunión
+                                                    echo '<td>' . $preventa['fecha_presentacion'] . '</td>'; // Fecha Presentación
                                                     echo '<td>' . $preventa['acta_reunion'] . '</td>'; // Acta
+                                                    echo '<td>' . $preventa['archivo'] . '</td>'; // Archivo
                                                     echo '<td>' . $preventa['horas_previstas'] . '</td>'; // Horas
                                                     echo '<td>' . $preventa['importe'] . '</td>'; // Importe
                                                     

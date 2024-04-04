@@ -40,10 +40,38 @@ if(isset($_GET['id'])){
                         <form action="index.php?action=enviarEditarPreventa" method="POST">
                             <div class="card-body">
                                 <div class="row">                            
-                                    <div class="col-lg-6">                                    
-                                        <!-- selector clientes-->
+                                    <div class="col-lg-6">   
+                                        <!-- selector usuarios-->
                                         <div class="mb-3">
                                             <input type="hidden" name="id" value="<?=$actual['id']?>">
+                                            <label for="id_usuario" class="form-label">Usuario</label>
+                                            <select class="form-select" name="id_usuario" id="usuario">
+                                                <option value="">Seleccione usuario</option>
+                                                <?php 
+                                                    $usuario = new Usuario();
+                                                    $usuarios = $usuario->obtenerUsuarios();
+                                                    if (!empty($usuarios)) {
+                                                        foreach ($usuarios as $u) {
+                                                ?>
+                                                <?php if($u['status'] != 'D'):?>
+                                                    <option value="<?=$u['id']?>">
+                                                        <?=$u['nombre']?>
+                                                    </option>
+                                                <?php endif;?>
+                                                <?php
+                                                        }
+                                                    }
+                                                ?>
+                                            </select>
+                                            <?php if(isset($_SESSION['error']['id_usuario'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['id_usuario'];?>
+                                                </div>
+                                            <?php endif; ?>                                            
+                                        </div>
+                                        <!-- fin selector usuarios -->                                 
+                                        <!-- selector clientes-->
+                                        <div class="mb-3">                                            
                                             <label for="id_cliente" class="form-label">Cliente</label>
                                             <select class="form-select" name="id_cliente" id="cliente" onchange="cargarContactos()">
                                                 <option value="">Seleccione cliente</option>
@@ -98,10 +126,10 @@ if(isset($_GET['id'])){
                                                 </div>
                                             <?php endif; ?>
                                         </div>                                        
-                                        <!-- <div class="mb-3">
-                                            <label for="example-fileinput" class="form-label">Archivo acta de la reunión</label>
+                                        <div class="mb-3">
+                                            <label for="example-fileinput" class="form-label">Archivo</label>
                                             <input type="file" id="example-fileinput" class="form-control">
-                                        </div> -->                                                                            
+                                        </div>                                                                           
                                     </div> <!-- end col -->
                                     <div class="col-lg-6">
                                         <!-- selector contactos -->
@@ -174,7 +202,13 @@ if(isset($_GET['id'])){
                                                 </div>
                                             <?php endif; ?>
                                         </div>                                    
-                                        <!-- fin selector tipos -->                                    
+                                        <!-- fin selector tipos -->  
+                                        
+                                        <div class="mb-3">
+                                            <label for="fecha_presentacion" class="form-label">Fecha presentación propuesta</label>
+                                            <input class="form-control" id="fecha_presentacion" type="date" name="fecha_presentacion" value="<?=$actual['fecha_presentacion']?>">                                
+                                        </div>  
+
                                         <div class="mb-3">
                                             <label for="importe" class="form-label">Precio estimado</label>
                                             <input class="form-control" id="importe" type="number" name="importe" value="<?=$actual['importe']?>">
