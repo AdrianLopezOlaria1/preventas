@@ -36,6 +36,34 @@
                             <div class="row">
                            
                                 <div class="col-lg-6">
+                                        <!-- selector usuarios-->
+                                        <div class="mb-3">
+                                            <label for="id_usuario" class="form-label">Usuario</label>
+                                            <select class="form-select" name="id_usuario" id="usuario">
+                                                <option value="">Seleccione usuario</option>
+                                                <?php 
+                                                    $usuario = new Usuario();
+                                                    $usuarios = $usuario->obtenerUsuarios();
+                                                    if (!empty($usuarios)) {
+                                                        foreach ($usuarios as $u) {
+                                                ?>
+                                                <?php if($u['status'] != 'D'):?>
+                                                    <option value="<?=$u['id']?>">
+                                                        <?=$u['nombre']?>
+                                                    </option>
+                                                <?php endif;?>
+                                                <?php
+                                                        }
+                                                    }
+                                                ?>
+                                            </select>
+                                            <?php if(isset($_SESSION['error']['id_usuario'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['id_usuario'];?>
+                                                </div>
+                                            <?php endif; ?>                                            
+                                        </div>
+                                        <!-- fin selector usuarios -->
                                    
                                         <!-- selector clientes-->
                                         <div class="mb-3">
@@ -91,11 +119,7 @@
                                                     <?=$_SESSION['error']['acta_reunion'];?>
                                                 </div>
                                             <?php endif; ?>
-                                        </div>                                        
-                                        <!-- <div class="mb-3">
-                                            <label for="example-fileinput" class="form-label">Archivo acta de la reunión</label>
-                                            <input type="file" id="example-fileinput" class="form-control">
-                                        </div> -->
+                                        </div>                                                                                
                                     </form>
                                    
                                 </div> <!-- end col -->
@@ -164,7 +188,13 @@
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                    <!-- fin selector tipos -->                                    
+                                    <!-- fin selector tipos -->
+
+                                    <div class="mb-3">
+                                        <label for="fecha_presentacion" class="form-label">Fecha presentación propuesta</label>
+                                        <input class="form-control" id="fecha_presentacion" type="date" name="fecha_presentacion">                                        
+                                    </div>
+                                    
                                     <div class="mb-3">
                                         <label for="importe" class="form-label">Precio estimado</label>
                                         <input class="form-control" id="importe" type="number" name="importe">
@@ -173,6 +203,10 @@
                                                 <?=$_SESSION['error']['importe'];?>
                                             </div>
                                         <?php endif; ?>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="example-fileinput" class="form-label">Archivo</label>
+                                        <input type="file" id="example-fileinput" class="form-control">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Enviar</button>
                                 </div> <!-- end col -->

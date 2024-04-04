@@ -324,7 +324,19 @@ if (!function_exists('Conexion')) {
         }
     }
     
-    
+    public function obtenerUsuarios() {
+        $usuarios = array();
+        $conexion = new Conexion();
+        $mysqli = $conexion->getConexion();
+        $sql = "SELECT * FROM usuarios";
+        $resultado = $mysqli->query($sql);
+        if ($resultado) {
+            while ($fila = $resultado->fetch_assoc()) {
+                $usuarios[] = $fila;
+            }
+        }
+        return $usuarios;
+    }
     
     
 }

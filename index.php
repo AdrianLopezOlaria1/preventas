@@ -44,6 +44,7 @@ switch ($action) {
         include 'views/header.php';
         include 'clases/Cliente.php';
         include 'clases/Contacto.php';
+        include 'clases/Usuario.php';
         include 'clases/Preventa.php';
         include 'clases/Tipo.php';
         include 'clases/Comercial.php';
@@ -56,6 +57,7 @@ switch ($action) {
         include 'views/header.php';
         include 'clases/Cliente.php';
         include 'clases/Contacto.php';
+        include 'clases/Usuario.php';
         include 'clases/Preventa.php';
         include 'clases/Tipo.php';
         include 'clases/Comercial.php';
