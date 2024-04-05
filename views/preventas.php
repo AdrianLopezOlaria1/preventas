@@ -14,7 +14,10 @@
                                 <h4 class="page-title">Preventas</h4>
                             </div>
                         </div>
-                    </div>                                       
+                    </div> 
+                    <div>
+                    <?php require 'form/formFiltros.php'?>
+                    </div>                                      
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
@@ -46,15 +49,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php
-                                                // Instanciar la clase Precompra
-                                                $preventa = new PreVenta();
-
-                                                // Obtener los datos de las preventas
-                                                $preventas = $preventa->obtenerPreventas();
-
-                                                // Iterar sobre los resultados y generar las filas de la tabla
-                                                foreach ($preventas as $index => $preventa) {
+                                            <?php                                                                                       
+                                            if (isset($_SESSION['preventasFiltradas'])) {
+                                                $preventasFiltradas = $_SESSION['preventasFiltradas'];                                                                                 
+                                                foreach ($preventasFiltradas as $index => $preventa) {
                                                     echo '<tr>';
                                                     echo '<th scope="row">' . ($index + 1) . '</th>'; // Número de fila
                                                     echo '<td>' . $preventa['nomUs'] . '</td>'; // Usuario
@@ -69,8 +67,6 @@
                                                     echo '<td>' . $preventa['archivo'] . '</td>'; // Archivo
                                                     echo '<td>' . $preventa['horas_previstas'] . '</td>'; // Horas
                                                     echo '<td>' . $preventa['importe'] . '</td>'; // Importe
-                                                    
-                                                
                                                     // Definir la clase CSS según el estado
                                                     $estado_class = '';
                                                     switch ($preventa['status']) {
@@ -101,8 +97,7 @@
                                                         default:
                                                             $estado_class = 'badge bg-secondary-subtle text-secondary'; // Por defecto
                                                             break;
-                                                    }
-                                                    
+                                                    }      
                                                     echo '<td><span class="' . $estado_class . '">' . $estado . '</span></td>'; // Estado 
                                                     if($_SESSION['usuario']['rol'] == 1){   
                                                     echo '<td style="white-space: nowrap; width: 1%;"> <div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><a href="index.php?action=formEditPreventa&id=' .$preventa['id']. 
@@ -111,11 +106,68 @@
                                                     }                                                                                
                                                     echo '</tr>';
                                                 }
-                                                
-                                                ?>
-                                                
+                                            } else {
+                                                $preventa = new PreVenta();
+                                                $preventas = $preventa->obtenerPreventas();
+                                                foreach ($preventas as $index => $preventa) {
+                                                    echo '<tr>';
+                                                    echo '<th scope="row">' . ($index + 1) . '</th>'; // Número de fila
+                                                    echo '<td>' . $preventa['nomUs'] . '</td>'; // Usuario
+                                                    echo '<td>' . $preventa['nomCli'] . '</td>'; // Cliente
+                                                    echo '<td>' . $preventa['nomCont'] . '</td>'; // Contacto
+                                                    echo '<td>' . $preventa['nomCom'] . '</td>'; // Comercial
+                                                    echo '<td>' . $preventa['nomTi'] . '</td>'; // Tipo
+                                                    echo '<td>' . $preventa['fecha_solicitud'] . '</td>'; // Fecha Solicitud
+                                                    echo '<td>' . $preventa['fecha_reunion'] . '</td>'; // Fecha Reunión
+                                                    echo '<td>' . $preventa['fecha_presentacion'] . '</td>'; // Fecha Presentación
+                                                    echo '<td>' . $preventa['acta_reunion'] . '</td>'; // Acta
+                                                    echo '<td>' . $preventa['archivo'] . '</td>'; // Archivo
+                                                    echo '<td>' . $preventa['horas_previstas'] . '</td>'; // Horas
+                                                    echo '<td>' . $preventa['importe'] . '</td>'; // Importe
+                                                    // Definir la clase CSS según el estado
+                                                    $estado_class = '';
+                                                    switch ($preventa['status']) {
+                                                        case 'P':
+                                                            $estado_class = 'badge bg-warning-subtle text-warning';
+                                                            $estado = 'Pendiente';
+                                                            break;
+                                                        case 'RP':
+                                                            $estado_class = 'badge bg-secondary-subtle text-secondary';
+                                                            $estado = 'Realizada reunión';
+                                                            break;
+                                                        case 'RV':
+                                                            $estado_class = 'badge bg-primary';
+                                                            $estado = 'Realizada valoración';
+                                                            break;
+                                                        case 'PC':
+                                                            $estado_class = 'badge bg-purple-subtle text-purple';
+                                                            $estado = 'Pendiente cierre';
+                                                            break;
+                                                        case 'CG':
+                                                            $estado_class = 'badge bg-primary-subtle text-primary';
+                                                            $estado = 'Cerrada ganada';
+                                                            break; 
+                                                        case 'CP':
+                                                            $estado_class = 'badge bg-danger-subtle text-danger';
+                                                            $estado = 'Cerrada perdida';
+                                                            break;         
+                                                        default:
+                                                            $estado_class = 'badge bg-secondary-subtle text-secondary'; // Por defecto
+                                                            break;
+                                                    }      
+                                                    echo '<td><span class="' . $estado_class . '">' . $estado . '</span></td>'; // Estado 
+                                                    if($_SESSION['usuario']['rol'] == 1){   
+                                                    echo '<td style="white-space: nowrap; width: 1%;"> <div class="tabledit-toolbar btn-toolbar" style="text-align: left;"><div class="btn-group btn-group-sm" style="float: none;"><a href="index.php?action=formEditPreventa&id=' .$preventa['id']. 
+                                                    '" class="tabledit-edit-button btn btn-success" 
+                                                    style="float: none;">Modificar</a></div>';                                        
+                                                    }                                                                                
+                                                    echo '</tr>';
+                                                }
+                                            }                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                            ?>                                                
                                             </tbody>
                                         </table>
+                                        <?php $_SESSION['preventasFiltradas'] = null;?>
                                     </div> <!-- end table-responsive-->
 
                                 </div> <!-- end card body-->
