@@ -30,7 +30,8 @@
                                             <?=$_SESSION['completado'];?>
                                         </div>
                                     <?php endif; ?>
-                                    <form action="index.php?action=enviarPreventa" method="POST" enctype="multipart/form-data">
+                    <form action="index.php?action=enviarPreventa" method="POST" enctype="multipart/form-data" data-plugin="dropzone" data-previews-container="#file-previews"
+                                                data-upload-preview-template="#uploadPreviewTemplate"> 
 
                         <div class="card-body">
                             <div class="row">
@@ -211,8 +212,7 @@
                                     
                                     <div class="card">                                        
                                         <div class="card-body">
-                                            <div class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
-                                                data-upload-preview-template="#uploadPreviewTemplate">
+                                            <div class="dropzone" id="myAwesomeDropzone" >
                                                 <div class="fallback">
                                                     <input name="archivo" type="file" multiple />
                                                 </div>
@@ -235,6 +235,28 @@
                             <!-- end row -->
                             </form>
                             <?php $preventa = new Preventa(); $preventa->borrarErrores(); ?>     
+
+                            <div class="d-none" id="uploadPreviewTemplate">
+                                <div class="card mt-1 mb-0 shadow-none border">
+                                    <div class="p-2">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <img data-dz-thumbnail src="#" class="avatar-sm rounded bg-light" alt="">
+                                            </div>
+                                            <div class="col ps-0">
+                                                <a href="javascript:void(0);" class="text-muted fw-bold" data-dz-name></a>
+                                                <p class="mb-0" data-dz-size></p>
+                                            </div>
+                                            <div class="col-auto">
+                                                <!-- Button -->
+                                                <a href="" class="btn btn-link btn-lg text-danger" data-dz-remove>
+                                                    <i class="ri-close-line"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div> <!-- end card-body -->
                     </div> <!-- end card -->
                 </div><!-- end col -->

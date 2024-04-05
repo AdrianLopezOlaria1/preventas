@@ -195,6 +195,12 @@ switch ($action) {
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
 
+            <!-- Dropzone File Upload js -->
+            <script src="assets/vendor/dropzone/min/dropzone.min.js"></script>
+
+            <!-- File Upload Demo js -->
+            <script src="assets/js/pages/fileupload.init.js"></script>
+
     <!-- Daterangepicker js -->
     <script src="assets/vendor/daterangepicker/moment.min.js"></script>
     <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
