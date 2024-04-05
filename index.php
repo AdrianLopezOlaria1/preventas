@@ -80,6 +80,7 @@ switch ($action) {
         include 'views/footer.php';
         include 'views/header.php';
         include 'clases/Preventa.php';
+        require "clases/Comercial.php";
         include 'views/preventas.php';
         break;
     case "cerrando":
