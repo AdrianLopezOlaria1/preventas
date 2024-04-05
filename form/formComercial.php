@@ -56,7 +56,11 @@
                                     
                                 </div>
                                 
-                                <button type="submit" class="btn btn-primary">Crear</button>
+                                <button type="submit" class="btn btn-primary" style="background-color: #f93215; color: white; padding: 10px 20px; border: none; transition: all 0.3s ease; border-radius: 20px;" 
+                                        onmouseover="this.style.backgroundColor='#2d9cfc'; this.style.transform='scale(1.1)';"
+                                        onmouseout="this.style.backgroundColor='#f93215'; this.style.transform='scale(1)';"
+                                        >Crear</button>
+                                
                             </form>
                             <?php $comercial = new Comercial(); $comercial->borrarErrores(); ?>          
                         </div> <!-- end card-body-->

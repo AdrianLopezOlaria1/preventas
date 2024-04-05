@@ -269,7 +269,8 @@
 
                                     <div id="weeklysales-collapse" class="collapse pt-3 show">
                                         <div dir="ltr">
-                                            <div id="revenue-chart1" data-colors="#2fff00,#ff0000"></div>
+                                            <div id="revenue-chart1" data-colors="#0075bc,#f93215"></div>
+                                         
                                         </div>
 
                                        
@@ -404,9 +405,9 @@ $mesesAnteriores = imprimirMesesAnteriores();
                     right: 0
                 }
             },
-            colors: ["#2fff00", "#ff0000"]
+            colors: ["#0075bc", "#f93215"]
         };
-        var e = ["#2fff00", "#ff0000"];
+        var e = ["#0075bc", "#f93215"];
 var t = r("#revenue-chart1").data("colors");
 var a = {
     series: [{
