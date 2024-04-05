@@ -19,7 +19,10 @@
             $horas_previstas = $_POST["horas_previstas"];
             $importe = $_POST["importe"];
             $status = 'P';
-            $archivo = $_POST["archivo"];
+
+            $file = $_FILES['archivo'];
+            $archivo = $file['name'];
+            move_uploaded_file($file['tmp_name'], 'assets/files/'.$archivo);
             
             if($preventa->crearPreventa($id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario,
             $fecha_reunion, $fecha_presentacion, $horas_previstas, $acta_reunion, $archivo, $importe, $status)){

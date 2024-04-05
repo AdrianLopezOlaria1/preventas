@@ -30,7 +30,7 @@
                                             <?=$_SESSION['completado'];?>
                                         </div>
                                     <?php endif; ?>
-                                    <form action="index.php?action=enviarPreventa" method="POST">
+                                    <form action="index.php?action=enviarPreventa" method="POST" enctype="multipart/form-data">
 
                         <div class="card-body">
                             <div class="row">
@@ -204,12 +204,32 @@
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="example-fileinput" class="form-label">Archivo</label>
-                                        <input type="file" id="example-fileinput" class="form-control">
+                                    <!-- <div class="mb-3">
+                                        <label for="archivo" class="form-label">Archivo</label>
+                                        <input type="file" id="archivo" class="form-control" name="archivo">
+                                    </div>-->
+                                    
+                                    <div class="card">                                        
+                                        <div class="card-body">
+                                            <div class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
+                                                data-upload-preview-template="#uploadPreviewTemplate">
+                                                <div class="fallback">
+                                                    <input name="archivo" type="file" multiple />
+                                                </div>
+
+                                                <div class="dz-message needsclick">
+                                                    <i class="h1 text-muted ri-upload-cloud-2-line"></i>
+                                                    <h3>Drop files here or click to upload.</h3>                                                    
+                                                </div>
+                                        </div>
+                                            <!-- Preview -->
+                                            <div class="dropzone-previews mt-3" id="file-previews"></div>  
+                                        </div>
+                                        <!-- end card-body -->
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Enviar</button>
-                                </div> <!-- end col -->
+                                    <!-- end card-->
+                                    <button type="submit" class="btn btn-primary">Enviar</button> 
+                                </div> <!-- end col -->                            
                                         
                             </div>
                             <!-- end row -->
