@@ -16,11 +16,14 @@ if (session_status() === PHP_SESSION_NONE) {
         <link rel="stylesheet" href="assets/vendor/daterangepicker/daterangepicker.css">
         <link rel="stylesheet" href="assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css">
         <script src="assets/js/config.js"></script>
-        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
-        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" /><!-- css -->
+        
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /> <!-- iconos -->
         <script src="https://maps.googleapis.com/maps/api/js?key=TU_CLAVE_API&libraries=places"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
 </head>
