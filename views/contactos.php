@@ -28,7 +28,10 @@
                             <div class="input-group">
                                 <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Search">
                                 <span class="input-group-append">
-                                    <button type="button" class="btn btn-primary rounded-start-0"><i class="ri-search-line fs-16"></i></button>
+                                    <button type="button" class="btn btn-primary rounded-start-0" style="background-color: #f93215; color: white; padding: 10px 20px; border: none; transition: all 0.3s ease; border-radius: 20px;" 
+                                        onmouseover="this.style.backgroundColor='#2d9cfc'; this.style.transform='scale(1.1)';"
+                                        onmouseout="this.style.backgroundColor='#f93215'; this.style.transform='scale(1)';"
+                                        ><i class="ri-search-line fs-16"></i></button>
                                 </span>
                             </div>
                         </div>
@@ -37,7 +40,10 @@
                 <?php if($_SESSION['usuario']['rol'] == 1):?>
                 <div class="col-lg-4">
                     <div class="d-flex justify-content-end align-items-center gap-2">        
-                        <a class="btn btn-soft-info" href="index.php?action=formContacto"> Nuevo contacto</a>
+                        <a class="btn btn-soft-info" href="index.php?action=formContacto" style="background-color: #f93215; color: white; padding: 10px 20px; border: none; transition: all 0.3s ease; border-radius: 20px;" 
+                                        onmouseover="this.style.backgroundColor='#2d9cfc'; this.style.transform='scale(1.1)';"
+                                        onmouseout="this.style.backgroundColor='#f93215'; this.style.transform='scale(1)';"
+                                        > Nuevo contacto</a>
                     </div>
                 </div>
                 <?php endif; ?>
