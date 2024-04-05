@@ -1,6 +1,7 @@
+<br>
 <form method="POST" action="index.php?action=enviarFiltro">
     <label for="estado">Filtrar por estado:</label>
-    <select id="estado" name="estado">
+    <select class="form-select" id="estado" name="estado">
         <option value="">Todos</option>
         <option value="P">Pendiente</option>
         <option value="RP">Realizada reunión</option>
@@ -10,11 +11,11 @@
         <option value="CP">Cerrada perdida</option>
     </select>
     <input type="submit" value="seleccionar">
-</form>
+</form><br>
 
 <form method="POST" action="index.php?action=enviarFiltro">
     <label for="comercial">Filtrar por comercial asignado</label>
-    <select id="comercial" name="comercial">
+    <select class="form-select" id="comercial" name="comercial">
     <option value="">Todos</option>
     <?php 
         $comerciales = new Comercial();
@@ -31,4 +32,4 @@
     ?>                                  
     </select>
     <input type="submit" value="seleccionar">
-</form>
+</form><br>

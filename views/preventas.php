@@ -15,8 +15,15 @@
                             </div>
                         </div>
                     </div> 
-                    <div>
-                    <?php require 'form/formFiltros.php'?>
+                    <div >
+                    <button class="btn btn-primary" onclick="mostrarFiltros()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+                            <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"></path>
+                        </svg> Filtros
+                    </button>
+                        <div id="filtros" class="col-2" style="display:none">
+                            <?php require 'form/formFiltros.php'?>
+                        </div>                        
                     </div>                                      
                     <div class="row">
                         <div class="col-12">
@@ -181,3 +188,13 @@
                 </div>
             </div>
         </div>
+        <script>
+            function mostrarFiltros() {
+                var div = document.getElementById("filtros");
+                if (div.style.display === "none") {
+                    div.style.display = "block";
+                } else {
+                    div.style.display = "none";
+                }
+            }
+        </script>
