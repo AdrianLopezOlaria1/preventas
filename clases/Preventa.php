@@ -487,7 +487,7 @@
             return $numero_preventas;
         }
 
-        public function filtrarPorEstados($status) {
+        public function filtrarPreventas($status=null, $comercial=null) {
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
             $sql = "SELECT pr.id, cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi, us.nombre AS nomUs,
@@ -497,11 +497,14 @@
                     LEFT JOIN comerciales com ON com.id = pr.id_comercial
                     LEFT JOIN personas_contacto cont ON cont.id = pr.id_contacto
                     LEFT JOIN usuarios us ON us.id = pr.id_usuario
-                    LEFT JOIN tipos_proyectos ti ON ti.id = pr.id_tipo 
-                    WHERE pr.status = '$status';";
+                    LEFT JOIN tipos_proyectos ti ON ti.id = pr.id_tipo ";
+                    if (!is_null($status)) {
+                        $sql .= "WHERE pr.status = '$status';";
+                      } elseif (!is_null($comercial)) {
+                        $sql .= "WHERE pr.id_comercial = $comercial;";
+                      }            
             $preventa = mysqli_query($mysqli, $sql);
-            $preventasFiltradas = array();
-        
+            $preventasFiltradas = array();        
             if ($preventa && mysqli_num_rows($preventa) >= 1) {
                 while ($fila = mysqli_fetch_assoc($preventa)) {
                     $preventasFiltradas[] = $fila;
