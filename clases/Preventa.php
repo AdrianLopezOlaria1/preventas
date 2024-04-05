@@ -367,11 +367,11 @@
             $sql = "SELECT pr.id, cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi, us.nombre AS nomUs,
             pr.id_cliente, pr.id_comercial, pr.id_tipo, pr.id_usuario, pr.status, pr.fecha_solicitud, pr.fecha_reunion,
             pr.fecha_presentacion, pr.acta_reunion, pr.horas_previstas, pr.importe, pr.id_contacto, pr.archivo FROM preventas pr
-            INNER JOIN clientes cl ON cl.id = pr.id_cliente
-            INNER JOIN comerciales com ON com.id = pr.id_comercial
-            INNER JOIN personas_contacto cont ON cont.id = pr.id_contacto
-            INNER JOIN usuarios us ON us.id = pr.id_usuario
-            INNER JOIN tipos_proyectos ti ON ti.id = pr.id_tipo 
+            LEFT JOIN clientes cl ON cl.id = pr.id_cliente
+            LEFT JOIN comerciales com ON com.id = pr.id_comercial
+            LEFT JOIN personas_contacto cont ON cont.id = pr.id_contacto
+            LEFT JOIN usuarios us ON us.id = pr.id_usuario
+            LEFT JOIN tipos_proyectos ti ON ti.id = pr.id_tipo 
             WHERE pr.id = $id;";
             $preventa = mysqli_query($mysqli, $sql);
             $result = array();
@@ -486,6 +486,30 @@
             $mysqli->close();
             return $numero_preventas;
         }
+
+        public function filtrarPorEstados($status) {
+            $conexion = new Conexion();
+            $mysqli = $conexion->getConexion();
+            $sql = "SELECT pr.id, cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi, us.nombre AS nomUs,
+                    pr.id_cliente, pr.id_comercial, pr.id_tipo, pr.id_usuario, pr.status, pr.fecha_solicitud, pr.fecha_reunion,
+                    pr.fecha_presentacion, pr.acta_reunion, pr.horas_previstas, pr.importe, pr.id_contacto, pr.archivo FROM preventas pr
+                    LEFT JOIN clientes cl ON cl.id = pr.id_cliente
+                    LEFT JOIN comerciales com ON com.id = pr.id_comercial
+                    LEFT JOIN personas_contacto cont ON cont.id = pr.id_contacto
+                    LEFT JOIN usuarios us ON us.id = pr.id_usuario
+                    LEFT JOIN tipos_proyectos ti ON ti.id = pr.id_tipo 
+                    WHERE pr.status = '$status';";
+            $preventa = mysqli_query($mysqli, $sql);
+            $preventasFiltradas = array();
+        
+            if ($preventa && mysqli_num_rows($preventa) >= 1) {
+                while ($fila = mysqli_fetch_assoc($preventa)) {
+                    $preventasFiltradas[] = $fila;
+                }
+            }
+            return $preventasFiltradas;
+        }
+        
         
     }
 
