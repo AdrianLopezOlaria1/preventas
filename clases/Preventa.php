@@ -141,14 +141,14 @@
             if(empty($fecha_reunion)){
                 $error['fecha_reunion'] = "Debes escoger una fecha";
             }
-            if(empty($horas_previstas) || !is_numeric($horas_previstas)){            
-                $error['horas_previstas'] = "Debes insertar horas previstas en número";
+            if(empty($horas_previstas) || !is_numeric($horas_previstas) || $horas_previstas <= 0){            
+                $error['horas_previstas'] = "Debes insertar un número de horas válidas";
             }
             if(empty($acta_reunion)){
                 $error['acta_reunion'] = "Debes rellenar el acta de reunión";
             }
-            if(empty($importe) || !is_numeric($importe)){
-                $error['importe'] = "Debes poner importe en números";
+            if(empty($importe) || !is_numeric($importe) || $importe < 0){
+                $error['importe'] = "Debes poner un importe válido";
             }
             if(empty($status)){
                 $error['status'] = "Debes escojer un estado";
