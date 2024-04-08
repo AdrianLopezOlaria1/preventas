@@ -487,7 +487,7 @@
             return $numero_preventas;
         }
 
-        public function filtrarPreventas($status=null, $comercial=null) {
+        public function filtrarPreventas($status=null, $comercial=null, $fechaInicio=null, $fechaFin=null) {
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
             $sql = "SELECT pr.id, cl.nombre AS nomCli, com.nombre AS nomCom, cont.nombre AS nomCont, ti.nombre AS nomTi, us.nombre AS nomUs,
@@ -500,9 +500,11 @@
                     LEFT JOIN tipos_proyectos ti ON ti.id = pr.id_tipo ";
                     if (!is_null($status)) {
                         $sql .= "WHERE pr.status = '$status';";
-                      } elseif (!is_null($comercial)) {
+                    } elseif (!is_null($comercial)) {
                         $sql .= "WHERE pr.id_comercial = $comercial;";
-                      }            
+                    } elseif (!is_null($fechaInicio) && !is_null($fechaFin)) {
+                        $sql .= "WHERE pr.fecha_solicitud BETWEEN '$fechaInicio' AND '$fechaFin';";
+                    }          
             $preventa = mysqli_query($mysqli, $sql);
             $preventasFiltradas = array();        
             if ($preventa && mysqli_num_rows($preventa) >= 1) {

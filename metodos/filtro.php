@@ -36,5 +36,25 @@ if (isset($_POST)) {
             }
         }
     }
+
+    if (isset($_POST["fecha_inicio"]) && isset($_POST["fecha_fin"])) {
+        $fechaInicio = date('Y-m-d', strtotime($_POST['fecha_inicio']));
+        $fechaFin = date('Y-m-d', strtotime($_POST['fecha_fin']));
+        if($fechaInicio > $fechaFin){
+            $fecha_inicio = $fechaFin;
+            $fecha_fin = $fechaInicio;
+        } else {
+            $fecha_inicio = $fechaInicio;
+            $fecha_fin = $fechaFin;
+        }
+        $preventasFiltradas = $preventa->filtrarPreventas(null, null, $fecha_inicio, $fecha_fin);
+        if ($preventasFiltradas) {
+            $_SESSION['preventasFiltradas'] = $preventasFiltradas;
+            header("location: index.php?action=preventas"); 
+        } else {
+            $_SESSION['preventasFiltradas'] = $preventasFiltradas;
+            header("location: index.php?action=preventas"); 
+        }
+    }
 }
 ?>
