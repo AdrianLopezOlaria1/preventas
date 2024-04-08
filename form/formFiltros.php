@@ -33,3 +33,14 @@
     </select>
     <input type="submit" value="seleccionar">
 </form><br>
+
+<form method="POST" action="index.php?action=enviarFiltro">
+    <label for="fecha_inicio" class="form-label">Fecha de inicio:</label>
+    <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
+
+    <label for="fecha_fin" class="form-label">Fecha fin:</label>
+    <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" required>
+  
+    <button type="submit">Seleccionar fechas</button>
+</form><br>
+

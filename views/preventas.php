@@ -24,7 +24,7 @@
                         <div id="filtros" class="col-2" style="display:none">
                             <?php require 'form/formFiltros.php'?>
                         </div>                        
-                    </div>                                      
+                    </div><br>                                     
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
