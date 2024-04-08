@@ -198,10 +198,17 @@
                                                 </div>
                                             <?php endif; ?>
                                         </div>                                    
-                                        <div class="mb-3">
-                                            <label for="archivo" class="form-label">Archivo</label>
-                                            <input class="form-control dropzone" id="archivo" type="file" name="archivo">
+                                        <div class="mb-3 form-control dropzone">
+                                           
+                                                
+                                                
+                                            <h3 style="text-align:center;">Arrastra los archivos o clica para subir<i class="h1 text-muted ri-upload-cloud-2-line"></i></h3>
+                                            <input class="form-control dropzone" id="archivo" type="file" name="archivo" style="opacity:0;" onchange="updateFileName(this)">
+                                            
+                                            <span id="file-name-info"></span>
                                         </div>
+
+                                        
                                                                                 
                                         <button type="submit" class="btn btn-primary">Enviar</button> 
 
@@ -244,6 +251,15 @@
         } else {
             var selectorContacto = document.getElementById("contacto");
             selectorContacto.innerHTML = "";
+        }
+    }
+    
+    function updateFileName(input) {
+        var fileNameInfo = document.getElementById('file-name-info');
+        if (input.files.length > 0) {
+            fileNameInfo.textContent = input.files[0].name;
+        } else {
+            fileNameInfo.textContent = 'Ningún archivo seleccionado';
         }
     }
 </script>
