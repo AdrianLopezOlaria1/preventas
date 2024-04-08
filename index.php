@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preventas</title>
+    <title>Inforges</title>
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
         <link rel="stylesheet" href="assets/vendor/daterangepicker/daterangepicker.css">
@@ -37,7 +37,6 @@ switch ($action) {
         include 'form/formRegister.php';
         break;
     case "logout":
- 
         include 'views/logout.php';
         break;
     case "formPreventa":
@@ -195,8 +194,17 @@ switch ($action) {
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
 
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
  
+
+            <!-- Dropzone File Upload js -->
+            <!--<script src="assets/vendor/dropzone/min/dropzone.min.js"></script>-->
+
+            <!-- File Upload Demo js -->
+            <!--<script src="assets/js/pages/fileupload.init.js"></script>-->
+
+
     <!-- Daterangepicker js -->
     <script src="assets/vendor/daterangepicker/moment.min.js"></script>
     <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
