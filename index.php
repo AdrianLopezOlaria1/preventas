@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preventas</title>
+    <title>Inforges</title>
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
         <link rel="stylesheet" href="assets/vendor/daterangepicker/daterangepicker.css">
@@ -37,7 +37,6 @@ switch ($action) {
         include 'form/formRegister.php';
         break;
     case "logout":
-        
         include 'views/logout.php';
         break;
     case "formPreventa":

@@ -1,4 +1,5 @@
 
+<!-- identado -->
 <div class="content-page">
     <div class="content">
         <!-- Start Content-->
@@ -24,19 +25,16 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="header-title">Ingrese información</h4>
-                        </div>
-                        <?php if(isset($_SESSION['completado'])): ?>
-                                        <div class='alert alert-success'>
-                                            <?=$_SESSION['completado'];?>
-                                        </div>
-                                    <?php endif; ?>
-                    <form action="index.php?action=enviarPreventa" method="POST" enctype="multipart/form-data" data-plugin="dropzone" data-previews-container="#file-previews"
-                                                data-upload-preview-template="#uploadPreviewTemplate"> 
-
+                        </div>                         
                         <div class="card-body">
-                            <div class="row">
-                           
-                                <div class="col-lg-6">
+                            <?php if(isset($_SESSION['completado'])): ?>
+                                <div class='alert alert-success'>
+                                    <?=$_SESSION['completado'];?>
+                                </div>
+                            <?php endif; ?>
+                            <form action="index.php?action=enviarPreventa" method="POST" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-lg-6">
                                         <!-- selector usuarios-->
                                         <div class="mb-3">
                                             <label for="id_usuario" class="form-label">Usuario</label>
@@ -65,7 +63,7 @@
                                             <?php endif; ?>                                            
                                         </div>
                                         <!-- fin selector usuarios -->
-                                   
+
                                         <!-- selector clientes-->
                                         <div class="mb-3">
                                             <label for="id_cliente" class="form-label">Cliente</label>
@@ -120,151 +118,106 @@
                                                     <?=$_SESSION['error']['acta_reunion'];?>
                                                 </div>
                                             <?php endif; ?>
-                                        </div>                                                                                
-                                    </form>
-                                   
-                                </div> <!-- end col -->
-                                <div class="col-lg-6">
-                                    <!-- selector contactos -->
-                                    <div class="mb-3">
-                                        <label for="id_contacto" class="form-label">Contacto</label>
-                                        <select class="form-select" name="id_contacto" id="contacto">
-                                            <option value="">Seleccione contacto</option>
-                                        </select>
-                                        <?php if(isset($_SESSION['error']['id_contacto'])): ?>
-                                            <div class='alert alert-warning'>
-                                                <?=$_SESSION['error']['id_contacto'];?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <!-- fin selector contactos -->
-                                    <div class="mb-3">
-                                        <label for="id_comercial" class="form-label">Comercial</label>
-                                        <select class="form-select" id="id_comercial" name="comercial">
-                                        <option value="">Seleccione comercial</option>
-                                        <?php 
-                                            $comerciales = new Comercial();
-                                            $comerciales = $comerciales->obtenerComerciales();
-                                            if (!empty($comerciales)) {
-                                                foreach ($comerciales as $c) {
-                                                    if($c['status'] != 'D'):
-                                        ?>
-                                        <option value="<?=$c['id']?>">
-                                            <?=$c['nombre']?>
-                                        </option>
-                                        <?php 
-                                            endif;
-                                                }
-                                            }
-                                        ?>                                  
-                                        </select>
-                                        <?php if(isset($_SESSION['error']['id_comercial'])): ?>
-                                            <div class='alert alert-warning'>
-                                                <?=$_SESSION['error']['id_comercial'];?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <!-- selector tipos -->
-                                    <div class="mb-3">
-                                        <label for="id_tipo" class="form-label">Tipo de proyecto</label>
-                                        <select class="form-select" name="id_tipo" id="id_tipo">
-                                            <option value="">Seleccione tipo</option>
+                                        </div>                                                                                                                            
+                                    </div> <!-- end col -->
+                                    <div class="col-lg-6">
+                                        <!-- selector contactos -->
+                                        <div class="mb-3">
+                                            <label for="id_contacto" class="form-label">Contacto</label>
+                                            <select class="form-select" name="id_contacto" id="contacto">
+                                                <option value="">Seleccione contacto</option>
+                                            </select>
+                                            <?php if(isset($_SESSION['error']['id_contacto'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['id_contacto'];?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                        <!-- fin selector contactos -->
+                                        <div class="mb-3">
+                                            <label for="id_comercial" class="form-label">Comercial</label>
+                                            <select class="form-select" id="id_comercial" name="comercial">
+                                            <option value="">Seleccione comercial</option>
                                             <?php 
-                                                $tipo = new Tipo();
-                                                $tipos = $tipo->obtenerTipos();
-                                                if (!empty($tipos)) {
-                                                    foreach ($tipos as $t) {
+                                                $comerciales = new Comercial();
+                                                $comerciales = $comerciales->obtenerComerciales();
+                                                if (!empty($comerciales)) {
+                                                    foreach ($comerciales as $c) {
+                                                        if($c['status'] != 'D'):
                                             ?>
-                                            <option value="<?=$t['id']?>">
-                                                <?=$t['nombre']?>
+                                            <option value="<?=$c['id']?>">
+                                                <?=$c['nombre']?>
                                             </option>
-                                            <?php
+                                            <?php 
+                                                endif;
                                                     }
                                                 }
-                                            ?>
-                                        </select>
-                                        <?php if(isset($_SESSION['error']['id_tipo'])): ?>
-                                            <div class='alert alert-warning'>
-                                                <?=$_SESSION['error']['id_tipo'];?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <!-- fin selector tipos -->
-
-                                    <div class="mb-3">
-                                        <label for="fecha_presentacion" class="form-label">Fecha presentación propuesta</label>
-                                        <input class="form-control" id="fecha_presentacion" type="date" name="fecha_presentacion">                                        
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="importe" class="form-label">Precio estimado</label>
-                                        <input class="form-control" id="importe" type="number" name="importe">
-                                        <?php if(isset($_SESSION['error']['importe'])): ?>
-                                            <div class='alert alert-warning'>
-                                                <?=$_SESSION['error']['importe'];?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <!-- <div class="mb-3">
-                                        <label for="archivo" class="form-label">Archivo</label>
-                                        <input type="file" id="archivo" class="form-control" name="archivo">
-                                    </div>-->
-                                    
-                                    <div class="card">                                        
-                                        <div class="card-body">
-                                            <div class="dropzone" id="myAwesomeDropzone" >
-                                                <div class="fallback">
-                                                    <input name="archivo" type="file" multiple />
+                                            ?>                                  
+                                            </select>
+                                            <?php if(isset($_SESSION['error']['id_comercial'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['id_comercial'];?>
                                                 </div>
-
-                                                <div class="dz-message needsclick">
-                                                    <i class="h1 text-muted ri-upload-cloud-2-line"></i>
-                                                    <h3>Drop files here or click to upload.</h3>                                                    
+                                            <?php endif; ?>
+                                        </div>
+                                        <!-- selector tipos -->
+                                        <div class="mb-3">
+                                            <label for="id_tipo" class="form-label">Tipo de proyecto</label>
+                                            <select class="form-select" name="id_tipo" id="id_tipo">
+                                                <option value="">Seleccione tipo</option>
+                                                <?php 
+                                                    $tipo = new Tipo();
+                                                    $tipos = $tipo->obtenerTipos();
+                                                    if (!empty($tipos)) {
+                                                        foreach ($tipos as $t) {
+                                                ?>
+                                                <option value="<?=$t['id']?>">
+                                                    <?=$t['nombre']?>
+                                                </option>
+                                                <?php
+                                                        }
+                                                    }
+                                                ?>
+                                            </select>
+                                            <?php if(isset($_SESSION['error']['id_tipo'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['id_tipo'];?>
                                                 </div>
+                                            <?php endif; ?>
                                         </div>
-                                            <!-- Preview -->
-                                            <div class="dropzone-previews mt-3" id="file-previews"></div>  
-                                        </div>
-                                        <!-- end card-body -->
-                                    </div>
-                                    <!-- end card-->
-                                    <button type="submit" class="btn btn-primary">Enviar</button> 
-                                </div> <!-- end col -->                            
-                                        
-                            </div>
-                            <!-- end row -->
+                                        <!-- fin selector tipos -->    
+                                        <div class="mb-3">
+                                            <label for="fecha_presentacion" class="form-label">Fecha presentación propuesta</label>
+                                            <input class="form-control" id="fecha_presentacion" type="date" name="fecha_presentacion">                                        
+                                        </div>    
+                                        <div class="mb-3">
+                                            <label for="importe" class="form-label">Precio estimado</label>
+                                            <input class="form-control" id="importe" type="number" name="importe">
+                                            <?php if(isset($_SESSION['error']['importe'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['importe'];?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>                                    
+                                        <div class="mb-3">
+                                            <label for="archivo" class="form-label">Archivo</label>
+                                            <input class="dropzone" id="archivo" type="file" name="archivo">                                        
+                                        </div>    
+                                                                                
+                                        <button type="submit" class="btn btn-primary">Enviar</button> 
+
+                                    </div> <!-- end col -->                            
+                                </div> <!-- end row -->
                             </form>
-                            <?php $preventa = new Preventa(); $preventa->borrarErrores(); ?>     
-
-                            <div class="d-none" id="uploadPreviewTemplate">
-                                <div class="card mt-1 mb-0 shadow-none border">
-                                    <div class="p-2">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <img data-dz-thumbnail src="#" class="avatar-sm rounded bg-light" alt="">
-                                            </div>
-                                            <div class="col ps-0">
-                                                <a href="javascript:void(0);" class="text-muted fw-bold" data-dz-name></a>
-                                                <p class="mb-0" data-dz-size></p>
-                                            </div>
-                                            <div class="col-auto">
-                                                <!-- Button -->
-                                                <a href="" class="btn btn-link btn-lg text-danger" data-dz-remove>
-                                                    <i class="ri-close-line"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> <!-- end card-body -->
+                            <?php $preventa = new Preventa(); $preventa->borrarErrores(); ?>
+                        </div> <!-- end card body -->                                                                                                                 
                     </div> <!-- end card -->
                 </div><!-- end col -->
             </div><!-- end row -->
         </div><!-- end container-fluid -->
     </div><!-- end content -->
 </div><!-- end content-page -->
-
+ 
 <script>
     function cargarContactos() {
         var idCliente = document.getElementById("cliente").value;
