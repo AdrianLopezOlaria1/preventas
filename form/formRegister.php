@@ -12,11 +12,11 @@
                             <div class="col-lg-6">
                                 <div class="d-flex flex-column h-100">
                                     <div class="auth-brand p-4">
-                                        <a href="index.html" class="logo-light">
-                                            <img src="assets/images/logo.png" alt="logo" height="22">
+                                        <a href="index.php" class="logo-light">
+                                            <img src="assets/images/logo.png" alt="logo" style="height: auto; max-height: 100%;">
                                         </a>
-                                        <a href="index.html" class="logo-dark">
-                                            <img src="assets/images/logo-dark.png" alt="dark logo" height="22">
+                                        <a href="index.php" class="logo-dark">
+                                            <img src="assets/images/logo.png" alt="dark logo" style="height: auto; max-height: 100%;">
                                         </a>
                                     </div>
                                     <div class="p-4 my-auto">
@@ -130,7 +130,7 @@
 
     <footer class="footer footer-alt fw-medium">
         <span class="text-dark-emphasis">
-            <script>document.write(new Date().getFullYear())</script> © Velonic - Theme by Techzaa
+            <script>document.write(new Date().getFullYear())</script> © Inforges - Theme by Techzaa
         </span>
     </footer>
 
