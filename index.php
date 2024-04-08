@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,21 +16,21 @@ if (session_status() === PHP_SESSION_NONE) {
         <link rel="stylesheet" href="assets/vendor/daterangepicker/daterangepicker.css">
         <link rel="stylesheet" href="assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css">
         <script src="assets/js/config.js"></script>
-
+ 
         <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" /><!-- css -->
-        
+ 
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /> <!-- iconos -->
         <script src="https://maps.googleapis.com/maps/api/js?key=TU_CLAVE_API&libraries=places"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-
+ 
+ 
+ 
 </head>
 <body>
     <?php
 $action = isset($_GET["action"]) ? $_GET["action"] : "";
-
+ 
 switch ($action) {
     case "register":
         include 'clases/Usuario.php';
@@ -88,7 +88,7 @@ switch ($action) {
     case "delete":
         include 'metodos/deshabilitar.php';
         break;
-        
+ 
     case "profile":
         include 'metodos/checker.php';
         include 'views/aside.php';
@@ -188,36 +188,41 @@ switch ($action) {
         include 'form/formLogin.php';
          break;
  }
-
+ 
 ?>
-
+ 
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+ 
+
             <!-- Dropzone File Upload js -->
-            <script src="assets/vendor/dropzone/min/dropzone.min.js"></script>
+            <!--<script src="assets/vendor/dropzone/min/dropzone.min.js"></script>-->
 
             <!-- File Upload Demo js -->
-            <script src="assets/js/pages/fileupload.init.js"></script>
+            <!--<script src="assets/js/pages/fileupload.init.js"></script>-->
+
 
     <!-- Daterangepicker js -->
     <script src="assets/vendor/daterangepicker/moment.min.js"></script>
     <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
-    
+ 
     <!-- Apex Charts js -->
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-
+ 
     <!-- Vector Map js -->
     <script src="assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
     <script src="assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
-
+ 
     <!-- Dashboard App js -->
-    
-
-
+ 
+ 
+ 
     <!-- App js -->
     <script src="assets/js/app.min.js"></script>
-
-
+ 
+ 
 </body>
 </html>
