@@ -200,8 +200,8 @@
                                         </div>                                    
                                         <div class="mb-3">
                                             <label for="archivo" class="form-label">Archivo</label>
-                                            <input class="dropzone" id="archivo" type="file" name="archivo">                                        
-                                        </div>    
+                                            <input class="form-control dropzone" id="archivo" type="file" name="archivo">
+                                        </div>
                                                                                 
                                         <button type="submit" class="btn btn-primary">Enviar</button> 
 
