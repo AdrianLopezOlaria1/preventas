@@ -21,7 +21,7 @@
                             <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"></path>
                         </svg> Filtros
                     </button>
-                        <div id="filtros" class="col-2" style="display:none">
+                        <div id="filtros" class="row" style="display:none; transition: opacity 0.3s;">
                             <?php require 'form/formFiltros.php'?>
                         </div>                        
                     </div><br>                                     
@@ -191,12 +191,18 @@
             </div>
         </div>
         <script>
-            function mostrarFiltros() {
-                var div = document.getElementById("filtros");
-                if (div.style.display === "none") {
-                    div.style.display = "block";
-                } else {
-                    div.style.display = "none";
-                }
-            }
-        </script>
+    function mostrarFiltros() {
+        var div = document.getElementById("filtros");
+        if (div.style.display === "none") {
+            div.style.display = "block";
+            setTimeout(function() {
+                div.style.opacity = 1;
+            }, 300);
+        } else {
+            div.style.opacity = 0;
+            setTimeout(function() {
+                div.style.display = "none";
+            }, 200); // 0.3 segundos
+        }
+    }
+</script>
