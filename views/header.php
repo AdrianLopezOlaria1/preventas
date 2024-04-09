@@ -130,7 +130,7 @@
                             <!-- item-->
                             <a href="index.php?action=cerrando" class="dropdown-item">
                                 <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
-                                <span>Logout</span>
+                                <span>Salir</span>
                             </a>
                         </div>
                     </li>
