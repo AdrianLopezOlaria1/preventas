@@ -23,8 +23,8 @@
                                         <div class="my-auto">
                                             <!-- title-->
                                             <div class="text-center">
-                                                <h4 class="mt-0 fs-20">See You Again !</h4>
-                                                <p class="text-muted mb-4">You are now successfully sign out.</p>
+                                                <h4 class="mt-0 fs-20">Hasta la próxima !</h4>
+                                                <p class="text-muted mb-4">Has salido de tu cuenta exitosamente.</p>
                                             </div>
 
                                             <!-- Logout icon -->
@@ -54,8 +54,8 @@
             </div>
             <div class="row">
                 <div class="col-12 text-center">
-                    <p class="text-dark-emphasis">Back To <a href="index.php"
-                            class="text-dark fw-bold ms-1 link-offset-3 text-decoration-underline"><b>Log In</b></a></p>
+                    <p class="text-dark-emphasis">Volver al <a href="index.php"
+                            class="text-dark fw-bold ms-1 link-offset-3 text-decoration-underline"><b>Inicio de sesion</b></a></p>
                 </div> <!-- end col -->
             </div>
             <!-- end row -->
@@ -66,14 +66,11 @@
 
     <footer class="footer footer-alt fw-medium">
         <span class="text-dark-emphasis">
-            <script>document.write(new Date().getFullYear())</script> © Inforges - Theme by Techzaa
+            <script>document.write(new Date().getFullYear())</script> © Inforges
         </span>
     </footer>
     <!-- Vendor js -->
-    <script src="assets/js/vendor.min.js"></script>
 
-    <!-- App js -->
-    <script src="assets/js/app.min.js"></script>
 
 </body>
 

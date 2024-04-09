@@ -33,11 +33,8 @@
                                     $preventas = new Preventa();
                                     $cantidadGanadas = $preventas->contarPreventasGanadas();
                                 ?>
-                                <h2 class="my-2"><?= $cantidadGanadas ?></h2>
-                                <p class="mb-0">
-                                    <span class="badge bg-white bg-opacity-25 me-1">-5.75%</span>
-                                    <span class="text-nowrap">Since last month</span>
-                                </p>
+                                <h2 class="my-3"><?= $cantidadGanadas ?></h2>
+                                
                             </div>
                         </div>
                     </div> <!-- end col-->
@@ -55,11 +52,8 @@
                                         $preventas = new Preventa();
                                         $cantidadCerradasPerdidas = $preventas->contarPreventasCerradaPerdida();
                                     ?>
-                                    <h2 class="my-2"><?= $cantidadCerradasPerdidas ?></h2>
-                                    <p class="mb-0">
-                                        <span class="badge bg-white bg-opacity-10 me-1">2.97%</span>
-                                        <span class="text-nowrap">Since last month</span>
-                                    </p>
+                                    <h2 class="my-3"><?= $cantidadCerradasPerdidas ?></h2>
+                                    
                                 </div>
                             </div>
                         </div> <!-- end col-->
@@ -79,11 +73,8 @@
                                         $preventas = new Preventa();
                                         $cantidadPendienteCierre = $preventas->contarPreventasPendientesCierre();
                                     ?>
-                                    <h2 class="my-2"><?= $cantidadPendienteCierre ?></h2>
-                                    <p class="mb-0">
-                                        <span class="badge bg-white bg-opacity-10 me-1">18.25%</span>
-                                        <span class="text-nowrap">Since last month</span>
-                                    </p>
+                                    <h2 class="my-3"><?= $cantidadPendienteCierre ?></h2>
+                                    
                                 </div>
                             </div>
                         </div> <!-- end col-->
@@ -102,11 +93,8 @@
                                         $preventas = new Preventa();
                                         $cantidadPendientes = $preventas->contarPreventasPendientes();
                                     ?>
-                                    <h2 class="my-2"><?= $cantidadPendientes ?></h2>
-                                    <p class="mb-0">
-                                        <span class="badge bg-white text-warning bg-opacity-50 me-1">-5.75%</span>
-                                        <span class="text-nowrap">Since last month</span>
-                                    </p>
+                                    <h2 class="my-3"><?= $cantidadPendientes ?></h2>
+                                    
                                 </div>
                             </div>
                         </div> <!-- end col-->
@@ -123,11 +111,8 @@
                 $preventas = new Preventa();
                 $cantidadRealizadaReunion = $preventas->contarPreventasRealizadaReunion();
             ?>
-            <h2 class="my-2"><?= $cantidadRealizadaReunion ?></h2>
-            <p class="mb-0">
-                <span class="badge bg-secondary-subtle text-secondary me-1">8.21%</span>
-                <span class="text-nowrap">Since last month</span>
-            </p>
+            <h2 class="my-3"><?= $cantidadRealizadaReunion ?></h2>
+            
         </div>
     </div>
 </div> <!-- end col-->
@@ -147,11 +132,8 @@
                                         $preventas = new Preventa();
                                         $cantidadValoradas = $preventas->contarPreventasValoradas();
                                     ?>
-                                    <h2 class="my-2"><?= $cantidadValoradas ?></h2>
-                                    <p class="mb-0">
-                                        <span class="badge bg-white bg-opacity-10 me-1">8.21%</span>
-                                        <span class="text-nowrap">Since last month</span>
-                                    </p>
+                                    <h2 class="my-3"><?= $cantidadValoradas ?></h2>
+                                    
                                 </div>
                             </div>
                         </div> <!-- end col-->
@@ -164,7 +146,9 @@
                                 <div class="card-header">
                                     <h4 class="header-title">Últimas preventas</h4>
                                 </div>
+                                
                                 <div class="card-body">
+                                    
                                     <div class="table-responsive">
                                         <table class="table mb-0">
                                             <thead>
@@ -182,7 +166,7 @@
                                                     <th scope="col">Archivo</th>
                                                     <th scope="col">Horas</th>
                                                     <th scope="col">Importe</th>
-                                                    <th scope="col">Status</th>                                                     
+                                                    <th scope="col">Estado</th>                                                     
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -263,7 +247,6 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-widgets">
-                                        <a href="javascript:;" data-bs-toggle="reload"><i class="ri-refresh-line"></i></a>
                                         <a data-bs-toggle="collapse" href="#weeklysales-collapse" role="button" aria-expanded="false" aria-controls="weeklysales-collapse"><i class="ri-subtract-line"></i></a>
                                         <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
                                     </div>
@@ -286,7 +269,6 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-widgets">
-                                        <a href="javascript:;" data-bs-toggle="reload"><i class="ri-refresh-line"></i></a>
                                         <a data-bs-toggle="collapse" href="#yearly-sales-collapse" role="button" aria-expanded="false" aria-controls="yearly-sales-collapse"><i class="ri-subtract-line"></i></a>
                                         <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
                                     </div>

@@ -21,19 +21,19 @@
                                         <div class="">
                                             <h4 class="mt-4 fs-17 ellipsis"><?php echo isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['nombre'] : 'Error'; ?></h4>
                                             <p class="font-13"><?php echo isset($_SESSION['usuario']['description']) ? $_SESSION['usuario']['description'] : 'Añada su descripción'; ?></p>
-                                            <p class="text-muted mb-0"><small>California, United States</small></p>
+                                            <!-- <p class="text-muted mb-0"><small>California, United States</small></p> -->
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="d-flex justify-content-end align-items-center gap-2">
                                             <a href="#edit-profile" onclick="changeTab('edit-profile', this)">
-                                                <button type="button" class="btn btn-soft-danger">
+                                                <button type="button" class="btn btn-soft-info">
                                                     <i class="ri-settings-2-line align-text-bottom me-1 fs-16 lh-1"></i>
-                                                    Edit Profile
+                                                    Editar perfil
                                                 </button>
                                             </a>
-                                            <a class="btn btn-soft-info" href="#" id="eliminar"> 
-                                                <i class="ri-check-double-fill fs-18 me-1 lh-1"></i> Eliminar
+                                            <a class="btn btn-soft-danger" href="#" id="eliminar"> 
+                                            <i class="bi bi-trash"></i> Eliminar cuenta
                                             </a>
                                         </div>
                                     </div>
@@ -52,20 +52,14 @@
                                         <ul class="nav nav-underline nav-justified gap-0">
                                             <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab"
                                                     data-bs-target="#aboutme" type="button" role="tab"
-                                                    aria-controls="home" aria-selected="true" href="#aboutme">About</a>
+                                                    aria-controls="home" aria-selected="true" href="#aboutme">Sobre mi</a>
                                             </li>
-                                            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
-                                                    data-bs-target="#user-activities" type="button" role="tab"
-                                                    aria-controls="home" aria-selected="true"
-                                                    href="#user-activities">Activities</a></li>
+                                            
                                             <li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
                                                     data-bs-target="#edit-profile" type="button" role="tab"
                                                     aria-controls="home" aria-selected="true"
-                                                    href="#edit-profile">Settings</a></li>
-                                            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
-                                                    data-bs-target="#projects" type="button" role="tab"
-                                                    aria-controls="home" aria-selected="true"
-                                                    href="#projects">Projects</a></li>
+                                                    href="#edit-profile">Ajustes</a></li>
+                                            
                                         </ul>
 
                                         <div class="tab-content m-0 p-4">
@@ -78,11 +72,11 @@
                                                     <?php echo isset($_SESSION['usuario']['description']) ? $_SESSION['usuario']['description'] : ''; ?>
                                                     </p>
 
-                                                    <h5 class="mt-4 fs-17 text-dark">Contact Information</h5>
+                                                    <h5 class="mt-4 fs-17 text-dark">Información del Usuario</h5>
                                                     <table class="table table-condensed mb-0 border-top">
                                                         <tbody>
                                                             <tr>
-                                                                <th scope="row">Url</th>
+                                                                <th scope="row">Sitio web</th>
                                                                 <td>
                                                                     <a href="#" class="ng-binding">
                                                                     <?php echo isset($_SESSION['usuario']['website']) ? $_SESSION['usuario']['website'] : ''; ?>
@@ -117,83 +111,7 @@
                                             </div> <!-- about-me -->
 
                                             <!-- Activities -->
-                                            <div id="user-activities" class="tab-pane">
-                                                <div class="timeline-2">
-                                                    <div class="time-item">
-                                                        <div class="item-info ms-3 mb-3">
-                                                            <div class="text-muted">5 minutes ago</div>
-                                                            <p><strong><a href="#" class="text-info">John
-                                                                        Doe</a></strong>Uploaded a photo</p>
-                                                            <img src="assets/images/small/small-3.jpg" alt=""
-                                                                height="40" width="60" class="rounded-1">
-                                                            <img src="assets/images/small/small-4.jpg" alt=""
-                                                                height="40" width="60" class="rounded-1">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="time-item">
-                                                        <div class="item-info ms-3 mb-3">
-                                                            <div class="text-muted">30 minutes ago</div>
-                                                            <p><a href="" class="text-info">Lorem</a> commented your
-                                                                post.
-                                                            </p>
-                                                            <p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit.
-                                                                    Aliquam laoreet tellus ut tincidunt euismod. "</em>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="time-item">
-                                                        <div class="item-info ms-3 mb-3">
-                                                            <div class="text-muted">59 minutes ago</div>
-                                                            <p><a href="" class="text-info">Jessi</a> attended a meeting
-                                                                with<a href="#" class="text-success">John Doe</a>.</p>
-                                                            <p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit.
-                                                                    Aliquam laoreet tellus ut tincidunt euismod. "</em>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="time-item">
-                                                        <div class="item-info ms-3 mb-3">
-                                                            <div class="text-muted">5 minutes ago</div>
-                                                            <p><strong><a href="#" class="text-info">John
-                                                                        Doe</a></strong> Uploaded 2 new photos</p>
-                                                            <img src="assets/images/small/small-2.jpg" alt=""
-                                                                height="40" width="60" class="rounded-1">
-                                                            <img src="assets/images/small/small-1.jpg" alt=""
-                                                                height="40" width="60" class="rounded-1">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="time-item">
-                                                        <div class="item-info ms-3 mb-3">
-                                                            <div class="text-muted">30 minutes ago</div>
-                                                            <p><a href="" class="text-info">Lorem</a> commented your
-                                                                post.
-                                                            </p>
-                                                            <p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit.
-                                                                    Aliquam laoreet tellus ut tincidunt euismod. "</em>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="time-item">
-                                                        <div class="item-info ms-3 mb-3">
-                                                            <div class="text-muted">59 minutes ago</div>
-                                                            <p><a href="" class="text-info">Jessi</a> attended a meeting
-                                                                with<a href="#" class="text-success">John Doe</a>.</p>
-                                                            <p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit.
-                                                                    Aliquam laoreet tellus ut tincidunt euismod. "</em>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
 
                                             <!-- settings -->
                                             <div id="edit-profile" class="tab-pane">
@@ -201,8 +119,8 @@
                                                     <form action="index.php?action=updateProfile" method="POST">
                                                         <div class="row row-cols-sm-2 row-cols-1">
                                                             <div class="mb-2">
-                                                                <label class="form-label" for="FullName">Full
-                                                                    Name</label>
+                                                                <label class="form-label" for="FullName">Nombre
+                                                                    Completo</label>
                                                                 <input type="text" value="<?php echo ($_SESSION['usuario']['nombre']);?>" id="FullName"
                                                                     class="form-control" name="nombre">
                                                             </div>
@@ -213,7 +131,7 @@
                                                                     id="Email" class="form-control" name="email">
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label class="form-label" for="web-url">Website</label>
+                                                                <label class="form-label" for="web-url">Sito web</label>
                                                                 <input type="text" value="<?php echo isset($_SESSION['usuario']['website']) ? $_SESSION['usuario']['website'] : 'Enter your website url'; ?>"
                                                                     id="web-url" class="form-control" name="website">
                                                             </div>
@@ -236,88 +154,20 @@
                                                                     id="RePassword" class="form-control" name="re_password">
                                                             </div>
                                                             <div class="col-sm-12 mb-3">
-                                                                <label class="form-label" for="description">About Me</label>
+                                                                <label class="form-label" for="description">Descripción</label>
                                                                 <textarea style="height: 125px;" id="description"
                                                                     class="form-control" name="description"><?php echo isset($_SESSION['usuario']['description']) ? $_SESSION['usuario']['description'] : 'Enter your skype'; ?></textarea>
                                                             </div>
 
                                                         </div>
                                                         <button class="btn btn-primary" type="submit"><i
-                                                                class="ri-save-line me-1 fs-16 lh-1"></i> Save</button>
+                                                                class="ri-save-line me-1 fs-16 lh-1"></i> Guardar</button>
                                                     </form>
                                                 </div>
                                             </div>
 
                                             <!-- profile -->
-                                            <div id="projects" class="tab-pane">
-                                                <div class="row m-t-10">
-                                                    <div class="col-md-12">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-bordered mb-0">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>#</th>
-                                                                        <th>Project Name</th>
-                                                                        <th>Start Date</th>
-                                                                        <th>Due Date</th>
-                                                                        <th>Status</th>
-                                                                        <th>Assign</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>1</td>
-                                                                        <td>Velonic Admin</td>
-                                                                        <td>01/01/2015</td>
-                                                                        <td>07/05/2015</td>
-                                                                        <td><span class="badge bg-info">Work
-                                                                                in Progress</span></td>
-                                                                        <td>Techzaa</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>2</td>
-                                                                        <td>Velonic Frontend</td>
-                                                                        <td>01/01/2015</td>
-                                                                        <td>07/05/2015</td>
-                                                                        <td><span
-                                                                                class="badge bg-success">Pending</span>
-                                                                        </td>
-                                                                        <td>Techzaa</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>3</td>
-                                                                        <td>Velonic Admin</td>
-                                                                        <td>01/01/2015</td>
-                                                                        <td>07/05/2015</td>
-                                                                        <td><span class="badge bg-pink">Done</span>
-                                                                        </td>
-                                                                        <td>Techzaa</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>4</td>
-                                                                        <td>Velonic Frontend</td>
-                                                                        <td>01/01/2015</td>
-                                                                        <td>07/05/2015</td>
-                                                                        <td><span class="badge bg-purple">Work
-                                                                                in Progress</span></td>
-                                                                        <td>Techzaa</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>5</td>
-                                                                        <td>Velonic Admin</td>
-                                                                        <td>01/01/2015</td>
-                                                                        <td>07/05/2015</td>
-                                                                        <td><span class="badge bg-warning">Coming
-                                                                                soon</span></td>
-                                                                        <td>Techzaa</td>
-                                                                    </tr>
-
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                 </div>

@@ -465,18 +465,18 @@
             FROM preventas 
             WHERE MONTH(fecha_solicitud) = 
                 CASE '$mes'
-                    WHEN 'Jan' THEN 1
+                    WHEN 'Ene' THEN 1
                     WHEN 'Feb' THEN 2
                     WHEN 'Mar' THEN 3
-                    WHEN 'Apr' THEN 4
+                    WHEN 'Abr' THEN 4
                     WHEN 'May' THEN 5
                     WHEN 'Jun' THEN 6
                     WHEN 'Jul' THEN 7
-                    WHEN 'Aug' THEN 8
+                    WHEN 'Ago' THEN 8
                     WHEN 'Sep' THEN 9
                     WHEN 'Oct' THEN 10
                     WHEN 'Nov' THEN 11
-                    WHEN 'Dec' THEN 12
+                    WHEN 'Dic' THEN 12
                 END";
             $resultado = $mysqli->query($query);
             $numero_preventas = 0;

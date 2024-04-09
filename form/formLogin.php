@@ -19,9 +19,9 @@
                                         </a>
                                     </div>
                                     <div class="p-4 my-auto">
-                                        <h4 class="fs-20">Sign In</h4>
-                                        <p class="text-muted mb-3">Enter your email address and password to access
-                                            account.
+                                        <h4 class="fs-20">Inicio de sesión</h4>
+                                        <p class="text-muted mb-3">Introduce tu correo y tu contraseña para
+                                            acceder a tu cuenta.
                                         </p>
                                         <?php if(isset($_SESSION['error_login'])): ?>
                                             <div class='alert alert-warning'>
@@ -31,33 +31,34 @@
                                         <!-- form -->
                                         <form action="index.php?action=enviarLogin" method="POST">
                                             <div class="mb-3">
-                                                <label for="emailaddress" class="form-label">Email address</label>
+                                                <label for="emailaddress" class="form-label">Correo</label>
                                                 <input class="form-control" type="email" id="emailaddress"
-                                                    placeholder="Enter your email" name="email">                        
+                                                    placeholder="Introduce tu correo" name="email">                        
                                             </div>
                                             <div class="mb-3">
-                                                <a href="auth-forgotpw.html" class="text-muted float-end"><small>Forgot
-                                                        your
-                                                        password?</small></a>
-                                                <label for="password" class="form-label">Password</label>
+                                            <a href="#" class="text-muted float-end" id="forgotPasswordLink"><small>Has olvidado tu contraseña?</small></a>
+
+                                                <label for="password" class="form-label">Contraseña</label>
                                                 <input class="form-control" type="password" id="password"
-                                                    placeholder="Enter your password" name="password">                                                    
+                                                    placeholder="Introduce tu contraseña" name="password">                                                    
                                             </div>
                                             <div class="mb-3">
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input"
                                                         id="checkbox-signin">
-                                                    <label class="form-check-label" for="checkbox-signin">Remember
-                                                        me</label>
+                                                    <label class="form-check-label" for="checkbox-signin">Recordarme
+                                                        </label>
                                                 </div>
                                             </div>
+
                                             <div class="mb-0 text-start">
                                                 <button class="btn btn-soft-primary w-100" type="submit"><i
-                                                        class="ri-login-circle-fill me-1"></i> <span class="fw-bold">Log
-                                                        In</span> </button>
+                                                        class="ri-login-circle-fill me-1"></i> <span class="fw-bold">Iniciar
+                                                            sesión
+                                                        </span> </button>
                                             </div>
 
-                                            <div class="text-center mt-4">
+                                            <!-- <div class="text-center mt-4">
                                                 <p class="text-muted fs-16">Sign in with</p>
                                                 <div class="d-flex gap-2 justify-content-center mt-3">
                                                     <a href="javascript: void(0);" class="btn btn-soft-primary"><i
@@ -69,7 +70,8 @@
                                                     <a href="javascript: void(0);" class="btn btn-soft-dark"><i
                                                             class="ri-github-fill"></i></a>
                                                 </div>
-                                            </div>
+                                            </div> -->
+
                                         </form>
                                         <?php $usuario = new Usuario(); $usuario->borrarErrores(); ?>
                                         <!-- end form-->
@@ -83,8 +85,8 @@
             </div>
             <div class="row">
                 <div class="col-12 text-center">
-                    <p class="text-dark-emphasis">Don't have an account? <a href="index.php?action=register"
-                            class="text-dark fw-bold ms-1 link-offset-3 text-decoration-underline"><b>Sign up</b></a>
+                    <p class="text-dark-emphasis">¿No tienes cuenta? <a href="index.php?action=register"
+                            class="text-dark fw-bold ms-1 link-offset-3 text-decoration-underline"><b>Registrate</b></a>
                     </p>
                 </div> <!-- end col -->
             </div>
@@ -96,7 +98,23 @@
 
     <footer class="footer footer-alt fw-medium">
         <span class="text-dark">
-            <script>document.write(new Date().getFullYear())</script> © Inforges - Theme by Techzaa
+            <script>document.write(new Date().getFullYear())</script> © Inforges
         </span>
     </footer>
     <!-- Vendor js -->
+    <script>
+document.getElementById('forgotPasswordLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    var emailAddress = 'admin@admin.com'; // Reemplaza con tu dirección de correo electrónico
+    var subject = 'Recuperación de contraseña'; // Asunto del correo electrónico
+    var body = 'Hola, he olvidado mi contraseña. ¿Puedes ayudarme a recuperarla? Mi nombre de usuario es:___ (Proporcionar datos, como fecha de creación, '+
+    'correo de cuenta, skype, descripción, acciones...'; // Contenido del cuerpo del correo electrónico
+
+    // Construir el enlace para enviar un correo electrónico
+    var mailtoLink = 'mailto:' + encodeURIComponent(emailAddress) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+    // Abrir el cliente de correo electrónico predeterminado con el enlace de correo electrónico
+    window.location.href = mailtoLink;
+});
+
+</script>

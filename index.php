@@ -100,13 +100,15 @@ switch ($action) {
         include 'metodos/checker.php';
         include 'metodos/updateProfile.php';
         break;
-    case "support":
+        
+    case "support":  // puede que se tenga que quitar, se ha quitado del header!
         include 'metodos/checker.php';
         include 'views/aside.php';
         include 'views/footer.php';
         include 'views/header.php';
         include 'views/support.php';
         break;
+
     case "enviarLogin":
         include 'metodos/login.php';
         break;

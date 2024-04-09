@@ -11,7 +11,7 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Velonic</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Listas</a></li>
                                 <li class="breadcrumb-item active">Lista de comerciales</li>
                             </ol>
                         </div>
@@ -26,7 +26,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="input-group">
-                                <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Search">
+                                <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Buscar">
                                 <span class="input-group-append">
                                     <button type="button" class="btn btn-primary rounded-start-0" style="background-color: #f93215; color: white; padding: 10px 20px; border: none; transition: all 0.3s ease; border-radius: 20px;" 
                                         onmouseover="this.style.backgroundColor='#2d9cfc'; this.style.transform='scale(1.1)';"
@@ -128,13 +128,13 @@
                             
                             html += '</div>';
                             html += '<hr>'; // Asegúrate de que el hr esté dentro del bloque if
-                            html += '<ul class="social-list list-inline mt-3 mb-0">';
-                            html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="Facebook"><i class="ri-facebook-fill"></i></a></li>';
-                            html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="Twitter"><i class="ri-twitter-fill"></i></a></li>';
-                            html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="LinkedIn"><i class="ri-linkedin-box-fill"></i></a></li>';
-                            html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="Skype"><i class="ri-skype-fill"></i></a></li>';
-                            html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="Message"><i class="ri-mail-open-line"></i></a></li>';
-                            html += '</ul>';
+                            // html += '<ul class="social-list list-inline mt-3 mb-0">';
+                            // html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="Facebook"><i class="ri-facebook-fill"></i></a></li>';
+                            // html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="Twitter"><i class="ri-twitter-fill"></i></a></li>';
+                            // html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="LinkedIn"><i class="ri-linkedin-box-fill"></i></a></li>';
+                            // html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="Skype"><i class="ri-skype-fill"></i></a></li>';
+                            // html += '<li class="list-inline-item"><a class="social-list-item bg-dark-subtle text-secondary fs-16 border-0" title="" data-bs-toggle="tooltip" data-bs-placement="top" class="tooltips" href="" data-bs-title="Message"><i class="ri-mail-open-line"></i></a></li>';
+                            // html += '</ul>';
                             html += '</div>'; 
                             html += '</div>'; 
                             html += '</div>'; 

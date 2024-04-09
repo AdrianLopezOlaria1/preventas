@@ -7,11 +7,11 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Velonic</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                                <li class="breadcrumb-item active">Form Comertials</li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Formularios</a></li>
+                                <li class="breadcrumb-item active">Formulario Comerciales</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Form Comertials</h4>
+                        <h4 class="page-title">Formulario comerciales</h4>
                     </div>
                 </div>
             </div>

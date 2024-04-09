@@ -3,7 +3,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <script>document.write(new Date().getFullYear())</script> © Inforges - Theme by <b>Techzaa</b>
+                            <script>document.write(new Date().getFullYear())</script> © Inforges
                         </div>
                     </div>
                 </div>

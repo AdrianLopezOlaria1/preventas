@@ -10,7 +10,7 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Velonic</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Formularios</a></li>
                                 <li class="breadcrumb-item active">Formulario preventas</li>
                             </ol>
                         </div>
@@ -23,7 +23,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="header-title">Ingrese información</h4>
+                            <h4 class="header-title">Nueva preventa</h4>
                         </div>                         
                         <div class="card-body">
                             <?php if(isset($_SESSION['completado'])): ?>
@@ -65,75 +65,6 @@
 
                                         <!-- selector clientes-->
                                         <div class="mb-3">
-                                            <label for="id_cliente" class="form-label">Cliente</label>
-                                            <select class="form-select" name="id_cliente" id="cliente" onchange="cargarContactos()">
-                                                <option value="">Seleccione cliente</option>
-                                                <?php 
-                                                    $cliente = new Cliente();
-                                                    $clientes = $cliente->obtenerClientes();
-                                                    if (!empty($clientes)) {
-                                                        foreach ($clientes as $c) {
-                                                ?>
-                                                <?php if($c['status'] != 'D'):?>
-                                                    <option value="<?=$c['id']?>">
-                                                        <?=$c['nombre']?>
-                                                    </option>
-                                                <?php endif;?>
-                                                <?php
-                                                        }
-                                                    }
-                                                ?>
-                                            </select>
-                                            <?php if(isset($_SESSION['error']['id_cliente'])): ?>
-                                                <div class='alert alert-warning'>
-                                                    <?=$_SESSION['error']['id_cliente'];?>
-                                                </div>
-                                            <?php endif; ?>                                            
-                                        </div>
-                                        <!-- fin selector clientes -->                    
-                                        <div class="mb-3">
-                                            <label for="fecha_reunion" class="form-label">Fecha de la reunión</label>
-                                            <input class="form-control" id="fecha_reunion" type="date" name="fecha_reunion">
-                                            <?php if(isset($_SESSION['error']['fecha_reunion'])): ?>
-                                                <div class='alert alert-warning'>
-                                                    <?=$_SESSION['error']['fecha_reunion'];?>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>                                           
-                                        <div class="mb-3">
-                                            <label for="horas" class="form-label">Horas previstas</label>
-                                            <input class="form-control" id="horas" type="number" name="horas_previstas">
-                                            <?php if(isset($_SESSION['error']['horas_previstas'])): ?>
-                                                <div class='alert alert-warning'>
-                                                    <?=$_SESSION['error']['horas_previstas'];?>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>                                                                             
-                                        <div class="mb-3">
-                                            <label for="acta_reunion" class="form-label">Detalles acta de la reunión</label>
-                                            <textarea class="form-control" id="acta_reunion" name="acta_reunion" rows="5"></textarea>
-                                            <?php if(isset($_SESSION['error']['acta_reunion'])): ?>
-                                                <div class='alert alert-warning'>
-                                                    <?=$_SESSION['error']['acta_reunion'];?>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>                                                                                                                            
-                                    </div> <!-- end col -->
-                                    <div class="col-lg-6">
-                                        <!-- selector contactos -->
-                                        <div class="mb-3">
-                                            <label for="id_contacto" class="form-label">Contacto</label>
-                                            <select class="form-select" name="id_contacto" id="contacto">
-                                                <option value="">Seleccione contacto</option>
-                                            </select>
-                                            <?php if(isset($_SESSION['error']['id_contacto'])): ?>
-                                                <div class='alert alert-warning'>
-                                                    <?=$_SESSION['error']['id_contacto'];?>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
-                                        <!-- fin selector contactos -->
-                                        <div class="mb-3">
                                             <label for="id_comercial" class="form-label">Comercial</label>
                                             <select class="form-select" id="id_comercial" name="comercial">
                                             <option value="">Seleccione comercial</option>
@@ -159,6 +90,80 @@
                                                 </div>
                                             <?php endif; ?>
                                         </div>
+
+                                        
+                                        <!-- fin selector clientes -->                    
+                                        <div class="mb-3">
+                                            <label for="fecha_reunion" class="form-label">Fecha de la reunión</label>
+                                            <input class="form-control" id="fecha_reunion" type="date" name="fecha_reunion">
+                                            <?php if(isset($_SESSION['error']['fecha_reunion'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['fecha_reunion'];?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>                                           
+                                        <div class="mb-3">
+                                            <label for="horas" class="form-label">Horas previstas</label>
+                                            <input class="form-control" id="horas" type="number" name="horas_previstas">
+                                            <?php if(isset($_SESSION['error']['horas_previstas'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['horas_previstas'];?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>                                                                             
+                                        <div class="mb-3">
+                                            <label for="acta_reunion" class="form-label">Detalles acta de la reunión</label>
+                                            <textarea class="form-control" id="acta_reunion" name="acta_reunion" rows="14"></textarea>
+                                            <?php if(isset($_SESSION['error']['acta_reunion'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['acta_reunion'];?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>                                                                                                                            
+                                    </div> <!-- end col -->
+                                    <div class="col-lg-6">
+                                        <!-- selector contactos -->
+                                        <div class="mb-3">
+                                            <label for="id_cliente" class="form-label">Cliente</label>
+                                            <select class="form-select" name="id_cliente" id="cliente" onchange="cargarContactos()">
+                                                <option value="">Seleccione cliente</option>
+                                                <?php 
+                                                    $cliente = new Cliente();
+                                                    $clientes = $cliente->obtenerClientes();
+                                                    if (!empty($clientes)) {
+                                                        foreach ($clientes as $c) {
+                                                ?>
+                                                <?php if($c['status'] != 'D'):?>
+                                                    <option value="<?=$c['id']?>">
+                                                        <?=$c['nombre']?>
+                                                    </option>
+                                                <?php endif;?>
+                                                <?php
+                                                        }
+                                                    }
+                                                ?>
+                                            </select>
+                                            <?php if(isset($_SESSION['error']['id_cliente'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['id_cliente'];?>
+                                                </div>
+                                            <?php endif; ?>                                            
+                                        </div>
+                                        <!-- fin selector contactos -->
+
+                                        <div class="mb-3">
+                                            <label for="id_contacto" class="form-label">Contacto</label>
+                                            <select class="form-select" name="id_contacto" id="contacto">
+                                                <option value="">Seleccione contacto</option>
+                                            </select>
+                                            <?php if(isset($_SESSION['error']['id_contacto'])): ?>
+                                                <div class='alert alert-warning'>
+                                                    <?=$_SESSION['error']['id_contacto'];?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+
+                                        
                                         <!-- selector tipos -->
                                         <div class="mb-3">
                                             <label for="id_tipo" class="form-label">Tipo de proyecto</label>

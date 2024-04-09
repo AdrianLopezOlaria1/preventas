@@ -7,7 +7,7 @@
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Velonic</a></li>
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Ventana</a></li>
                                         <li class="breadcrumb-item active">Preventas</li>
                                     </ol>
                                 </div>
@@ -29,7 +29,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="header-title">Orders</h4>
+                                    <h4 class="header-title">Preventas</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -49,9 +49,9 @@
                                                     <th scope="col">Archivo</th>
                                                     <th scope="col">Horas</th>
                                                     <th scope="col">Importe</th>
-                                                    <th scope="col">Status</th> 
+                                                    <th scope="col">Preventas</th> 
                                                     <?php if($_SESSION['usuario']['rol'] == 1): ?> 
-                                                    <th scope="col">acción</th>
+                                                    <th scope="col">Acción</th>
                                                     <?php endif; ?>
                                                 </tr>
                                             </thead>
