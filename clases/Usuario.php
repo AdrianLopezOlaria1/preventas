@@ -328,7 +328,7 @@ if (!function_exists('Conexion')) {
         $usuarios = array();
         $conexion = new Conexion();
         $mysqli = $conexion->getConexion();
-        $sql = "SELECT * FROM usuarios";
+        $sql = "SELECT * FROM usuarios ORDER BY nombre ASC";
         $resultado = $mysqli->query($sql);
         if ($resultado) {
             while ($fila = $resultado->fetch_assoc()) {

@@ -120,7 +120,7 @@ if (!function_exists('Conexion')) {
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
     
-            $sql = "SELECT * FROM clientes";
+            $sql = "SELECT * FROM clientes ORDER BY nombre ASC";
             $resultado = $mysqli->query($sql);
     
             if ($resultado) {
