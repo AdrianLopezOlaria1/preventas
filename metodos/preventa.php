@@ -21,7 +21,7 @@
             $status = 'P';
 
             $file = $_FILES['archivo'];
-            if($file['temp_name'] != ''){
+            if($file['name'] != ''){
                 $archivo = uniqid() . '_' . $file['name'];
                 move_uploaded_file($file['tmp_name'], 'assets/files/'.$archivo);
             }
