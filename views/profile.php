@@ -132,31 +132,31 @@
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="web-url">Sito web</label>
-                                                                <input type="text" value="<?php echo isset($_SESSION['usuario']['website']) ? $_SESSION['usuario']['website'] : 'Enter your website url'; ?>"
+                                                                <input type="text" value="<?php echo isset($_SESSION['usuario']['website']) ? $_SESSION['usuario']['website'] : 'Introduce tu sitio web'; ?>"
                                                                     id="web-url" class="form-control" name="website">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label class="form-label"
                                                                     for="skype">Skype</label>
-                                                                <input type="text" value="<?php echo isset($_SESSION['usuario']['skype']) ? $_SESSION['usuario']['skype'] : 'Enter your skype'; ?>" id="skype"
+                                                                <input type="text" value="<?php echo isset($_SESSION['usuario']['skype']) ? $_SESSION['usuario']['skype'] : 'Introduce tu skype'; ?>" id="skype"
                                                                     class="form-control" name="skype">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label class="form-label"
-                                                                    for="password">Password</label>
-                                                                <input type="password" placeholder="6 - 15 Characters"
+                                                                    for="password">Contraseña</label>
+                                                                <input type="password" placeholder="introduce tu contraseña"
                                                                     id="password" class="form-control" name="password">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label class="form-label"
-                                                                    for="RePassword">New Password (if you want change it)</label>
-                                                                <input type="password" placeholder="6 - 15 Characters"
+                                                                    for="RePassword">Nueva contraseña(si quieres cambiarla)</label>
+                                                                <input type="password" placeholder="Introduce tu nueva contraseña (opcional)"
                                                                     id="RePassword" class="form-control" name="re_password">
                                                             </div>
                                                             <div class="col-sm-12 mb-3">
                                                                 <label class="form-label" for="description">Descripción</label>
                                                                 <textarea style="height: 125px;" id="description"
-                                                                    class="form-control" name="description"><?php echo isset($_SESSION['usuario']['description']) ? $_SESSION['usuario']['description'] : 'Enter your skype'; ?></textarea>
+                                                                    class="form-control" name="description"><?php echo isset($_SESSION['usuario']['description']) ? $_SESSION['usuario']['description'] : 'Introduce tu descripción'; ?></textarea>
                                                             </div>
 
                                                         </div>
