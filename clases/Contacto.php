@@ -162,7 +162,7 @@
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
     
-            $sql = "SELECT * FROM personas_contacto";
+            $sql = "SELECT * FROM personas_contacto ORDER BY nombre ASC";
             $resultado = $mysqli->query($sql);
     
             if ($resultado) {

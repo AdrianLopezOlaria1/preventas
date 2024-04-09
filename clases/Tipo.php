@@ -29,7 +29,7 @@ if (!function_exists('Conexion')) {
             $tipos = array();
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
-            $sql = "SELECT * FROM tipos_proyectos";
+            $sql = "SELECT * FROM tipos_proyectos ORDER BY nombre ASC";
             $resultado = $mysqli->query($sql);
             if ($resultado) {
                 while ($tipo = $resultado->fetch_assoc()) {

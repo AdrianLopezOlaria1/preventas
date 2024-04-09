@@ -192,7 +192,7 @@
                 </div>
             </div>
         </div>
-        <script>
+<script>
     function mostrarFiltros() {
         var div = document.getElementById("filtros");
         if (div.style.display === "none") {
