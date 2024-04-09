@@ -74,7 +74,9 @@
                                                         echo '<td>' . $preventa['fecha_reunion'] . '</td>'; // Fecha Reunión
                                                         echo '<td>' . $preventa['fecha_presentacion'] . '</td>'; // Fecha Presentación
                                                         echo '<td>' . $preventa['acta_reunion'] . '</td>'; // Acta
-                                                        echo '<td>' . $preventa['archivo'] . '</td>'; // Archivo
+                                                        $nombreArchivo = $preventa['archivo'];
+                                                        $nombreArchivoBien = substr($nombreArchivo, strrpos($nombreArchivo, '_') + 1);
+                                                        echo '<td>' . $nombreArchivoBien . '</td>'; // Archivo
                                                         echo '<td>' . $preventa['horas_previstas'] . '</td>'; // Horas
                                                         echo '<td>' . $preventa['importe'] . '</td>'; // Importe
                                                         // Definir la clase CSS según el estado
