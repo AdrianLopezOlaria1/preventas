@@ -21,8 +21,12 @@
             $status = 'P';
 
             $file = $_FILES['archivo'];
-            $archivo = uniqid() . '_' . $file['name'];
-            move_uploaded_file($file['tmp_name'], 'assets/files/'.$archivo);
+            if($file['temp_name'] != ''){
+                $archivo = uniqid() . '_' . $file['name'];
+                move_uploaded_file($file['tmp_name'], 'assets/files/'.$archivo);
+            }
+            
+            
             
             if($preventa->crearPreventa($id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario,
             $fecha_reunion, $fecha_presentacion, $horas_previstas, $acta_reunion, $archivo, $importe, $status)){
