@@ -357,6 +357,11 @@ $mesesAnteriores = imprimirMesesAnteriores();
         $fecha_actual->modify('-1 month');
     }
     $meses = array_reverse($meses);
+    $meses_ingles = array('Jan'=>'Ene','Feb'=>'Feb','Mar'=>'Mar','Apr'=>'Abr','May'=>'May','Jun'=>'Jun',
+    'Jul'=>'Jul','Aug'=>'Ago','Sep'=>'Sep','Oct'=>'Oct','Nov'=>'Nov','Dec'=>'Dic',);
+    foreach ($meses as &$mes) {
+        $mes = $meses_ingles[$mes];
+    }
     $meses_json = json_encode($meses);
 
     $pre = new Preventa();
