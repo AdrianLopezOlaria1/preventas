@@ -15,17 +15,7 @@ if (isset($_POST)) {
     if ($preventasFiltradas) {
         $_SESSION['preventasFiltradas'] = $preventasFiltradas;
         header("location: index.php?action=preventas"); 
-    } else {
-        $_SESSION['preventasFiltradas'] = $preventasFiltradas;
-        header("location: index.php?action=preventas"); 
-    }
-} else {
-    unset($_SESSION['preventasFiltradas']);
-    unset($_SESSION['estado']);
-    unset($_SESSION['comercial']);
-    unset($_SESSION['usu']);
-    unset($_SESSION['ini']);
-    unset($_SESSION['fin']);
-    header("location: index.php?action=preventas");
-}
+    } 
+} 
+
 ?>
