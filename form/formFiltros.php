@@ -7,12 +7,12 @@
                     <label for="estado" class="form-label">Filtrar por estado:</label>
                     <select class="form-select" id="estado" name="estado">
                         <option value="" <?php if(isset($_SESSION['estado']) && $_SESSION['estado'] == null) echo " selected"?>>Todos</option>
-                        <option value="P" <?php if(isset($_SESSION['estado']) && $_SESSION['estado'] == 'P') echo " selected"?>>Pendiente</option>
-                        <option value="RP" <?php if(isset($_SESSION['estado']) && $_SESSION['estado'] == 'RP') echo " selected"?>>Realizada reunión</option>
-                        <option value="RV" <?php if(isset($_SESSION['estado']) && $_SESSION['estado'] == 'RV') echo " selected"?>>Realizada valoración</option>
-                        <option value="PC" <?php if(isset($_SESSION['estado']) && $_SESSION['estado'] == 'PC') echo " selected"?>>Pendiente cierre</option>
                         <option value="CG" <?php if(isset($_SESSION['estado']) && $_SESSION['estado'] == 'CG') echo " selected"?>>Cerrada ganada</option>
                         <option value="CP" <?php if(isset($_SESSION['estado']) && $_SESSION['estado'] == 'CP') echo " selected"?>>Cerrada perdida</option>
+                        <option value="P" <?php if(isset($_SESSION['estado']) && $_SESSION['estado'] == 'P') echo " selected"?>>Pendiente</option>
+                        <option value="PC" <?php if(isset($_SESSION['estado']) && $_SESSION['estado'] == 'PC') echo " selected"?>>Pendiente cierre</option>
+                        <option value="RP" <?php if(isset($_SESSION['estado']) && $_SESSION['estado'] == 'RP') echo " selected"?>>Realizada reunión</option>
+                        <option value="RV" <?php if(isset($_SESSION['estado']) && $_SESSION['estado'] == 'RV') echo " selected"?>>Realizada valoración</option>                                                                
                     </select>
                 </div>
                 <div class="col">
