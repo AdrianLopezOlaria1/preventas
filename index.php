@@ -116,6 +116,9 @@ switch ($action) {
     case "enviarFiltro":
         include 'metodos/filtro.php';
         break;
+    case "borrarFiltro":
+        include 'metodos/borrarFiltros.php';
+        break;
     case "enviarPreventa":
         include 'metodos/preventa.php';
         break;
