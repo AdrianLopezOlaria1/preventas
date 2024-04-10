@@ -15,7 +15,10 @@ if (isset($_POST)) {
     if ($preventasFiltradas) {
         $_SESSION['preventasFiltradas'] = $preventasFiltradas;
         header("location: index.php?action=preventas"); 
-    } 
+    } else {
+        $_SESSION['preventasFiltradas'] = $preventasFiltradas;
+        header("location: index.php?action=preventas"); 
+    }
 } 
 
 ?>
