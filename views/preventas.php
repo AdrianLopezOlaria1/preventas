@@ -21,7 +21,7 @@
                             <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"></path>
                         </svg> Filtros
                     </button>
-                    <?php if(isset($_SESSION['preventasFiltradas']) || isset($_SESSION['mostrar'])):?>
+                    <?php if(isset($_SESSION['preventasFiltradas'])):?>
                         <div id="filtros" class="row" style="display:block; transition: opacity 0.3s;">
                     <?php else:?>
                         <div id="filtros" class="row" style="display:none; transition: opacity 0.3s;">
@@ -66,11 +66,14 @@
                                                 if($preventasFiltradas == null){
                                                     echo "<div class='alert alert-warning'>No hay resultados que mostrar</div>";
                                                 } else {
-
-                                                  
-                                                    foreach ($preventasFiltradas as $index => $preventa) {
+                                                    $paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1; 
+                                                    $totalPreventas = count($preventasFiltradas);
+                                                    $preventasPorPagina = 5;  
+                                                    $totalPaginas = ceil($totalPreventas / $preventasPorPagina);                                               
+                                                    for ($i = ($paginaActual - 1) * $preventasPorPagina; $i < min($paginaActual * $preventasPorPagina, $totalPreventas); $i++) {
+                                                        $preventa = $preventasFiltradas[$i];
                                                         echo '<tr>';
-                                                        echo '<th scope="row">' . ($index + 1) . '</th>'; // Número de fila
+                                                        echo '<th scope="row">' . ($i + 1) . '</th>'; // Número de fila
                                                         echo '<td>' . $preventa['nomUs'] . '</td>'; // Usuario
                                                         echo '<td>' . $preventa['nomCli'] . '</td>'; // Cliente
                                                         echo '<td>' . $preventa['nomCont'] . '</td>'; // Contacto
@@ -126,8 +129,11 @@
                                                     }
                                                     echo '</tbody>';
                                                     echo '</table>';
-                                                    
-                                                                                                                                                                        
+                                                    echo '<ul class="pagination">';
+                                                    for ($i = 1; $i <= $totalPaginas; $i++) {
+                                                        echo '<li class="page-item ' . ($paginaActual == $i ? 'active' : '') . '"><a class="page-link" href="index.php?action=preventas&pagina=' . $i . '">' . $i . '</a></li>';
+                                                }
+                                                echo '</ul>';                                                                                                                                                                                                                            
                                                 }
                                             } else {
                                                     $paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
@@ -206,14 +212,9 @@
                                                     echo '<li class="page-item ' . ($paginaActual == $i ? 'active' : '') . '"><a class="page-link" href="index.php?action=preventas&pagina=' . $i . '">' . $i . '</a></li>';
                                                 }
                                                 echo '</ul>';
-                                            }
-                                            
-                                           
-                                            ?>                                                
-                                        
-                                        <?php $_SESSION['preventasFiltradas'] = null;?>
-                                    </div> <!-- end table-responsive-->
-
+                                            }                                                                                       
+                                            ?>                                                                                                                                
+                                    </div> <!-- end table-responsive-->                                
                                 </div> <!-- end card body-->
                             </div> <!-- end card -->
                         </div><!-- end col-->

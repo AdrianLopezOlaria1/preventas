@@ -1,5 +1,5 @@
 <?php
-$_SESSION['mostrar'] = 'ok';
+unset($_SESSION['preventasFiltradas']);
 unset($_SESSION['estado']);
 unset($_SESSION['comercial']);
 unset($_SESSION['usu']);
