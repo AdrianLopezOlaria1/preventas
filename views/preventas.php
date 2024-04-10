@@ -67,7 +67,7 @@
                                                     echo "<div class='alert alert-warning'>No hay resultados que mostrar</div>";
                                                 } else {
 
-                                                    
+                                                  
                                                     foreach ($preventasFiltradas as $index => $preventa) {
                                                         echo '<tr>';
                                                         echo '<th scope="row">' . ($index + 1) . '</th>'; // Número de fila
