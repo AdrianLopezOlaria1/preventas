@@ -55,13 +55,15 @@
                                                     <?php endif; ?>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                        <tbody>
                                             <?php                                                                                       
                                             if (isset($_SESSION['preventasFiltradas'])) {
                                                 $preventasFiltradas = $_SESSION['preventasFiltradas']; 
                                                 if($preventasFiltradas == null){
                                                     echo "<div class='alert alert-warning'>No hay resultados que mostrar</div>";
                                                 } else {
+
+                                                    
                                                     foreach ($preventasFiltradas as $index => $preventa) {
                                                         echo '<tr>';
                                                         echo '<th scope="row">' . ($index + 1) . '</th>'; // Número de fila
@@ -117,14 +119,29 @@
                                                         style="float: none;">Modificar</a></div>';                                        
                                                         }                                                                                
                                                         echo '</tr>';
-                                                    }                                                                                                                              
+                                                    }
+                                                    echo '</tbody>';
+                                                    echo '</table>';
+                                                    
+                                                                                                                                                                        
                                                 }
                                             } else {
-                                                $preventa = new PreVenta();
-                                                $preventas = $preventa->obtenerPreventas();
-                                                foreach ($preventas as $index => $preventa) {
+                                                    $paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+
+                                                    $preventa = new PreVenta();
+                                                    $preventas = $preventa->obtenerPreventas();
+                                                        
+                                                    $totalPreventas = count($preventas);
+                                                    $preventasPorPagina = 10;
+                                                        
+                                                    $totalPaginas = ceil($totalPreventas / $preventasPorPagina);
+
+                                                        
+                                                    for ($i = ($paginaActual - 1) * $preventasPorPagina; $i < min($paginaActual * $preventasPorPagina, $totalPreventas); $i++) {
+                                                            
+                                                    $preventa = $preventas[$i];
                                                     echo '<tr>';
-                                                    echo '<th scope="row">' . ($index + 1) . '</th>'; // Número de fila
+                                                    echo '<th scope="row">' . ($i+1) . '</th>'; // Número de fila
                                                     echo '<td>' . $preventa['nomUs'] . '</td>'; // Usuario
                                                     echo '<td>' . $preventa['nomCli'] . '</td>'; // Cliente
                                                     echo '<td>' . $preventa['nomCont'] . '</td>'; // Contacto
@@ -178,10 +195,18 @@
                                                     }                                                                                
                                                     echo '</tr>';
                                                 }
-                                            }                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                echo '</tbody>';
+                                                echo '</table>';
+                                                echo '<ul class="pagination">';
+                                                for ($i = 1; $i <= $totalPaginas; $i++) {
+                                                    echo '<li class="page-item ' . ($paginaActual == $i ? 'active' : '') . '"><a class="page-link" href="index.php?action=preventas&pagina=' . $i . '">' . $i . '</a></li>';
+                                                }
+                                                echo '</ul>';
+                                            }
+                                            
+                                           
                                             ?>                                                
-                                            </tbody>
-                                        </table>
+                                        
                                         <?php $_SESSION['preventasFiltradas'] = null;?>
                                     </div> <!-- end table-responsive-->
 
