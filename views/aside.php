@@ -40,7 +40,7 @@
                             <div class="collapse" id="sidebarCharts">
                                 <ul class="side-nav-second-level">
                                     <li>
-                                        <a href="index.php?action=preventas" style="color:white; text-decoration: none;"
+                                        <a href="index.php?action=preventas&pre" style="color:white; text-decoration: none;"
                                          onmouseover="this.style.color='#3399FF'" onmouseout="this.style.color='white'">Mis preventas</a>
                                     </li>
                                     <li>
