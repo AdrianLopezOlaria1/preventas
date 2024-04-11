@@ -1,3 +1,4 @@
+        <?php if(isset($_GET['pre'])){unset($_SESSION['preventasFiltradas']);unset($_SESSION['estado']);unset($_SESSION['comercial']);unset($_SESSION['usu']);unset($_SESSION['ini']);unset($_SESSION['fin']);}?>                                            
         <div class="content-page">
             <div class="content">
                 <div class="container-fluid">
@@ -21,7 +22,7 @@
                             <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"></path>
                         </svg> Filtros
                     </button>
-                    <?php if(isset($_SESSION['preventasFiltradas'])):?>
+                    <?php if(isset($_SESSION['preventasFiltradas']) || isset($_GET['mostrar'])):?>
                         <div id="filtros" class="row" style="display:block; transition: opacity 0.3s;">
                     <?php else:?>
                         <div id="filtros" class="row" style="display:none; transition: opacity 0.3s;">
@@ -60,7 +61,7 @@
                                                 </tr>
                                             </thead>
                                         <tbody>
-                                            <?php                                                                                       
+                                            <?php                                                                                                                                   
                                             if (isset($_SESSION['preventasFiltradas'])) {                                                
                                                 $preventasFiltradas = $_SESSION['preventasFiltradas']; 
                                                 if($preventasFiltradas == null){
@@ -129,6 +130,7 @@
                                                     }
                                                     echo '</tbody>';
                                                     echo '</table>';
+                                                    echo '<br>';
                                                     echo '<ul class="pagination">';
                                                     for ($i = 1; $i <= $totalPaginas; $i++) {
                                                         echo '<li class="page-item ' . ($paginaActual == $i ? 'active' : '') . '"><a class="page-link" href="index.php?action=preventas&pagina=' . $i . '">' . $i . '</a></li>';
@@ -207,6 +209,7 @@
                                                 }
                                                 echo '</tbody>';
                                                 echo '</table>';
+                                                echo '<br>';
                                                 echo '<ul class="pagination">';
                                                 for ($i = 1; $i <= $totalPaginas; $i++) {
                                                     echo '<li class="page-item ' . ($paginaActual == $i ? 'active' : '') . '"><a class="page-link" href="index.php?action=preventas&pagina=' . $i . '">' . $i . '</a></li>';

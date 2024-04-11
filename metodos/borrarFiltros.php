@@ -6,4 +6,4 @@ unset($_SESSION['usu']);
 unset($_SESSION['ini']);
 unset($_SESSION['fin']);
 
-header('Location:index.php?action=preventas');
+header('Location:index.php?action=preventas&mostrar');
