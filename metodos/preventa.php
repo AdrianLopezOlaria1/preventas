@@ -30,7 +30,8 @@
             
             if($preventa->crearPreventa($id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario,
             $fecha_reunion, $fecha_presentacion, $horas_previstas, $acta_reunion, $archivo, $importe, $status)){
-                header("location: index.php?action=formPreventa");
+                echo "<script>alert('Preventa creada correctamente');</script>";                
+                echo "<script>window.location.href = 'index.php?action=preventas&pre';</script>";
             }else{
                 header("location: index.php?action=formPreventa");
             }            

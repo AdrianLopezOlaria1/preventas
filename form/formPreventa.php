@@ -25,12 +25,7 @@
                         <div class="card-header">
                             <h4 class="header-title">Nueva preventa</h4>
                         </div>                         
-                        <div class="card-body">
-                            <?php if(isset($_SESSION['completado'])): ?>
-                                <div class='alert alert-success'>
-                                    <?=$_SESSION['completado'];?>
-                                </div>
-                            <?php endif; ?>
+                        <div class="card-body">                            
                             <form action="index.php?action=enviarPreventa" method="POST" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-lg-6">
