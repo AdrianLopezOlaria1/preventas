@@ -57,6 +57,7 @@
                         ?>                                  
                     </select>
                 </div>
+
                 <div class="col">
                     <label for="fecha_inicio" class="form-label">Fecha de inicio:</label>
                     <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" <?php if(isset($_SESSION['ini'])) echo "value='".$_SESSION['ini']."'"?>>
@@ -65,13 +66,20 @@
                     <label for="fecha_fin" class="form-label">Fecha fin:</label>
                     <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" <?php if(isset($_SESSION['fin'])) echo "value='".$_SESSION['fin']."'"?>>
                 </div>
-                <div class="col">
-                    <button type="submit" class="btn btn-primary" style="background-color: #f93215; color: white; padding: 10px 20px; border: none; transition: all 0.3s ease; border-radius: 20px;"
-                    onmouseover="this.style.backgroundColor='#2d9cfc'; this.style.transform='scale(1.1)';"
-                    onmouseout="this.style.backgroundColor='#f93215'; this.style.transform='scale(1)';">Filtrar</button>
-                    <a href="index.php?action=borrarFiltro" class="btn btn-primary" style="background-color: #f93215; color: white; padding: 10px 20px; border: none; transition: all 0.3s ease; border-radius: 20px;"
-                    onmouseover="this.style.backgroundColor='#2d9cfc'; this.style.transform='scale(1.1)';"
-                    onmouseout="this.style.backgroundColor='#f93215'; this.style.transform='scale(1)';">Borrar filtros</a>
+                
+                <div class="col-2 row">
+                    <div class="col">
+                        <br>
+                        <button type="submit" class="btn btn-primary mb-3" style="background-color: #f93215; color: white; padding: 10px 20px; border: none; transition: all 0.3s ease; border-radius: 20px; display:float;"
+                        onmouseover="this.style.backgroundColor='#2d9cfc'; this.style.transform='scale(1.1)';"
+                        onmouseout="this.style.backgroundColor='#f93215'; this.style.transform='scale(1)';">Filtrar</button>
+                    
+
+                    
+                        <a href="index.php?action=borrarFiltro" class="btn btn-primary" style="background-color: #f93215; color: white; padding: 10px 20px; border: none; transition: all 0.3s ease; border-radius: 20px; float:left;"
+                        onmouseover="this.style.backgroundColor='#2d9cfc'; this.style.transform='scale(1.1)';"
+                        onmouseout="this.style.backgroundColor='#f93215'; this.style.transform='scale(1)';">Borrar filtros</a>
+                    </div>
                 </div>
             </div>
         </form>        

@@ -96,7 +96,7 @@ if (!function_exists('Conexion')) {
                 $result_check_name = mysqli_query($mysqli, $sql_check_name);
                 $row = mysqli_fetch_assoc($result_check_name);
                 if ($row) {
-                    $_SESSION['error']['nombre'] = "Error, this name is already registered";
+                    $_SESSION['error']['nombre'] = "Error, ese nombre ya esta en uso";
                     return $_SESSION['error'];
                 }
                 // Insertar Cliente en la base de datos
@@ -104,7 +104,7 @@ if (!function_exists('Conexion')) {
                  NULL, NULL);";
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {
-                    $_SESSION['completado'] = "Client has been successfully completed!";
+                    $_SESSION['completado'] = "El cliente se ha creado con exito!";
                 } else {
                    return false;
                 }

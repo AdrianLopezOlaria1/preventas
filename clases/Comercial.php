@@ -236,13 +236,13 @@ if (!function_exists('Conexion')) {
                 $sql = "INSERT INTO comerciales VALUES(NULL, '$nombre', '$email', 'A', NOW(), NULL, NULL)";
                 $guardar = mysqli_query($mysqli, $sql);
                 if ($guardar) {
-                    $_SESSION['completado'] = "Commercial has been successfully created!";
+                    $_SESSION['completado'] = "¡El comercial ha sido creado exitosamente!";
                     return true;
                 } else {
                     return false;
                 }
             } else {
-                $_SESSION['error']['email'] = "Error, this email is already registered";
+                $_SESSION['error']['email'] = "Error, este email ya esta regitrado";
                 return $_SESSION['error'];
             }
         }
