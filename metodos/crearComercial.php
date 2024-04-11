@@ -7,7 +7,8 @@
             $email = $_POST["email"];
             
             if($comercial->nuevo($nombre, $email)){
-                header("location: index.php?action=formComercial");
+                echo "<script>alert('Comercial creado correctamente');</script>";                
+                echo "<script>window.location.href = 'index.php?action=comercialList';</script>";
             }else{
                 header("location: index.php?action=formComercial");
             }            

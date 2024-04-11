@@ -6,7 +6,8 @@
             $nombre = $_POST["nombre"];
             
             if($cliente->nuevo($nombre)){
-                header("location: index.php?action=formCliente");
+                echo "<script>alert('Cliente creado correctamente');</script>";                
+                echo "<script>window.location.href = 'index.php?action=clientList';</script>";
             }else{
                 header("location: index.php?action=formCliente");
             }            

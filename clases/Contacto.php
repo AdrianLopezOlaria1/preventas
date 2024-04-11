@@ -97,49 +97,42 @@
         function validarDatos($id_cliente, $nombre, $email, $tel) {
             $error = array();
             if(empty($id_cliente)){
-                $error['id_cliente'] = "You must choose a client";
+                $error['id_cliente'] = "Debes escoger un cliente";
             }
-            if(!empty($nombre) && !is_numeric($nombre) && !preg_match("/[0-9]/", $nombre)){
-                $nombre_validado = true;
-            } else {
-                $nombre_validado = false;
-                $error['nombre'] = "Insert a valid name";
-            }
+            if(empty($nombre) || is_numeric($nombre) || preg_match("/[0-9]/", $nombre)){
+                $error['nombre'] = "Inserte un nombre válido";
+            } 
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                $error['email'] = "Insert a valid email address";
+                $error['email'] = "Inserte un email válido";
             }
             if(empty($tel) || !is_numeric($tel)){
-                $error['tel'] = "Insert a valid phone number";
+                $error['tel'] = "Inserte un número de teléfono correcto";
             }
             return $error;
         }
 
         public function nuevo($id_cliente, $nombre, $email, $tel) {
+            $result = false;
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
             $error = $this->validarDatos($id_cliente, $nombre, $email, $tel);
-            if(count($error) == 0){
-                // Verificar si el correo electrónico ya existe en la base de datos
+            if(count($error) == 0){                
                 $sql_check_email = "SELECT email FROM personas_contacto WHERE email = '$email'";
                 $result_check_email = mysqli_query($mysqli, $sql_check_email);
                 $row = mysqli_fetch_assoc($result_check_email);
                 if ($row) {
-                    $_SESSION['error']['email'] = "Error, el correo ya esta en uso";
-                    return $_SESSION['error'];
-                }
-                // Insertar contacto en la base de datos
+                    $_SESSION['error']['email'] = "Error, el correo ya esta en uso";                    
+                }                
                 $sql = "INSERT INTO personas_contacto VALUES(NULL, $id_cliente, '$nombre', '$email', '$tel', 
                 'A', NOW(), NULL, NULL);";
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {
-                    $_SESSION['completado'] = "El contacto ha sido creado exitosamente!";
-                } else {
-                    $_SESSION['error']['general'] = "Error";
+                    $result = true;
                 }
             } else {
-                $_SESSION['error'] = $error;
-                return $_SESSION['error'];
+                $_SESSION['error'] = $error;               
             }
+            return $result;
         }    
 
         function borrarErrores(){

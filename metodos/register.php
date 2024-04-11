@@ -9,7 +9,8 @@
             $check = $_POST["check"];
             
             if($usuario->registrar($nombre, $email, $password, $check)){
-                header("location: index.php?action=register");
+                echo "<script>alert('Registro exitoso');</script>";                
+                echo "<script>window.location.href = 'index.php';</script>";
             }else{
                 header("location: index.php?action=register");
             }            

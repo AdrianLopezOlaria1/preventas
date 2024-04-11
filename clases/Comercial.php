@@ -82,11 +82,11 @@ if (!function_exists('Conexion')) {
         function validarDatos($nombre, $email) {
             $error = array();
             if(empty($nombre)){
-                $error['nombre'] = "Insert a valid name";
+                $error['nombre'] = "Debe insertar un nombre";
             }
-        
+
             if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){
-                $error['email'] = "Insert a valid email address";
+                $error['email'] = "Inserte un email correcto";
             }
         
             return $error;
@@ -218,33 +218,25 @@ if (!function_exists('Conexion')) {
         
         
         public function nuevo($nombre, $email) {
+            $result = false;
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
-            
-            // Validar los datos de entrada
             $error = $this->validarDatos($nombre, $email);
-            if (count($error) > 0) {
-                $_SESSION['error'] = $error;
-                return $_SESSION['error'];
-            }
-            
-            // Verificar si el nombre ya existe en la base de datos
-            $emailExistente = $this->valorExistente($mysqli, 'email', $email);
-            
-            // Insertar Cliente en la base de datos si el nombre no existe
-            if (!$emailExistente) {
-                $sql = "INSERT INTO comerciales VALUES(NULL, '$nombre', '$email', 'A', NOW(), NULL, NULL)";
-                $guardar = mysqli_query($mysqli, $sql);
-                if ($guardar) {
-                    $_SESSION['completado'] = "¡El comercial ha sido creado exitosamente!";
-                    return true;
+            if (count($error) == 0) {
+                $emailExistente = $this->valorExistente($mysqli, 'email', $email);
+                if (!$emailExistente) {
+                    $sql = "INSERT INTO comerciales VALUES(NULL, '$nombre', '$email', 'A', NOW(), NULL, NULL)";
+                    $guardar = mysqli_query($mysqli, $sql);
+                    if ($guardar) {
+                        $result = true;
+                    } 
                 } else {
-                    return false;
-                }
+                    $_SESSION['error']['email'] = "Error, este email ya esta regitrado";                
+                }         
             } else {
-                $_SESSION['error']['email'] = "Error, este email ya esta regitrado";
-                return $_SESSION['error'];
-            }
+                $_SESSION['error'] = $error;
+            }            
+            return $result;
         }
         
 

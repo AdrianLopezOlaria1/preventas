@@ -29,12 +29,7 @@
                             Ingrese la información del nuevo contacto aquí.
                             </p>
                         </div>
-                        <div class="card-body">
-                            <?php if(isset($_SESSION['completado'])): ?>
-                                <div class='alert alert-success'>
-                                    <?=$_SESSION['completado'];?>
-                                </div>
-                            <?php endif; ?>
+                        <div class="card-body">                            
                             <form method="POST" action="index.php?action=enviarContacto">
                                 <div class="mb-3">
                                     <label for="exampleInputName1" class="form-label">Nombre de contacto</label>

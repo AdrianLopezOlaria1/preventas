@@ -26,12 +26,7 @@
                             Ingrese la información del nuevo comercial aquí.
                             </p>
                         </div>
-                        <div class="card-body">
-                            <?php if(isset($_SESSION['completado'])): ?>
-                                <div class='alert alert-success'>
-                                    <?=$_SESSION['completado'];?>
-                                </div>
-                            <?php endif; ?>
+                        <div class="card-body">                            
                             <form method="POST" action="index.php?action=enviarComercial">
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Nombre de comercial</label>

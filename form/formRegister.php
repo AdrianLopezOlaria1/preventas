@@ -22,13 +22,7 @@
                                     <div class="p-4 my-auto">
                                         <h4 class="fs-20">Registrate Gratis</h4>
                                         <p class="text-muted mb-3">Introduce tu nombre, tu correo y una contraseña para 
-                                            registrarte</p>
-
-                                        <?php if(isset($_SESSION['completado'])): ?>
-                                            <div class='alert alert-success'>
-                                                <?=$_SESSION['completado'];?>
-                                            </div>
-                                        <?php endif; ?>
+                                            registrarte</p>                                        
                                         <!-- form -->
                                         <form method="POST" action="index.php?action=enviarRegister" >
                                             <div class="mb-3">
