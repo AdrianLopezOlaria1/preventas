@@ -21,11 +21,17 @@
             $horas_previstas = $_POST["horas_previstas"];
             $importe = $_POST["importe"];
             $status = $_POST["estado"];
-            $archivo = $_POST["archivo"];
+            
+            $file = $_FILES['archivo'];
+            if($file['name'] != ''){
+                $archivo = uniqid() . '_' . $file['name'];
+                move_uploaded_file($file['tmp_name'], 'assets/files/'.$archivo);
+            }
             
             if($preventa->editarPreventa($id, $id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario, $fecha_reunion,
             $fecha_presentacion, $horas_previstas, $acta_reunion, $importe, $status, $archivo)){
-                header("location: index.php?action=formEditPreventa");
+                echo "<script>alert('Preventa modificada correctamente');</script>";                
+                echo "<script>window.location.href = 'index.php?action=preventas&pre';</script>";
             }else{
                 header("location: index.php?action=formEditPreventa");
             }            

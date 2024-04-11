@@ -17,11 +17,20 @@
                         </div>
                     </div> 
                     <div >
-                    <button class="btn btn-primary" onclick="mostrarFiltros()">
+                    <button class="btn btn-primary" onclick="mostrarFiltros()" style="display:float;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
                             <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"></path>
                         </svg> Filtros
                     </button>
+                    <?php if($_SESSION['usuario']['rol'] == 1):?>                
+                        <div class="d-flex justify-content-end align-items-center gap-2" style="float:right;">        
+                            <a class="btn btn-soft-info" href="index.php?action=formPreventa" style="background-color: #f93215; color: white; padding: 10px 20px; border: none; transition: all 0.3s ease; border-radius: 20px;" 
+                            onmouseover="this.style.backgroundColor='#2d9cfc'; this.style.transform='scale(1.1)';"
+                            onmouseout="this.style.backgroundColor='#f93215'; this.style.transform='scale(1)';"
+                            > Nueva preventa</a>
+                        </div>                
+                    <?php endif; ?>
+
                     <?php if(isset($_SESSION['preventasFiltradas']) || isset($_GET['mostrar'])):?>
                         <div id="filtros" class="row" style="display:block; transition: opacity 0.3s;">
                     <?php else:?>

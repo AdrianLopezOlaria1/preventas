@@ -31,13 +31,8 @@ if(isset($_GET['id'])){
                     <div class="card">
                         <div class="card-header">
                             <h4 class="header-title">Modifique información de la preventa</h4>
-                        </div>
-                        <?php if(isset($_SESSION['completado'])): ?>
-                            <div class='alert alert-success'>
-                                <?=$_SESSION['completado'];?>
-                            </div>
-                        <?php endif; ?>
-                        <form action="index.php?action=enviarEditarPreventa" method="POST">
+                        </div>                        
+                        <form action="index.php?action=enviarEditarPreventa" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="row">                            
                                     <div class="col-lg-6">   
@@ -128,7 +123,7 @@ if(isset($_GET['id'])){
                                         </div>                                        
                                         <div class="mb-3">
                                             <label for="example-fileinput" class="form-label">Archivo</label>
-                                            <input type="file" id="example-fileinput" class="form-control">
+                                            <input type="file" id="example-fileinput" class="form-control" name="archivo">
                                         </div>                                                                           
                                     </div> <!-- end col -->
                                     <div class="col-lg-6">

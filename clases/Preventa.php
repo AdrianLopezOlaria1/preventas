@@ -159,25 +159,24 @@
     
         public function crearPreventa($id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario,
         $fecha_reunion, $fecha_presentacion, $horas_previstas, $acta_reunion, $archivo, $importe, $status) {
+            $result = false;
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
             $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario,
             $fecha_reunion, $horas_previstas, $acta_reunion, $importe, $status);
-            if(count($error) == 0){
-                // Insertar precompra en la base de datos
+            if(count($error) == 0){                
                 $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_comercial, $id_tipo, NOW(), '$fecha_reunion', '$acta_reunion', $horas_previstas, $importe, '$status', NULL, $id_contacto, $id_usuario, '$fecha_presentacion', '$archivo');";
-
-
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {
                     $_SESSION['completado'] = "La preventa se ha generado correctamente!";
+                    $result = true;
                 } else {
                     $_SESSION['error']['general'] = "Error";
                 }
             } else {
-                $_SESSION['error'] = $error;
-                return $_SESSION['error'];
+                $_SESSION['error'] = $error;                
             }
+            return $result; 
         }    
 
         public function borrarErrores(){
@@ -211,7 +210,8 @@
             LEFT JOIN comerciales com ON com.id = pr.id_comercial
             LEFT JOIN personas_contacto cont ON cont.id = pr.id_contacto
             LEFT JOIN usuarios us ON us.id = pr.id_usuario
-            LEFT JOIN tipos_proyectos ti ON ti.id = pr.id_tipo;";
+            LEFT JOIN tipos_proyectos ti ON ti.id = pr.id_tipo
+            ORDER BY pr.fecha_solicitud DESC;";
         
             // Ejecutar la consulta
             $resultado = $mysqli->query($sql);
@@ -384,7 +384,7 @@
 
         public function editarPreventa($id, $id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario, $fecha_reunion,
         $fecha_presentacion, $horas_previstas, $acta_reunion, $importe, $status, $archivo) {
-
+            $result = false;
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
             $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario,
@@ -411,13 +411,14 @@
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {
                     $_SESSION['completado'] = "La preventa se ha modificado correctamente!";
+                    $result = true;
                 } else {
                     $_SESSION['error']['general'] = "Error";
                 }
             } else {
-                $_SESSION['error'] = $error;
-                return $_SESSION['error'];
+                $_SESSION['error'] = $error;                
             }
+            return $result;
         }
 
         function obtenerNumeroPreventasPorMes($status, $mes) {
@@ -515,6 +516,8 @@
             if (!empty($condiciones)) {
                 $sql .= "WHERE " . implode(" AND ", $condiciones);
             }
+
+            $sql .= " ORDER BY pr.fecha_solicitud DESC;";
         
             $preventa = mysqli_query($mysqli, $sql);
             $preventasFiltradas = array();        
