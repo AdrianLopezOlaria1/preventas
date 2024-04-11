@@ -124,7 +124,7 @@
                 $result_check_email = mysqli_query($mysqli, $sql_check_email);
                 $row = mysqli_fetch_assoc($result_check_email);
                 if ($row) {
-                    $_SESSION['error']['email'] = "Error, the email is already registered";
+                    $_SESSION['error']['email'] = "Error, el correo ya esta en uso";
                     return $_SESSION['error'];
                 }
                 // Insertar contacto en la base de datos
@@ -132,7 +132,7 @@
                 'A', NOW(), NULL, NULL);";
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {
-                    $_SESSION['completado'] = "The contact has been successfully created!";
+                    $_SESSION['completado'] = "El contacto ha sido creado exitosamente!";
                 } else {
                     $_SESSION['error']['general'] = "Error";
                 }
@@ -243,7 +243,7 @@
                 $result_check_email = $conn->query($sql_check_email);
                 if ($result_check_email->num_rows > 0) {
                     // El nuevo correo electrónico ya está en uso
-                    return array('error' => 'El correo electrónico ya está en uso por otro contacto.');
+                    return array('error' => 'El correo electrónico ya está en uso.');
                 }
             }
             

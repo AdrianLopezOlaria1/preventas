@@ -95,16 +95,16 @@ if (!function_exists('Conexion')) {
                 $nombre_validado = true;
             } else {
                 $nombre_validado = false;
-                $error['nombre'] = "Insert a valid name";
+                $error['nombre'] = "Inserte un nombre valido";
             }
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                $error['email'] = "Insert a valid email address";
+                $error['email'] = "Inserte un correo valido";
             }
             if(empty($password)){
-                $error['password'] = "The password can't be empty";
+                $error['password'] = "La contraseña no puede estar vacía";
             }
             if(!isset($check)){
-                $error['check'] = "You must accept terms and conditions";
+                $error['check'] = "Debes aceptar los terminos y condiciones";
             }
             return $error;
         }
@@ -127,11 +127,11 @@ if (!function_exists('Conexion')) {
                     header('Location: index.php?action=index');
                     return true;
                 } else {
-                    $_SESSION['error_login'] = 'Invalid credentials, check email or password';
+                    $_SESSION['error_login'] = 'El correo o la contraseña son incorrectos.';
                     return false;
                 }
             } else {
-                $_SESSION['error_login'] = 'Invalid credentials, check email or password';
+                $_SESSION['error_login'] = 'El correo o la contraseña son incorrectos.';
                 return false;
             }
         }
@@ -146,7 +146,7 @@ if (!function_exists('Conexion')) {
                 $result_check_email = mysqli_query($mysqli, $sql_check_email);
                 $row = mysqli_fetch_assoc($result_check_email);
                 if ($row['count'] > 0) {
-                    $_SESSION['error']['email'] = "Error, the email is already registered";
+                    $_SESSION['error']['email'] = "Error, ese correo ya esta en uso";
                     return $_SESSION['error'];
                 }
                 // Insertar usuario en la base de datos
@@ -156,7 +156,7 @@ if (!function_exists('Conexion')) {
                 NULL, NULL, NULL, 'A', NOW(), NULL, NULL, 0);";
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {
-                    $_SESSION['completado'] = "Sign up has been successfully completed!";
+                    $_SESSION['completado'] = "Te has registrado con exito!";
                 } else {
                     $_SESSION['error']['general'] = "Error";
                 }
@@ -227,7 +227,7 @@ if (!function_exists('Conexion')) {
                                 }
 
                             } else {
-                                $_SESSION['error']['general'] = "Error, this email is already registered";
+                                $_SESSION['error']['general'] = "Error, ese correo ya esta registrado";
                                 return false;
                             }
                             
@@ -269,7 +269,7 @@ if (!function_exists('Conexion')) {
                         return false; 
                     }
                 } else {
-                    $_SESSION['error']['general'] = "Error, this email is already registered";
+                    $_SESSION['error']['general'] = "Error, ese correo ya esta registrado";
                     return false;
                 }
             }
