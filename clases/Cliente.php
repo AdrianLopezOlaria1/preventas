@@ -72,21 +72,16 @@ if (!function_exists('Conexion')) {
 
         function validarDatos($nombre) {
             $error = array();
-            if(!empty($nombre)){
-                $nombre_validado = true;
-            } else {
-                $nombre_validado = false;
-                $error['nombre'] = "Insert a valid name";
-            }
-/*             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                $error['email'] = "Insert a valid email address";
-            } */
+            if(empty($nombre)){
+                $error['nombre'] = "Debe insertar un nombre";
+            } 
             return $error;
         }
 
     
 
         public function nuevo($nombre) {
+            $result = false;
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
             $error = $this->validarDatos($nombre);
@@ -96,22 +91,18 @@ if (!function_exists('Conexion')) {
                 $result_check_name = mysqli_query($mysqli, $sql_check_name);
                 $row = mysqli_fetch_assoc($result_check_name);
                 if ($row) {
-                    $_SESSION['error']['nombre'] = "Error, ese nombre ya esta en uso";
-                    return $_SESSION['error'];
-                }
-                // Insertar Cliente en la base de datos
+                    $_SESSION['error']['nombre'] = "Error, ese nombre ya esta en uso";                    
+                }              
                 $sql = "INSERT INTO clientes VALUES(NULL,'$nombre', 'A', NOW(),
                  NULL, NULL);";
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {
-                    $_SESSION['completado'] = "El cliente se ha creado con exito!";
-                } else {
-                   return false;
-                }
+                    $result = true;
+                } 
             } else {
-                $_SESSION['error'] = $error;
-                return $_SESSION['error'];
+                $_SESSION['error'] = $error;                
             }
+            return $result;
         }    
 
         public function obtenerClientes() {

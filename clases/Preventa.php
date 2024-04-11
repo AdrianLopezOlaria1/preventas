@@ -167,8 +167,7 @@
             if(count($error) == 0){                
                 $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_comercial, $id_tipo, NOW(), '$fecha_reunion', '$acta_reunion', $horas_previstas, $importe, '$status', NULL, $id_contacto, $id_usuario, '$fecha_presentacion', '$archivo');";
                 $guardar = mysqli_query($mysqli, $sql);
-                if($guardar) {
-                    $_SESSION['completado'] = "La preventa se ha generado correctamente!";
+                if($guardar) {                
                     $result = true;
                 } else {
                     $_SESSION['error']['general'] = "Error";
@@ -409,8 +408,7 @@
                     WHERE id = $id;"; 
 
                 $guardar = mysqli_query($mysqli, $sql);
-                if($guardar) {
-                    $_SESSION['completado'] = "La preventa se ha modificado correctamente!";
+                if($guardar) {                    
                     $result = true;
                 } else {
                     $_SESSION['error']['general'] = "Error";

@@ -8,7 +8,8 @@
             $email = $_POST["email"];
             $tel = $_POST["tel"];
             if($contacto->nuevo($id_cliente, $nombre, $email, $tel)){
-                header("location: index.php?action=formContacto");
+                echo "<script>alert('Contacto creado correctamente');</script>";                
+                echo "<script>window.location.href = 'index.php?action=contactList';</script>";
             }else{
                 header("location: index.php?action=formContacto");
             }            

@@ -137,6 +137,7 @@ if (!function_exists('Conexion')) {
         }
 
         public function registrar($nombre, $email, $password, $check) {
+            $result = false;
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
             $error = $this->validarDatos($nombre, $email, $password, $check);
@@ -146,134 +147,94 @@ if (!function_exists('Conexion')) {
                 $result_check_email = mysqli_query($mysqli, $sql_check_email);
                 $row = mysqli_fetch_assoc($result_check_email);
                 if ($row['count'] > 0) {
-                    $_SESSION['error']['email'] = "Error, ese correo ya esta en uso";
-                    return $_SESSION['error'];
-                }
-                // Insertar usuario en la base de datos
+                    $_SESSION['error']['email'] = "Error, ese correo ya esta en uso";                   
+                }        
                 $password_segura = password_hash($password, PASSWORD_BCRYPT, ['cost' => 4]);
-
                 $sql = "INSERT INTO usuarios VALUES(null, '$nombre', '$email', '$password_segura', 
                 NULL, NULL, NULL, 'A', NOW(), NULL, NULL, 0);";
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {
-                    $_SESSION['completado'] = "Te has registrado con exito!";
-                } else {
-                    $_SESSION['error']['general'] = "Error";
-                }
+                    $result = true;
+                } 
             } else {
-                $_SESSION['error'] = $error;
-                return $_SESSION['error'];
+                $_SESSION['error'] = $error;                
             }
+            return $result;
         }    
 
         public function update($nombre, $email, $website, $skype, $new_password, $description, $password) {
+            $res = false;
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
-
-        
             $id_usuario = $_SESSION['usuario']['id'];
-
-        
-            // Verificar si se proporcionó una nueva contraseña
             if ($new_password) {
-
-
                 $sql = "SELECT password FROM usuarios WHERE id = $id_usuario;";
-                $result = mysqli_query($mysqli, $sql);
-
-        
+                $result = mysqli_query($mysqli, $sql);        
                 if ($result && mysqli_num_rows($result) == 1) {
-
                     $row = mysqli_fetch_assoc($result);
-                    $hashedPassword = $row['password'];
-                    
-
+                    $hashedPassword = $row['password'];                    
                     // Verificar si la contraseña actual coincide
                     if (password_verify($password, $hashedPassword)) {
                         // Contraseña actual coincide, proceder con la actualización de datos
-
                         // Validar los nuevos datos
-                        $error = $this->validarDatos($nombre, $email, $new_password);
-        
+                        $error = $this->validarDatos($nombre, $email, $new_password);        
                         if (count($error) == 0) {
-
                             //comprobar si email ya existe
                             $sql = "SELECT id, email FROM usuarios WHERE email = '$email';";
                             $result = mysqli_query($mysqli, $sql);
                             $user = mysqli_fetch_assoc($result);
-
                             if($user['id'] == $id_usuario || empty($user)){
                                 // Hashear la nueva contraseña
-
-                                $password_segura = password_hash($new_password, PASSWORD_BCRYPT, ['cost' => 4]);
-                                
+                                $password_segura = password_hash($new_password, PASSWORD_BCRYPT, ['cost' => 4]);                                
                                 // Actualizar los datos del usuario en la base de datos
                                 $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', password = '$password_segura', 
                                 skype = '$skype', website = '$website', description = '$description', status = 'M', fecha_modificacion = NOW()
                                 WHERE id = $id_usuario;";
-                                $resultado = mysqli_query($mysqli, $sql);
-            
+                                $resultado = mysqli_query($mysqli, $sql);    
                                 if ($resultado) {
                                     $_SESSION['usuario']['nombre'] = $nombre;
                                     $_SESSION['usuario']['email'] = $email;
                                     $_SESSION['usuario']['skype'] = $skype;
                                     $_SESSION['usuario']['website'] = $website;
-                                    $_SESSION['usuario']['description'] = $description;
-            
-                                    return true; // Actualización exitosa
-                                } else {
-                                    $_SESSION['error'] = $error;
-                                    return false; // Error al actualizar
+                                    $_SESSION['usuario']['description'] = $description;            
+                                    $res = true;
                                 }
-
                             } else {
-                                $_SESSION['error']['general'] = "Error, ese correo ya esta registrado";
-                                return false;
-                            }
-                            
-                        } else {
-                            // Datos inválidos
-                            $_SESSION['error'] = $error;
-                            return false;
+                                $_SESSION['error']['general'] = "Error, ese correo ya esta registrado";                               
+                            }                            
+                        } else {                           
+                            $_SESSION['error'] = $error;                           
                         }
                     } else {
-                        // Contraseña actual no coincide
-                        return false;
+                        $_SESSION['error']['password'] = 'La contraseña actual no coincide';
                     }
-                } else {
-                    // No se encontró al usuario o error en la consulta
-                    return false;
-                }
+                } 
             } else {
                 // No se proporcionó una nueva contraseña, actualizar sin cambiar la contraseña
                 //comprobar si email ya existe
                 $sql = "SELECT id, email FROM usuarios WHERE email = '$email';";
                 $result = mysqli_query($mysqli, $sql);
                 $user = mysqli_fetch_assoc($result);
-
                 if($user['id'] == $id_usuario || empty($user)){
                     $sql = "UPDATE usuarios SET nombre = '$nombre', email = '$email', skype = '$skype', 
                     website = '$website', description = '$description', status = 'M', fecha_modificacion = NOW()
                     WHERE id = $id_usuario;";
-                    $resultado = mysqli_query($mysqli, $sql);
-            
+                    $resultado = mysqli_query($mysqli, $sql);            
                     if ($resultado) {
                         $_SESSION['usuario']['nombre'] = $nombre;
                         $_SESSION['usuario']['email'] = $email;
                         $_SESSION['usuario']['skype'] = $skype;
                         $_SESSION['usuario']['website'] = $website;
                         $_SESSION['usuario']['description'] = $description;
-
-                        return true; 
-                    } else {
-                        return false; 
-                    }
+                        $res = true; 
+                    } 
                 } else {
-                    $_SESSION['error']['general'] = "Error, ese correo ya esta registrado";
-                    return false;
+                    $_SESSION['error']['general'] = "Error, ese correo ya esta registrado";                    
                 }
             }
+            return $res;
         }
+
         public function deshabilitar($usuario_id) {
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
