@@ -128,13 +128,14 @@
                 $row = mysqli_fetch_assoc($result_check_email);
                 if ($row) {
                     $_SESSION['error']['email'] = "Error, el correo ya esta en uso";                    
-                }                
-                $sql = "INSERT INTO personas_contacto VALUES(NULL, $id_cliente, '$nombre', '$email', '$tel', 
-                'A', NOW(), NULL, NULL);";
-                $guardar = mysqli_query($mysqli, $sql);
-                if($guardar) {
-                    $result = true;
-                }
+                } else {
+                    $sql = "INSERT INTO personas_contacto VALUES(NULL, $id_cliente, '$nombre', '$email', '$tel', 
+                    'A', NOW(), NULL, NULL);";
+                    $guardar = mysqli_query($mysqli, $sql);
+                    if($guardar) {
+                        $result = true;
+                    }
+                }                               
             } else {
                 $_SESSION['error'] = $error;               
             }
