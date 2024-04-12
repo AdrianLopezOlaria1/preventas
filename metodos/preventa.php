@@ -8,6 +8,7 @@
         && isset($_POST["id_tipo"]) && isset($_POST["fecha_reunion"]) && isset($_POST["id_usuario"]) 
         && isset($_POST["horas_previstas"]) && isset($_POST["importe"])){
 
+
             $id_cliente = $_POST["id_cliente"];
             $id_contacto = $_POST["id_contacto"];
             $id_comercial = $_POST["comercial"];
