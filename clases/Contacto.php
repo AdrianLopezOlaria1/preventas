@@ -105,8 +105,12 @@
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
                 $error['email'] = "Inserte un email válido";
             }
-            if(empty($tel) || !is_numeric($tel)){
-                $error['tel'] = "Inserte un número de teléfono correcto";
+            if($tel != ""){
+                
+                if( !is_numeric($tel)){
+                    
+                    $error['tel'] = "Inserte un número de teléfono correcto";
+                }
             }
             return $error;
         }
@@ -115,6 +119,8 @@
             $result = false;
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
+            
+            
             $error = $this->validarDatos($id_cliente, $nombre, $email, $tel);
             if(count($error) == 0){                
                 $sql_check_email = "SELECT email FROM personas_contacto WHERE email = '$email'";
@@ -132,6 +138,7 @@
             } else {
                 $_SESSION['error'] = $error;               
             }
+
             return $result;
         }    
 
