@@ -108,12 +108,7 @@
                                         </div>                                                                             
                                         <div class="mb-3">
                                             <label for="acta_reunion" class="form-label">Detalles acta de la reunión</label>
-                                            <textarea class="form-control" id="acta_reunion" name="acta_reunion" rows="14"></textarea>
-                                            <?php if(isset($_SESSION['error']['acta_reunion'])): ?>
-                                                <div class='alert alert-warning'>
-                                                    <?=$_SESSION['error']['acta_reunion'];?>
-                                                </div>
-                                            <?php endif; ?>
+                                            <textarea class="form-control" id="acta_reunion" name="acta_reunion" rows="14"></textarea>                                            
                                         </div>                                                                                                                            
                                     </div> <!-- end col -->
                                     <div class="col-lg-6">

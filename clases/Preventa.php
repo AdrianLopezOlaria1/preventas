@@ -120,7 +120,7 @@
         //funciones
 
         public function validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario,
-        $fecha_reunion, $horas_previstas, $acta_reunion, $importe, $status) {
+        $fecha_reunion, $horas_previstas, $importe, $status) {
 
             $error = array();
             if(empty($id_cliente)){
@@ -144,9 +144,6 @@
             if(empty($horas_previstas) || !is_numeric($horas_previstas) || $horas_previstas <= 0){            
                 $error['horas_previstas'] = "Debes insertar un número de horas válidas";
             }
-            if(empty($acta_reunion)){
-                $error['acta_reunion'] = "Debes rellenar el acta de reunión";
-            }
             if(empty($importe) || !is_numeric($importe) || $importe < 0){
                 $error['importe'] = "Debes poner un importe válido";
             }
@@ -163,7 +160,7 @@
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
             $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario,
-            $fecha_reunion, $horas_previstas, $acta_reunion, $importe, $status);
+            $fecha_reunion, $horas_previstas, $importe, $status);
             if(count($error) == 0){                
                 $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_comercial, $id_tipo, NOW(), '$fecha_reunion', '$acta_reunion', $horas_previstas, $importe, '$status', NULL, $id_contacto, $id_usuario, '$fecha_presentacion', '$archivo');";
                 $guardar = mysqli_query($mysqli, $sql);
@@ -387,7 +384,7 @@
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
             $error = $this->validarDatos($id_cliente, $id_contacto, $id_comercial, $id_tipo, $id_usuario,
-            $fecha_reunion, $horas_previstas, $acta_reunion, $importe, $status);
+            $fecha_reunion, $horas_previstas, $importe, $status);
 
             if(count($error) == 0){    
         

@@ -114,12 +114,7 @@ if(isset($_GET['id'])){
                                         <div class="mb-3">
                                             <label for="acta_reunion" class="form-label">Detalles acta de la reunión</label>
                                             <textarea class="form-control" id="acta_reunion" name="acta_reunion" rows="5">
-                                                <?php echo isset($actual['acta_reunion']) ? $actual['acta_reunion'] : ''; ?></textarea>
-                                            <?php if(isset($_SESSION['error']['acta_reunion'])): ?>
-                                                <div class='alert alert-warning'>
-                                                    <?=$_SESSION['error']['acta_reunion'];?>
-                                                </div>
-                                            <?php endif; ?>
+                                                <?php echo isset($actual['acta_reunion']) ? $actual['acta_reunion'] : ''; ?></textarea>                                            
                                         </div>                                        
                                         <div class="mb-3">
                                             <label for="example-fileinput" class="form-label">Archivo</label>

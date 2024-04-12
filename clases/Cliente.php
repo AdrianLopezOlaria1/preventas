@@ -92,13 +92,14 @@ if (!function_exists('Conexion')) {
                 $row = mysqli_fetch_assoc($result_check_name);
                 if ($row) {
                     $_SESSION['error']['nombre'] = "Error, ese nombre ya esta en uso";                    
-                }              
-                $sql = "INSERT INTO clientes VALUES(NULL,'$nombre', 'A', NOW(),
-                 NULL, NULL);";
-                $guardar = mysqli_query($mysqli, $sql);
-                if($guardar) {
-                    $result = true;
-                } 
+                } else {
+                    $sql = "INSERT INTO clientes VALUES(NULL,'$nombre', 'A', NOW(),
+                    NULL, NULL);";
+                    $guardar = mysqli_query($mysqli, $sql);
+                    if($guardar) {
+                        $result = true;
+                    }
+                }             
             } else {
                 $_SESSION['error'] = $error;                
             }
