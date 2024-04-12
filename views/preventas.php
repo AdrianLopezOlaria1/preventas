@@ -45,30 +45,29 @@
                                 <div class="card-header">
                                     <h4 class="header-title">Preventas</h4>
                                 </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Usuario</th>
-                                                    <th scope="col">Cliente</th>
-                                                    <th scope="col">Contacto</th>
-                                                    <th scope="col">Comercial</th>
-                                                    <th scope="col">Tipo</th>
-                                                    <th scope="col">Fecha Solicitud</th>
-                                                    <th scope="col">Fecha Reunión</th>
-                                                    <th scope="col">Fecha Presentación</th>
-                                                    <th scope="col">Acta</th>
-                                                    <th scope="col">Archivo</th>
-                                                    <th scope="col">Horas</th>
-                                                    <th scope="col">Importe</th>
-                                                    <th scope="col">Preventas</th> 
-                                                    <?php if($_SESSION['usuario']['rol'] == 1): ?> 
-                                                    <th scope="col">Acción</th>
-                                                    <?php endif; ?>
-                                                </tr>
-                                            </thead>
+                                <div class="card-body">                                    
+                                    <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Usuario</th>
+                                                <th scope="col">Cliente</th>
+                                                <th scope="col">Contacto</th>
+                                                <th scope="col">Comercial</th>
+                                                <th scope="col">Tipo</th>
+                                                <th scope="col">Fecha Solicitud</th>
+                                                <th scope="col">Fecha Reunión</th>
+                                                <th scope="col">Fecha Presentación</th>
+                                                <th scope="col">Acta</th>
+                                                <th scope="col">Archivo</th>
+                                                <th scope="col">Horas</th>
+                                                <th scope="col">Importe</th>
+                                                <th scope="col">Preventas</th> 
+                                                <?php if($_SESSION['usuario']['rol'] == 1): ?> 
+                                                <th scope="col">Acción</th>
+                                                <?php endif; ?>
+                                            </tr>
+                                        </thead>
                                         <tbody>
                                             <?php                                                                                                                                   
                                             if (isset($_SESSION['preventasFiltradas'])) {                                                
@@ -225,8 +224,7 @@
                                                 }
                                                 echo '</ul>';
                                             }                                                                                       
-                                            ?>                                                                                                                                
-                                    </div> <!-- end table-responsive-->                                
+                                            ?>                                                                                                                                                                                              
                                 </div> <!-- end card body-->
                             </div> <!-- end card -->
                         </div><!-- end col-->
