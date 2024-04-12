@@ -200,17 +200,9 @@ switch ($action) {
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
 
-
+    <!-- Dropzone File Upload js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
  
-
-            <!-- Dropzone File Upload js -->
-            <!--<script src="assets/vendor/dropzone/min/dropzone.min.js"></script>-->
-
-            <!-- File Upload Demo js -->
-            <!--<script src="assets/js/pages/fileupload.init.js"></script>-->
-
-
     <!-- Daterangepicker js -->
     <script src="assets/vendor/daterangepicker/moment.min.js"></script>
     <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
@@ -222,9 +214,10 @@ switch ($action) {
     <script src="assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
     <script src="assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
  
-    <!-- Dashboard App js -->
- 
- 
+    <!-- Datatables js -->
+    <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>    
+    <script src="assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>   
+    <script src="assets/js/pages/datatable.init.js"></script>
  
     <!-- App js -->
     <script src="assets/js/app.min.js"></script>
