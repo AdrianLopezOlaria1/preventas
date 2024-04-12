@@ -4,7 +4,7 @@
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         
         
-        if (isset($_POST["id_cliente"]) && isset($_POST["id_contacto"]) && isset($_POST["comercial"])
+        if (isset($_POST["id_cliente"]) && isset($_POST["comercial"])
         && isset($_POST["id_tipo"]) && isset($_POST["fecha_reunion"]) && isset($_POST["acta_reunion"]) 
         && isset($_POST["id_usuario"]) && isset($_POST["horas_previstas"]) && isset($_POST["importe"])){
 
