@@ -58,7 +58,7 @@
                                         </div>
                                         <!-- fin selector usuarios -->
 
-                                        <!-- selector clientes-->
+                                        <!-- selector comerciales-->
                                         <div class="mb-3">
                                             <label for="id_comercial" class="form-label">Comercial</label>
                                             <select class="form-select" id="id_comercial" name="comercial">
@@ -85,18 +85,13 @@
                                                 </div>
                                             <?php endif; ?>
                                         </div>
-
                                         
-                                        <!-- fin selector clientes -->                    
+                                        <!-- fin selector comerciales -->                    
                                         <div class="mb-3">
                                             <label for="fecha_reunion" class="form-label">Fecha de la reunión</label>
-                                            <input class="form-control" id="fecha_reunion" type="date" name="fecha_reunion">
-                                            <?php if(isset($_SESSION['error']['fecha_reunion'])): ?>
-                                                <div class='alert alert-warning'>
-                                                    <?=$_SESSION['error']['fecha_reunion'];?>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>                                           
+                                            <input class="form-control" id="fecha_reunion" type="date" name="fecha_reunion">                                            
+                                        </div>
+
                                         <div class="mb-3">
                                             <label for="horas" class="form-label">Horas previstas</label>
                                             <input class="form-control" id="horas" type="number" name="horas_previstas">
@@ -112,7 +107,7 @@
                                         </div>                                                                                                                            
                                     </div> <!-- end col -->
                                     <div class="col-lg-6">
-                                        <!-- selector contactos -->
+                                        <!-- selector clientes -->
                                         <div class="mb-3">
                                             <label for="id_cliente" class="form-label">Cliente</label>
                                             <select class="form-select" name="id_cliente" id="cliente" onchange="cargarContactos()">
@@ -139,20 +134,16 @@
                                                 </div>
                                             <?php endif; ?>                                            
                                         </div>
-                                        <!-- fin selector contactos -->
+                                        <!-- fin selector clientes -->
 
+                                        <!-- selector contactos -->
                                         <div class="mb-3">
                                             <label for="id_contacto" class="form-label">Contacto</label>
                                             <select class="form-select" name="id_contacto" id="contacto">
                                                 <option value="">Seleccione contacto</option>
-                                            </select>
-                                            <?php if(isset($_SESSION['error']['id_contacto'])): ?>
-                                                <div class='alert alert-warning'>
-                                                    <?=$_SESSION['error']['id_contacto'];?>
-                                                </div>
-                                            <?php endif; ?>
+                                            </select>                                            
                                         </div>
-
+                                        <!-- fin selector contactos -->
                                         
                                         <!-- selector tipos -->
                                         <div class="mb-3">
@@ -179,11 +170,13 @@
                                                 </div>
                                             <?php endif; ?>
                                         </div>
-                                        <!-- fin selector tipos -->    
+                                        <!-- fin selector tipos --> 
+
                                         <div class="mb-3">
                                             <label for="fecha_presentacion" class="form-label">Fecha presentación propuesta</label>
                                             <input class="form-control" id="fecha_presentacion" type="date" name="fecha_presentacion">                                        
-                                        </div>    
+                                        </div>  
+
                                         <div class="mb-3">
                                             <label for="importe" class="form-label">Precio estimado</label>
                                             <input class="form-control" id="importe" type="number" name="importe">
@@ -230,6 +223,10 @@
                     var contactos = JSON.parse(xhr.responseText);                                                      
                     var selectorContacto = document.getElementById("contacto");
                     selectorContacto.innerHTML = "";
+                    var opcionSeleccionar = document.createElement("option");
+                    opcionSeleccionar.value = "";
+                    opcionSeleccionar.textContent = "Seleccione contacto";
+                    selectorContacto.appendChild(opcionSeleccionar);
                     for (var i = 0; i < contactos.length; i++) {
                         var opcion = document.createElement("option");
                         opcion.value = contactos[i].id;                    
