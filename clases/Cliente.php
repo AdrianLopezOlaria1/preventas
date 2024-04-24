@@ -17,7 +17,6 @@ if (!function_exists('Conexion')) {
         private $fecha_modificacion;
         private $fecha_baja;
 
-
         public function __construct($nombre = "", $status = "", $fecha_alta = "", $fecha_modificacion = "", $fecha_baja = "") {
             $this->nombre = $nombre;
             $this->status = $status;
@@ -80,8 +79,8 @@ if (!function_exists('Conexion')) {
 
     
 
-        public function nuevo($nombre) {
-            $result = false;
+        public function nuevo($nombre) {                
+            $result = false;            
             $conexion = new Conexion();
             $mysqli = $conexion->getConexion();
             $error = $this->validarDatos($nombre);
@@ -97,7 +96,7 @@ if (!function_exists('Conexion')) {
                     $sql2 = "INSERT INTO actividades VALUES(NULL, 'Creado cliente $nombre', CURDATE(), CURTIME())";                    
                     $guardar = mysqli_query($mysqli, $sql);                    
                     if($guardar) {
-                        $act = mysqli_query($mysqli, $sql2);
+                        mysqli_query($mysqli, $sql2);
                         $result = true;
                     }
                 }             
@@ -175,49 +174,35 @@ if (!function_exists('Conexion')) {
         }
 
 
-        public function editarCliente($conn, $idCliente, $nuevoNombre) {
+        public function editarCliente($conn, $idCliente, $nuevoNombre) {  
             $idCliente = $conn->real_escape_string($idCliente);
             $nuevoNombre = $conn->real_escape_string($nuevoNombre);
-
-            $sql = "SELECT nombre FROM clientes";
-            $resultado = $conn->query($sql);
+            
+            $sql = "SELECT * FROM clientes";
+            $clientes = $conn->query($sql);                        
         
-            if ($resultado) {
-                $nombresClientes = array();
-
-                while ($row = $resultado->fetch_assoc()) {
-                    $nombresClientes[] = $row['nombre'];
-                }
-        
-                if (in_array($nuevoNombre, $nombresClientes)) {
-
-        
+            foreach($clientes as $cliente){
+                if($cliente['nombre'] == $nuevoNombre && $cliente['id'] != $idCliente){
                     return false;
-                }
-            } else {
-                return false;
-            }
-            
-            $fechaModificacion = date('Y-m-d H:i:s');
-        
-            $consulta = "UPDATE clientes SET nombre = '$nuevoNombre', fecha_modificacion = '$fechaModificacion', status = 'M' WHERE id = '$idCliente'";
-            
-            if ($conn->query($consulta)) {
+                } 
+            }     
+            $sql = "UPDATE clientes SET nombre = '$nuevoNombre', fecha_modificacion = CURDATE(), status = 'M' WHERE id = '$idCliente'";
+            $sql2 = "INSERT INTO actividades VALUES (NULL, 'Modificado cliente con id $idCliente', CURDATE(), CURTIME())";
+            $update = $conn->query($sql);
+            if($update){
+                $conn->query($sql2);
                 return true;
-            } else {
-                return false;
-            }
+            }                                                   
         }
 
 
         public function deshabilitarCliente($conn, $idCliente) {
-
             $idCliente = $conn->real_escape_string($idCliente);
             
             $consulta = "UPDATE clientes SET status = 'D', fecha_baja = NOW() WHERE id = $idCliente";
-
-            if ($conn->query($consulta) === TRUE) {
-
+            $sql2 = "INSERT INTO actividades VALUES (NULL, 'Eliminado cliente con id $idCliente', CURDATE(), CURTIME())";
+            if ($conn->query($consulta)) {
+                $conn->query($sql2);
                 return true;
             } else {
 

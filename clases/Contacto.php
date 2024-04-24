@@ -118,9 +118,7 @@
         public function nuevo($id_cliente, $nombre, $email, $tel) {
             $result = false;
             $conexion = new Conexion();
-            $mysqli = $conexion->getConexion();
-            
-            
+            $mysqli = $conexion->getConexion();                        
             $error = $this->validarDatos($id_cliente, $nombre, $email, $tel);
             if(count($error) == 0){                
                 $sql_check_email = "SELECT email FROM personas_contacto WHERE email = '$email'";
@@ -131,8 +129,10 @@
                 } else {
                     $sql = "INSERT INTO personas_contacto VALUES(NULL, $id_cliente, '$nombre', '$email', '$tel', 
                     'A', NOW(), NULL, NULL);";
+                    $sql2 = "INSERT INTO actividades VALUES (NULL, 'Creado contacto $nombre', CURDATE(), CURTIME())";
                     $guardar = mysqli_query($mysqli, $sql);
                     if($guardar) {
+                        mysqli_query($mysqli, $sql2);
                         $result = true;
                     }
                 }                               
@@ -246,14 +246,14 @@
                     // El nuevo correo electrónico ya está en uso
                     return array('error' => 'El correo electrónico ya está en uso.');
                 }
-            }
-            
-            $fechaModificacion = date('Y-m-d H:i:s');
+            }                    
         
             $consulta = "UPDATE personas_contacto SET nombre = '$nuevoNombre', 
-            email = '$nuevoEmail', tel = '$nuevoTel', fecha_modificacion = '$fechaModificacion', status = 'M' WHERE id = '$idContacto'";
+            email = '$nuevoEmail', tel = '$nuevoTel', fecha_modificacion = CURDATE(), status = 'M' WHERE id = '$idContacto'";
+            $sql2 = "INSERT INTO actividades VALUES (NULL, 'Modificado contacto con id $idContacto', CURDATE(), CURTIME())"; 
         
             if ($conn->query($consulta)) {
+                $conn->query($sql2);
                 return true;
             } else {
                 return false;
@@ -265,12 +265,11 @@
             $idContacto = $conn->real_escape_string($idContacto);
             
             $consulta = "UPDATE personas_contacto SET status = 'D', fecha_baja = NOW() WHERE id = $idContacto";
-
+            $sql2 = "INSERT INTO actividades VALUES (NULL, 'Eliminado contacto con id $idContacto', CURDATE(), CURTIME())";
             if ($conn->query($consulta) === TRUE) {
-
+                $conn->query($sql2);
                 return true;
             } else {
-
                 return array('error' => 'Error al deshabilitar el contacto: ' . $conn->error);
             }
         }
