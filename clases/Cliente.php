@@ -93,10 +93,11 @@ if (!function_exists('Conexion')) {
                 if ($row) {
                     $_SESSION['error']['nombre'] = "Error, ese nombre ya esta en uso";                    
                 } else {
-                    $sql = "INSERT INTO clientes VALUES(NULL,'$nombre', 'A', NOW(),
-                    NULL, NULL);";
-                    $guardar = mysqli_query($mysqli, $sql);
+                    $sql = "INSERT INTO clientes VALUES(NULL,'$nombre', 'A', NOW(), NULL, NULL);";
+                    $sql2 = "INSERT INTO actividades VALUES(NULL, 'Creado cliente $nombre', CURDATE(), CURTIME())";                    
+                    $guardar = mysqli_query($mysqli, $sql);                    
                     if($guardar) {
+                        $act = mysqli_query($mysqli, $sql2);
                         $result = true;
                     }
                 }             
@@ -200,7 +201,7 @@ if (!function_exists('Conexion')) {
             $fechaModificacion = date('Y-m-d H:i:s');
         
             $consulta = "UPDATE clientes SET nombre = '$nuevoNombre', fecha_modificacion = '$fechaModificacion', status = 'M' WHERE id = '$idCliente'";
-        
+            
             if ($conn->query($consulta)) {
                 return true;
             } else {
