@@ -92,10 +92,6 @@ if (!function_exists('Conexion')) {
             return $error;
         }
 
-    
-
- 
-
         public function obtenerComerciales() {
             $comerciales = array();
     
@@ -169,6 +165,8 @@ if (!function_exists('Conexion')) {
 
         public function editarComercial($conn, $idComercial, $nuevoNombre, $nuevoEmail) {
             $idComercial = $conn->real_escape_string($idComercial);
+            $nuevoNombre = isset($nuevoNombre) ? "'" . $conn->real_escape_string($nuevoNombre) . "'" : "nombre";
+            $nuevoEmail = isset($nuevoEmail) ? "'" . $conn->real_escape_string($nuevoEmail) . "'" : "email";
             
             // Verificar si el nuevo email ya existe en la base de datos antes de escaparlo
             if ($nuevoEmail !== "email") {
@@ -177,20 +175,15 @@ if (!function_exists('Conexion')) {
                     return false; // Si el email ya existe, retornar false
                 }
             }
-        
-            // Escapar el nuevo nombre si se proporcionó
-            $nuevoNombre = isset($nuevoNombre) ? "'" . $conn->real_escape_string($nuevoNombre) . "'" : "nombre";
-        
-            // Escapar el nuevo email si se proporcionó
-            $nuevoEmail = isset($nuevoEmail) ? "'" . $conn->real_escape_string($nuevoEmail) . "'" : "email";
-        
+                    
             $fechaModificacion = date('Y-m-d H:i:s');
             
             // Construir la consulta SQL para actualizar el registro
             $consulta = "UPDATE comerciales SET nombre = $nuevoNombre, email = $nuevoEmail, fecha_modificacion = NOW(), status = 'M' WHERE id = '$idComercial'";
-        
+            $sql2 = "INSERT INTO actividades VALUES(NULL, 'Modificado comercial con id $idComercial', CURDATE(), CURTIME())";
             // Ejecutar la consulta SQL
             if ($conn->query($consulta)) {
+                $conn->query($sql2);
                 return true;
             } else {
                 return false;
@@ -226,8 +219,10 @@ if (!function_exists('Conexion')) {
                 $emailExistente = $this->valorExistente($mysqli, 'email', $email);
                 if (!$emailExistente) {
                     $sql = "INSERT INTO comerciales VALUES(NULL, '$nombre', '$email', 'A', NOW(), NULL, NULL)";
-                    $guardar = mysqli_query($mysqli, $sql);
+                    $sql2 = "INSERT INTO actividades VALUES(NULL, 'Creado comercial $nombre', CURDATE(), CURTIME())";                    
+                    $guardar = mysqli_query($mysqli, $sql);                    
                     if ($guardar) {
+                        $act = mysqli_query($mysqli, $sql2);
                         $result = true;
                     } 
                 } else {
@@ -246,39 +241,39 @@ if (!function_exists('Conexion')) {
             $idComercial = $conn->real_escape_string($idComercial);
             
             $consulta = "UPDATE comerciales SET status = 'D', fecha_baja = NOW() WHERE id = $idComercial";
-
+            $sql2 = "INSERT INTO actividades VALUES (NULL, 'Eliminado comercial con id $idComercial', CURDATE(), CURTIME())";
             if ($conn->query($consulta) === TRUE) {
-
+                $conn->query($sql2);
                 return true;
             } else {
 
                 return array('error' => 'Error al deshabilitar el cliente: ' . $conn->error);
             }
-}
+        }
 
-            public function buscarComerciales($conn, $termino) {
-                $comerciales = array();
+        public function buscarComerciales($conn, $termino) {
+            $comerciales = array();
 
-                // Escapar el término de búsqueda para evitar inyección de SQL
-                $termino = $conn->real_escape_string($termino);
+            // Escapar el término de búsqueda para evitar inyección de SQL
+            $termino = $conn->real_escape_string($termino);
 
-                // Consulta SQL para buscar comerciales$comerciales que coincidan con el término de búsqueda en el nombre
-                $sql = "SELECT * FROM comerciales WHERE nombre LIKE '%$termino%'";
+            // Consulta SQL para buscar comerciales$comerciales que coincidan con el término de búsqueda en el nombre
+            $sql = "SELECT * FROM comerciales WHERE nombre LIKE '%$termino%'";
 
-                // Ejecutar la consulta SQL
-                $resultado = $conn->query($sql);
+            // Ejecutar la consulta SQL
+            $resultado = $conn->query($sql);
 
-                // Verificar si se encontraron resultados
-                if ($resultado) {
-                    // Iterar sobre los resultados y agregarlos al arreglo de comerciales$comerciales
-                    while ($fila = $resultado->fetch_assoc()) {
-                        $comerciales[] = $fila;
-                    }
+            // Verificar si se encontraron resultados
+            if ($resultado) {
+                // Iterar sobre los resultados y agregarlos al arreglo de comerciales$comerciales
+                while ($fila = $resultado->fetch_assoc()) {
+                    $comerciales[] = $fila;
                 }
+            }
 
-                // Devolver el arreglo de comerciales$comerciales encontrados
-                return $comerciales;
-            }        
+            // Devolver el arreglo de comerciales$comerciales encontrados
+            return $comerciales;
+        }        
         
     
 }      

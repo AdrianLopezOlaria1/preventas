@@ -3,6 +3,7 @@ if(isset($_GET['id'])){
     $pre = new Preventa();
     $id = (int)$_GET['id'];
     $actual = $pre->conseguirPreventa($id);
+    $_SESSION['actual'] = $actual;
 }
 
 ?>
@@ -41,14 +42,14 @@ if(isset($_GET['id'])){
                                             <input type="hidden" name="id" value="<?=$actual['id']?>">
                                             <label for="id_usuario" class="form-label">Usuario</label>
                                             <select class="form-select" name="id_usuario" id="usuario">
-                                                <option value="">Seleccione usuario</option>
+                                                <option value="<?=$_SESSION['actual']['id_usuario']?>"><?=$_SESSION['actual']['nomUs']?></option>
                                                 <?php 
                                                     $usuario = new Usuario();
                                                     $usuarios = $usuario->obtenerUsuarios();
                                                     if (!empty($usuarios)) {
                                                         foreach ($usuarios as $u) {
                                                 ?>
-                                                <?php if($u['status'] != 'D'):?>
+                                                <?php if($u['status'] != 'D' && $_SESSION['actual']['id_usuario'] !== $u['id']):?>
                                                     <option value="<?=$u['id']?>">
                                                         <?=$u['nombre']?>
                                                     </option>
@@ -69,14 +70,14 @@ if(isset($_GET['id'])){
                                         <div class="mb-3">                                            
                                             <label for="id_cliente" class="form-label">Cliente</label>
                                             <select class="form-select" name="id_cliente" id="cliente" onchange="cargarContactos()">
-                                                <option value="">Seleccione cliente</option>
+                                                <option value="<?=$_SESSION['actual']['id_cliente']?>"><?=$_SESSION['actual']['nomCli']?></option>
                                                 <?php 
                                                     $cliente = new Cliente();
                                                     $clientes = $cliente->obtenerClientes();
                                                     if (!empty($clientes)) {
                                                         foreach ($clientes as $c) {
                                                 ?>
-                                                <?php if($c['status'] != 'D'):?>
+                                                <?php if($c['status'] != 'D' && $_SESSION['actual']['id_cliente'] !== $c['id']):?>
                                                     <option value="<?=$c['id']?>">
                                                         <?=$c['nombre']?>
                                                     </option>
@@ -95,16 +96,11 @@ if(isset($_GET['id'])){
                                         <!-- fin selector clientes -->                    
                                         <div class="mb-3">
                                             <label for="fecha_reunion" class="form-label">Fecha de la reunión</label>
-                                            <input class="form-control" id="fecha_reunion" type="date" name="fecha_reunion" value="<?=$actual['fecha_reunion']?>">
-                                            <?php if(isset($_SESSION['error']['fecha_reunion'])): ?>
-                                                <div class='alert alert-warning'>
-                                                    <?=$_SESSION['error']['fecha_reunion'];?>
-                                                </div>
-                                            <?php endif; ?>
+                                            <input class="form-control" id="fecha_reunion" type="date" name="fecha_reunion" value="<?=$_SESSION['actual']['fecha_reunion']?>">                                            
                                         </div>                                           
                                         <div class="mb-3">
                                             <label for="horas" class="form-label">Horas previstas</label>
-                                            <input class="form-control" id="horas" type="number" name="horas_previstas" value="<?=$actual['horas_previstas']?>">
+                                            <input class="form-control" id="horas" type="number" name="horas_previstas" value="<?=$_SESSION['actual']['horas_previstas']?>">
                                             <?php if(isset($_SESSION['error']['horas_previstas'])): ?>
                                                 <div class='alert alert-warning'>
                                                     <?=$_SESSION['error']['horas_previstas'];?>
@@ -114,7 +110,7 @@ if(isset($_GET['id'])){
                                         <div class="mb-3">
                                             <label for="acta_reunion" class="form-label">Detalles acta de la reunión</label>
                                             <textarea class="form-control" id="acta_reunion" name="acta_reunion" rows="5">
-                                                <?php echo isset($actual['acta_reunion']) ? $actual['acta_reunion'] : ''; ?></textarea>                                            
+                                                <?=$_SESSION['actual']['acta_reunion']?></textarea>                                            
                                         </div>                                        
                                         <div class="mb-3">
                                             <label for="example-fileinput" class="form-label">Archivo</label>
@@ -126,25 +122,20 @@ if(isset($_GET['id'])){
                                         <div class="mb-3">
                                             <label for="id_contacto" class="form-label">Contacto</label>
                                             <select class="form-select" name="id_contacto" id="contacto">
-                                                <option value="">Seleccione contacto</option>
-                                            </select>
-                                            <?php if(isset($_SESSION['error']['id_contacto'])): ?>
-                                                <div class='alert alert-warning'>
-                                                    <?=$_SESSION['error']['id_contacto'];?>
-                                                </div>
-                                            <?php endif; ?>
+                                                <option value="<?=$_SESSION['actual']['id_contacto']?>"><?=$_SESSION['actual']['nomCont']?></option>
+                                            </select>                                            
                                         </div>
                                         <!-- fin selector contactos -->
                                         <div class="mb-3">
                                             <label for="id_comercial" class="form-label">Comercial</label>
                                             <select class="form-select" id="id_comercial" name="comercial">
-                                            <option value="">Seleccione comercial</option>
+                                            <option value="<?=$_SESSION['actual']['id_comercial']?>"><?=$_SESSION['actual']['nomCom']?></option>
                                             <?php 
                                                 $comerciales = new Comercial();
                                                 $comerciales = $comerciales->obtenerComerciales();
                                                 if (!empty($comerciales)) {
                                                     foreach ($comerciales as $c) {
-                                                        if($c['status'] != 'D'):
+                                                        if($c['status'] != 'D' && $_SESSION['actual']['id_comercial'] !== $c['id']):
                                             ?>
                                             <option value="<?=$c['id']?>">
                                                 <?=$c['nombre']?>
@@ -165,21 +156,18 @@ if(isset($_GET['id'])){
                                         <div class="mb-3">
                                             <label for="id_tipo" class="form-label">Tipo de proyecto</label>
                                             <select class="form-select" name="id_tipo" id="id_tipo">
-                                                <option value="">Seleccione tipo</option>
+                                                <option value="<?=$_SESSION['actual']['id_tipo']?>"><?=$_SESSION['actual']['nomTi']?></option>
                                                 <?php 
                                                     $tipo = new Tipo();
                                                     $tipos = $tipo->obtenerTipos();
                                                     if (!empty($tipos)) {
                                                         foreach ($tipos as $t) {
-                                                            if ($t['id'] == $actual['id_tipo']){
+                                                            if ($t['id'] !== $_SESSION['actual']['id_tipo']){
                                                 ?>
-                                                <option value="<?=$t['id']?>" selected>
+                                                <option value="<?=$t['id']?>">
                                                     <?=$t['nombre']?>
                                                 </option>
-                                                <?php } else { ?>
-                                                    <option value="<?=$t['id']?>">
-                                                        <?=$t['nombre']?>
-                                                    </option>
+                                                
                                                 <?php                                                                
                                                             }
                                                         }
@@ -196,12 +184,12 @@ if(isset($_GET['id'])){
                                         
                                         <div class="mb-3">
                                             <label for="fecha_presentacion" class="form-label">Fecha presentación propuesta</label>
-                                            <input class="form-control" id="fecha_presentacion" type="date" name="fecha_presentacion" value="<?=$actual['fecha_presentacion']?>">                                
+                                            <input class="form-control" id="fecha_presentacion" type="date" name="fecha_presentacion" value="<?=$_SESSION['actual']['fecha_presentacion']?>">                                
                                         </div>  
 
                                         <div class="mb-3">
                                             <label for="importe" class="form-label">Precio estimado</label>
-                                            <input class="form-control" id="importe" type="number" name="importe" value="<?=$actual['importe']?>">
+                                            <input class="form-control" id="importe" type="number" name="importe" value="<?=$_SESSION['actual']['importe']?>">
                                             <?php if(isset($_SESSION['error']['importe'])): ?>
                                                 <div class='alert alert-warning'>
                                                     <?=$_SESSION['error']['importe'];?>
@@ -212,13 +200,13 @@ if(isset($_GET['id'])){
                                         <div class="mb-3">
                                             <label for="estado" class="form-label">Estado</label>
                                             <select class="form-select" id="estado" name="estado">
-                                                <option value="" selected>Seleccione estado</option>
-                                                <option value="P" <?php echo ($actual['status'] == 'P') ? 'selected' : ''; ?>>Pendiente</option>
-                                                <option value="RP" <?php echo ($actual['status'] == 'RP') ? 'selected' : ''; ?>>Realizada reunión preventa</option>
-                                                <option value="RV" <?php echo ($actual['status'] == 'RV') ? 'selected' : ''; ?>>Realizada valoración</option>
-                                                <option value="PC" <?php echo ($actual['status'] == 'PC') ? 'selected' : ''; ?>>Pendiente cierre</option>
-                                                <option value="CG" <?php echo ($actual['status'] == 'CG') ? 'selected' : ''; ?>>Cerrada ganada</option>
-                                                <option value="CP" <?php echo ($actual['status'] == 'CP') ? 'selected' : ''; ?>>Cerrada perdida</option>
+                                                
+                                                <option value="P" <?php echo ($_SESSION['actual']['status'] == 'P') ? 'selected' : ''; ?>>Pendiente</option>
+                                                <option value="RP" <?php echo ($_SESSION['actual']['status'] == 'RP') ? 'selected' : ''; ?>>Realizada reunión preventa</option>
+                                                <option value="RV" <?php echo ($_SESSION['actual']['status'] == 'RV') ? 'selected' : ''; ?>>Realizada valoración</option>
+                                                <option value="PC" <?php echo ($_SESSION['actual']['status'] == 'PC') ? 'selected' : ''; ?>>Pendiente cierre</option>
+                                                <option value="CG" <?php echo ($_SESSION['actual']['status'] == 'CG') ? 'selected' : ''; ?>>Cerrada ganada</option>
+                                                <option value="CP" <?php echo ($_SESSION['actual']['status'] == 'CP') ? 'selected' : ''; ?>>Cerrada perdida</option>
                                             </select>
                                             <?php if(isset($_SESSION['error']['status'])): ?>
                                                 <div class='alert alert-warning'>
@@ -253,6 +241,10 @@ if(isset($_GET['id'])){
                     var contactos = JSON.parse(xhr.responseText);                                                      
                     var selectorContacto = document.getElementById("contacto");
                     selectorContacto.innerHTML = "";
+                    var opcionSeleccionar = document.createElement("option");
+                    opcionSeleccionar.value = "";
+                    opcionSeleccionar.textContent = "Seleccione contacto";
+                    selectorContacto.appendChild(opcionSeleccionar);
                     for (var i = 0; i < contactos.length; i++) {
                         var opcion = document.createElement("option");
                         opcion.value = contactos[i].id;                    
