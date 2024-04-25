@@ -149,8 +149,11 @@
                                             ?>
 
                                         <div id="user-activities" class="tab-pane">
-                                            
-                                            <?php
+                                        <?php
+                                        // Verificar si $datos_actividades está vacío
+                                        if (empty($datos_actividades)) {
+                                            echo "<p>No hay movimientos.</p>";
+                                        } else {
                                             $fecha_anterior = null; // Variable para almacenar la fecha anterior
                                             
                                             foreach ($datos_actividades as $actividad):
@@ -191,7 +194,8 @@
                                             
                                             <?php endforeach; ?>
                                             </div> <!-- Cerrar la última sección -->
-                                        </div> <!-- Cerrar el contenedor principal -->
+                                        <?php } ?>
+                                    </div> <!-- Cerrar el contenedor principal -->
 
                                             
                                             
