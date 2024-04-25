@@ -3,7 +3,7 @@
             <!-- Brand Logo Light -->
             <a href="index.php?action=index" class="logo logo-light">
                 <span class="logo-lg">
-                    <img src="assets/images/logo_blanco.png" alt="logo" style="height: 60px; max-height: 100%;" >
+                    <img src="assets/images/logo_blanco.png" alt="logo" style="height: 50px; max-height: 80%;" >
                 </span>
                 <span class="logo-sm">
                     <img src="assets/images/logo_blanco.png" alt="small logo">

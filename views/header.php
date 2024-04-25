@@ -70,7 +70,7 @@
                         <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
                         aria-haspopup="false" aria-expanded="false">
                             <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12">
-                            <span class="align-middle">Español</span>
+                            <span class="align-middle" style="color:white;"><strong>Español</strong></span>
                         </a>
                          
                     </li>
@@ -80,8 +80,8 @@
                     
 
                     <li class="d-none d-sm-inline-block">
-                        <div class="nav-link" id="light-dark-mode">
-                            <i class="ri-moon-line fs-22"></i>
+                        <div class="nav-link" id="light-dark-mode" style="color:white;">
+                            <i style="color:white;" class="ri-moon-line fs-22"></i>
                         </div>
                     </li>
 
@@ -92,7 +92,7 @@
                                 <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle">
                             </span>
                             <span class="d-lg-block d-none">
-                                <h5 class="my-0 fw-normal"><?php echo isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['nombre'] : 'Error'; ?>
+                                <h5 style="color:white;" class="my-0 fw-normal"><strong><?php echo isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['nombre'] : 'Error'; ?></strong>
                             <i
                                         class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i></h5>
                             </span>
