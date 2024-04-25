@@ -94,10 +94,12 @@
 
         //funciones
 
-        function validarDatos($id_cliente, $nombre, $email, $tel) {
+        function validarDatos($id_cliente = null, $nombre, $email, $tel) {
             $error = array();
-            if(empty($id_cliente)){
-                $error['id_cliente'] = "Debes escoger un cliente";
+            if(!is_null($id_cliente)){
+                if(empty($id_cliente)){
+                    $error['id_cliente'] = "Debes escoger un cliente";
+                }            
             }
             if(empty($nombre) || is_numeric($nombre) || preg_match("/[0-9]/", $nombre)){
                 $error['nombre'] = "Inserte un nombre válido";
@@ -129,7 +131,7 @@
                 } else {
                     $sql = "INSERT INTO personas_contacto VALUES(NULL, $id_cliente, '$nombre', '$email', '$tel', 
                     'A', NOW(), NULL, NULL);";
-                    $sql2 = "INSERT INTO actividades VALUES (NULL, 'Creado contacto $nombre', CURDATE(), CURTIME())";
+                    $sql2 = "INSERT INTO actividades VALUES (NULL, 'Creado contacto $nombre', CURDATE(), CURTIME(), {$_SESSION['usuario']['id']})";
                     $guardar = mysqli_query($mysqli, $sql);
                     if($guardar) {
                         mysqli_query($mysqli, $sql2);
@@ -225,47 +227,53 @@
             }
         }
 
-        public function editarContacto($conn, $idContacto, $nuevoNombre, $nuevoEmail, $nuevoTel) {
+        public function editarContacto($conn, $idContacto, $nuevoNombre, $nuevoEmail, $nuevoTel, $idUser) {
             $idContacto = $conn->real_escape_string($idContacto);
             $nuevoNombre = $conn->real_escape_string($nuevoNombre);
             $nuevoEmail = $conn->real_escape_string($nuevoEmail);
             $nuevoTel = $conn->real_escape_string($nuevoTel);
 
-            // Obtener el correo electrónico actual del contacto
-            $sql_obtener_email_actual = "SELECT email FROM personas_contacto WHERE id = '$idContacto'";
-            $result_obtener_email_actual = $conn->query($sql_obtener_email_actual);
-            $row_obtener_email_actual = $result_obtener_email_actual->fetch_assoc();
-            $email_actual = $row_obtener_email_actual['email'];
-
-            // Verificar si el correo electrónico ha sido cambiado
-            if ($email_actual != $nuevoEmail) {
-                // Verificar si el nuevo correo electrónico ya está en uso
-                $sql_check_email = "SELECT email FROM personas_contacto WHERE email = '$nuevoEmail'";
-                $result_check_email = $conn->query($sql_check_email);
-                if ($result_check_email->num_rows > 0) {
-                    // El nuevo correo electrónico ya está en uso
-                    return array('error' => 'El correo electrónico ya está en uso.');
+            $error = $this->validarDatos(null, $nuevoNombre, $nuevoEmail, $nuevoTel);
+            
+            if(count($error) == 0){
+                // Obtener el correo electrónico actual del contacto
+                $sql_obtener_email_actual = "SELECT email FROM personas_contacto WHERE id = '$idContacto'";
+                $result_obtener_email_actual = $conn->query($sql_obtener_email_actual);
+                $row_obtener_email_actual = $result_obtener_email_actual->fetch_assoc();
+                $email_actual = $row_obtener_email_actual['email'];
+                // Verificar si el correo electrónico ha sido cambiado
+                if ($email_actual != $nuevoEmail) {
+                    // Verificar si el nuevo correo electrónico ya está en uso
+                    $sql_check_email = "SELECT email FROM personas_contacto WHERE email = '$nuevoEmail'";
+                    $result_check_email = $conn->query($sql_check_email);
+                    if ($result_check_email->num_rows > 0) {
+                        // El nuevo correo electrónico ya está en uso
+                        $_SESSION['en_uso'] = 'El correo electrónico ya está en uso.';
+                        return false;
+                    }
                 }
-            }                    
-        
-            $consulta = "UPDATE personas_contacto SET nombre = '$nuevoNombre', 
-            email = '$nuevoEmail', tel = '$nuevoTel', fecha_modificacion = CURDATE(), status = 'M' WHERE id = '$idContacto'";
-            $sql2 = "INSERT INTO actividades VALUES (NULL, 'Modificado contacto con id $idContacto', CURDATE(), CURTIME())"; 
-        
-            if ($conn->query($consulta)) {
-                $conn->query($sql2);
-                return true;
+                $consulta = "UPDATE personas_contacto SET nombre = '$nuevoNombre', 
+                email = '$nuevoEmail', tel = '$nuevoTel', fecha_modificacion = CURDATE(), status = 'M' WHERE id = '$idContacto'";
+                $sql2 = "INSERT INTO actividades VALUES (NULL, 'Modificado contacto con id $idContacto', CURDATE(), CURTIME(), $idUser)"; 
+            
+                if ($conn->query($consulta)) {
+                    $conn->query($sql2);
+                    return true;
+                } else {
+                    return false;
+                }                
             } else {
+                $_SESSION['error'] = $error;
                 return false;
-            }
+            }                                                                          
         }
 
-        public function deshabilitarContacto($conn, $idContacto) {
+        public function deshabilitarContacto($conn, $idContacto, $idUser) {
 
             $idContacto = $conn->real_escape_string($idContacto);
             
             $consulta = "UPDATE personas_contacto SET status = 'D', fecha_baja = NOW() WHERE id = $idContacto";
-            $sql2 = "INSERT INTO actividades VALUES (NULL, 'Eliminado contacto con id $idContacto', CURDATE(), CURTIME())";
+            $sql2 = "INSERT INTO actividades VALUES (NULL, 'Eliminado contacto con id $idContacto', CURDATE(), CURTIME(), $idUser)";
             if ($conn->query($consulta) === TRUE) {
                 $conn->query($sql2);
                 return true;

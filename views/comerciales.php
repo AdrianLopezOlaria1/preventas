@@ -75,6 +75,7 @@
                         <input type="email" class="form-control" id="emailComercial" name="emailComercial" value="">
                     </div>
                     <input type="hidden" id="comercialId" name="comercialId" value="">
+                    <input type="hidden" id="id_usuario" name="id_usuario" value="<?=$_SESSION['usuario']['id']?>">
                     <button type="button" id="guardarCambiosBtn" class="btn btn-primary">Guardar Cambios</button>
                 </form>
             </div>
@@ -122,7 +123,7 @@
                             <?php if($_SESSION['usuario']['rol'] == 1): ?>
                             html += '<div class="">';
                             html += '<a href="#" class="btn btn-success btn-sm me-1 editar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" data-id="' + comercial.id + '"><i class="ri-pencil-fill"></i></a>';
-                            html += '<a href="#" class="btn btn-danger btn-sm eliminar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" data-id="' + comercial.id + '"><i class="ri-close-fill"></i></a>';
+                            html += '<a href="#" class="btn btn-danger btn-sm eliminar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" data-id="' + comercial.id + ',' + <?=$_SESSION['usuario']['id']?> + '"><i class="ri-close-fill"></i></a>';
                             html += '</div>';
                             <?php endif; ?>
                             

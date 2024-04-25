@@ -161,7 +161,7 @@
             $horas_previstas, $importe, $status);
             if(count($error) == 0){                
                 $sql = "INSERT INTO preventas VALUES(NULL, $id_cliente, $id_comercial, $id_tipo, NOW(), '$fecha_reunion', '$acta_reunion', $horas_previstas, $importe, '$status', NULL, $id_contacto, $id_usuario, '$fecha_presentacion', '$archivo');";
-                $sql2 = "INSERT INTO actividades VALUES (NULL, 'Creada preventa', CURDATE(), CURTIME())";
+                $sql2 = "INSERT INTO actividades VALUES (NULL, 'Se te ha asignado una preventa', CURDATE(), CURTIME(), $id_usuario)";
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {                
                     mysqli_query($mysqli, $sql2);
@@ -403,7 +403,7 @@
                     id_contacto = $id_contacto,
                     archivo = '$archivo' 
                     WHERE id = $id;"; 
-                $sql2 = "INSERT INTO actividades VALUES (NULL, 'Modificada preventa con id $id', CURDATE(), CURTIME())";
+                $sql2 = "INSERT INTO actividades VALUES (NULL, 'Tu preventa con id $id ha sido modificada ', CURDATE(), CURTIME(), $id_usuario)";
                 $guardar = mysqli_query($mysqli, $sql);
                 if($guardar) {    
                     mysqli_query($mysqli, $sql2);                

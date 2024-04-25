@@ -1,7 +1,10 @@
 <?php
 if (isset($_POST['id'])) {
 
-    $contactoId = $_POST['id'];
+    $data_id = $_POST['id'];
+    $id_values = explode(',', $data_id);
+    $contactoId = $id_values[0];
+    $usuarioId = $id_values[1];
 
     require_once('../config/conexion.php');
 
@@ -14,7 +17,7 @@ if (isset($_POST['id'])) {
 
     $contacto = new Contacto();
 
-    $resultado = $contacto->deshabilitarContacto($conn, $contactoId);
+    $resultado = $contacto->deshabilitarContacto($conn, $contactoId, $usuarioId);
 
     if ($resultado === true) {
         echo json_encode(array('success' => true));

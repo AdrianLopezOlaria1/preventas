@@ -163,31 +163,33 @@ if (!function_exists('Conexion')) {
             }
         }
 
-        public function editarComercial($conn, $idComercial, $nuevoNombre, $nuevoEmail) {
+        public function editarComercial($conn, $idComercial, $nuevoNombre, $nuevoEmail, $idUser) {
             $idComercial = $conn->real_escape_string($idComercial);
-            $nuevoNombre = isset($nuevoNombre) ? "'" . $conn->real_escape_string($nuevoNombre) . "'" : "nombre";
-            $nuevoEmail = isset($nuevoEmail) ? "'" . $conn->real_escape_string($nuevoEmail) . "'" : "email";
-            
-            // Verificar si el nuevo email ya existe en la base de datos antes de escaparlo
-            if ($nuevoEmail !== "email") {
-                $emailExistente = $this->valorExistente($conn, 'email', $nuevoEmail);
-                if ($emailExistente) {
-                    return false; // Si el email ya existe, retornar false
-                }
+            $nuevoNombre = $conn->real_escape_string($nuevoNombre);
+            $nuevoEmail =$conn->real_escape_string($nuevoEmail);
+            $error = $this->validarDatos($nuevoNombre, $nuevoEmail);
+            if(count($error) == 0){
+                $sql = "SELECT COUNT(*) as count FROM comerciales WHERE email = '$nuevoEmail' AND id != '$idComercial'";
+                $result = $conn->query($sql);
+                $row = $result->fetch_assoc();
+                $count = $row['count'];                   
+                if ($count > 0) {
+                    return false;
+                }                
+            } else {
+                $_SESSION['error'] = $error;
+                return false;
             }
-                    
-            $fechaModificacion = date('Y-m-d H:i:s');
-            
             // Construir la consulta SQL para actualizar el registro
-            $consulta = "UPDATE comerciales SET nombre = $nuevoNombre, email = $nuevoEmail, fecha_modificacion = NOW(), status = 'M' WHERE id = '$idComercial'";
-            $sql2 = "INSERT INTO actividades VALUES(NULL, 'Modificado comercial con id $idComercial', CURDATE(), CURTIME())";
+            $consulta = "UPDATE comerciales SET nombre = '$nuevoNombre', email = '$nuevoEmail', fecha_modificacion = NOW(), status = 'M' WHERE id = $idComercial";
+            $sql2 = "INSERT INTO actividades VALUES(NULL, 'Modificado comercial con id $idComercial', CURDATE(), CURTIME(), $idUser)";
             // Ejecutar la consulta SQL
             if ($conn->query($consulta)) {
                 $conn->query($sql2);
                 return true;
             } else {
                 return false;
-            }
+            }                                                      
         }
         
         
@@ -219,7 +221,7 @@ if (!function_exists('Conexion')) {
                 $emailExistente = $this->valorExistente($mysqli, 'email', $email);
                 if (!$emailExistente) {
                     $sql = "INSERT INTO comerciales VALUES(NULL, '$nombre', '$email', 'A', NOW(), NULL, NULL)";
-                    $sql2 = "INSERT INTO actividades VALUES(NULL, 'Creado comercial $nombre', CURDATE(), CURTIME())";                    
+                    $sql2 = "INSERT INTO actividades VALUES(NULL, 'Creado comercial $nombre', CURDATE(), CURTIME(), {$_SESSION['usuario']['id']})";                    
                     $guardar = mysqli_query($mysqli, $sql);                    
                     if ($guardar) {
                         $act = mysqli_query($mysqli, $sql2);
@@ -236,12 +238,12 @@ if (!function_exists('Conexion')) {
         
 
 
-        public function deshabilitarComerial($conn, $idComercial) {
+        public function deshabilitarComerial($conn, $idComercial, $idUser) {
 
             $idComercial = $conn->real_escape_string($idComercial);
             
             $consulta = "UPDATE comerciales SET status = 'D', fecha_baja = NOW() WHERE id = $idComercial";
-            $sql2 = "INSERT INTO actividades VALUES (NULL, 'Eliminado comercial con id $idComercial', CURDATE(), CURTIME())";
+            $sql2 = "INSERT INTO actividades VALUES (NULL, 'Eliminado comercial con id $idComercial', CURDATE(), CURTIME(), $idUser)";
             if ($conn->query($consulta) === TRUE) {
                 $conn->query($sql2);
                 return true;

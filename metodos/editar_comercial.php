@@ -12,7 +12,7 @@ if (isset($_POST['comercialId']) && isset($_POST['nombreComercial']) && isset($_
     $comercialId = $_POST['comercialId'];
     $nombreComercial = $_POST['nombreComercial'];
     $emailComercial = $_POST['emailComercial'];
-
+    $idUser = $_POST['id_usuario'];
     // Crear una instancia de la clase Conexion para obtener la conexión
     $conexion = new Conexion();
     $conn = $conexion->getConexion();
@@ -20,16 +20,18 @@ if (isset($_POST['comercialId']) && isset($_POST['nombreComercial']) && isset($_
     // Crear una instancia de la clase Cliente para editar el cliente
     $comercial = new Comercial();
     // Llamar al método editarCliente y pasarle la conexión
-    $resultado = $comercial->editarComercial($conn, $comercialId, $nombreComercial,  $emailComercial);
+    $resultado = $comercial->editarComercial($conn, $comercialId, $nombreComercial,  $emailComercial, $idUser);
 
     // Verificar si hubo un error
     if ($resultado) {
         // Éxito: enviar mensaje de éxito
         $response['success'] = true;
         $response['message'] = "Cliente modificado exitosamente.";
-    } else {
+    } elseif(isset($_SESSION['error'])) {
+        $response['error'] = "Debe poner un nombre";
+     } else {
         // Error: enviar mensaje de error
-        $response['error'] = "Ese email están en uso.";
+        $response['error'] = "Ese email está en uso.";
     }
 } else {
     // Si no se recibieron los datos del formulario, devolver un error
