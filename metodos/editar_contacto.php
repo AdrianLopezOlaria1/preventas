@@ -13,6 +13,7 @@ if (isset($_POST['contactoId']) && isset($_POST['nombreContacto']) && isset($_PO
     $nombreContacto = $_POST['nombreContacto'];
     $emailContacto = $_POST['emailContacto'];
     $telContacto = $_POST['telContacto'];
+    $idUser = $_POST['id_usuario'];
 
     // Crear una instancia de la clase Conexion para obtener la conexión
     $conexion = new Conexion();
@@ -21,16 +22,22 @@ if (isset($_POST['contactoId']) && isset($_POST['nombreContacto']) && isset($_PO
     // Crear una instancia de la clase Contacto para editar el contacto
     $contacto = new Contacto();
     // Llamar al método editarContacto y pasarle la conexión
-    $resultado = $contacto->editarContacto($conn, $contactoId, $nombreContacto, $emailContacto, $telContacto);
+    $resultado = $contacto->editarContacto($conn, $contactoId, $nombreContacto, $emailContacto, $telContacto, $idUser);
 
     // Verificar si hubo un error
-    if ($resultado === true) {
+    if ($resultado) {
         // Éxito: enviar mensaje de éxito
         $response['success'] = true;
         $response['message'] = "Contacto modificado exitosamente.";
-    } else {
+    } elseif (isset($_SESSION['en_uso'])){
         // Error: enviar mensaje de error
-        $response['error'] = $resultado['error']; // Acceder al mensaje de error dentro del objeto devuelto
+        $response['error'] = $_SESSION['en_uso']; // Acceder al mensaje de error dentro del objeto devuelto
+    } elseif(isset($_SESSION['error']['nombre'])){
+        $response['error'] = $_SESSION['error']['nombre'];
+    } elseif(isset($_SESSION['error']['email'])){
+        $response['error'] = $_SESSION['error']['email'];
+    } elseif(isset($_SESSION['error']['tel'])){
+        $response['error'] = $_SESSION['error']['tel'];
     }
 } else {
     // Si no se recibieron los datos del formulario, devolver un error

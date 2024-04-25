@@ -72,6 +72,7 @@
                         <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" value="Cliente_A1">
                     </div>
                     <input type="hidden" id="clienteId" name="clienteId" value="">
+                    <input type="hidden" id="usuario_id" name="usuario_id" value="<?=$_SESSION['usuario']['id']?>">
                     <button type="button" id="guardarCambiosBtn" class="btn btn-primary">Guardar Cambios</button>
                 </form>
             </div>
@@ -119,7 +120,7 @@
                                 <?php if($_SESSION['usuario']['rol'] == 1): ?>
                                 html += '<div class="">';
                                 html += '<a href="#" class="btn btn-success btn-sm me-1 editar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" data-id="' + cliente.id + '"><i class="ri-pencil-fill"></i></a>';
-                                html += '<a href="#" class="btn btn-danger btn-sm eliminar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" data-id="' + cliente.id + '"><i class="ri-close-fill"></i></a>';
+                                html += '<a href="#" class="btn btn-danger btn-sm eliminar-btn tooltips" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" data-id="' + cliente.id + ',' + <?=$_SESSION['usuario']['id']?> + '"><i class="ri-close-fill"></i></a>';
                                 html += '</div>';
                                 <?php endif; ?>
                                 

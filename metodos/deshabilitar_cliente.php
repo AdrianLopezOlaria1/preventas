@@ -1,7 +1,10 @@
 <?php
 if (isset($_POST['id'])) {
 
-    $clienteId = $_POST['id'];
+    $data_id = $_POST['id'];
+    $id_values = explode(',', $data_id);
+    $clienteId = $id_values[0];
+    $usuarioId = $id_values[1];
 
     require_once('../config/conexion.php');
 
@@ -14,7 +17,7 @@ if (isset($_POST['id'])) {
 
     $cliente = new Cliente();
 
-    $resultado = $cliente->deshabilitarCliente($conn, $clienteId);
+    $resultado = $cliente->deshabilitarCliente($conn, $clienteId, $usuarioId);
 
     if ($resultado === true) {
         echo json_encode(array('success' => true));

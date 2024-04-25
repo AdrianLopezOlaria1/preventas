@@ -11,7 +11,8 @@ if (isset($_POST['clienteId']) && isset($_POST['nombreCliente'])) {
     // Obtener los datos del formulario
     $clienteId = $_POST['clienteId'];
     $nombreCliente = $_POST['nombreCliente'];
-
+    $idUser = $_POST['usuario_id'];
+    
     // Crear una instancia de la clase Conexion para obtener la conexión
     $conexion = new Conexion();
     $conn = $conexion->getConexion();
@@ -19,7 +20,7 @@ if (isset($_POST['clienteId']) && isset($_POST['nombreCliente'])) {
     // Crear una instancia de la clase Cliente para editar el cliente
     $cliente = new Cliente();
     // Llamar al método editarCliente y pasarle la conexión
-    $resultado = $cliente->editarCliente($conn, $clienteId, $nombreCliente);
+    $resultado = $cliente->editarCliente($conn, $clienteId, $nombreCliente, $idUser);
 
     // Verificar si hubo un error
     if ($resultado) {
