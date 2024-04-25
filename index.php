@@ -92,6 +92,7 @@ switch ($action) {
  
     case "profile":
         include 'metodos/checker.php';
+        
         include 'views/aside.php';
         include 'views/footer.php';
         include 'views/header.php';

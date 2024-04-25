@@ -58,7 +58,7 @@
                                             <li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
                                                     data-bs-target="#user-activities" type="button" role="tab"
                                                     aria-controls="home" aria-selected="true"
-                                                    href="#user-activities">Activities</a></li>
+                                                    href="#user-activities">Historial</a></li>
                                             
                                             <li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
                                                     data-bs-target="#edit-profile" type="button" role="tab"
@@ -116,84 +116,84 @@
                                             </div> <!-- about-me -->
 
                                             <!-- Activities -->
+                                            <?php 
+                                            include 'clases/Actividad.php';
 
-                                            <div id="user-activities" class="tab-pane">
-                                                <div class="timeline-2">
-                                                    <div class="time-item">
-                                                        <div class="item-info ms-3 mb-3">
-                                                            <div class="text-muted">5 minutes ago</div>
-                                                            <p><strong><a href="#" class="text-info">John
-                                                                        Doe</a></strong>Uploaded a photo</p>
-                                                            <img src="assets/images/small/small-3.jpg" alt=""
-                                                                height="40" width="60" class="rounded-1">
-                                                            <img src="assets/images/small/small-4.jpg" alt=""
-                                                                height="40" width="60" class="rounded-1">
-                                                        </div>
-                                                    </div>
+                                            $actividades = new Actividad();
 
-                                                    <div class="time-item">
-                                                        <div class="item-info ms-3 mb-3">
-                                                            <div class="text-muted">30 minutes ago</div>
-                                                            <p><a href="" class="text-info">Lorem</a> commented your
-                                                                post.
-                                                            </p>
-                                                            <p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit.
-                                                                    Aliquam laoreet tellus ut tincidunt euismod. "</em>
-                                                            </p>
-                                                        </div>
-                                                    </div>
+                                            // Llamar al método obtenerActividades() para obtener los datos
+                                            $datos_actividades = $actividades->obtenerActividades();
 
-                                                    <div class="time-item">
-                                                        <div class="item-info ms-3 mb-3">
-                                                            <div class="text-muted">59 minutes ago</div>
-                                                            <p><a href="" class="text-info">Jessi</a> attended a meeting
-                                                                with<a href="#" class="text-success">John Doe</a>.</p>
-                                                            <p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit.
-                                                                    Aliquam laoreet tellus ut tincidunt euismod. "</em>
-                                                            </p>
-                                                        </div>
-                                                    </div>
+                                            function obtenerIcono($descripcion) {
+                                                // Convertir la descripción a minúsculas para realizar comparaciones sin distinción de mayúsculas/minúsculas
+                                                $descripcion = strtolower($descripcion);
+                                            
+                                                // Verificar si la descripción contiene palabras clave y devolver el icono correspondiente
+                                                if (strpos($descripcion, 'crea') !== false) {
+                                                    return '<img src="assets/images/svg/check2-circle.svg" alt=""></img>';
+                                                }
+                                                if (strpos($descripcion, 'modi') !== false) {
+                                                    return '<img src="assets/images/svg/pencil-square.svg" alt=""></img>';
+                                                }
+                                                if (strpos($descripcion, 'elim') !== false) {
+                                                    return '<img src="assets/images/svg/trash.svg" alt=""></img>';
+                                                }
+                                                if (strpos($descripcion, 'asig') !== false) {
+                                                    return '<img src="assets/images/svg/bag.svg" alt=""></img>';
+                                                }
+                                            
+                                                // Devolver una cadena vacía si no se encuentra ninguna palabra clave
+                                                return '';
+                                            }
 
-                                                    <div class="time-item">
-                                                        <div class="item-info ms-3 mb-3">
-                                                            <div class="text-muted">5 minutes ago</div>
-                                                            <p><strong><a href="#" class="text-info">John
-                                                                        Doe</a></strong> Uploaded 2 new photos</p>
-                                                            <img src="assets/images/small/small-2.jpg" alt=""
-                                                                height="40" width="60" class="rounded-1">
-                                                            <img src="assets/images/small/small-1.jpg" alt=""
-                                                                height="40" width="60" class="rounded-1">
-                                                        </div>
-                                                    </div>
+                                            ?>
 
-                                                    <div class="time-item">
-                                                        <div class="item-info ms-3 mb-3">
-                                                            <div class="text-muted">30 minutes ago</div>
-                                                            <p><a href="" class="text-info">Lorem</a> commented your
-                                                                post.
-                                                            </p>
-                                                            <p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit.
-                                                                    Aliquam laoreet tellus ut tincidunt euismod. "</em>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="time-item">
-                                                        <div class="item-info ms-3 mb-3">
-                                                            <div class="text-muted">59 minutes ago</div>
-                                                            <p><a href="" class="text-info">Jessi</a> attended a meeting
-                                                                with<a href="#" class="text-success">John Doe</a>.</p>
-                                                            <p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit.
-                                                                    Aliquam laoreet tellus ut tincidunt euismod. "</em>
-                                                            </p>
-                                                        </div>
-                                                    </div>
+                                        <div id="user-activities" class="tab-pane">
+                                            
+                                            <?php
+                                            $fecha_anterior = null; // Variable para almacenar la fecha anterior
+                                            
+                                            foreach ($datos_actividades as $actividad):
+                                                // Obtener la fecha de la actividad y formatearla como "día mes año"
+                                                $fecha_actividad = date("d F Y", strtotime($actividad['fecha']));
+                                                
+                                                // Verificar si la fecha actual es diferente a la fecha anterior
+                                                if ($fecha_actividad != $fecha_anterior):
+                                                    // Si es diferente, imprimir la nueva fecha y comenzar una nueva sección
+                                                    if ($fecha_anterior !== null) {
+                                                        // Cerrar la sección anterior si no es la primera iteración
+                                                        echo '</div>';
+                                                    }
+                                                    echo "<br><p> $fecha_actividad:</p>";
+                                                    echo '<div class="timeline-2">';
+                                                    $fecha_anterior = $fecha_actividad; // Actualizar la fecha anterior
+                                                endif;
+                                            ?>
+                                            
+                                            <div class="time-item">
+                                                <div class="item-info ms-3 mb-3">
+                                                    <div class="text-muted"><?php echo $actividad['hora']; ?>  </div>
+                                                    <p>
+                                                        <strong><?php echo $actividad['descripcion']; ?></strong>
+                                                        
+                                                        <?php 
+                                                        // Obtener el icono correspondiente según la descripción
+                                                        $icono = obtenerIcono($actividad['descripcion']);
+                                                        
+                                                        // Imprimir el icono si está disponible
+                                                        if (!empty($icono)) {
+                                                            echo $icono;
+                                                        }
+                                                        ?>
+                                                    </p>
                                                 </div>
                                             </div>
+                                            
+                                            <?php endforeach; ?>
+                                            </div> <!-- Cerrar la última sección -->
+                                        </div> <!-- Cerrar el contenedor principal -->
+
+                                            
                                             
 
                                             <!-- settings -->
